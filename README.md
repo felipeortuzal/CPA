@@ -2,7 +2,51 @@
 
 Plataforma web de estudos para certificações financeiras brasileiras, iniciando pela nova **CPA — Certificado Profissional ANBIMA** vigente em 2026.
 
-> O projeto segue integralmente `PROJECT_SPEC.md`. Conteúdo regulatório só deve ser adicionado após validação em fontes oficiais.
+> O projeto segue `PROJECT_SPEC.md`. Conteúdo regulatório só é versionado após validação em fontes oficiais.
+
+## Programa oficial da CPA
+
+A trilha atualmente versionada usa o **Programa Detalhado CPA da ANBIMA — versão 1.2**:
+
+- elaboração: **02/09/2024**;
+- revisão: **04/06/2025**;
+- vigência: **01/01/2026**;
+- última verificação no projeto: **14/09/2026**;
+- pesos: **20% / 40% / 30% / 10%**.
+
+Fonte oficial: `content/cpa/metadata.json`. A antiga CPA-10 e a CPA-20 não são usadas como currículo da plataforma.
+
+## Currículo versionado
+
+```text
+content/cpa/
+  metadata.json      versão, vigência, fonte e pesos oficiais
+  schema.ts          contrato de cada unidade curricular
+  curriculum.ts      agregador da trilha completa
+  module-1.ts        macrotema 1
+  module-2.ts        macrotema 2
+  module-3.ts        macrotema 3
+  module-4.ts        macrotema 4
+```
+
+A versão 1.2 contém **590 códigos PD únicos**. Cada unidade gerada possui `title`, `pdCode`, `parentCode`, `order`, `description`, `officialSources`, `lastVerified` e metadados de versão. Os `parentCode` preservam integralmente a hierarquia oficial.
+
+As migrations `20260914230000` a `20260914230400` sincronizam o mesmo currículo com `public.curriculum_items`, permitindo ligar o progresso individual do aluno aos códigos PD.
+
+## Trilha de Estudos
+
+A página `/trilha` mostra os quatro macrotemas oficiais, seus pesos, toda a árvore expansível/recolhível e os estados de progresso:
+
+- Não iniciado;
+- Em andamento;
+- Estudado;
+- Dominado.
+
+O progresso é lido de `lesson_progress` e continua isolado por usuário via RLS.
+
+## Fontes
+
+A página `/fontes` mostra programa oficial, versão, revisão, vigência, URL e data da última verificação, além da política de atualização regulatória.
 
 ## Stack
 
@@ -11,7 +55,7 @@ Plataforma web de estudos para certificações financeiras brasileiras, iniciand
 - Vite
 - Tailwind CSS
 - React Router
-- Supabase Free Tier: Auth + PostgreSQL + Row Level Security
+- Supabase Free Tier: Auth + PostgreSQL + RLS
 - Vite PWA / Workbox
 - Cloudflare Pages
 
@@ -22,24 +66,18 @@ npm install
 cp .env.example .env.local
 ```
 
-Preencha somente as credenciais públicas do frontend:
+Preencha somente as credenciais públicas:
 
 ```env
 VITE_SUPABASE_URL=https://SEU_PROJECT_REF.supabase.co
-VITE_SUPABASE_ANON_KEY=SUA_CHAVE_PUBLICA_ANON_OU_PUBLISHABLE
+VITE_SUPABASE_ANON_KEY=SUA_CHAVE_PUBLICA
 ```
 
-**Nunca** coloque `SERVICE_ROLE_KEY`, senha do banco ou qualquer segredo administrativo em variáveis `VITE_*`. Tudo que começa com `VITE_` é exposto ao navegador.
+Nunca coloque `SERVICE_ROLE_KEY`, senha do banco ou segredo administrativo em variáveis `VITE_*`.
 
-## Supabase: primeira configuração
+## Supabase
 
-1. Crie um projeto no Supabase Free Tier.
-2. Em **Project Settings / API**, copie a Project URL e a chave pública client-side (anon/publishable) para `.env.local`.
-3. Em **Authentication**, mantenha Email/Password habilitado.
-4. Em **Authentication > URL Configuration**, configure o Site URL do ambiente de produção e adicione como Redirect URLs:
-   - `http://localhost:5173/**`
-   - a URL do Cloudflare Pages, incluindo `/login` e `/nova-senha` (ou um wildcard equivalente para previews).
-5. Instale/execute a Supabase CLI e vincule o repositório ao projeto:
+Crie um projeto no Supabase Free Tier, mantenha Email/Password habilitado e configure as URLs de redirect para localhost e produção. Depois:
 
 ```bash
 npx supabase login
@@ -48,127 +86,56 @@ npx supabase db push --dry-run
 npx supabase db push
 ```
 
-As migrations ficam em `supabase/migrations/` e são a fonte de verdade do schema. Para desenvolvimento local com Docker:
+Para desenvolvimento local com Docker:
 
 ```bash
 npx supabase start
 npx supabase db reset
 ```
 
-`db reset` recria o banco local, aplica todas as migrations em ordem e executa `supabase/seed.sql`.
+As migrations ficam em `supabase/migrations/` e são a fonte de verdade do schema e do currículo persistido.
 
-## Como Felipe e Thó criam as contas
+## Contas de Felipe e Thó
 
-Depois que o Supabase e as variáveis de ambiente estiverem configurados:
+1. Rode `npm run dev`.
+2. Cada pessoa usa **Criar conta** com seu próprio e-mail e senha.
+3. O trigger de cadastro cria uma linha separada em `profiles`.
+4. Em **Configurações**, cada usuário define nome, certificação e meta diária.
+5. RLS garante que progresso, tentativas, simulados, respostas, flashcards pessoais, bookmarks e sessões de estudo não sejam compartilhados entre as contas.
 
-1. Rode `npm run dev` e abra `http://localhost:5173`.
-2. Na tela de login, clique em **Criar conta**.
-3. Felipe cria uma conta com o próprio e-mail e nome `Felipe`.
-4. Thó cria outra conta com o próprio e-mail e nome `Thó`.
-5. Se a confirmação de e-mail estiver habilitada no Supabase, cada um confirma o link recebido antes de entrar.
-6. No primeiro cadastro, um trigger cria automaticamente uma linha em `profiles` ligada ao `auth.users.id` daquela conta.
-7. Cada usuário acessa **Configurações** para ajustar nome, certificação atual e meta diária.
+## Validação
 
-Felipe e Thó **não compartilham** progresso. RLS garante que cada conta só consiga consultar e alterar seus próprios progressos, tentativas, simulados, respostas, reviews de flashcards, bookmarks e sessões de estudo. Conteúdos da plataforma (`certifications`, `curriculum_items`, `questions` e `simulations`) são somente leitura para usuários autenticados.
-
-## Autenticação
-
-Fluxos implementados:
-
-- cadastro por e-mail e senha;
-- login;
-- logout;
-- recuperação de senha por e-mail;
-- definição de nova senha;
-- sessão persistente e refresh automático via Supabase Auth;
-- perfil individual criado automaticamente no cadastro.
-
-## Banco de dados
-
-Tabelas versionadas:
-
-- `profiles`
-- `certifications`
-- `curriculum_items`
-- `lesson_progress`
-- `questions`
-- `question_attempts`
-- `simulations`
-- `simulation_attempts`
-- `simulation_answers`
-- `flashcards`
-- `flashcard_reviews`
-- `bookmarks`
-- `study_sessions`
-
-O schema usa foreign keys, constraints, índices e RLS. Flashcards de plataforma podem ter `user_id = null` e são legíveis por usuários autenticados; flashcards pessoais só podem ser alterados e lidos pelo dono.
-
-## Seed
-
-`supabase/seed.sql` é opcional e propositalmente conservador: ele não cria usuários, senhas, questões ou conteúdo regulatório. Serve apenas para garantir os registros-base de certificações no ambiente de desenvolvimento.
-
-## Dashboard
-
-Quando o Supabase está configurado, o Dashboard utiliza dados reais para:
-
-- progresso curricular;
-- quantidade de questões respondidas;
-- taxa de acerto;
-- horas de estudo;
-- sequência de estudos;
-- progresso/acerto por macrotema;
-- assuntos fracos;
-- simulados recentes;
-- indicador orientativo de preparação.
-
-O indicador **Pronto para a prova** continua sendo uma estimativa e nunca é apresentado como garantia de aprovação.
-
-## Comandos
+Validação do currículo:
 
 ```bash
-npm run dev
+npm run validate:curriculum
+```
+
+Ela verifica versão, datas, 590 códigos únicos, pais existentes, quatro raízes, soma de pesos igual a 100% e igualdade entre os arquivos de conteúdo e as migrations.
+
+Validação completa do frontend:
+
+```bash
+npm run validate
+```
+
+Comandos individuais:
+
+```bash
 npm run typecheck
 npm run build
-npm run preview
 ```
 
-## Arquitetura
-
-```text
-src/
-  components/       componentes compartilhados e design system
-  layouts/          shell autenticado da aplicação
-  pages/            páginas roteáveis, incluindo Auth e Configurações
-  features/
-    auth/            sessão e perfil Supabase
-    dashboard/       agregação dos dados reais do usuário
-    curriculum/
-    lessons/
-    questions/
-    simulations/
-    flashcards/
-    review/
-    analytics/
-  data/             definições estáticas não sensíveis
-  lib/               infraestrutura, incluindo supabase.ts
-  hooks/             hooks React reutilizáveis
-  types/             contratos TypeScript
-
-supabase/
-  config.toml
-  migrations/        schema versionado
-  seed.sql            seed opcional de desenvolvimento
-```
+O GitHub Actions também executa validação curricular, TypeScript, build e recria um Supabase local do zero com todas as migrations.
 
 ## Segurança
 
-- nenhuma `SERVICE_ROLE_KEY` é usada no frontend;
-- o cliente usa somente `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`;
-- tabelas expostas têm RLS habilitado;
-- dados pessoais usam políticas baseadas em `auth.uid()`;
-- conteúdo público da plataforma exige usuário autenticado;
-- `.env` e `.env.local` ficam fora do Git.
+- frontend usa somente `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`;
+- nenhuma `SERVICE_ROLE_KEY` é exposta;
+- tabelas expostas possuem RLS;
+- dados privados usam políticas baseadas em `auth.uid()`;
+- currículo e demais conteúdos da plataforma são somente leitura para usuários autenticados.
 
-## Conteúdo regulatório
+## Regra para futuras atualizações
 
-Antes de adicionar ou alterar aulas, questões ou dados regulatórios, consulte as fontes oficiais indicadas em `PROJECT_SPEC.md`. O Programa Detalhado vigente da ANBIMA é a fonte de verdade para o conteúdo da CPA.
+Antes de alterar aulas, questões ou estrutura do currículo, consulte novamente os canais oficiais da ANBIMA. Se o Programa Detalhado da CPA tiver versão posterior à 1.2, a versão mais nova prevalece e deve gerar atualização de `metadata`, módulos, migrations e testes de validação.

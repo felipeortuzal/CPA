@@ -1,14 +1,16 @@
 {
   "name": "cpa-study-platform",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "validate:curriculum": "node scripts/validate-curriculum.mjs",
+    "validate": "npm run validate:curriculum && npm run typecheck && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

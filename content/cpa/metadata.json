@@ -1,0 +1,21 @@
+{
+  "certification": "CPA",
+  "name": "CPA — Certificado Profissional ANBIMA",
+  "programVersion": "1.2",
+  "elaborationDate": "2024-09-02",
+  "revisionDate": "2025-06-04",
+  "effectiveFrom": "2026-01-01",
+  "lastVerified": "2026-09-14",
+  "officialSource": {
+    "id": "ANBIMA_CPA_PD_1_2",
+    "name": "ANBIMA — Programa Detalhado CPA",
+    "url": "https://www.anbima.com.br/data/files/6A/52/6F/A1/BED73910B07B2739B82BA2A8/Programa-Detalhado-CPA-ANBIMA.pdf",
+    "landingPage": "https://www.anbima.com.br/pt_br/especial/pds-certificacoes-distribuicao.htm"
+  },
+  "macroTopics": [
+    { "pdCode": "1", "title": "Estrutura e dinâmica do sistema financeiro nacional", "weight": 20 },
+    { "pdCode": "2", "title": "Produtos do mercado financeiro", "weight": 40 },
+    { "pdCode": "3", "title": "Relacionamento com o cliente (prospecção, atendimento e suporte)", "weight": 30 },
+    { "pdCode": "4", "title": "Inovação e desenvolvimento de mercado", "weight": 10 }
+  ]
+}

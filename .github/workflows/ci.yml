@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - run: npm run validate:curriculum
       - run: npm run typecheck
       - run: npm run build
 
@@ -22,8 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Supabase CLI
-        uses: supabase/setup-cli@v1
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
       - name: Start local Supabase and apply migrations
         run: supabase start
       - name: Rebuild database from migrations and seed
