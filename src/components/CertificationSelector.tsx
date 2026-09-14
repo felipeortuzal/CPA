@@ -1,0 +1,3 @@
+import { ChevronDown } from 'lucide-react'
+import { certifications } from '../data/certifications'
+export function CertificationSelector() { return <div className="relative"><select aria-label="Certificação" defaultValue="CPA" className="appearance-none rounded-xl border border-slate-200 bg-white py-2 pl-3 pr-9 text-sm font-semibold outline-none ring-emerald-400 focus:ring-2 dark:border-white/10 dark:bg-white/5">{certifications.map(c => <option key={c.id} value={c.id} disabled={!c.available}>{c.name}{!c.available ? ' — em breve' : ''}</option>)}</select><ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /></div> }

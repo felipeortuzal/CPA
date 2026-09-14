@@ -1,0 +1,2 @@
+import type { ReactNode } from 'react'
+export function EmptyState({ icon, title, description }: { icon?: ReactNode; title: string; description: string }) { return <div className="grid min-h-48 place-items-center rounded-2xl border border-dashed border-slate-300 p-8 text-center dark:border-white/15"><div><div className="mx-auto mb-3 w-fit text-slate-400">{icon}</div><h3 className="font-semibold">{title}</h3><p className="mt-1 text-sm text-slate-500">{description}</p></div></div> }

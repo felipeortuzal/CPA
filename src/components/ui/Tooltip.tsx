@@ -1,0 +1,2 @@
+import type { PropsWithChildren } from 'react'
+export function Tooltip({ label, children }: PropsWithChildren<{ label: string }>) { return <span className="group relative inline-flex">{children}<span className="pointer-events-none absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg bg-slate-950 px-2 py-1 text-xs text-white group-hover:block">{label}</span></span> }
