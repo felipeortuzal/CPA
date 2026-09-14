@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  frontend:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,4 +15,19 @@ jobs:
         with:
           node-version: 22
       - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
       - run: npm run build
+
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+      - name: Start local Supabase and apply migrations
+        run: supabase start
+      - name: Rebuild database from migrations and seed
+        run: supabase db reset
+      - name: Stop local Supabase
+        if: always()
+        run: supabase stop --no-backup
