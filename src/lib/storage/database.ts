@@ -1,13 +1,14 @@
 import { deleteDB, openDB, type DBSchema, type IDBPDatabase } from 'idb'
-import type { ActivityDayRecord, ErrorRecord, FavoriteRecord, FlashcardReviewRecord, LessonProgressRecord, LocalProfile, PreferencesRecord, QuestionBookmarkRecord, QuizAttemptRecord, SimulationRecord, StoredFlashcard, StudyPlanRecord, StudySessionRecord } from './types'
+import type { ActivityDayRecord, ErrorRecord, FavoriteRecord, FlashcardReviewRecord, LessonProgressRecord, LocalProfile, PreferencesRecord, QuestionAttemptRecord, QuestionBookmarkRecord, QuizAttemptRecord, SimulationRecord, StoredFlashcard, StudyPlanRecord, StudySessionRecord } from './types'
 
 export const DB_NAME = 'cpa-study-local'
-export const DB_VERSION = 1
+export const DB_VERSION = 2
 
 export interface CPAStudyDB extends DBSchema {
   profile: { key: 'local'; value: LocalProfile }
   lessonProgress: { key: string; value: LessonProgressRecord }
   quizAttempts: { key: string; value: QuizAttemptRecord; indexes: { 'by-pd-code': string; 'by-completed-at': string } }
+  questionAttempts: { key: string; value: QuestionAttemptRecord; indexes: { 'by-question-id': string; 'by-pd-code': string; 'by-answered-at': string } }
   favorites: { key: string; value: FavoriteRecord; indexes: { 'by-item-id': string } }
   flashcards: { key: string; value: StoredFlashcard; indexes: { 'by-pd-code': string } }
   flashcardReviews: { key: string; value: FlashcardReviewRecord; indexes: { 'by-flashcard-id': string; 'by-reviewed-at': string } }
@@ -38,12 +39,19 @@ function migrateV1(db: IDBPDatabase<CPAStudyDB>) {
   db.createObjectStore('studyPlans', { keyPath: 'id' })
 }
 
+function migrateV2(db: IDBPDatabase<CPAStudyDB>) {
+  const attempts = db.createObjectStore('questionAttempts', { keyPath: 'id' })
+  attempts.createIndex('by-question-id', 'questionId')
+  attempts.createIndex('by-pd-code', 'pdCode')
+  attempts.createIndex('by-answered-at', 'answeredAt')
+}
+
 export function getDatabase() {
   if (!databasePromise) {
     databasePromise = openDB<CPAStudyDB>(DB_NAME, DB_VERSION, {
       upgrade(db, oldVersion) {
-        // Future versions must be additive: if (oldVersion < 2) migrateV2(...), etc.
         if (oldVersion < 1) migrateV1(db)
+        if (oldVersion < 2) migrateV2(db)
       },
     })
   }

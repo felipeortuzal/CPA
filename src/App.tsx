@@ -1,12 +1,14 @@
-import { BarChart3, Brain, ClipboardCheck, FileText, RotateCcw, Target } from 'lucide-react'
+import { BarChart3, Brain, FileText, RotateCcw } from 'lucide-react'
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { StudentProvider, useStudent } from './features/profile/StudentProvider'
 import { AppLayout } from './layouts/AppLayout'
 import { ContentsPage } from './pages/ContentsPage'
 import { CurriculumPage } from './pages/CurriculumPage'
 import { DashboardPage } from './pages/DashboardPage'
+import { ErrorNotebookPage } from './pages/ErrorNotebookPage'
 import { LessonPage } from './pages/LessonPage'
 import { PlaceholderPage } from './pages/PlaceholderPage'
+import { QuestionsPage } from './pages/QuestionsPage'
 import { SettingsPage } from './pages/SettingsPage'
 import { SourcesPage } from './pages/SourcesPage'
 import { WelcomePage } from './pages/WelcomePage'
@@ -16,12 +18,12 @@ const router = createBrowserRouter([{ path:'/', element:<AppLayout/>, children:[
   { path:'trilha', element:<CurriculumPage/> },
   { path:'conteudos', element:<ContentsPage/> },
   { path:'conteudos/:pdCode', element:<LessonPage/> },
-  { path:'questoes', element:<PlaceholderPage title="Questões" description="O banco original de questões será implementado na próxima etapa." icon={ClipboardCheck}/> },
-  { path:'simulados', element:<PlaceholderPage title="Simulados" description="Os simulados completos serão implementados depois do banco de questões." icon={FileText}/> },
-  { path:'revisao', element:<PlaceholderPage title="Revisão" description="A fila inteligente de revisão será construída sobre o progresso local já salvo." icon={RotateCcw}/> },
+  { path:'questoes', element:<QuestionsPage/> },
+  { path:'simulados', element:<PlaceholderPage title="Simulados" description="Os simulados completos serão implementados na próxima etapa sobre o banco de questões já existente." icon={FileText}/> },
+  { path:'revisao', element:<PlaceholderPage title="Revisão" description="A fila inteligente de revisão será construída sobre o progresso local, questões e flashcards." icon={RotateCcw}/> },
   { path:'flashcards', element:<PlaceholderPage title="Flashcards" description="As aulas já contêm flashcards; o modo de repetição espaçada virá na etapa própria." icon={Brain}/> },
-  { path:'erros', element:<PlaceholderPage title="Caderno de Erros" description="O armazenamento local já está preparado para o futuro caderno de erros." icon={Target}/> },
-  { path:'estatisticas', element:<PlaceholderPage title="Estatísticas" description="O histórico local está preparado para análises mais profundas nas próximas etapas." icon={BarChart3}/> },
+  { path:'erros', element:<ErrorNotebookPage/> },
+  { path:'estatisticas', element:<PlaceholderPage title="Estatísticas" description="O histórico local já registra aulas, quizzes e questões para análises mais profundas nas próximas etapas." icon={BarChart3}/> },
   { path:'fontes', element:<SourcesPage/> },
   { path:'configuracoes', element:<SettingsPage/> },
 ]} , { path:'*', element:<Navigate to="/" replace/> }])

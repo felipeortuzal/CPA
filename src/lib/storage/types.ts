@@ -21,19 +21,19 @@ export interface LessonProgressRecord {
 }
 
 export interface QuizAttemptRecord { id: string; pdCode: string; answers: number[]; correct: number; total: number; score: number; completedAt: string }
+export interface QuestionAttemptRecord { id: string; questionId: string; pdCode: string; selectedAnswer: number; correctAnswer: number; isCorrect: boolean; answeredAt: string }
 export interface FavoriteRecord { id: string; itemType: 'lesson' | 'question' | 'flashcard'; itemId: string; createdAt: string }
 export interface StoredFlashcard { id: string; pdCode: string | null; front: string; back: string; createdAt: string; updatedAt: string }
 export interface FlashcardReviewRecord { id: string; flashcardId: string; rating: 'again' | 'hard' | 'good' | 'easy'; reviewedAt: string; nextReviewAt: string | null }
 export interface QuestionBookmarkRecord { id: string; questionId: string; createdAt: string }
-export interface ErrorRecord { id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; resolvedAt: string | null }
+export interface ErrorRecord { id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; resolvedAt: string | null; wrongCount?: number; lastWrongAt?: string }
 export interface SimulationRecord { id: string; certification: string; score: number | null; questionCount: number; completedAt: string | null; payload: unknown }
 export interface StudySessionRecord { id: string; activityType: 'lesson' | 'quiz' | 'flashcard' | 'questions' | 'simulation' | 'review'; pdCode: string | null; startedAt: string; endedAt: string | null; activeSeconds: number }
 export interface ActivityDayRecord { date: string; events: number; lastActivityAt: string }
 export interface PreferencesRecord { id: 'preferences'; theme?: 'light' | 'dark'; reduceMotion?: boolean; lessonSidebarOpen?: boolean; updatedAt: string }
 export interface StudyPlanRecord { id: string; payload: unknown; updatedAt: string }
 
-export interface LocalBackupV1 {
-  backupVersion: 1
+interface LocalBackupBase {
   databaseVersion: number
   exportedAt: string
   profile: LocalProfile | null
@@ -50,3 +50,7 @@ export interface LocalBackupV1 {
   preferences: PreferencesRecord[]
   studyPlans: StudyPlanRecord[]
 }
+
+export interface LocalBackupV1 extends LocalBackupBase { backupVersion: 1 }
+export interface LocalBackupV2 extends LocalBackupBase { backupVersion: 2; questionAttempts: QuestionAttemptRecord[] }
+export type LocalBackup = LocalBackupV1 | LocalBackupV2

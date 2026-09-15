@@ -1,0 +1,21 @@
+import { useEffect, useState } from 'react'
+import { CheckCircle2, RotateCcw, Target } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { cpaQuestionMap } from '../../content/cpa/questions'
+import { macro1LessonMap } from '../../content/cpa/lessons/macro-1'
+import { Badge } from '../components/ui/Badge'
+import { Button } from '../components/ui/Button'
+import { Card } from '../components/ui/Card'
+import { STORAGE_CHANGED_EVENT } from '../lib/storage/events'
+import { getQuestionErrors, markQuestionErrorResolved } from '../lib/storage/repositories/questionRepository'
+import type { ErrorRecord } from '../lib/storage/types'
+
+export function ErrorNotebookPage(){
+  const [errors,setErrors]=useState<ErrorRecord[]>([]);const [loading,setLoading]=useState(true);const [showResolved,setShowResolved]=useState(false)
+  async function load(){const rows=await getQuestionErrors(true);setErrors(rows.sort((a,b)=>(b.lastWrongAt??b.createdAt).localeCompare(a.lastWrongAt??a.createdAt)));setLoading(false)}
+  useEffect(()=>{void load();const listener=()=>{void load()};window.addEventListener(STORAGE_CHANGED_EVENT,listener);return()=>window.removeEventListener(STORAGE_CHANGED_EVENT,listener)},[])
+  const visible=errors.filter((error)=>showResolved||!error.resolvedAt)
+  return <div className="mx-auto max-w-6xl space-y-6"><div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>Caderno de Erros</Badge><span className="text-sm text-slate-500">alimentado automaticamente</span></div><h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Aprenda com os erros</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Toda questão respondida incorretamente entra aqui. Ao dominar o assunto, marque como aprendido; o histórico de tentativas continua salvo localmente.</p></div><button className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold dark:border-white/10" onClick={()=>setShowResolved((value)=>!value)}>{showResolved?'Ocultar aprendidas':'Mostrar aprendidas'}</button></div>
+  {loading?<Card><p className="py-10 text-center text-sm text-slate-500">Carregando erros...</p></Card>:visible.length===0?<Card><div className="py-12 text-center"><Target className="mx-auto h-9 w-9 text-emerald-400"/><h2 className="mt-3 text-lg font-bold">Nenhum erro pendente</h2><p className="mt-1 text-sm text-slate-500">Quando você errar uma questão, ela aparecerá aqui automaticamente.</p><Link to="/questoes"><Button className="mt-5">Treinar questões</Button></Link></div></Card>:<div className="space-y-4">{visible.map((error)=>{const question=cpaQuestionMap.get(error.sourceId);return <Card key={error.id} className={error.resolvedAt?'opacity-60':''}><div className="flex flex-wrap items-center gap-2"><Badge>{error.sourceId}</Badge>{error.pdCode?<Badge>PD {error.pdCode}</Badge>:null}<span className="text-xs text-slate-500">Errou {error.wrongCount??1} vez(es)</span>{error.resolvedAt?<span className="ml-auto text-xs font-semibold text-emerald-600">Aprendida</span>:null}</div><h2 className="mt-4 font-bold leading-6">{error.prompt}</h2><div className="mt-4 grid gap-3 md:grid-cols-2"><div className="rounded-xl bg-rose-400/10 p-3"><p className="text-xs font-semibold text-rose-700 dark:text-rose-300">Sua última resposta</p><p className="mt-1 text-sm">{error.selectedAnswer??'—'}</p></div><div className="rounded-xl bg-emerald-400/10 p-3"><p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Resposta correta</p><p className="mt-1 text-sm">{error.correctAnswer??'—'}</p></div></div>{question?<p className="mt-4 text-sm leading-6 text-slate-500">{question.explanation}</p>:null}<div className="mt-5 flex flex-wrap gap-2"><Link to={`/questoes?question=${encodeURIComponent(error.sourceId)}`}><Button variant="secondary"><RotateCcw className="h-4 w-4"/>Refazer questão</Button></Link>{error.pdCode?<Link to={macro1LessonMap.has(error.pdCode)?`/conteudos/${error.pdCode}`:'/trilha'}><Button variant="secondary">Revisar conteúdo</Button></Link>:null}{!error.resolvedAt?<Button onClick={()=>void markQuestionErrorResolved(error.id)}><CheckCircle2 className="h-4 w-4"/>Já aprendi</Button>:null}</div></Card>})}</div>}
+  </div>
+}
