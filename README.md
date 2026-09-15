@@ -1,141 +1,135 @@
-# CPA Study Platform
+# CPA Study — Nova CPA ANBIMA 2026
 
-Plataforma web de estudos para certificações financeiras brasileiras, iniciando pela nova **CPA — Certificado Profissional ANBIMA** vigente em 2026.
+Plataforma local e gratuita de estudos para a **CPA — Certificado Profissional ANBIMA** do novo modelo vigente em 2026. Não é material da antiga CPA-10 ou CPA-20.
 
-> O projeto segue `PROJECT_SPEC.md`. Conteúdo regulatório só é versionado após validação em fontes oficiais.
+## Arquitetura atual
+
+- React + TypeScript + Vite + Tailwind CSS
+- IndexedDB via `idb` para progresso pessoal
+- conteúdo e currículo versionados no GitHub
+- PWA para facilitar uso offline depois que os arquivos da aplicação foram carregados
+- sem login, sem cadastro, sem Supabase/Firebase e sem servidor obrigatório
+- custo operacional obrigatório: **R$ 0**
+
+O princípio é simples:
+
+- **GitHub = conteúdo da plataforma**
+- **IndexedDB do navegador = progresso do aluno**
+
+Felipe e Thó usam o mesmo código, mas cada computador/navegador possui progresso próprio.
+
+## Como rodar o CPA no seu computador
+
+### Primeira instalação
+
+No Windows, instale Git e Node.js 22 ou superior. Depois abra o Prompt de Comando/PowerShell e rode:
+
+```bash
+git clone https://github.com/felipeortuzal/CPA.git
+cd CPA
+npm install
+npm run dev
+```
+
+Abra o endereço exibido pelo Vite, normalmente `http://localhost:5173`.
+
+Na primeira abertura aparecerá:
+
+> Bem-vindo ao CPA
+> Como podemos te chamar?
+
+Digite `Felipe`, `Thó` ou outro nome. Não é uma conta: o nome e todo o progresso ficam apenas naquele navegador.
+
+### Próximas vezes
+
+Dentro da pasta `CPA`, basta usar:
+
+```bash
+npm run dev
+```
+
+No Windows também existe `start-cpa.bat`; dê dois cliques nele dentro da pasta do projeto.
+
+### Quando houver atualização do projeto
+
+```bash
+git pull
+npm install
+npm run dev
+```
+
+O `git pull` altera os arquivos do projeto, **não o IndexedDB do navegador**. Portanto o progresso local permanece.
+
+## Backup do progresso
+
+Em **Configurações > Dados e Backup** existem três ações:
+
+- **Exportar progresso**: baixa `cpa-backup-YYYY-MM-DD.json`.
+- **Importar progresso**: valida o JSON e pede confirmação antes de substituir os dados locais.
+- **Apagar todo o progresso**: exige duas confirmações e nunca apaga silenciosamente.
+
+Faça backups periódicos, principalmente antes de trocar de navegador/computador ou limpar dados do navegador.
 
 ## Programa oficial da CPA
 
-A trilha atualmente versionada usa o **Programa Detalhado CPA da ANBIMA — versão 1.2**:
+O currículo atualmente versionado utiliza o **Programa Detalhado CPA da ANBIMA, versão 1.2**, revisão de **04/06/2025**, vigente desde **01/01/2026**. Antes de alterar conteúdo regulatório, a versão oficial mais recente deve ser verificada novamente na ANBIMA.
 
-- elaboração: **02/09/2024**;
-- revisão: **04/06/2025**;
-- vigência: **01/01/2026**;
-- última verificação no projeto: **14/09/2026**;
-- pesos: **20% / 40% / 30% / 10%**.
+A estrutura completa do PD está em `content/cpa/`. O Macrotema 1 possui aulas didáticas completas em `content/cpa/lessons/`.
 
-Fonte oficial: `content/cpa/metadata.json`. A antiga CPA-10 e a CPA-20 não são usadas como currículo da plataforma.
+## Sistema de aulas
 
-## Currículo versionado
+Cada aula do Macrotema 1 inclui:
 
-```text
-content/cpa/
-  metadata.json      versão, vigência, fonte e pesos oficiais
-  schema.ts          contrato de cada unidade curricular
-  curriculum.ts      agregador da trilha completa
-  module-1.ts        macrotema 1
-  module-2.ts        macrotema 2
-  module-3.ts        macrotema 3
-  module-4.ts        macrotema 4
-```
+1. Em uma frase
+2. Explicação para iniciante
+3. Explicação completa
+4. Conceitos essenciais
+5. Como pode aparecer na prova
+6. Exemplo prático
+7. Comparações importantes
+8. Fórmulas quando aplicável
+9. Pegadinhas
+10. Resumo para revisão
+11. Flashcards
+12. Mini quiz
+13. Fontes oficiais e data de verificação
 
-A versão 1.2 contém **590 códigos PD únicos**. Cada unidade gerada possui `title`, `pdCode`, `parentCode`, `order`, `description`, `officialSources`, `lastVerified` e metadados de versão. Os `parentCode` preservam integralmente a hierarquia oficial.
+Status local:
 
-As migrations `20260914230000` a `20260914230400` sincronizam o mesmo currículo com `public.curriculum_items`, permitindo ligar o progresso individual do aluno aos códigos PD.
+- Não iniciado
+- Em andamento ao abrir a aula pela primeira vez
+- Estudado ao marcar a aula
+- Dominado quando a aula está estudada e o melhor mini quiz é de pelo menos 75%
 
-## Trilha de Estudos
+## Persistência local
 
-A página `/trilha` mostra os quatro macrotemas oficiais, seus pesos, toda a árvore expansível/recolhível e os estados de progresso:
+A camada fica em `src/lib/storage/` e usa schema versionado (`DB_VERSION`). Atualizações futuras devem criar migrations aditivas; não se deve apagar o banco para resolver mudança de schema.
 
-- Não iniciado;
-- Em andamento;
-- Estudado;
-- Dominado.
+O IndexedDB já possui stores preparadas para perfil, progresso de aula, quizzes, favoritos, flashcards, revisões, questões marcadas, caderno de erros, simulados, sessões de estudo, dias ativos, preferências e plano futuro.
 
-O progresso é lido de `lesson_progress` e continua isolado por usuário via RLS.
+## Tempo de estudo e streak
 
-## Fontes
+O timer de aula só soma tempo quando a aba está visível e houve interação recente. Abrir uma aba e deixá-la parada indefinidamente não gera horas falsas.
 
-A página `/fontes` mostra programa oficial, versão, revisão, vigência, URL e data da última verificação, além da política de atualização regulatória.
+Um dia conta para o streak quando ocorre atividade significativa, como concluir aula ou responder mini quiz; abrir o site sozinho não conta.
 
-## Stack
-
-- React 18
-- TypeScript strict
-- Vite
-- Tailwind CSS
-- React Router
-- Supabase Free Tier: Auth + PostgreSQL + RLS
-- Vite PWA / Workbox
-- Cloudflare Pages
-
-## Instalação
-
-```bash
-npm install
-cp .env.example .env.local
-```
-
-Preencha somente as credenciais públicas:
-
-```env
-VITE_SUPABASE_URL=https://SEU_PROJECT_REF.supabase.co
-VITE_SUPABASE_ANON_KEY=SUA_CHAVE_PUBLICA
-```
-
-Nunca coloque `SERVICE_ROLE_KEY`, senha do banco ou segredo administrativo em variáveis `VITE_*`.
-
-## Supabase
-
-Crie um projeto no Supabase Free Tier, mantenha Email/Password habilitado e configure as URLs de redirect para localhost e produção. Depois:
-
-```bash
-npx supabase login
-npx supabase link --project-ref SEU_PROJECT_REF
-npx supabase db push --dry-run
-npx supabase db push
-```
-
-Para desenvolvimento local com Docker:
-
-```bash
-npx supabase start
-npx supabase db reset
-```
-
-As migrations ficam em `supabase/migrations/` e são a fonte de verdade do schema e do currículo persistido.
-
-## Contas de Felipe e Thó
-
-1. Rode `npm run dev`.
-2. Cada pessoa usa **Criar conta** com seu próprio e-mail e senha.
-3. O trigger de cadastro cria uma linha separada em `profiles`.
-4. Em **Configurações**, cada usuário define nome, certificação e meta diária.
-5. RLS garante que progresso, tentativas, simulados, respostas, flashcards pessoais, bookmarks e sessões de estudo não sejam compartilhados entre as contas.
-
-## Validação
-
-Validação do currículo:
+## Comandos de qualidade
 
 ```bash
 npm run validate:curriculum
+npm test
+npm run typecheck
+npm run build
 ```
 
-Ela verifica versão, datas, 590 códigos únicos, pais existentes, quatro raízes, soma de pesos igual a 100% e igualdade entre os arquivos de conteúdo e as migrations.
-
-Validação completa do frontend:
+Ou tudo de uma vez:
 
 ```bash
 npm run validate
 ```
 
-Comandos individuais:
+O GitHub Actions executa a mesma sequência em cada push/PR.
 
-```bash
-npm run typecheck
-npm run build
-```
+## Próximas etapas
 
-O GitHub Actions também executa validação curricular, TypeScript, build e recria um Supabase local do zero com todas as migrations.
-
-## Segurança
-
-- frontend usa somente `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`;
-- nenhuma `SERVICE_ROLE_KEY` é exposta;
-- tabelas expostas possuem RLS;
-- dados privados usam políticas baseadas em `auth.uid()`;
-- currículo e demais conteúdos da plataforma são somente leitura para usuários autenticados.
-
-## Regra para futuras atualizações
-
-Antes de alterar aulas, questões ou estrutura do currículo, consulte novamente os canais oficiais da ANBIMA. Se o Programa Detalhado da CPA tiver versão posterior à 1.2, a versão mais nova prevalece e deve gerar atualização de `metadata`, módulos, migrations e testes de validação.
+Ainda não fazem parte desta versão: banco completo de questões, simulado de 50 questões, ranking Felipe x Thó, IA, C-Pro R/C-Pro I e demais certificações. A arquitetura local já deixa stores preparadas para evolução sem perder o progresso existente.
