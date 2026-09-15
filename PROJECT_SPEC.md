@@ -1,22 +1,422 @@
-import { CalendarDays, ExternalLink, FileCheck2, ShieldCheck } from 'lucide-react'
-import metadata from '../../content/cpa/metadata.json'
-import { Badge } from '../components/ui/Badge'
-import { Card } from '../components/ui/Card'
+# PROJECT_SPEC.md
 
-const questionReferences=[
-  {title:'Guia de Elaboração de Questões das Certificações ANBIMA',url:'https://www.anbima.com.br/data/files/40/C6/A8/5E/FCBF891048BA3F89EA2BA2A8/Guia-de-Elaboracao-de-Questao-Certificacoes-Anbima.pdf',note:'Referência oficial para contexto, comando, distratores e níveis cognitivos.'},
-  {title:'Caderno de Questões CPA — ANBIMA',url:'https://www.anbima.com.br/data/files/DF/86/EE/B6/EB6F8910C03A3F89B82BA2A8/Caderno-de-questoes-CPA.pdf',note:'Questões oficiais usadas somente para estudar estilo e desenho cognitivo; o banco da plataforma é autoral.'},
-]
+Você está trabalhando no repositório GitHub `CPA`.
 
-export function SourcesPage() {
-  const source = metadata.officialSource
-  return <div className="mx-auto max-w-5xl space-y-6">
-    <div><div className="mb-2 flex items-center gap-2"><Badge>Fontes oficiais</Badge><span className="text-sm text-slate-500">Rastreabilidade do conteúdo</span></div><h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Fontes</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">A trilha e o banco de questões usam o Programa Detalhado vigente da CPA como fonte de verdade. A antiga CPA-10 e a CPA-20 não fazem parte deste currículo.</p></div>
+## Objetivo
 
-    <Card className="overflow-hidden p-0"><div className="border-b border-slate-200 bg-emerald-50 p-5 dark:border-white/10 dark:bg-emerald-400/[0.06] sm:p-6"><div className="flex items-start gap-3"><div className="grid h-11 w-11 place-items-center rounded-xl bg-emerald-400 text-slate-950"><FileCheck2 className="h-5 w-5" /></div><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-700 dark:text-emerald-300">Programa oficial vigente</p><h2 className="mt-1 text-xl font-bold">Programa Detalhado · CPA — Certificado Profissional ANBIMA</h2></div></div></div><div className="grid gap-px bg-slate-200 dark:bg-white/10 sm:grid-cols-2 lg:grid-cols-4">{[['Versão', metadata.programVersion], ['Revisão', '04/06/2025'], ['Vigência', '01/01/2026'], ['Última verificação', '14/09/2026']].map(([label, value]) => <div key={label} className="bg-white p-5 dark:bg-[#0b1824]"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500">{label}</p><p className="mt-1 font-bold">{value}</p></div>)}</div><div className="space-y-4 p-5 sm:p-6"><div className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-300"><CalendarDays className="h-4 w-4 text-slate-400" />Data de elaboração: 02/09/2024</div><div className="flex flex-col gap-2 sm:flex-row"><a href={source.url} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300">Abrir Programa Detalhado oficial <ExternalLink className="h-4 w-4" /></a><a href={source.landingPage} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold transition hover:bg-slate-100 dark:border-white/10 dark:hover:bg-white/10">Página oficial dos programas <ExternalLink className="h-4 w-4" /></a></div></div></Card>
+Construir uma plataforma completa de estudos para certificações financeiras brasileiras, começando pela **NOVA CPA — Certificado Profissional ANBIMA**, vigente no novo modelo a partir de 2026.
 
-    <Card><h2 className="font-semibold">Referências oficiais para elaboração de questões</h2><p className="mt-2 text-sm leading-6 text-slate-500">Esses documentos orientam o estilo do Question Engine. As questões da plataforma são novas e não reproduzem o caderno oficial.</p><div className="mt-4 space-y-3">{questionReferences.map((item)=><a key={item.title} href={item.url} target="_blank" rel="noreferrer" className="block rounded-xl border border-slate-200 p-4 transition hover:border-emerald-400/50 dark:border-white/10"><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-semibold">{item.title}</p><p className="mt-1 text-xs leading-5 text-slate-500">{item.note}</p></div><ExternalLink className="h-4 w-4 shrink-0 text-slate-400"/></div></a>)}</div></Card>
+Não usar conteúdo da antiga CPA-10 ou CPA-20.
 
-    <Card><div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" /><div><h2 className="font-semibold">Política de atualização</h2><p className="mt-1 text-sm leading-6 text-slate-500">Antes de qualquer alteração regulatória ou nova rodada de questões, a plataforma deve verificar novamente os canais oficiais. Uma versão posterior do Programa Detalhado prevalece e deve gerar nova versão do conteúdo.</p></div></div></Card>
-  </div>
-}
+A arquitetura deve permitir futuramente CPA, C-Pro R, C-Pro I, CFG, CGA, CGE e outras certificações, sem misturar conteúdos ou progressos.
+
+## Regra nº 1 — conteúdo sempre atualizado
+
+Nunca invente conteúdo regulatório.
+
+Antes de implementar ou alterar conteúdo de estudo, consultar fontes oficiais atualizadas nesta prioridade:
+
+1. ANBIMA / ANBIMA Edu
+2. CVM
+3. Banco Central do Brasil
+4. Tesouro Nacional / Tesouro Direto
+5. Receita Federal
+6. B3
+7. SUSEP / PREVIC / demais órgãos oficiais quando pertinentes
+
+O Programa Detalhado da CPA da ANBIMA é a fonte de verdade sobre o conteúdo cobrado. Se existir versão mais nova, ela prevalece.
+
+Cada conteúdo regulatório deve manter metadata quando aplicável:
+
+- certification
+- programVersion
+- pdCode
+- topic
+- subtopic
+- officialSource
+- sourceUrl
+- sourceDate
+- lastVerified
+- contentVersion
+
+Nunca copiar apostilas comerciais. Produzir explicações originais baseadas em fontes oficiais.
+
+## Programa atual versionado
+
+Programa Detalhado CPA ANBIMA atualmente versionado no projeto:
+
+- versão: 1.2
+- revisão: 04/06/2025
+- vigência: 01/01/2026
+
+Antes de qualquer nova produção de conteúdo, verificar novamente a ANBIMA.
+
+Macrotemas oficiais:
+
+1. Estrutura e dinâmica do Sistema Financeiro Nacional — 20%
+2. Produtos do mercado financeiro — 40%
+3. Relacionamento com o cliente — 30%
+4. Inovação e desenvolvimento de mercado — 10%
+
+Preservar todos os PD Codes do Programa Detalhado.
+
+## Arquitetura atual — local-first e custo R$ 0
+
+Esta seção substitui qualquer arquitetura antiga baseada em Supabase, Firebase, login ou backend remoto.
+
+A plataforma é inicialmente **100% local**.
+
+Felipe e Thó usam o mesmo código em computadores/navegadores separados. Cada instalação mantém seu próprio progresso local.
+
+Não exigir:
+
+- Supabase
+- Firebase
+- autenticação
+- login/cadastro
+- servidor próprio
+- API paga
+- `.env` para estudar
+
+Stack:
+
+- React
+- TypeScript strict
+- Vite
+- Tailwind CSS
+- React Router
+- IndexedDB via biblioteca `idb`
+- PWA
+- GitHub para versionamento do código e conteúdo
+
+Princípio obrigatório:
+
+- **GitHub = conteúdo da plataforma**
+- **IndexedDB = progresso e dados pessoais do aluno**
+
+O conteúdo oficial, aulas e banco base de questões não devem ser duplicados no IndexedDB.
+
+## Persistência local
+
+A camada de storage deve ficar centralizada em `src/lib/storage/` ou arquitetura equivalente. Não espalhar chamadas IndexedDB pela aplicação.
+
+O banco local deve ser versionado por `DB_VERSION` e evoluir por migrations aditivas (`v1 → v2 → v3`). Nunca apagar o banco como estratégia de migration.
+
+Schema atual: `DB_VERSION = 2`.
+
+- v1: perfil, progresso de aulas, mini quizzes, favoritos, flashcards, revisões, erros, simulados, sessões de estudo, dias ativos, preferências e plano de estudos.
+- v2: adiciona `questionAttempts` com índices por questão, PD e data.
+
+Persistir localmente, conforme implementados:
+
+- perfil/nome
+- aulas iniciadas/concluídas/dominadas
+- progresso por PD
+- favoritos
+- mini quizzes e respostas
+- tentativas de questões
+- erros e recorrência
+- questões marcadas
+- flashcards e revisões
+- simulados
+- tempo estudado
+- streak
+- estatísticas
+- preferências
+- plano de estudos
+
+Atualizações via `git pull` não podem apagar o IndexedDB do navegador.
+
+## Identidade local
+
+Na primeira abertura perguntar apenas:
+
+> Bem-vindo ao CPA
+> Como podemos te chamar?
+
+Salvar o nome localmente. Isso não é autenticação.
+
+Nas próximas visitas entrar direto no Dashboard e mostrar discretamente `Olá, <nome>`.
+
+Configurações deve permitir alterar o nome.
+
+## Backup obrigatório
+
+Configurações > Dados e Backup deve oferecer:
+
+- Exportar progresso para `cpa-backup-YYYY-MM-DD.json`
+- Importar progresso com validação de estrutura e versão e confirmação explícita
+- Apagar todo o progresso com confirmação forte
+
+A versão atual do backup é v2 e inclui tentativas de questões. Backups v1 devem continuar importáveis.
+
+Nunca substituir ou apagar dados silenciosamente.
+
+## Funcionamento offline
+
+Depois que dependências e assets da aplicação estiverem instalados/carregados, estudar deve funcionar sem internet obrigatória para:
+
+- abrir aulas
+- marcar progresso
+- responder mini quiz
+- responder questões do banco local
+- favoritos
+- caderno de erros
+- flashcards
+- dashboard
+- trilha
+
+Links de fontes oficiais podem abrir páginas externas, mas o conteúdo local não pode depender dessas chamadas em tempo de uso.
+
+## Design
+
+Interface premium de educação financeira, limpa, moderna, profissional, responsiva e desktop-first com boa experiência mobile.
+
+Manter dark/light mode. Evitar aparência infantil ou template genérico.
+
+## Estrutura principal
+
+Sidebar:
+
+- Dashboard
+- Trilha de Estudos
+- Conteúdos
+- Questões
+- Simulados
+- Revisão
+- Flashcards
+- Caderno de Erros
+- Estatísticas
+- Fontes
+- Configurações
+
+Topo com seletor de certificação, preparado para expansão futura.
+
+## Dashboard
+
+Usar apenas dados locais reais. Não inventar números.
+
+Mostrar conforme houver dados:
+
+- nome
+- certificação
+- progresso geral
+- aulas estudadas
+- progresso por macrotema
+- mini quizzes realizados
+- questões respondidas quando aplicável
+- taxa de acerto
+- tempo estudado
+- streak
+- última atividade
+- continuar estudando
+- simulados e assuntos fracos quando existirem dados suficientes
+
+Estados sem histórico devem aparecer como vazios, não como mocks.
+
+## Trilha
+
+Representar todo o Programa Detalhado e preservar hierarquia PD.
+
+Estados:
+
+- Não iniciado
+- Em andamento
+- Estudado
+- Dominado
+
+Nós-pai agregam dinamicamente o status dos itens estudáveis abaixo deles.
+
+## Sistema de aulas
+
+Cada aula completa deve conter:
+
+1. Em uma frase
+2. Explicação para iniciante
+3. Explicação completa
+4. Conceitos essenciais
+5. Como pode aparecer na prova
+6. Exemplo prático
+7. Comparações importantes
+8. Fórmulas quando aplicável
+9. Pegadinhas
+10. Resumo para revisão
+11. Flashcards
+12. Mini quiz
+13. Fontes oficiais
+
+Sempre apresentar nome completo antes da primeira ocorrência relevante de uma sigla.
+
+Recursos:
+
+- Marcar como estudado
+- Tenho dúvida
+- Favoritar
+- Treinar este assunto
+- Aula anterior / próxima aula
+- índice lateral
+- busca por título, palavra, conceito, sigla e PD Code
+
+`Treinar este assunto` deve direcionar ao Question Engine filtrado pelo PD quando existirem questões correspondentes.
+
+Conteúdo regulatório deve exibir `Verificado em: DD/MM/YYYY` e fonte.
+
+Critério atual de status:
+
+- abrir pela primeira vez → Em andamento
+- marcar como estudada → Estudado
+- Estudado + melhor mini quiz >= 75% → Dominado
+
+## Conteúdo atual de aulas
+
+O mecanismo de aulas está implementado para os 105 itens terminais do Macrotema 1.
+
+Macrotemas 2, 3 e 4 continuam no currículo/trilha, mas ainda não possuem aulas completas. O Question Engine pode conter questões desses macrotemas porque cada questão é ancorada diretamente no Programa Detalhado e em fontes oficiais.
+
+## Busca
+
+A busca de aulas deve localizar por:
+
+- título
+- palavra/conceito
+- sigla
+- PD Code
+
+A busca de questões pode localizar por ID, PD, tema/subtema, contexto, comando e conceito.
+
+## Tempo e streak
+
+Não contar indefinidamente tempo de aba aberta.
+
+Usar visibility API, atividade recente e sessões de estudo.
+
+Dia de streak só conta por atividade significativa, como concluir aula, responder mini quiz, revisar flashcard ou responder questão. Abrir o site sozinho não conta.
+
+## Question Engine — implementado
+
+Antes de criar ou ampliar o banco de questões, estudar novamente:
+
+1. Programa Detalhado CPA vigente da ANBIMA;
+2. Guia de Elaboração de Questões das Certificações ANBIMA;
+3. Caderno de Questões CPA publicado pela própria ANBIMA;
+4. modelos interativos/árvores de diálogo oficiais da ANBIMA.
+
+Materiais públicos de cursos e simulados podem ser consultados apenas para calibrar extensão, dificuldade e linguagem. Nunca copiar questões privadas, vazadas, comerciais ou de terceiros.
+
+O banco inicial possui **100 questões originais**:
+
+- Tema 1: 20
+- Tema 2: 40
+- Tema 3: 30
+- Tema 4: 10
+- dificuldade: 30 fáceis, 45 médias, 25 difíceis
+- cognição: 30 compreensão, 45 aplicação, 25 análise
+- tipo: 70 `multiple_choice`, 20 `case`, 10 `dialog_tree`
+- posição do gabarito: 25 em A, 25 em B, 25 em C, 25 em D
+
+Toda questão deve possuir:
+
+- certification: `CPA`
+- pdCode existente no currículo
+- macroTopic
+- topic
+- difficulty
+- cognitiveLevel
+- questionType
+- context
+- prompt
+- exatamente quatro options únicas
+- exactly one correctAnswer válido
+- explanation
+- whyOthersAreWrong alinhado às quatro alternativas
+- pelo menos uma officialSource
+- verifiedAt
+
+Regras pedagógicas:
+
+- priorizar situações reais de atendimento e mercado;
+- contexto deve ser relevante, não decorativo;
+- comando claro e direto;
+- distratores plausíveis no mesmo universo semântico da resposta correta;
+- evitar respostas óbvias, pistas gramaticais, absolutos artificiais, negativas desnecessárias e pegadinhas;
+- nunca usar `todas as anteriores` ou `nenhuma das anteriores`;
+- avaliar aplicação/análise sempre que o PD permitir, em vez de memorização isolada;
+- `dialog_tree` deve representar decisões em conversa/atendimento, inspirado no formato oficial sem copiar exemplos.
+
+Página Questões deve oferecer filtros por:
+
+- Tema
+- Subtema
+- Dificuldade
+- Tipo
+- Não respondidas
+- Erradas
+- Favoritas
+
+Após responder, mostrar:
+
+- correto/incorreto
+- resposta correta
+- explicação
+- motivo das alternativas incorretas
+- PD correspondente
+- fontes oficiais e data de verificação
+- botão Revisar conteúdo
+
+Toda tentativa é registrada no IndexedDB. Questão incorreta entra automaticamente no Caderno de Erros, com recorrência de erro. Favoritos também são locais.
+
+Validação automática deve impedir merge quando:
+
+- total/distribuições esperadas divergirem;
+- PD Code não existir;
+- fonte estiver ausente;
+- houver alternativa duplicada;
+- correctAnswer não apontar para exatamente uma das quatro alternativas;
+- enunciado completo estiver duplicado;
+- houver `todas as anteriores` ou `nenhuma das anteriores`;
+- distribuição de posição do gabarito ficar previsível na versão atual.
+
+## Simulados — fase futura
+
+CPA completa: 50 questões, 2h30, corte 35/50 e distribuição aproximada pelos pesos vigentes. Também prever simulados rápidos, por tema, assuntos fracos e personalizado.
+
+## Flashcards/revisão — evolução futura
+
+As aulas já contêm flashcards e a arquitetura local suporta reviews, mas a fila completa de repetição espaçada e revisão inteligente pertence às próximas etapas.
+
+## Caderno de Erros — implementado para questões
+
+Respostas incorretas do Question Engine entram automaticamente no Caderno de Erros. O registro deve preservar questão, PD, resposta dada, resposta correta, data, recorrência e estado resolvido/não resolvido.
+
+## PWA
+
+Permitir instalação e uso offline dos conteúdos e questões já empacotados. Não exigir sincronização remota.
+
+## Qualidade
+
+Obrigatório:
+
+- TypeScript strict
+- componentes reutilizáveis
+- validação de dados
+- tratamento de erros
+- loading/empty states
+- responsividade
+- testes de persistência local
+- testes do Question Engine
+- nenhum segredo ou chave obrigatória
+
+Antes de concluir uma mudança relevante:
+
+1. ler o repositório relevante;
+2. preservar funcionalidades boas;
+3. implementar sem duplicatas;
+4. executar validação curricular;
+5. executar validação de questões quando aplicável;
+6. executar testes;
+7. executar typecheck;
+8. executar build;
+9. corrigir erros antes de atualizar `main`;
+10. documentar mudanças e pendências reais.
+
+Não deixar TODOs quando for possível concluir a implementação.
