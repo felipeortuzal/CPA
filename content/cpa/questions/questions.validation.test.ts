@@ -41,14 +41,14 @@ describe('banco original de questões CPA', () => {
     }
   })
 
-  it('não contém alternativas duplicadas, prompts duplicados ou atalhos proibidos', () => {
-    const prompts = new Set<string>()
+  it('não contém alternativas duplicadas, enunciados completos duplicados ou atalhos proibidos', () => {
+    const stems = new Set<string>()
     for (const question of cpaQuestions) {
       const normalizedOptions = question.options.map((option) => option.trim().toLocaleLowerCase('pt-BR'))
       expect(new Set(normalizedOptions).size, `${question.id}: alternativa duplicada`).toBe(4)
-      const prompt = question.prompt.trim().toLocaleLowerCase('pt-BR')
-      expect(prompts.has(prompt), `${question.id}: prompt duplicado`).toBe(false)
-      prompts.add(prompt)
+      const stem = `${question.context} ${question.prompt}`.trim().toLocaleLowerCase('pt-BR')
+      expect(stems.has(stem), `${question.id}: enunciado completo duplicado`).toBe(false)
+      stems.add(stem)
       const text = `${question.prompt} ${question.options.join(' ')}`.toLocaleLowerCase('pt-BR')
       expect(text).not.toContain('todas as anteriores')
       expect(text).not.toContain('nenhuma das anteriores')

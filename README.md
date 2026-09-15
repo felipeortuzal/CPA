@@ -6,23 +6,21 @@ Plataforma local e gratuita de estudos para a **CPA — Certificado Profissional
 
 - React + TypeScript + Vite + Tailwind CSS
 - IndexedDB via `idb` para progresso pessoal
-- conteúdo e currículo versionados no GitHub
+- conteúdo, currículo e banco base de questões versionados no GitHub
 - PWA para facilitar uso offline depois que os arquivos da aplicação foram carregados
 - sem login, sem cadastro, sem Supabase/Firebase e sem servidor obrigatório
 - custo operacional obrigatório: **R$ 0**
 
-O princípio é simples:
+Princípio:
 
 - **GitHub = conteúdo da plataforma**
-- **IndexedDB do navegador = progresso do aluno**
+- **IndexedDB do navegador = progresso, tentativas, favoritos e erros do aluno**
 
 Felipe e Thó usam o mesmo código, mas cada computador/navegador possui progresso próprio.
 
-## Como rodar o CPA no seu computador
+## Como rodar
 
-### Primeira instalação
-
-No Windows, instale Git e Node.js 22 ou superior. Depois abra o Prompt de Comando/PowerShell e rode:
+Primeira instalação:
 
 ```bash
 git clone https://github.com/felipeortuzal/CPA.git
@@ -31,26 +29,9 @@ npm install
 npm run dev
 ```
 
-Abra o endereço exibido pelo Vite, normalmente `http://localhost:5173`.
+Nas próximas vezes, `npm run dev`. No Windows também existe `start-cpa.bat`.
 
-Na primeira abertura aparecerá:
-
-> Bem-vindo ao CPA
-> Como podemos te chamar?
-
-Digite `Felipe`, `Thó` ou outro nome. Não é uma conta: o nome e todo o progresso ficam apenas naquele navegador.
-
-### Próximas vezes
-
-Dentro da pasta `CPA`, basta usar:
-
-```bash
-npm run dev
-```
-
-No Windows também existe `start-cpa.bat`; dê dois cliques nele dentro da pasta do projeto.
-
-### Quando houver atualização do projeto
+Para atualizar:
 
 ```bash
 git pull
@@ -58,78 +39,83 @@ npm install
 npm run dev
 ```
 
-O `git pull` altera os arquivos do projeto, **não o IndexedDB do navegador**. Portanto o progresso local permanece.
+O `git pull` altera os arquivos do projeto, não o IndexedDB do navegador.
 
-## Backup do progresso
+## Backup
 
-Em **Configurações > Dados e Backup** existem três ações:
+Em **Configurações > Dados e Backup**:
 
-- **Exportar progresso**: baixa `cpa-backup-YYYY-MM-DD.json`.
-- **Importar progresso**: valida o JSON e pede confirmação antes de substituir os dados locais.
-- **Apagar todo o progresso**: exige duas confirmações e nunca apaga silenciosamente.
+- Exportar progresso para `cpa-backup-YYYY-MM-DD.json`.
+- Importar progresso com validação e confirmação.
+- Apagar todo o progresso com confirmação forte.
 
-Faça backups periódicos, principalmente antes de trocar de navegador/computador ou limpar dados do navegador.
+A versão atual do backup é v2 e inclui tentativas de questões. Backups v1 continuam importáveis.
 
-## Programa oficial da CPA
+## Programa oficial
 
-O currículo atualmente versionado utiliza o **Programa Detalhado CPA da ANBIMA, versão 1.2**, revisão de **04/06/2025**, vigente desde **01/01/2026**. Antes de alterar conteúdo regulatório, a versão oficial mais recente deve ser verificada novamente na ANBIMA.
+O currículo versionado utiliza o **Programa Detalhado CPA da ANBIMA, versão 1.2**, revisão de **04/06/2025**, vigente desde **01/01/2026**. Antes de alterar conteúdo regulatório ou questões, a versão oficial mais recente deve ser verificada novamente.
 
-A estrutura completa do PD está em `content/cpa/`. O Macrotema 1 possui aulas didáticas completas em `content/cpa/lessons/`.
+A estrutura completa do PD está em `content/cpa/`. São 590 nós curriculares, preservando os PD Codes oficiais.
 
 ## Sistema de aulas
 
-Cada aula do Macrotema 1 inclui:
+O Macrotema 1 possui 105 aulas terminais completas em `content/cpa/lessons/`, com explicações, conceitos, foco de prova, exemplos, comparações, fórmulas, pegadinhas, revisão, flashcards, mini quiz e fontes oficiais.
 
-1. Em uma frase
-2. Explicação para iniciante
-3. Explicação completa
-4. Conceitos essenciais
-5. Como pode aparecer na prova
-6. Exemplo prático
-7. Comparações importantes
-8. Fórmulas quando aplicável
-9. Pegadinhas
-10. Resumo para revisão
-11. Flashcards
-12. Mini quiz
-13. Fontes oficiais e data de verificação
+Status local: Não iniciado → Em andamento → Estudado → Dominado. Domínio exige aula estudada e melhor mini quiz >= 75%.
 
-Status local:
+## Question Engine
 
-- Não iniciado
-- Em andamento ao abrir a aula pela primeira vez
-- Estudado ao marcar a aula
-- Dominado quando a aula está estudada e o melhor mini quiz é de pelo menos 75%
+O banco inicial contém **100 questões originais** em `content/cpa/questions/`.
+
+Distribuição:
+
+- Tema 1: 20
+- Tema 2: 40
+- Tema 3: 30
+- Tema 4: 10
+- dificuldade: 30 fáceis, 45 médias, 25 difíceis
+- nível cognitivo: 30 compreensão, 45 aplicação, 25 análise
+- tipo: 70 `multiple_choice`, 20 `case`, 10 `dialog_tree`
+
+Cada questão possui certificação, PD Code, tema, subtema, dificuldade, nível cognitivo, tipo, contexto, comando, quatro alternativas, uma resposta correta, explicação, explicação das incorretas, fontes oficiais e data de verificação.
+
+Antes da elaboração foram estudados o Guia de Elaboração de Questões da ANBIMA, o Caderno de Questões CPA oficial e os modelos interativos divulgados pela ANBIMA. Materiais públicos de preparação foram observados apenas para calibrar extensão e dificuldade. Não são copiadas questões privadas, vazadas ou de terceiros.
+
+A página **Questões** permite filtrar por tema, subtema, dificuldade, tipo, não respondidas, erradas e favoritas. Após responder, mostra feedback completo, PD e acesso ao conteúdo relacionado.
+
+Respostas incorretas entram automaticamente no **Caderno de Erros**, que registra recorrência e permite refazer a questão ou marcar `Já aprendi`.
 
 ## Persistência local
 
-A camada fica em `src/lib/storage/` e usa schema versionado (`DB_VERSION`). Atualizações futuras devem criar migrations aditivas; não se deve apagar o banco para resolver mudança de schema.
+A camada fica em `src/lib/storage/`. O schema atual é `DB_VERSION = 2`.
 
-O IndexedDB já possui stores preparadas para perfil, progresso de aula, quizzes, favoritos, flashcards, revisões, questões marcadas, caderno de erros, simulados, sessões de estudo, dias ativos, preferências e plano futuro.
+- v1: perfil, aulas, quizzes, favoritos, flashcards, erros, simulados, sessões, streak, preferências etc.
+- v2: migration aditiva cria `questionAttempts` com índices por questão, PD e data.
 
-## Tempo de estudo e streak
+Nunca apagar o banco como estratégia de migration.
 
-O timer de aula só soma tempo quando a aba está visível e houve interação recente. Abrir uma aba e deixá-la parada indefinidamente não gera horas falsas.
+## Tempo e streak
 
-Um dia conta para o streak quando ocorre atividade significativa, como concluir aula ou responder mini quiz; abrir o site sozinho não conta.
+O timer de aula só soma tempo quando a aba está visível e houve interação recente. Um dia conta para o streak quando ocorre atividade significativa, incluindo conclusão de aula, mini quiz ou resposta de questão.
 
 ## Comandos de qualidade
 
 ```bash
 npm run validate:curriculum
+npm run validate:questions
 npm test
 npm run typecheck
 npm run build
 ```
 
-Ou tudo de uma vez:
+Ou:
 
 ```bash
 npm run validate
 ```
 
-O GitHub Actions executa a mesma sequência em cada push/PR.
+A validação de questões exige 100 itens, distribuição 20/40/30/10, PD Code existente, quatro alternativas únicas, uma resposta correta válida e pelo menos uma fonte oficial por questão.
 
 ## Próximas etapas
 
-Ainda não fazem parte desta versão: banco completo de questões, simulado de 50 questões, ranking Felipe x Thó, IA, C-Pro R/C-Pro I e demais certificações. A arquitetura local já deixa stores preparadas para evolução sem perder o progresso existente.
+Ainda não fazem parte desta versão: simulado completo de 50 questões, revisão inteligente completa, repetição espaçada dos flashcards, analytics avançado, ranking Felipe x Thó e demais certificações. O Question Engine e o storage v2 já servem de base para essas etapas.
