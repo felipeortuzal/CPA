@@ -1,5 +1,0 @@
-project_id = "cpa-study-platform"
-
-[auth]
-site_url = "http://localhost:5173"
-additional_redirect_urls = ["http://localhost:5173/login", "http://localhost:5173/nova-senha"]

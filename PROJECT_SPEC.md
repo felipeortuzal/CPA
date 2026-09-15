@@ -1,37 +1,20 @@
-Você está trabalhando no repositório GitHub chamado "CPA".
+# PROJECT_SPEC.md
 
-OBJETIVO
+Você está trabalhando no repositório GitHub `CPA`.
 
-Construir uma plataforma web completa de estudos para certificações financeiras brasileiras, começando pela NOVA CPA da ANBIMA vigente em 2026.
+## Objetivo
 
-A plataforma será usada inicialmente por duas pessoas, Felipe e Thó, mas sua arquitetura deve permitir adicionar futuramente:
+Construir uma plataforma completa de estudos para certificações financeiras brasileiras, começando pela **NOVA CPA — Certificado Profissional ANBIMA**, vigente no novo modelo a partir de 2026.
 
-- CPA
-- C-Pro R
-- C-Pro I
-- CFG
-- CGA
-- CGE
-- outras certificações
+Não usar conteúdo da antiga CPA-10 ou CPA-20.
 
-IMPORTANTE:
-NÃO estamos estudando para a antiga CPA-10 ou CPA-20.
+A arquitetura deve permitir futuramente CPA, C-Pro R, C-Pro I, CFG, CGA, CGE e outras certificações, sem misturar conteúdos ou progressos.
 
-Estamos estudando para a nova:
-
-CPA — Certificado Profissional ANBIMA
-
-que entrou em vigor em 2026.
-
-==================================================
-REGRA Nº 1 — CONTEÚDO SEMPRE ATUALIZADO
-==================================================
+## Regra nº 1 — conteúdo sempre atualizado
 
 Nunca invente conteúdo regulatório.
 
-Antes de implementar ou alterar conteúdos de estudo, consulte fontes oficiais atualizadas.
-
-Ordem de prioridade:
+Antes de implementar ou alterar conteúdo de estudo, consultar fontes oficiais atualizadas nesta prioridade:
 
 1. ANBIMA / ANBIMA Edu
 2. CVM
@@ -41,9 +24,9 @@ Ordem de prioridade:
 6. B3
 7. SUSEP / PREVIC / demais órgãos oficiais quando pertinentes
 
-O Programa Detalhado da CPA da ANBIMA deve ser a fonte de verdade sobre o conteúdo cobrado.
+O Programa Detalhado da CPA da ANBIMA é a fonte de verdade sobre o conteúdo cobrado. Se existir versão mais nova, ela prevalece.
 
-Cada conteúdo da plataforma deverá possuir metadata:
+Cada conteúdo regulatório deve manter metadata quando aplicável:
 
 - certification
 - programVersion
@@ -56,539 +39,285 @@ Cada conteúdo da plataforma deverá possuir metadata:
 - lastVerified
 - contentVersion
 
-Nunca copie apostilas comerciais.
+Nunca copiar apostilas comerciais. Produzir explicações originais baseadas em fontes oficiais.
 
-Produza explicações originais baseadas nas fontes oficiais.
+## Programa atual versionado
 
-==================================================
-ESTRUTURA ATUAL DA NOVA CPA
-==================================================
+Programa Detalhado CPA ANBIMA atualmente versionado no projeto:
 
-Utilizar como referência o Programa Detalhado oficial vigente.
+- versão: 1.2
+- revisão: 04/06/2025
+- vigência: 01/01/2026
 
-Macrotemas:
+Antes de qualquer nova produção de conteúdo, verificar novamente a ANBIMA.
 
-1. Estrutura e dinâmica do Sistema Financeiro Nacional
-Peso aproximado da prova: 20%
+Macrotemas oficiais:
 
-2. Produtos do mercado financeiro
-Peso aproximado: 40%
+1. Estrutura e dinâmica do Sistema Financeiro Nacional — 20%
+2. Produtos do mercado financeiro — 40%
+3. Relacionamento com o cliente — 30%
+4. Inovação e desenvolvimento de mercado — 10%
 
-3. Relacionamento com o cliente
-(prospecção, atendimento e suporte)
-Peso aproximado: 30%
+Preservar todos os PD Codes do Programa Detalhado.
 
-4. Inovação e desenvolvimento de mercado
-Peso aproximado: 10%
+## Arquitetura atual — local-first e custo R$ 0
 
-Preservar também os códigos do Programa Detalhado:
-1
-1.1
-1.1.1
-...
-2.1
-...
-etc.
+Esta seção substitui qualquer arquitetura antiga baseada em Supabase, Firebase, login ou backend remoto.
 
-Isso permitirá rastrear exatamente quais assuntos cada aluno domina.
+A plataforma é inicialmente **100% local**.
 
-==================================================
-FORMATO DA PROVA
-==================================================
+Felipe e Thó usam o mesmo código em computadores/navegadores separados. Cada instalação mantém seu próprio progresso local.
 
-Configuração da CPA vigente:
+Não exigir:
 
-- 50 questões
-- 2h30
-- aprovação: 35 acertos
-- aproximadamente 70%
-- questões contextualizadas
-- múltipla escolha
-- cases
-- árvores de diálogo / decisão quando aplicável
+- Supabase
+- Firebase
+- autenticação
+- login/cadastro
+- servidor próprio
+- API paga
+- `.env` para estudar
 
-O simulador deverá reproduzir essa experiência.
+Stack:
 
-==================================================
-STACK
-==================================================
-
-Priorizar serviços gratuitos.
-
-Frontend:
 - React
-- TypeScript
+- TypeScript strict
 - Vite
 - Tailwind CSS
+- React Router
+- IndexedDB via biblioteca `idb`
+- PWA
+- GitHub para versionamento do código e conteúdo
 
-Backend:
-- Supabase Free Tier
+Princípio obrigatório:
 
-Supabase:
-- Authentication
-- PostgreSQL
-- progresso
-- resultados
-- flashcards
-- respostas
+- **GitHub = conteúdo da plataforma**
+- **IndexedDB = progresso e dados pessoais do aluno**
+
+O conteúdo oficial, aulas e banco base de questões não devem ser duplicados no IndexedDB.
+
+## Persistência local
+
+A camada de storage deve ficar centralizada em `src/lib/storage/` ou arquitetura equivalente. Não espalhar chamadas IndexedDB pela aplicação.
+
+O banco local deve ser versionado por `DB_VERSION` e evoluir por migrations aditivas (`v1 → v2 → v3`). Nunca apagar o banco como estratégia de migration.
+
+Persistir localmente, conforme forem implementados:
+
+- perfil/nome
+- aulas iniciadas/concluídas/dominadas
+- progresso por PD
+- favoritos
+- mini quizzes e respostas
+- erros
+- questões marcadas
+- flashcards e revisões
 - simulados
+- tempo estudado
+- streak
+- estatísticas
+- preferências
+- plano de estudos
 
-Deploy:
-- Cloudflare Pages
+Atualizações via `git pull` não podem apagar o IndexedDB do navegador.
 
-Código:
-- GitHub
+## Identidade local
 
-Não criar qualquer dependência obrigatória de API paga.
+Na primeira abertura perguntar apenas:
 
-==================================================
-DESIGN
-==================================================
+> Bem-vindo ao CPA
+> Como podemos te chamar?
 
-Criar interface premium de plataforma educacional financeira.
+Salvar o nome localmente. Isso não é autenticação.
 
-Referências conceituais:
-- Bloomberg
-- Linear
-- Duolingo
-- Khan Academy
-- ANBIMA
+Nas próximas visitas entrar direto no Dashboard e mostrar discretamente `Olá, <nome>`.
 
-Não copiar nenhuma interface.
+Configurações deve permitir alterar o nome.
 
-Estilo:
+## Backup obrigatório
 
-- clean
-- financeiro
-- moderno
-- profissional
-- responsivo
-- dark/light mode
-- excelente UX mobile e desktop
+Configurações > Dados e Backup deve oferecer:
 
-Evitar aparência de template genérico.
+- Exportar progresso para `cpa-backup-YYYY-MM-DD.json`
+- Importar progresso com validação de estrutura e versão e confirmação explícita
+- Apagar todo o progresso com confirmação forte
 
-==================================================
-ESTRUTURA PRINCIPAL
-==================================================
+Nunca substituir ou apagar dados silenciosamente.
+
+## Funcionamento offline
+
+Depois que dependências e assets da aplicação estiverem instalados/carregados, estudar deve funcionar sem internet obrigatória para:
+
+- abrir aulas
+- marcar progresso
+- responder mini quiz
+- favoritos
+- flashcards
+- dashboard
+- trilha
+
+Links de fontes oficiais podem abrir páginas externas, mas o conteúdo local não pode depender dessas chamadas em tempo de uso.
+
+## Design
+
+Interface premium de educação financeira, limpa, moderna, profissional, responsiva e desktop-first com boa experiência mobile.
+
+Manter dark/light mode. Evitar aparência infantil ou template genérico.
+
+## Estrutura principal
 
 Sidebar:
 
-Dashboard
-Trilha de Estudos
-Conteúdos
-Questões
-Simulados
-Revisão
-Flashcards
-Caderno de Erros
-Estatísticas
-Fontes
-Configurações
+- Dashboard
+- Trilha de Estudos
+- Conteúdos
+- Questões
+- Simulados
+- Revisão
+- Flashcards
+- Caderno de Erros
+- Estatísticas
+- Fontes
+- Configurações
 
-Topo:
+Topo com seletor de certificação, preparado para expansão futura.
 
-Certificação:
-[ CPA ▼ ]
+## Dashboard
 
-Arquitetura deve permitir trocar futuramente para:
-C-Pro R
-C-Pro I
-etc.
+Usar apenas dados locais reais. Não inventar números.
 
-==================================================
-DASHBOARD
-==================================================
+Mostrar conforme houver dados:
 
-Mostrar:
-
-- nome do aluno
-- certificação atual
+- nome
+- certificação
 - progresso geral
-- percentual do edital dominado
-- questões respondidas
+- aulas estudadas
+- progresso por macrotema
+- mini quizzes realizados
 - taxa de acerto
-- sequência de estudos
 - tempo estudado
-- desempenho por macrotema
-- previsão de aprovação
-- últimos estudos
-- recomendação "Continue daqui"
-- assuntos fracos
-- simulados recentes
+- streak
+- última atividade
+- continuar estudando
+- simulados e assuntos fracos quando existirem dados suficientes
 
-Criar indicador:
+Estados sem histórico devem aparecer como vazios, não como mocks.
 
-"Pronto para a prova"
+## Trilha
 
-calculado a partir de:
-
-- cobertura do programa
-- desempenho recente
-- desempenho por macrotema
-- simulados completos
-- consistência
-
-Não apresentar isso como garantia de aprovação.
-
-==================================================
-TRILHA
-==================================================
-
-Representar TODO o Programa Detalhado.
-
-Exemplo:
-
-1. Sistema Financeiro Nacional
-  1.1 Sistema Financeiro Nacional
-  1.2 Política econômica
-  1.3 Operações do mercado financeiro
-  1.4 Regulação e infraestrutura
-
-Cada item pode estar:
-
-○ Não iniciado
-◔ Em andamento
-● Concluído
-★ Dominado
-
-Cada microtema deve abrir uma aula.
-
-==================================================
-AULA
-==================================================
-
-Cada aula deverá conter:
-
-1. Explicação simples
-2. Explicação completa
-3. Conceitos importantes
-4. "O que você precisa saber para a prova"
-5. Exemplos reais
-6. Fórmulas quando aplicável
-7. Pegadinhas comuns
-8. Comparações
-9. Flashcards
-10. Mini quiz
-11. Fontes oficiais
-12. Data da última verificação
-
-Adicionar botão:
-
-"Marcar como estudado"
-
-e
-
-"Treinar este assunto"
-
-==================================================
-QUESTÕES
-==================================================
-
-Criar banco de questões original.
-
-Cada questão possui:
-
-id
-certification
-pdCode
-macroTopic
-topic
-difficulty
-cognitiveLevel
-questionType
-context
-question
-options
-correctAnswer
-explanation
-whyOthersAreWrong
-officialSources
-createdAt
-verifiedAt
-
-difficulty:
-easy
-medium
-hard
-
-cognitiveLevel:
-knowledge
-comprehension
-application
-analysis
-
-questionType:
-multiple_choice
-case
-dialog_tree
-
-Nunca usar questões vazadas ou obtidas ilegalmente da prova.
-
-Questões oficiais publicadas pela própria ANBIMA podem ser tratadas
-separadamente como "Questões oficiais de referência", respeitando
-direitos autorais e preferencialmente apontando a fonte.
-
-==================================================
-MODO QUESTÕES
-==================================================
-
-Permitir:
-
-- questões aleatórias
-- por tema
-- por subtema
-- por dificuldade
-- somente erradas
-- somente marcadas
-- questões não vistas
-- revisão inteligente
-
-Depois da resposta:
-
-CORRETO ou INCORRETO
-
-mostrar:
-
-- resposta correta
-- explicação
-- por que cada alternativa está errada
-- assunto do Programa Detalhado
-- link para revisar aula
-
-==================================================
-SIMULADOS
-==================================================
-
-Criar:
-
-Simulado CPA Completo
-
-- 50 questões
-- 2h30
-- distribuição aproximada:
-  20% Tema 1
-  40% Tema 2
-  30% Tema 3
-  10% Tema 4
-
-Resultado:
-
-Pontuação
-XX / 50
-
-Status:
-APROVADO / REPROVADO
-
-Corte:
-35/50
-
-Mostrar desempenho detalhado por tema.
-
-Criar também:
-
-Simulado rápido 10 questões
-Simulado 20 questões
-Simulado por tema
-Simulado somente assuntos fracos
-Simulado personalizado
-
-Durante o simulado:
-
-- timer
-- navegação 1–50
-- marcar para revisão
-- bloco de notas
-- calculadora
-- finalizar prova
-
-Não mostrar respostas antes da finalização no modo prova.
-
-==================================================
-CADERNO DE ERROS
-==================================================
-
-Toda questão errada entra automaticamente.
-
-Mostrar:
-
-- questão
-- erro cometido
-- resposta escolhida
-- resposta correta
-- explicação
-- tema
-- número de vezes errada
-
-Permitir:
-
-"Já aprendi"
-
-e repetir depois.
-
-==================================================
-FLASHCARDS
-==================================================
-
-Criar sistema de repetição espaçada.
+Representar todo o Programa Detalhado e preservar hierarquia PD.
 
 Estados:
 
-Again
-Hard
-Good
-Easy
+- Não iniciado
+- Em andamento
+- Estudado
+- Dominado
 
-Registrar:
+Nós-pai agregam dinamicamente o status dos itens estudáveis abaixo deles.
 
-lastReviewed
-nextReview
-interval
-ease
+## Sistema de aulas
 
-Criar flashcards automaticamente associados aos conteúdos,
-mas armazenados estaticamente no projeto inicialmente.
+Cada aula completa deve conter:
 
-==================================================
-REVISÃO
-==================================================
+1. Em uma frase
+2. Explicação para iniciante
+3. Explicação completa
+4. Conceitos essenciais
+5. Como pode aparecer na prova
+6. Exemplo prático
+7. Comparações importantes
+8. Fórmulas quando aplicável
+9. Pegadinhas
+10. Resumo para revisão
+11. Flashcards
+12. Mini quiz
+13. Fontes oficiais
 
-Criar:
+Sempre apresentar nome completo antes da primeira ocorrência relevante de uma sigla.
 
-Revisão de hoje
+Recursos:
 
-baseada em:
+- Marcar como estudado
+- Tenho dúvida
+- Favoritar
+- Treinar este assunto
+- Aula anterior / próxima aula
+- índice lateral
+- busca por título, palavra, conceito, sigla e PD Code
 
-- questões erradas
-- conteúdos esquecidos
-- flashcards vencidos
-- temas com baixo desempenho
+Enquanto o Question Engine não existir, `Treinar este assunto` deve ficar desabilitado com mensagem `Banco de questões em construção`.
 
-Criar também:
+Conteúdo regulatório deve exibir `Verificado em: DD/MM/YYYY` e fonte.
 
-Modo véspera da prova
+Critério atual de status:
 
-com:
+- abrir pela primeira vez → Em andamento
+- marcar como estudada → Estudado
+- Estudado + melhor mini quiz >= 75% → Dominado
 
-- conceitos essenciais
-- fórmulas
-- diferenças importantes
-- pegadinhas
-- pontos de alta incidência
+## Conteúdo atual desta fase
 
-==================================================
-ANALYTICS
-==================================================
+O mecanismo de aulas está implementado somente para o Macrotema 1.
 
-Mostrar:
+Macrotemas 2, 3 e 4 continuam no currículo/trilha, mas não devem receber aulas completas até solicitação futura.
 
-- acerto total
-- acerto por tema
-- acerto por PD
-- desempenho por dificuldade
-- evolução semanal
-- simulados
-- tempo estudado
-- assuntos mais fracos
-- assuntos dominados
+## Busca
 
-Cada usuário possui seus próprios dados.
+A busca deve localizar aulas por:
 
-==================================================
-FELIPE E THÓ
-==================================================
+- título
+- palavra/conceito
+- sigla
+- PD Code
 
-Usuários separados.
+## Tempo e streak
 
-Cada um deve possuir:
+Não contar indefinidamente tempo de aba aberta.
 
-- conta
-- progresso
-- simulados
-- erros
-- flashcards
-- estatísticas
+Usar visibility API, atividade recente e sessões de estudo.
 
-Criar opcionalmente painel:
+Dia de streak só conta por atividade significativa, como concluir aula, responder mini quiz, revisar flashcard ou responder questões no futuro. Abrir o site sozinho não conta.
 
-"Felipe x Thó"
+## Questões — fase futura
 
-apenas com informações leves:
+Criar banco original, nunca usar questões vazadas. Cada questão deve rastrear certification, pdCode, tema, dificuldade, nível cognitivo, tipo, opções, resposta correta, explicação e fontes oficiais.
 
-- progresso
-- questões realizadas
-- taxa de acerto
-- sequência de estudos
+## Simulados — fase futura
 
-Sem misturar os dados individuais.
+CPA completa: 50 questões, 2h30, corte 35/50 e distribuição aproximada pelos pesos vigentes. Também prever simulados rápidos, por tema, assuntos fracos e personalizado.
 
-==================================================
-PWA
-==================================================
+## Flashcards/revisão/caderno de erros — evolução futura
 
-Transformar o site em Progressive Web App.
+A arquitetura local já deve suportar dados desses recursos, mas não criar implementação falsa antes das etapas específicas.
 
-Permitir:
+## PWA
 
-- instalar no celular
-- carregar rapidamente
-- estudar conteúdos offline quando possível
-- sincronizar progresso quando conexão voltar
+Permitir instalação e uso offline dos conteúdos já empacotados. Não exigir sincronização remota.
 
-==================================================
-QUALIDADE
-==================================================
+## Qualidade
 
-Usar:
+Obrigatório:
 
 - TypeScript strict
 - componentes reutilizáveis
-- boas práticas de segurança
 - validação de dados
-- RLS do Supabase
 - tratamento de erros
-- loading states
-- empty states
+- loading/empty states
 - responsividade
+- testes de persistência local
+- nenhum segredo ou chave obrigatória
 
-Nunca expor SERVICE_ROLE_KEY.
+Antes de concluir uma mudança relevante:
 
-Somente variáveis públicas necessárias no frontend.
+1. ler o repositório relevante;
+2. preservar funcionalidades boas;
+3. implementar sem duplicatas;
+4. executar validação curricular;
+5. executar testes;
+6. executar typecheck;
+7. executar build;
+8. corrigir erros antes de atualizar `main`;
+9. documentar mudanças e pendências reais.
 
-==================================================
-ARQUITETURA FUTURA
-==================================================
-
-Não hardcodar CPA na aplicação inteira.
-
-Criar abstraction:
-
-Certification
-
-permitindo posteriormente:
-
-CPA
-C-Pro R
-C-Pro I
-CFG
-CGA
-CGE
-
-Conteúdos e questões devem indicar a certificação.
-
-==================================================
-REGRA DE EXECUÇÃO
-==================================================
-
-Antes de alterar código:
-
-1. leia o repositório inteiro relevante;
-2. entenda a arquitetura atual;
-3. preserve funcionalidades existentes;
-4. implemente a alteração;
-5. rode build;
-6. rode testes;
-7. corrija erros;
-8. documente o que mudou.
-
-Não deixe TODOs quando puder concluir a implementação.
+Não deixar TODOs quando for possível concluir a implementação.

@@ -15,25 +15,14 @@ function extractModule(moduleNumber) {
     const pdCode = line.slice(0, separator).trim()
     const title = line.slice(separator + 1).trim()
     const parts = pdCode.split('.')
-    return {
-      title,
-      pdCode,
-      parentCode: parts.length === 1 ? null : parts.slice(0, -1).join('.'),
-      order: index + 1,
-      description: `Tópico oficial correspondente ao item ${pdCode} do Programa Detalhado da CPA.`,
-      officialSources: [metadata.officialSource],
-      lastVerified: metadata.lastVerified,
-    }
+    return { title, pdCode, parentCode: parts.length === 1 ? null : parts.slice(0, -1).join('.'), order: index + 1 }
   })
 }
 
 const modules = [1, 2, 3, 4].map(extractModule)
 const items = modules.flat()
-const required = ['title', 'pdCode', 'parentCode', 'order', 'description', 'officialSources', 'lastVerified']
 const codes = new Set()
-
 for (const item of items) {
-  for (const field of required) if (!(field in item)) throw new Error(`${item.pdCode ?? 'item'} sem ${field}`)
   if (!/^\d+(?:\.\d+)*$/.test(item.pdCode)) throw new Error(`Código PD inválido: ${item.pdCode}`)
   if (!item.title) throw new Error(`Título vazio em ${item.pdCode}`)
   if (codes.has(item.pdCode)) throw new Error(`Código PD duplicado: ${item.pdCode}`)
@@ -50,14 +39,19 @@ if (metadata.effectiveFrom !== '2026-01-01') throw new Error(`Vigência inespera
 const weightSum = metadata.macroTopics.reduce((sum, topic) => sum + topic.weight, 0)
 if (weightSum !== 100) throw new Error(`Pesos somam ${weightSum}, não 100`)
 
-for (const moduleNumber of [1, 2, 3, 4]) {
-  const migrationPath = path.join(root, 'supabase', 'migrations', `20260914230${moduleNumber}00_cpa_curriculum_module_${moduleNumber}.sql`)
-  const migration = fs.readFileSync(migrationPath, 'utf8')
-  const match = migration.match(/\$curriculum\$([\s\S]*?)\$curriculum\$/)
-  if (!match) throw new Error(`Bloco curricular ausente na migration do módulo ${moduleNumber}`)
-  const migrationRows = match[1].trim().split('\n')
-  const sourceRows = modules[moduleNumber - 1].map((item) => `${item.pdCode}|${item.title}`)
-  if (migrationRows.join('\n') !== sourceRows.join('\n')) throw new Error(`Migration do módulo ${moduleNumber} diverge do conteúdo versionado`)
-}
+const module1 = modules[0]
+const module1Codes = new Set(module1.map((item) => item.pdCode))
+const terminalCodes = module1.filter((item) => !module1.some((candidate) => candidate.parentCode === item.pdCode)).map((item) => item.pdCode)
+const definitionsFile = fs.readFileSync(path.join(contentDir, 'lessons', 'macro-1-definitions.ts'), 'utf8')
+const definitionCodes = [...definitionsFile.matchAll(/^'([0-9]+(?:\.[0-9]+)*)':/gm)].map((match) => match[1])
+const definitionSet = new Set(definitionCodes)
+if (definitionCodes.length !== definitionSet.size) throw new Error('Há PD Codes duplicados em macro-1-definitions.ts')
+if (terminalCodes.length !== 105) throw new Error(`Esperadas 105 aulas terminais no Macrotema 1; encontradas ${terminalCodes.length}`)
+if (definitionCodes.length !== 105) throw new Error(`Esperadas 105 definições de aula; encontradas ${definitionCodes.length}`)
+for (const code of terminalCodes) if (!definitionSet.has(code)) throw new Error(`Aula terminal sem definição: ${code}`)
+for (const code of definitionCodes) if (!module1Codes.has(code) || !terminalCodes.includes(code)) throw new Error(`Definição não corresponde a item terminal oficial: ${code}`)
 
-console.log(`CPA ${metadata.programVersion}: ${items.length} itens validados, 4 macrotemas, pesos ${weightSum}%, migrations sincronizadas.`)
+const sourceFile = fs.readFileSync(path.join(contentDir, 'lessons', 'sources.ts'), 'utf8')
+if (!sourceFile.includes("lastVerified:'2026-09-14'") && !sourceFile.includes("lastVerified: '2026-09-14'")) throw new Error('Fontes das aulas não registram lastVerified 2026-09-14')
+
+console.log(`CPA ${metadata.programVersion}: ${items.length} itens curriculares, 4 macrotemas, pesos ${weightSum}% e ${terminalCodes.length} aulas terminais do Macrotema 1 validadas.`)

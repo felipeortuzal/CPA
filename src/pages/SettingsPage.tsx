@@ -1,46 +1,104 @@
-import { useEffect, useState, type FormEvent } from 'react'
-import { CheckCircle2, LogOut, Save, UserRound } from 'lucide-react'
+import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import { CheckCircle2, DatabaseBackup, Download, Save, Trash2, Upload, UserRound } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { certifications } from '../data/certifications'
-import { useAuth } from '../features/auth/AuthProvider'
-import { useProfile } from '../features/auth/ProfileProvider'
+import { useStudent } from '../features/profile/StudentProvider'
+import { createBackup, downloadBackup, importBackup, parseBackupFile, resetAllProgress } from '../lib/storage/backup'
 
 const inputClass = 'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 dark:border-white/10 dark:bg-white/5 dark:text-white'
 
 export function SettingsPage() {
-  const { user, signOut } = useAuth()
-  const { profile, loading, updateProfile } = useProfile()
+  const { profile, loading, updateStudent, refresh } = useStudent()
+  const inputRef = useRef<HTMLInputElement>(null)
   const [displayName, setDisplayName] = useState('')
   const [certification, setCertification] = useState('CPA')
   const [dailyGoal, setDailyGoal] = useState(30)
   const [saving, setSaving] = useState(false)
+  const [busyAction, setBusyAction] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!profile) return
-    setDisplayName(profile.display_name)
-    setCertification(profile.current_certification)
-    setDailyGoal(profile.daily_goal_minutes)
+    setDisplayName(profile.displayName)
+    setCertification(profile.currentCertification)
+    setDailyGoal(profile.dailyGoalMinutes)
   }, [profile])
 
-  const submit = async (event: FormEvent) => {
+  async function submit(event: FormEvent) {
     event.preventDefault()
     setSaving(true); setMessage(null); setError(null)
     try {
-      await updateProfile({
-        display_name: displayName.trim(),
-        current_certification: certification,
-        daily_goal_minutes: dailyGoal,
-      })
-      setMessage('Configurações salvas e sincronizadas.')
+      await updateStudent({ displayName: displayName.trim(), currentCertification: certification, dailyGoalMinutes: dailyGoal })
+      setMessage('Configurações salvas neste navegador.')
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Não foi possível salvar as configurações.')
     } finally { setSaving(false) }
   }
 
-  if (loading) return <div className="mx-auto max-w-3xl space-y-4"><div className="h-9 w-48 animate-pulse rounded-xl bg-slate-200 dark:bg-white/10"/><div className="h-80 animate-pulse rounded-2xl bg-slate-200 dark:bg-white/10"/></div>
+  async function exportProgress() {
+    setBusyAction('export'); setMessage(null); setError(null)
+    try { downloadBackup(await createBackup()); setMessage('Backup exportado com sucesso.') }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'Não foi possível exportar o backup.') }
+    finally { setBusyAction(null) }
+  }
 
-  return <div className="mx-auto max-w-3xl space-y-6"><div><h1 className="text-3xl font-bold tracking-tight">Configurações</h1><p className="mt-2 text-slate-500">Preferências da sua conta e rotina de estudos.</p></div><Card><div className="mb-6 flex items-center gap-3"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-700 dark:text-emerald-300"><UserRound className="h-5 w-5"/></div><div><h2 className="font-semibold">Perfil</h2><p className="text-sm text-slate-500">{user?.email}</p></div></div><form onSubmit={submit} className="space-y-5"><label className="block"><span className="mb-1.5 block text-sm font-medium">Nome</span><input className={inputClass} required maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)}/></label><label className="block"><span className="mb-1.5 block text-sm font-medium">Certificação atual</span><select className={inputClass} value={certification} onChange={(e) => setCertification(e.target.value)}>{certifications.map((item) => <option key={item.id} value={item.id} disabled={!item.available}>{item.name}{!item.available ? ' — em breve' : ''}</option>)}</select></label><label className="block"><span className="mb-1.5 block text-sm font-medium">Meta diária</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={5} max={600} step={5} value={dailyGoal} onChange={(e) => setDailyGoal(Number(e.target.value))}/><span className="shrink-0 text-sm text-slate-500">minutos</span></div></label>{message && <div className="flex items-center gap-2 rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-4 w-4"/>{message}</div>}{error && <p className="rounded-xl bg-rose-400/10 p-3 text-sm text-rose-700 dark:text-rose-300">{error}</p>}<div className="flex flex-col gap-3 sm:flex-row"><Button disabled={saving} type="submit"><Save className="h-4 w-4"/>{saving ? 'Salvando...' : 'Salvar alterações'}</Button><Button type="button" variant="secondary" onClick={() => void signOut()}><LogOut className="h-4 w-4"/>Sair da conta</Button></div></form></Card><Card><h2 className="font-semibold">Privacidade dos estudos</h2><p className="mt-2 text-sm leading-6 text-slate-500">Seu progresso, tentativas, simulados, flashcards privados e sessões de estudo ficam associados ao seu usuário. As políticas RLS do banco impedem que outra conta consulte ou altere esses registros.</p></Card></div>
+  async function chooseImport(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    setBusyAction('import'); setMessage(null); setError(null)
+    try {
+      const backup = await parseBackupFile(file)
+      const name = backup.profile?.displayName ?? 'sem perfil'
+      const ok = window.confirm(`Importar o backup de ${name}? Os dados locais atuais serão substituídos somente após esta confirmação.`)
+      if (!ok) return
+      await importBackup(backup)
+      await refresh()
+      setMessage('Backup importado. Seu progresso local foi restaurado.')
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : 'Não foi possível importar o backup.')
+    } finally { setBusyAction(null) }
+  }
+
+  async function resetProgress() {
+    const first = window.confirm('Isso apagará TODO o progresso salvo neste navegador. Antes de continuar, recomendamos exportar um backup. Deseja prosseguir?')
+    if (!first) return
+    const typed = window.prompt('Confirmação final: digite APAGAR para remover todos os dados locais.')
+    if (typed !== 'APAGAR') { setError('Exclusão cancelada: a confirmação não correspondeu a APAGAR.'); return }
+    setBusyAction('reset'); setMessage(null); setError(null)
+    try { await resetAllProgress(); await refresh() }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'Não foi possível apagar os dados locais.') }
+    finally { setBusyAction(null) }
+  }
+
+  if (loading || !profile) return <div className="mx-auto max-w-3xl space-y-4"><div className="h-9 w-48 animate-pulse rounded-xl bg-slate-200 dark:bg-white/10"/><div className="h-80 animate-pulse rounded-2xl bg-slate-200 dark:bg-white/10"/></div>
+
+  return <div className="mx-auto max-w-3xl space-y-6">
+    <div><h1 className="text-3xl font-bold tracking-tight">Configurações</h1><p className="mt-2 text-slate-500">Perfil local, rotina de estudos e segurança dos seus dados.</p></div>
+    <Card>
+      <div className="mb-6 flex items-center gap-3"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-700 dark:text-emerald-300"><UserRound className="h-5 w-5"/></div><div><h2 className="font-semibold">Perfil local</h2><p className="text-sm text-slate-500">Sem conta e sem login. Este perfil existe apenas neste navegador.</p></div></div>
+      <form onSubmit={submit} className="space-y-5">
+        <label className="block"><span className="mb-1.5 block text-sm font-medium">Alterar nome</span><input className={inputClass} required maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)}/></label>
+        <label className="block"><span className="mb-1.5 block text-sm font-medium">Certificação atual</span><select className={inputClass} value={certification} onChange={(e) => setCertification(e.target.value)}>{certifications.map((item) => <option key={item.id} value={item.id} disabled={!item.available}>{item.name}{!item.available ? ' — em breve' : ''}</option>)}</select></label>
+        <label className="block"><span className="mb-1.5 block text-sm font-medium">Meta diária</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={5} max={600} step={5} value={dailyGoal} onChange={(e) => setDailyGoal(Number(e.target.value))}/><span className="shrink-0 text-sm text-slate-500">minutos</span></div></label>
+        <Button disabled={saving} type="submit"><Save className="h-4 w-4"/>{saving ? 'Salvando...' : 'Salvar alterações'}</Button>
+      </form>
+    </Card>
+
+    <Card>
+      <div className="mb-5 flex items-start gap-3"><DatabaseBackup className="mt-0.5 h-5 w-5 text-emerald-500"/><div><h2 className="font-semibold">Dados e Backup</h2><p className="mt-1 text-sm leading-6 text-slate-500">O conteúdo da CPA vem do GitHub. Seu nome, progresso, quizzes, favoritos, estatísticas e demais dados pessoais ficam no IndexedDB deste navegador.</p></div></div>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Button variant="secondary" disabled={busyAction !== null} onClick={() => void exportProgress()}><Download className="h-4 w-4"/>Exportar progresso</Button>
+        <Button variant="secondary" disabled={busyAction !== null} onClick={() => inputRef.current?.click()}><Upload className="h-4 w-4"/>Importar progresso</Button>
+      </div>
+      <input ref={inputRef} className="hidden" type="file" accept="application/json,.json" onChange={(event) => void chooseImport(event)}/>
+      <div className="mt-5 border-t border-slate-200 pt-5 dark:border-white/10"><Button variant="secondary" disabled={busyAction !== null} className="text-rose-700 dark:text-rose-300" onClick={() => void resetProgress()}><Trash2 className="h-4 w-4"/>Apagar todo o progresso</Button><p className="mt-2 text-xs leading-5 text-slate-500">A exclusão exige duas confirmações e não acontece silenciosamente.</p></div>
+    </Card>
+
+    {message ? <div className="flex items-center gap-2 rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-4 w-4"/>{message}</div> : null}
+    {error ? <p className="rounded-xl bg-rose-400/10 p-3 text-sm text-rose-700 dark:text-rose-300">{error}</p> : null}
+    <Card><h2 className="font-semibold">Privacidade</h2><p className="mt-2 text-sm leading-6 text-slate-500">Nenhum dado de estudo é enviado para servidor obrigatório. Felipe e Thó possuem bancos locais independentes nos próprios navegadores/computadores. Atualizar o código com <code>git pull</code> não apaga o IndexedDB.</p></Card>
+  </div>
 }
