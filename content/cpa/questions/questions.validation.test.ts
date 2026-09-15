@@ -3,7 +3,7 @@ import { cpaCurriculum } from '../curriculum'
 import { cpaQuestions } from './index'
 
 const pdCodes = new Set(cpaCurriculum.map((item) => item.pdCode))
-const countBy = <T extends string>(values: T[]) => values.reduce<Record<string, number>>((acc, value) => { acc[value] = (acc[value] ?? 0) + 1; return acc }, {})
+const countBy = <T extends string | number>(values: T[]) => values.reduce<Record<string, number>>((acc, value) => { const key = String(value); acc[key] = (acc[key] ?? 0) + 1; return acc }, {})
 
 describe('banco original de questões CPA', () => {
   it('possui exatamente 100 questões únicas e distribuição oficial 20/40/30/10', () => {
@@ -16,6 +16,10 @@ describe('banco original de questões CPA', () => {
     expect(countBy(cpaQuestions.map((q) => q.difficulty))).toEqual({ easy: 30, medium: 45, hard: 25 })
     expect(countBy(cpaQuestions.map((q) => q.cognitiveLevel))).toEqual({ comprehension: 30, application: 45, analysis: 25 })
     expect(countBy(cpaQuestions.map((q) => q.questionType))).toEqual({ multiple_choice: 70, case: 20, dialog_tree: 10 })
+  })
+
+  it('distribui o gabarito igualmente entre A, B, C e D para evitar padrão previsível', () => {
+    expect(countBy(cpaQuestions.map((q) => q.correctAnswer))).toEqual({ '0': 25, '1': 25, '2': 25, '3': 25 })
   })
 
   it('valida todos os campos, PD Codes, fontes e exatamente uma resposta correta', () => {
