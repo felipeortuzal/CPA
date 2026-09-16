@@ -14,13 +14,11 @@ Plataforma local e gratuita de estudos para a **CPA — Certificado Profissional
 Princípio:
 
 - **GitHub = conteúdo da plataforma**
-- **IndexedDB do navegador = progresso, tentativas, favoritos e erros do aluno**
+- **IndexedDB do navegador = progresso, tentativas, favoritos, simulados e erros do aluno**
 
 Felipe e Thó usam o mesmo código, mas cada computador/navegador possui progresso próprio.
 
 ## Como rodar
-
-Primeira instalação:
 
 ```bash
 git clone https://github.com/felipeortuzal/CPA.git
@@ -29,33 +27,30 @@ npm install
 npm run dev
 ```
 
-Nas próximas vezes, `npm run dev`. No Windows também existe `start-cpa.bat`.
-
-Para atualizar:
-
-```bash
-git pull
-npm install
-npm run dev
-```
-
-O `git pull` altera os arquivos do projeto, não o IndexedDB do navegador.
+No Windows também existe `start-cpa.bat`. Para atualizar: `git pull`, `npm install` e `npm run dev`. O `git pull` não apaga o IndexedDB do navegador.
 
 ## Backup
 
-Em **Configurações > Dados e Backup**:
+Em **Configurações > Dados e Backup** é possível exportar `cpa-backup-YYYY-MM-DD.json`, importar com validação/confirmação e apagar o progresso com confirmação forte. A versão atual do backup é v2 e já inclui o store de simulados; backups v1 continuam importáveis.
 
-- Exportar progresso para `cpa-backup-YYYY-MM-DD.json`.
-- Importar progresso com validação e confirmação.
-- Apagar todo o progresso com confirmação forte.
+## Programa e edital oficiais
 
-A versão atual do backup é v2 e inclui tentativas de questões. Backups v1 continuam importáveis.
+Currículo versionado:
 
-## Programa oficial
+- Programa Detalhado CPA ANBIMA v1.2
+- revisão 04/06/2025
+- vigência 01/01/2026
+- verificado novamente em 16/09/2026
 
-O currículo versionado utiliza o **Programa Detalhado CPA da ANBIMA, versão 1.2**, revisão de **04/06/2025**, vigente desde **01/01/2026**. Antes de alterar conteúdo regulatório ou questões, a versão oficial mais recente deve ser verificada novamente.
+Modo Prova:
 
-A estrutura completa do PD está em `content/cpa/`. São 590 nós curriculares, preservando os PD Codes oficiais.
+- Edital dos Exames de Certificação Profissional ANBIMA v1.4, de 28/05/2026
+- CPA: **50 questões**
+- duração: **2h30**
+- aprovação: **35 acertos**
+- formatos previstos: múltipla escolha, árvore de diálogo e cases
+
+A estrutura completa do PD possui 590 nós curriculares e preserva os PD Codes oficiais.
 
 ## Sistema de aulas
 
@@ -65,9 +60,7 @@ Status local: Não iniciado → Em andamento → Estudado → Dominado. Domínio
 
 ## Question Engine
 
-O banco inicial contém **100 questões originais** em `content/cpa/questions/`.
-
-Distribuição:
+O banco inicial contém **100 questões originais** em `content/cpa/questions/`:
 
 - Tema 1: 20
 - Tema 2: 40
@@ -76,29 +69,51 @@ Distribuição:
 - dificuldade: 30 fáceis, 45 médias, 25 difíceis
 - nível cognitivo: 30 compreensão, 45 aplicação, 25 análise
 - tipo: 70 `multiple_choice`, 20 `case`, 10 `dialog_tree`
+- posição do gabarito: 25 A, 25 B, 25 C, 25 D
 
-Cada questão possui certificação, PD Code, tema, subtema, dificuldade, nível cognitivo, tipo, contexto, comando, quatro alternativas, uma resposta correta, explicação, explicação das incorretas, fontes oficiais e data de verificação.
+A página **Questões** filtra por tema, subtema, dificuldade, tipo, não respondidas, erradas e favoritas. Respostas incorretas entram automaticamente no **Caderno de Erros**.
 
-Antes da elaboração foram estudados o Guia de Elaboração de Questões da ANBIMA, o Caderno de Questões CPA oficial e os modelos interativos divulgados pela ANBIMA. Materiais públicos de preparação foram observados apenas para calibrar extensão e dificuldade. Não são copiadas questões privadas, vazadas ou de terceiros.
+## Modo Prova e simulados — v0.6
 
-A página **Questões** permite filtrar por tema, subtema, dificuldade, tipo, não respondidas, erradas e favoritas. Após responder, mostra feedback completo, PD e acesso ao conteúdo relacionado.
+A página **Simulados** oferece:
 
-Respostas incorretas entram automaticamente no **Caderno de Erros**, que registra recorrência e permite refazer a questão ou marcar `Já aprendi`.
+- Modo Prova CPA — 50 questões, 2h30, corte 35/50
+- Simulado 10
+- Simulado 20
+- Simulado por tema
+- Simulado de assuntos fracos
+- Simulado somente com questões inéditas
+
+A prova completa usa exatamente 10/20/15/5 questões dos Temas 1/2/3/4, refletindo 20%/40%/30%/10%.
+
+A interface de prova é separada da navegação normal e contém cronômetro, questão atual, mapa de navegação, respondida/não respondida, marcação para revisão, bloco de notas, calculadora e finalização. Durante a prova não mostra gabarito, correção, tema, dificuldade ou dica.
+
+Ao finalizar são exibidos:
+
+- acertos e percentual
+- aprovado/reprovado apenas no modo oficial
+- corte 35/50 no modo oficial
+- desempenho por macrotema
+- tempo utilizado
+- questões erradas e em branco
+- questões marcadas
+- desempenho por dificuldade
+- desempenho por PD
+
+Erros respondidos incorretamente entram automaticamente no Caderno de Erros. Questões deixadas em branco não são tratadas como erro conceitual no caderno.
+
+O histórico em **Simulados > Histórico** mostra gráfico de evolução, média, melhor resultado e acesso ao detalhamento de cada tentativa.
 
 ## Persistência local
 
-A camada fica em `src/lib/storage/`. O schema atual é `DB_VERSION = 2`.
+A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
 
 - v1: perfil, aulas, quizzes, favoritos, flashcards, erros, simulados, sessões, streak, preferências etc.
-- v2: migration aditiva cria `questionAttempts` com índices por questão, PD e data.
+- v2: adiciona `questionAttempts` com índices por questão, PD e data.
 
 Nunca apagar o banco como estratégia de migration.
 
-## Tempo e streak
-
-O timer de aula só soma tempo quando a aba está visível e houve interação recente. Um dia conta para o streak quando ocorre atividade significativa, incluindo conclusão de aula, mini quiz ou resposta de questão.
-
-## Comandos de qualidade
+## Qualidade
 
 ```bash
 npm run validate:curriculum
@@ -108,14 +123,10 @@ npm run typecheck
 npm run build
 ```
 
-Ou:
+Ou execute tudo com `npm run validate`.
 
-```bash
-npm run validate
-```
-
-A validação de questões exige 100 itens, distribuição 20/40/30/10, PD Code existente, quatro alternativas únicas, uma resposta correta válida e pelo menos uma fonte oficial por questão.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, modos de treino e integração com Caderno de Erros.
 
 ## Próximas etapas
 
-Ainda não fazem parte desta versão: simulado completo de 50 questões, revisão inteligente completa, repetição espaçada dos flashcards, analytics avançado, ranking Felipe x Thó e demais certificações. O Question Engine e o storage v2 já servem de base para essas etapas.
+Ainda não fazem parte desta versão: revisão inteligente completa, repetição espaçada dos flashcards, analytics avançado, ranking Felipe x Thó, aulas completas dos Macrotemas 2–4 e demais certificações.
