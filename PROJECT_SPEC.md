@@ -48,6 +48,7 @@ Programa Detalhado CPA ANBIMA atualmente versionado no projeto:
 - versão: 1.2
 - revisão: 04/06/2025
 - vigência: 01/01/2026
+- última verificação: 16/09/2026
 
 Antes de qualquer nova produção de conteúdo, verificar novamente a ANBIMA.
 
@@ -59,6 +60,23 @@ Macrotemas oficiais:
 4. Inovação e desenvolvimento de mercado — 10%
 
 Preservar todos os PD Codes do Programa Detalhado.
+
+## Edital de exames atualmente verificado
+
+Edital dos Exames de Certificação Profissional ANBIMA:
+
+- versão: 1.4
+- data: 28/05/2026
+- verificado em: 16/09/2026
+
+Para a CPA o edital confirma:
+
+- 50 questões
+- 2h30 de duração
+- mínimo de 35 acertos para aprovação
+- questões objetivas de múltipla escolha com quatro alternativas e uma correta, árvore de diálogo e cases
+
+Antes de alterar regras do Modo Prova, verificar novamente o edital oficial mais recente. Uma versão posterior prevalece.
 
 ## Arquitetura atual — local-first e custo R$ 0
 
@@ -107,6 +125,8 @@ Schema atual: `DB_VERSION = 2`.
 - v1: perfil, progresso de aulas, mini quizzes, favoritos, flashcards, revisões, erros, simulados, sessões de estudo, dias ativos, preferências e plano de estudos.
 - v2: adiciona `questionAttempts` com índices por questão, PD e data.
 
+O Modo Prova usa o store `simulations` já existente desde v1; não foi necessária migration de schema para a v0.6.
+
 Persistir localmente, conforme implementados:
 
 - perfil/nome
@@ -118,7 +138,7 @@ Persistir localmente, conforme implementados:
 - erros e recorrência
 - questões marcadas
 - flashcards e revisões
-- simulados
+- simulados, respostas, marcações, notas, tempo e resultados
 - tempo estudado
 - streak
 - estatísticas
@@ -148,7 +168,7 @@ Configurações > Dados e Backup deve oferecer:
 - Importar progresso com validação de estrutura e versão e confirmação explícita
 - Apagar todo o progresso com confirmação forte
 
-A versão atual do backup é v2 e inclui tentativas de questões. Backups v1 devem continuar importáveis.
+A versão atual do backup é v2 e inclui tentativas de questões e simulados. Backups v1 devem continuar importáveis.
 
 Nunca substituir ou apagar dados silenciosamente.
 
@@ -160,6 +180,7 @@ Depois que dependências e assets da aplicação estiverem instalados/carregados
 - marcar progresso
 - responder mini quiz
 - responder questões do banco local
+- fazer simulados
 - favoritos
 - caderno de erros
 - flashcards
@@ -290,7 +311,7 @@ Não contar indefinidamente tempo de aba aberta.
 
 Usar visibility API, atividade recente e sessões de estudo.
 
-Dia de streak só conta por atividade significativa, como concluir aula, responder mini quiz, revisar flashcard ou responder questão. Abrir o site sozinho não conta.
+Dia de streak só conta por atividade significativa, como concluir aula, responder mini quiz, revisar flashcard, responder questão ou concluir simulado. Abrir o site sozinho não conta.
 
 ## Question Engine — implementado
 
@@ -376,21 +397,102 @@ Validação automática deve impedir merge quando:
 - houver `todas as anteriores` ou `nenhuma das anteriores`;
 - distribuição de posição do gabarito ficar previsível na versão atual.
 
-## Simulados — fase futura
+## Modo Prova e Simulados — implementado na v0.6
 
-CPA completa: 50 questões, 2h30, corte 35/50 e distribuição aproximada pelos pesos vigentes. Também prever simulados rápidos, por tema, assuntos fracos e personalizado.
+### Modo Prova CPA
+
+Configuração oficial atualmente verificada:
+
+- 50 questões
+- 2h30
+- corte 35/50
+- composição local: 10 questões do Tema 1, 20 do Tema 2, 15 do Tema 3 e 5 do Tema 4
+
+A interface de prova deve ficar fora da navegação normal e mostrar apenas recursos compatíveis com prova:
+
+- cronômetro
+- questão atual
+- navegação numérica
+- respondida
+- não respondida
+- marcada para revisão
+- anterior
+- próxima
+- marcar/desmarcar para revisão
+- bloco de notas
+- calculadora
+- finalizar
+
+Durante a prova nunca mostrar:
+
+- correção imediata
+- dica
+- macrotema/assunto
+- dificuldade
+- resposta correta
+- explicação
+
+O cronômetro é calculado a partir do `startedAt`, portanto reload da página não reinicia o tempo. Ao chegar a zero, finalizar automaticamente.
+
+Ao finalizar mostrar:
+
+- acertos / total
+- percentual
+- APROVADO/REPROVADO apenas no Modo Prova oficial
+- corte 35
+- desempenho por Tema 1–4
+- tempo utilizado
+- questões erradas
+- questões em branco
+- questões marcadas
+- desempenho por dificuldade
+- desempenho por PD
+- links para revisar conteúdo e refazer questões
+
+Respostas incorretas entram automaticamente no Caderno de Erros. Questões deixadas em branco contam como não acertadas no resultado, mas não entram no Caderno de Erros como erro conceitual.
+
+### Modos adicionais
+
+Implementados:
+
+- Simulado 10 — 2/4/3/1 por tema, 30 min
+- Simulado 20 — 4/8/6/2 por tema, 60 min
+- Simulado por tema — até 20 questões do macrotema escolhido
+- Simulado assuntos fracos — prioriza PDs e macrotemas com erros no histórico local
+- Simulado somente questões inéditas — exclui questões já vistas no Question Engine ou em simulados anteriores
+
+Os modos adicionais não exibem selo APROVADO/REPROVADO nem corte inventado, porque o corte oficial 35/50 vale para o exame CPA completo.
+
+### Histórico
+
+Salvar cada simulado no IndexedDB com:
+
+- modo
+- questionIds
+- respostas
+- questões marcadas
+- notas
+- startedAt
+- duração
+- resultado
+- desempenho por tema
+- dificuldade
+- PD
+- tempo utilizado
+
+A página `Simulados > Histórico` deve mostrar gráfico de evolução, média, melhor resultado e acesso ao detalhamento de cada tentativa.
 
 ## Flashcards/revisão — evolução futura
 
 As aulas já contêm flashcards e a arquitetura local suporta reviews, mas a fila completa de repetição espaçada e revisão inteligente pertence às próximas etapas.
 
-## Caderno de Erros — implementado para questões
+## Caderno de Erros — implementado
 
-Respostas incorretas do Question Engine entram automaticamente no Caderno de Erros. O registro deve preservar questão, PD, resposta dada, resposta correta, data, recorrência e estado resolvido/não resolvido.
+Respostas incorretas do Question Engine e dos simulados entram automaticamente no mesmo Caderno de Erros. O registro deve preservar questão, PD, resposta dada, resposta correta, data, recorrência e estado resolvido/não resolvido.
 
 ## PWA
 
-Permitir instalação e uso offline dos conteúdos e questões já empacotados. Não exigir sincronização remota.
+Permitir instalação e uso offline dos conteúdos, questões e simulados já empacotados. Não exigir sincronização remota.
 
 ## Qualidade
 
@@ -404,6 +506,7 @@ Obrigatório:
 - responsividade
 - testes de persistência local
 - testes do Question Engine
+- testes do Simulation Engine
 - nenhum segredo ou chave obrigatória
 
 Antes de concluir uma mudança relevante:
