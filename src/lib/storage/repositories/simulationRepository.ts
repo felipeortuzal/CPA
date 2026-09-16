@@ -78,7 +78,7 @@ export async function finishSimulation(id: string, forcedTimeUsedSeconds?: numbe
   const next: SimulationRecord = { ...record, score: result.scorePercent, completedAt, payload: { ...record.payload, result } }
   await db.put('simulations', next)
 
-  for (const row of result.questionResults.filter((item) => !item.isCorrect)) {
+  for (const row of result.questionResults.filter((item) => !item.isCorrect && item.selectedAnswer !== null)) {
     const question = cpaQuestionMap.get(row.questionId)
     if (!question) continue
     const errorId = `question:${question.id}`
@@ -89,7 +89,7 @@ export async function finishSimulation(id: string, forcedTimeUsedSeconds?: numbe
       sourceId: question.id,
       pdCode: question.pdCode,
       prompt: question.prompt,
-      selectedAnswer: row.selectedAnswer === null ? 'Não respondida' : question.options[row.selectedAnswer],
+      selectedAnswer: question.options[row.selectedAnswer!],
       correctAnswer: question.options[question.correctAnswer],
       createdAt: current?.createdAt ?? completedAt,
       resolvedAt: null,
