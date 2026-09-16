@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Calculator, CheckCircle2, ChevronLeft, ChevronRight, Clock3, FileText, Flag, NotebookPen, X } from 'lucide-react'
+import { Calculator, CheckCircle2, ChevronLeft, ChevronRight, Clock3, Flag, NotebookPen, X } from 'lucide-react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { cpaQuestionMap } from '../../content/cpa/questions'
 import { Button } from '../components/ui/Button'
@@ -29,9 +29,9 @@ export function ExamPage(){
   const { simulationId } = useParams(); const navigate=useNavigate()
   const [simulation,setSimulation]=useState<SimulationRecord|null>(null); const [index,setIndex]=useState(0); const [remaining,setRemaining]=useState(0); const [loading,setLoading]=useState(true); const [notesOpen,setNotesOpen]=useState(false); const [calculatorOpen,setCalculatorOpen]=useState(false); const [finishOpen,setFinishOpen]=useState(false); const [finishing,setFinishing]=useState(false); const [notes,setNotes]=useState('')
 
-  useEffect(()=>{if(!simulationId)return;let active=true;void getSimulation(simulationId).then((record)=>{if(!active)return;if(!record){navigate('/simulados',{replace:true});return}if(record.completedAt){navigate(`/prova/${record.id}/resultado`,{replace:true});return}setSimulation(record);setNotes(record.payload.notes);setLoading(false)});return()=>{active=false}},[simulationId,navigate])
+  useEffect(()=>{if(!simulationId)return;let active=true;void getSimulation(simulationId).then((record)=>{if(!active)return;if(!record){navigate('/simulados',{replace:true});return}if(record.completedAt){navigate(`/prova/${record.id}/resultado`,{replace:true});return}const elapsed=Math.floor((Date.now()-new Date(record.payload.startedAt).getTime())/1000);setRemaining(Math.max(0,record.payload.durationSeconds-elapsed));setSimulation(record);setNotes(record.payload.notes);setLoading(false)});return()=>{active=false}},[simulationId,navigate])
   useEffect(()=>{if(!simulation)return;const tick=()=>{const elapsed=Math.floor((Date.now()-new Date(simulation.payload.startedAt).getTime())/1000);setRemaining(Math.max(0,simulation.payload.durationSeconds-elapsed))};tick();const id=window.setInterval(tick,1000);return()=>window.clearInterval(id)},[simulation])
-  useEffect(()=>{if(!simulation||remaining!==0||loading||finishing)return;setFinishing(true);void finishSimulation(simulation.id,simulation.payload.durationSeconds).then((record)=>navigate(`/prova/${record.id}/resultado`,{replace:true}))},[simulation,remaining,loading,finishing,navigate])
+  useEffect(()=>{if(!simulation||remaining!==0||loading||finishing)return;const elapsed=Math.floor((Date.now()-new Date(simulation.payload.startedAt).getTime())/1000);if(elapsed<simulation.payload.durationSeconds)return;setFinishing(true);void finishSimulation(simulation.id,simulation.payload.durationSeconds).then((record)=>navigate(`/prova/${record.id}/resultado`,{replace:true}))},[simulation,remaining,loading,finishing,navigate])
   useEffect(()=>{if(!simulation)return;const id=window.setTimeout(()=>{void saveSimulationNotes(simulation.id,notes)},400);return()=>window.clearTimeout(id)},[notes,simulation])
 
   const questions=useMemo(()=>simulation?.payload.questionIds.map((id)=>cpaQuestionMap.get(id)).filter((q):q is NonNullable<typeof q>=>Boolean(q))??[],[simulation])
