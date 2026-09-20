@@ -27,6 +27,13 @@ describe('V8 review queue',()=>{
     expect(center.dueFlashcards).toBe(1)
   })
 
+  it('coloca Revisar depois abaixo de Ainda tenho dúvida',()=>{
+    const doubt:ErrorRecord={id:'question:q1',sourceType:'question',sourceId:'q1',pdCode:'1.1',prompt:'Dúvida',selectedAnswer:'B',correctAnswer:'A',createdAt:'2026-09-10T12:00:00Z',resolvedAt:null,wrongCount:1,reviewStatus:'doubt'}
+    const later:ErrorRecord={id:'question:q2',sourceType:'question',sourceId:'q2',pdCode:'1.2',prompt:'Depois',selectedAnswer:'B',correctAnswer:'A',createdAt:'2026-09-10T12:00:00Z',resolvedAt:null,wrongCount:1,reviewStatus:'review_later'}
+    const center=buildReviewCenter(study,[],[],[later,doubt],new Date('2026-09-20T12:00:00Z'))
+    expect(center.queue.filter((item)=>item.type==='error').map((item)=>item.errorId)).toEqual([doubt.id,later.id])
+  })
+
   it('não transforma conteúdo nunca estudado em revisão',()=>{
     const center=buildReviewCenter(study,[],[],[],new Date('2026-09-20T12:00:00Z'))
     expect(center.queue.some((item)=>item.pdCode==='2.1')).toBe(false)
