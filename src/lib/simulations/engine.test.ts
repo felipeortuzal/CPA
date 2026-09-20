@@ -30,7 +30,7 @@ describe('simulation engine CPA',()=>{
   })
 
   it('não usa questões vistas no modo somente inéditas',()=>{
-    const seen=new Set(cpaQuestions.slice(0,90).map((question)=>question.id))
+    const seen=new Set(cpaQuestions.slice(0,cpaQuestions.length-10).map((question)=>question.id))
     const simulation=generateSimulation(cpaQuestions,{mode:'unseen',seenQuestionIds:seen,random:()=>0.5})
     expect(simulation.questionIds.length).toBe(10)
     expect(simulation.questionIds.every((id)=>!seen.has(id))).toBe(true)

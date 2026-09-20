@@ -1,6 +1,6 @@
 import type { QuestionOfficialSource, QuestionSourceId } from './types'
 
-export const QUESTION_VERIFIED_AT = '2026-09-14'
+export const QUESTION_VERIFIED_AT = '2026-09-20'
 
 export const questionSources: Record<QuestionSourceId, QuestionOfficialSource> = {
   ANBIMA_PD: { id: 'ANBIMA_PD', institution: 'ANBIMA', title: 'Programa Detalhado CPA — versão 1.2', url: 'https://www.anbima.com.br/data/files/6A/52/6F/A1/BED73910B07B2739B82BA2A8/Programa-Detalhado-CPA-ANBIMA.pdf', verifiedAt: QUESTION_VERIFIED_AT },

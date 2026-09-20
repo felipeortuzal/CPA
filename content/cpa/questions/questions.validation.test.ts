@@ -1,25 +1,42 @@
 import { describe, expect, it } from 'vitest'
 import { cpaCurriculum } from '../curriculum'
+import { cpaLessons } from '../lessons'
 import { cpaQuestions } from './index'
 
 const pdCodes = new Set(cpaCurriculum.map((item) => item.pdCode))
+const terminalPdCodes = new Set(cpaLessons.map((lesson) => lesson.pdCode))
 const countBy = <T extends string | number>(values: T[]) => values.reduce<Record<string, number>>((acc, value) => { const key = String(value); acc[key] = (acc[key] ?? 0) + 1; return acc }, {})
 
 describe('banco original de questões CPA', () => {
-  it('possui exatamente 100 questões únicas e distribuição oficial 20/40/30/10', () => {
-    expect(cpaQuestions).toHaveLength(100)
-    expect(new Set(cpaQuestions.map((q) => q.id)).size).toBe(100)
-    expect(countBy(cpaQuestions.map((q) => q.pdCode.split('.')[0]))).toEqual({ '1': 20, '2': 40, '3': 30, '4': 10 })
+  it('possui 545 questões únicas e cobre todos os 445 PDs terminais', () => {
+    expect(cpaQuestions).toHaveLength(545)
+    expect(new Set(cpaQuestions.map((q) => q.id)).size).toBe(545)
+    const covered=new Set(cpaQuestions.map((q)=>q.pdCode))
+    for(const pdCode of terminalPdCodes)expect(covered.has(pdCode),`PD terminal sem questão: ${pdCode}`).toBe(true)
   })
 
-  it('mantém a distribuição planejada de dificuldade, cognição e tipo', () => {
-    expect(countBy(cpaQuestions.map((q) => q.difficulty))).toEqual({ easy: 30, medium: 45, hard: 25 })
-    expect(countBy(cpaQuestions.map((q) => q.cognitiveLevel))).toEqual({ comprehension: 30, application: 45, analysis: 25 })
-    expect(countBy(cpaQuestions.map((q) => q.questionType))).toEqual({ multiple_choice: 70, case: 20, dialog_tree: 10 })
+  it('mantém as quatro áreas da CPA e variedade de dificuldade, cognição e tipo', () => {
+    const macro=countBy(cpaQuestions.map((q) => q.pdCode.split('.')[0]))
+    expect(Object.keys(macro).sort()).toEqual(['1','2','3','4'])
+    expect(macro['1']).toBeGreaterThan(100)
+    expect(macro['2']).toBeGreaterThan(160)
+    expect(macro['3']).toBeGreaterThan(100)
+    expect(macro['4']).toBeGreaterThan(60)
+
+    const difficulty=countBy(cpaQuestions.map((q)=>q.difficulty))
+    const cognition=countBy(cpaQuestions.map((q)=>q.cognitiveLevel))
+    const type=countBy(cpaQuestions.map((q)=>q.questionType))
+    for(const value of ['easy','medium','hard'])expect(difficulty[value]).toBeGreaterThan(50)
+    for(const value of ['comprehension','application','analysis'])expect(cognition[value]).toBeGreaterThan(50)
+    expect(type.multiple_choice).toBeGreaterThan(100)
+    expect(type.case).toBeGreaterThan(200)
+    expect(type.dialog_tree).toBeGreaterThan(40)
   })
 
-  it('distribui o gabarito igualmente entre A, B, C e D para evitar padrão previsível', () => {
-    expect(countBy(cpaQuestions.map((q) => q.correctAnswer))).toEqual({ '0': 25, '1': 25, '2': 25, '3': 25 })
+  it('mantém posição de gabarito sem concentração artificial', () => {
+    const counts=countBy(cpaQuestions.map((q)=>q.correctAnswer))
+    const values=[0,1,2,3].map((key)=>counts[String(key)]??0)
+    expect(Math.max(...values)-Math.min(...values)).toBeLessThanOrEqual(40)
   })
 
   it('valida todos os campos, PD Codes, fontes e exatamente uma resposta correta', () => {

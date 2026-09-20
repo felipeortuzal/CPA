@@ -1,3 +1,4 @@
+import { generatedCoverageQuestions } from './generated-coverage'
 import { macro1Questions } from './macro-1'
 import { macro2QuestionsA } from './macro-2a'
 import { macro2QuestionsB } from './macro-2b'
@@ -11,6 +12,7 @@ export const cpaQuestions: CPAQuestion[] = [
   ...macro2QuestionsB,
   ...macro3Questions,
   ...macro4Questions,
+  ...generatedCoverageQuestions,
 ]
 
 export const cpaQuestionMap = new Map(cpaQuestions.map((question) => [question.id, question]))
@@ -18,3 +20,5 @@ export const cpaQuestionMap = new Map(cpaQuestions.map((question) => [question.i
 export function getQuestionsByPdCode(pdCode: string) {
   return cpaQuestions.filter((question) => question.pdCode === pdCode)
 }
+
+if(cpaQuestions.length!==545)throw new Error(`O banco CPA deveria possuir 545 questões; foram carregadas ${cpaQuestions.length}.`)
