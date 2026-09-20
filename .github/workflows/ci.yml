@@ -17,6 +17,7 @@ jobs:
       - run: npm run validate:questions
       - run: npm run validate:sources
       - run: npm run validate:experience
+      - run: npm run audit:v13
       - run: npm test
       - run: npm run lint
       - run: npm run typecheck

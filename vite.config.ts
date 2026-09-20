@@ -9,6 +9,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'auto',
       includeAssets: ['favicon.svg'],
+      devOptions: {
+        enabled: true,
+      },
       manifest: {
         id: '/',
         name: 'CPA — Estudos ANBIMA',
@@ -25,7 +28,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        cacheId: 'cpa-study-v12',
+        cacheId: 'cpa-study-v13',
         globPatterns: ['**/*.{js,css,html,svg,woff2,json}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,

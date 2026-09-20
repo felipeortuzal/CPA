@@ -1094,6 +1094,88 @@ A V12 não deve:
 - reescrever conteúdo regulatório;
 - alterar a arquitetura local-first.
 
+## Auditoria Final — implementada na v0.13
+
+A V13 não cria uma nova grande funcionalidade acadêmica. Ela audita e estabiliza o estado acumulado das versões anteriores.
+
+### Escopo obrigatório
+
+Auditar:
+
+- Programa Detalhado oficial vigente;
+- edital vigente;
+- currículo e pesos;
+- aulas e flashcards;
+- Question Engine;
+- Modo Prova e simulados;
+- IndexedDB e migrations;
+- sobrevivência do progresso após update;
+- backup/importação;
+- PWA/offline;
+- performance/code splitting;
+- acessibilidade e UX;
+- código morto e resíduos de arquitetura antiga;
+- links/fontes oficiais;
+- instalação e atualização no computador do Thó.
+
+### Relatório
+
+Manter `AUDIT_REPORT.md` com:
+
+- data;
+- base oficial;
+- inventário de cobertura;
+- status por subsistema;
+- problemas encontrados;
+- correções aplicadas;
+- pendências reais;
+- critério de fechamento.
+
+O relatório deve distinguir **pronto operacionalmente** de **conteúdo academicamente completo**.
+
+### Resíduos proibidos
+
+A V13 deve remover:
+
+- referências antigas a Supabase/Firebase sem uso;
+- variáveis `VITE_SUPABASE_*`;
+- módulos placeholder vazios;
+- TODO/FIXME conhecidos quando puderem ser resolvidos no escopo;
+- comandos destrutivos no atualizador.
+
+### PWA
+
+Como `start-cpa.bat` usa o servidor Vite local, habilitar o service worker também no modo de desenvolvimento para manter coerência com a experiência PWA/offline descrita.
+
+### Validação automática
+
+Adicionar `npm run audit:v13` ao CI.
+
+A auditoria estática deve falhar se:
+
+- versão do app não for 0.13.0;
+- versões oficiais centrais divergirem do estado verificado;
+- stores locais obrigatórios desaparecerem;
+- DB_VERSION deixar de ser 2 sem migration planejada;
+- surgir dependência Supabase/Firebase;
+- voltar referência antiga de backend em `src`;
+- voltar módulo placeholder vazio conhecido;
+- sumir rota principal;
+- backup perder proteções da V12;
+- updater ganhar comando destrutivo;
+- PWA perder cache/fallback/dev mode;
+- documentação deixar de registrar contagens e fluxo do Thó.
+
+### Pendências que a V13 não deve mascarar
+
+Registrar explicitamente:
+
+- aulas completas existem atualmente apenas para o Macrotema 1;
+- Estatísticas avançadas ainda não estão implementadas;
+- expansão do banco de questões é futura;
+- demais certificações são futuras;
+- ranking Felipe × Thó permanece fora do escopo atual.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.
@@ -1113,6 +1195,7 @@ E, quando existirem/aplicarem:
 - `npm run validate:questions`
 - `npm run validate:sources`
 - `npm run validate:experience`
+- `npm run audit:v13`
 - demais scripts de validação adicionados por versões futuras
 
 Se qualquer check falhar:

@@ -400,6 +400,34 @@ A V12 reforça a validação interna do arquivo, limita importações a 25 MB, m
 - aviso de estado offline com `aria-live`;
 - desktop-first, mantendo responsividade mobile e dark/light mode.
 
+## Auditoria Final — v0.13
+
+A V13 é uma auditoria de fechamento da base atual.
+
+Ela revisa:
+
+- Programa Detalhado e edital oficiais;
+- currículo, aulas, questões e simulados;
+- IndexedDB e sobrevivência do progresso a updates;
+- backup/importação;
+- PWA e uso offline;
+- performance e lazy loading;
+- acessibilidade/UX;
+- resíduos de backend e código morto;
+- instalação/atualização para Felipe e Thó.
+
+O relatório completo está em **`AUDIT_REPORT.md`**.
+
+Correções da V13:
+
+- removidas declarações antigas de Supabase em `src/vite-env.d.ts`;
+- removidos seis módulos vazios sem uso em `src/features/*`;
+- service worker habilitado também no modo usado por `start-cpa.bat`;
+- cache atualizado para `cpa-study-v13`;
+- novo `npm run audit:v13` entra no CI.
+
+A auditoria confirma o núcleo técnico como operacional, mas registra uma pendência acadêmica real: as **105 aulas completas atuais cobrem somente o Macrotema 1**. Currículo, questões e simulados já cobrem os quatro temas, porém aulas completas dos Macrotemas 2–4 seguem como próxima expansão de conteúdo.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -416,6 +444,7 @@ npm run validate:curriculum
 npm run validate:questions
 npm run validate:sources
 npm run validate:experience
+npm run audit:v13
 npm test
 npm run lint
 npm run typecheck
@@ -424,7 +453,7 @@ npm run build
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, manifesto/impacto de fontes V11, experiência offline/PWA V12, backup completo, lazy loading e acessibilidade, repetição espaçada, fila de revisão e Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, manifesto/impacto de fontes V11, experiência offline/PWA V12, auditoria final V13, backup completo, lazy loading e acessibilidade, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 
