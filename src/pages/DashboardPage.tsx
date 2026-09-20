@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, CheckCircle2, Clock3, Flame, Gauge, HelpCircle, Target } from 'lucide-react'
+import { AlertTriangle, ArrowRight, BookOpen, CheckCircle2, Clock3, Flame, Gauge, HelpCircle, Target } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
@@ -11,6 +11,15 @@ import { useStudyEngine } from '../features/study/useStudyEngine'
 function formatActivity(value:string|null){
   return value?new Intl.DateTimeFormat('pt-BR',{dateStyle:'medium',timeStyle:'short'}).format(new Date(value)):'Nenhuma atividade ainda'
 }
+
+const factorLabel={
+  coverage:'Cobertura do edital',
+  mastery:'Domínio dos PDs',
+  fullExams:'Simulados completos',
+  recentPerformance:'Desempenho recente',
+  consistency:'Consistência',
+  themeBalance:'Equilíbrio entre temas',
+} as const
 
 export function DashboardPage(){
   const {data:d,loading}=useDashboardData()
@@ -39,7 +48,7 @@ export function DashboardPage(){
           <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Quizzes</p><p className="mt-1 text-xl font-bold">{d.quizzesCompleted}</p></div>
           <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Acerto</p><p className="mt-1 text-xl font-bold">{d.accuracy===null?'—':`${d.accuracy}%`}</p></div>
         </div>
-        <p className="mt-4 text-xs leading-5 text-slate-500">Macrotemas 2, 3 e 4 ainda não possuem aulas completas nesta versão. O indicador da CPA não inventa avanço nesses blocos.</p>
+        <p className="mt-4 text-xs leading-5 text-slate-500">Macrotemas 2, 3 e 4 ainda não possuem aulas completas nesta versão. O indicador não inventa avanço nesses blocos.</p>
       </Card>
 
       <Card className="relative overflow-hidden bg-gradient-to-br from-emerald-50 to-white dark:from-emerald-400/[0.08] dark:to-white/[0.02]">
@@ -50,19 +59,35 @@ export function DashboardPage(){
 
     <Card className="overflow-hidden p-0">
       <div className="border-b border-slate-200 bg-slate-950 p-5 text-white dark:border-white/10">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">V7 · Study Engine</p><h2 className="mt-1 text-xl font-black">Seu próximo melhor passo</h2></div>{study?<div className="text-right"><p className="text-2xl font-black">{study.readinessScore}%</p><p className="text-xs text-slate-400">{study.readinessLabel}</p></div>:null}</div>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">V9 · Study Engine</p><h2 className="mt-1 text-2xl font-black">Prontidão CPA</h2></div>
+          {study?<div className="sm:text-right"><p className="text-3xl font-black">{study.readinessScore===null?'Dados insuficientes':`${study.readinessScore}%`}</p><p className="text-xs text-slate-400">{study.readinessLabel}</p></div>:null}
+        </div>
       </div>
-      {studyLoading||!study?<div className="p-6 text-sm text-slate-500">Calculando plano inteligente...</div>:<div className="p-5">
+      {studyLoading||!study?<div className="p-6 text-sm text-slate-500">Calculando evidências reais do seu histórico...</div>:<div className="space-y-5 p-5">
+        <div className="rounded-xl border border-slate-200 p-4 dark:border-white/10">
+          <p className="text-sm font-semibold">{study.readinessMessage}</p>
+          <p className="mt-1 text-xs leading-5 text-slate-500">A pontuação considera cobertura, domínio, simulados completos recentes, desempenho recente, consistência e equilíbrio entre os quatro temas. Simulados completos recentes recebem peso maior.</p>
+        </div>
+
         <div className="grid gap-3 sm:grid-cols-3">
           <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Domínio ponderado</p><p className="mt-1 text-xl font-black">{study.overallMastery}%</p></div>
-          <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Revisões vencidas</p><p className="mt-1 text-xl font-black">{study.dueReviews}</p></div>
-          <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Plano de hoje</p><p className="mt-1 text-xl font-black">{study.recommendedMinutes} min</p></div>
+          <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Cobertura com evidência</p><p className="mt-1 text-xl font-black">{study.coveragePercent}%</p><p className="mt-1 text-[11px] text-slate-400">{study.sufficientCoveragePercent}% com amostra suficiente</p></div>
+          <div className="rounded-xl bg-slate-100 p-4 dark:bg-white/5"><p className="text-xs text-slate-500">Modo Prova recente</p><p className="mt-1 text-xl font-black">{study.recentOfficialExamAverage===null?'—':`${study.recentOfficialExamAverage}%`}</p><p className="mt-1 text-[11px] text-slate-400">{study.officialExamCount} simulado(s) completo(s) usados</p></div>
         </div>
-        {study.today[0]?<div className="mt-4 flex flex-col gap-3 rounded-2xl border border-emerald-300/50 bg-emerald-50 p-4 dark:border-emerald-400/20 dark:bg-emerald-400/[0.05] sm:flex-row sm:items-center"><Target className="h-5 w-5 shrink-0 text-emerald-600"/><div className="min-w-0 flex-1"><p className="font-mono text-xs font-bold text-emerald-700 dark:text-emerald-300">PD {study.today[0].pdCode}</p><p className="mt-1 font-semibold">{study.today[0].title}</p><p className="mt-1 text-xs leading-5 text-slate-500">{study.today[0].reason}</p></div><Link to={study.today[0].route}><Button>Fazer agora <ArrowRight className="h-4 w-4"/></Button></Link></div>:null}
-        <div className="mt-4 flex items-center justify-between gap-3"><p className="text-xs leading-5 text-slate-500">O indicador usa apenas evidências reais do seu histórico e não representa garantia de aprovação.</p><Link to="/revisao"><Button variant="secondary">Abrir plano completo</Button></Link></div>
+
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">{Object.entries(study.readinessBreakdown).map(([key,value])=><div key={key} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><div className="mb-2 flex items-center justify-between text-xs"><span className="font-semibold">{factorLabel[key as keyof typeof factorLabel]}</span><span>{value}%</span></div><Progress value={value}/></div>)}</div>
+
+        <div className="grid gap-5 lg:grid-cols-2">
+          <div><div className="mb-3 flex items-center justify-between"><h3 className="font-bold">O que estudar agora</h3><span className="text-xs text-slate-400">máx. 3 recomendações</span></div>{study.recommendations.length===0?<p className="rounded-xl bg-slate-100 p-4 text-sm text-slate-500 dark:bg-white/5">Ainda não há recomendação baseada em evidência suficiente.</p>:<div className="space-y-2">{study.recommendations.map((item,index)=><Link key={item.pdCode} to={item.route} className="flex items-center gap-3 rounded-xl border border-slate-200 p-3 transition hover:border-emerald-400 dark:border-white/10"><div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-emerald-400/10 text-xs font-black text-emerald-700 dark:text-emerald-300">{index+1}</div><div className="min-w-0 flex-1"><p className="font-mono text-[11px] font-bold text-emerald-600">PD {item.pdCode}</p><p className="line-clamp-1 text-sm font-semibold">{item.title}</p><p className="mt-1 text-xs text-slate-500">{item.reason}</p></div><ArrowRight className="h-4 w-4 shrink-0"/></Link>)}</div>}</div>
+
+          <div><div className="mb-3 flex items-center justify-between"><h3 className="font-bold">Pontos fracos</h3><span className="text-xs text-slate-400">ranking por evidência real</span></div>{study.weakTopics.length===0?<p className="rounded-xl bg-slate-100 p-4 text-sm text-slate-500 dark:bg-white/5">Sem fraquezas confiáveis para ranquear ainda.</p>:<div className="space-y-2">{study.weakTopics.slice(0,5).map((item)=><Link key={item.pdCode} to={item.route} className="block rounded-xl border border-slate-200 p-3 transition hover:border-amber-400 dark:border-white/10"><div className="flex items-start justify-between gap-3"><div><p className="font-mono text-[11px] font-bold text-slate-400">PD {item.pdCode} · Tema {item.macroCode}</p><p className="mt-1 line-clamp-1 text-sm font-semibold">{item.title}</p></div>{item.falseConfidence?<AlertTriangle className="h-4 w-4 shrink-0 text-amber-500"/>:null}</div><p className="mt-1 text-xs text-slate-500">{item.reason}</p></Link>)}</div>}</div>
+        </div>
+
+        <div className="flex items-center justify-between gap-3"><p className="text-xs leading-5 text-slate-500">Indicador interno baseado no seu desempenho na plataforma. Nunca deve ser tratado como garantia de aprovação.</p><Link to="/revisao"><Button variant="secondary">Abrir revisão</Button></Link></div>
       </div>}
     </Card>
 
-    <Card><div className="flex items-center gap-3"><Flame className="h-5 w-5 text-orange-500"/><div><p className="font-semibold">Streak: {d.streak} dia(s)</p><p className="text-sm text-slate-500">Conta apenas atividade significativa, como concluir aula ou responder quiz. Apenas abrir o site não conta.</p></div></div></Card>
+    <Card><div className="flex items-center gap-3"><Flame className="h-5 w-5 text-orange-500"/><div><p className="font-semibold">Streak: {d.streak} dia(s)</p><p className="text-sm text-slate-500">Conta apenas atividade significativa, como concluir aula, praticar, revisar flashcard ou fazer simulado.</p></div></div></Card>
   </div>
 }

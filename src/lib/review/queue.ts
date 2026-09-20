@@ -41,11 +41,12 @@ function masteryCandidates(snapshot:StudyEngineSnapshot){
     if(!item.lessonAvailable&&!item.questionAvailable)return false
     if(seen.has(item.pdCode))return false
     seen.add(item.pdCode)
-    return item.evidenceCount>0&&(item.score<70||item.overdue||item.hasDoubt)
+    return item.evidenceCount>0&&(item.score<60||item.overdue||item.hasDoubt||item.falseConfidence)
   })
 }
 
 function routeForMastery(item:PDMastery){
+  if(item.falseConfidence&&item.questionAvailable)return`/questoes?pd=${encodeURIComponent(item.pdCode)}`
   if(item.lessonAvailable)return`/conteudos/${encodeURIComponent(item.pdCode)}`
   if(item.questionAvailable)return`/questoes?pd=${encodeURIComponent(item.pdCode)}`
   return'/trilha'
@@ -62,11 +63,12 @@ export function buildReviewCenter(
   const unresolved=errors.filter((error)=>!error.resolvedAt)
 
   for(const error of unresolved){
-    const wrongCount=error.wrongCount??1
+    const wrongCount=error.errorCount??error.wrongCount??1
     queue.push({
       id:`error:${error.id}`,type:'error',pdCode:error.pdCode,title:error.prompt,
       reason:wrongCount>=2?`Erro recorrente: ${wrongCount} ocorrências.`:'Questão errada ainda não resolvida.',
-      priority:220+wrongCount*25+(error.reviewStatus==='doubt'?35:error.reviewStatus==='review_later'?-40:0),estimatedMinutes:3,route:`/questoes?question=${encodeURIComponent(error.sourceId)}`,errorId:error.id,
+      priority:220+wrongCount*25+(error.reviewStatus==='doubt'?35:error.reviewStatus==='review_later'?-40:0),estimatedMinutes:3,
+      route:`/questoes?question=${encodeURIComponent(error.sourceId)}`,errorId:error.id,
     })
   }
 
@@ -84,10 +86,11 @@ export function buildReviewCenter(
   const errorPdCodes=new Set(unresolved.map((error)=>error.pdCode).filter((code):code is string=>Boolean(code)))
   for(const item of masteryCandidates(study)){
     if(errorPdCodes.has(item.pdCode))continue
+    const reason=item.falseConfidence?'Estudado, mas precisa de prática.':item.dataStatus==='insufficient'?'Dados insuficientes para estimar domínio.':item.overdue?'Conteúdo antigo com revisão vencida.':item.hasDoubt?'Você marcou dúvida neste PD.':`Domínio atual em ${item.score}/100.`
     queue.push({
-      id:`content:${item.pdCode}`,type:'content',pdCode:item.pdCode,title:item.title,
-      reason:item.overdue?'Conteúdo antigo com revisão vencida.':item.hasDoubt?'Você marcou dúvida neste PD.':`Domínio atual em ${item.score}/100.`,
-      priority:100+(100-item.score)+(item.overdue?25:0)+(item.hasDoubt?20:0),estimatedMinutes:item.lessonAvailable?5:4,route:routeForMastery(item),
+      id:`content:${item.pdCode}`,type:'content',pdCode:item.pdCode,title:item.title,reason,
+      priority:100+(100-item.score)+(item.overdue?25:0)+(item.hasDoubt?20:0)+(item.falseConfidence?45:0)+(item.dataStatus==='insufficient'?15:0),
+      estimatedMinutes:item.lessonAvailable?5:4,route:routeForMastery(item),
     })
   }
 
@@ -96,8 +99,8 @@ export function buildReviewCenter(
     queue,
     dueFlashcards:queue.filter((item)=>item.type==='flashcard').length,
     unresolvedErrors:unresolved.length,
-    recurrentErrors:unresolved.filter((error)=>(error.wrongCount??1)>=2).length,
-    weakPdCount:study.mastery.filter((item)=>(item.lessonAvailable||item.questionAvailable)&&item.evidenceCount>0&&item.score<60).length,
+    recurrentErrors:unresolved.filter((error)=>(error.errorCount??error.wrongCount??1)>=2).length,
+    weakPdCount:study.mastery.filter((item)=>(item.lessonAvailable||item.questionAvailable)&&item.evidenceCount>0&&item.level==='weak').length,
     overdueContent:study.mastery.filter((item)=>(item.lessonAvailable||item.questionAvailable)&&item.evidenceCount>0&&item.overdue).length,
   }
 }
