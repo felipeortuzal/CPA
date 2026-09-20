@@ -136,27 +136,68 @@ function readinessLabel(score:number){
 
 export function buildStudyEngineSnapshot(input:StudyEngineInput):StudyEngineSnapshot{
   const now=input.now??new Date()
+  const directMastery=new Map(cpaCurriculum.map((unit)=>[unit.pdCode,calculatePdMastery(unit,input)]))
+  const children=new Map<string,CurriculumUnit[]>()
+  for(const unit of cpaCurriculum){
+    if(!unit.parentCode)continue
+    const list=children.get(unit.parentCode)??[]
+    list.push(unit);children.set(unit.parentCode,list)
+  }
+  const memo=new Map<string,{item:PDMastery;leafCount:number}>()
+  const resolve=(unit:CurriculumUnit):{item:PDMastery;leafCount:number}=>{
+    const cached=memo.get(unit.pdCode);if(cached)return cached
+    const direct=directMastery.get(unit.pdCode)!
+    const childUnits=children.get(unit.pdCode)??[]
+    if(childUnits.length===0){const result={item:direct,leafCount:1};memo.set(unit.pdCode,result);return result}
+    const childResults=childUnits.map(resolve)
+    const leafCount=childResults.reduce((sum,row)=>sum+row.leafCount,0)
+    const weighted=(selector:(item:PDMastery)=>number)=>childResults.reduce((sum,row)=>sum+selector(row.item)*row.leafCount,0)/leafCount
+    const childScore=weighted((item)=>item.score)
+    const childConfidence=weighted((item)=>item.confidence)
+    const childEvidence=childResults.reduce((sum,row)=>sum+row.item.evidenceCount,0)
+    const hasDirect=direct.evidenceCount>0
+    const hasChildren=childEvidence>0
+    const score=Math.round(hasDirect&&hasChildren?childScore*.75+direct.score*.25:hasDirect?direct.score:childScore)
+    const confidence=Math.round(hasDirect&&hasChildren?childConfidence*.75+direct.confidence*.25:hasDirect?direct.confidence:childConfidence)
+    const reviewDates=[direct.nextReviewAt,...childResults.map((row)=>row.item.nextReviewAt)].filter((value):value is string=>Boolean(value)).sort()
+    const item:PDMastery={
+      ...direct,
+      score,confidence,level:levelOf(score),
+      evidenceCount:direct.evidenceCount+childEvidence,
+      practiceAttempts:direct.practiceAttempts+childResults.reduce((sum,row)=>sum+row.item.practiceAttempts,0),
+      practiceAccuracy:direct.practiceAccuracy,
+      unresolvedErrors:direct.unresolvedErrors+childResults.reduce((sum,row)=>sum+row.item.unresolvedErrors,0),
+      hasDoubt:direct.hasDoubt||childResults.some((row)=>row.item.hasDoubt),
+      lastEvidenceAt:latest([direct.lastEvidenceAt,...childResults.map((row)=>row.item.lastEvidenceAt)]),
+      nextReviewAt:reviewDates[0]??null,
+      reviewIntervalDays:reviewInterval(score),
+      overdue:direct.overdue||childResults.some((row)=>row.item.overdue),
+    }
+    const result={item,leafCount};memo.set(unit.pdCode,result);return result
+  }
+  const mastery=cpaCurriculum.map((unit)=>resolve(unit).item)
   const terminals=terminalUnits(cpaCurriculum)
-  const mastery=terminals.map((unit)=>calculatePdMastery(unit,input))
+  const terminalMastery=terminals.map((unit)=>directMastery.get(unit.pdCode)!)
   const roots=cpaCurriculum.filter((item)=>item.parentCode===null)
   const macroSummary=roots.map((root)=>{
-    const items=mastery.filter((item)=>item.macroCode===root.pdCode)
-    const score=items.length?Math.round(items.reduce((sum,item)=>sum+item.score,0)/items.length):0
-    const covered=items.filter((item)=>item.evidenceCount>0).length
+    const rootMastery=resolve(root).item
+    const terminalItems=terminalMastery.filter((item)=>item.macroCode===root.pdCode)
+    const directItems=[...directMastery.values()].filter((item)=>item.macroCode===root.pdCode&&(item.lessonAvailable||item.questionAvailable))
+    const covered=terminalItems.filter((item)=>item.evidenceCount>0).length
     return{
       macroCode:root.pdCode,
       title:root.title,
       officialWeight:root.weight??0,
-      score,
-      coveragePercent:items.length?Math.round(covered/items.length*100):0,
-      dueReviews:items.filter((item)=>item.overdue&&item.evidenceCount>0).length,
-      weakItems:items.filter((item)=>item.evidenceCount>0&&item.score<60).length,
-      totalItems:items.length,
+      score:rootMastery.score,
+      coveragePercent:terminalItems.length?Math.round(covered/terminalItems.length*100):0,
+      dueReviews:directItems.filter((item)=>item.evidenceCount>0&&item.overdue).length,
+      weakItems:directItems.filter((item)=>item.evidenceCount>0&&item.score<60).length,
+      totalItems:terminalItems.length,
     }
   })
   const weightTotal=macroSummary.reduce((sum,item)=>sum+item.officialWeight,0)||100
   const overallMastery=Math.round(macroSummary.reduce((sum,item)=>sum+item.score*item.officialWeight,0)/weightTotal)
-  const coveragePercent=mastery.length?Math.round(mastery.filter((item)=>item.evidenceCount>0).length/mastery.length*100):0
+  const coveragePercent=terminalMastery.length?Math.round(terminalMastery.filter((item)=>item.evidenceCount>0).length/terminalMastery.length*100):0
   const officialExams=input.simulations
     .filter((row)=>row.completedAt&&row.payload.mode==='official_exam'&&row.payload.result)
     .sort((a,b)=>b.completedAt!.localeCompare(a.completedAt!))
@@ -167,7 +208,8 @@ export function buildStudyEngineSnapshot(input:StudyEngineInput):StudyEngineSnap
   const readinessScore=Math.round(clamp(overallMastery*.6+coveragePercent*.15+(recentOfficialExamAverage??0)*.25))
   const readyForExam=coveragePercent>=75&&overallMastery>=70&&(recentOfficialExamAverage??0)>=70&&macroSummary.every((item)=>item.score>=60)
 
-  const candidates=mastery
+  const actionable=[...directMastery.values()].filter((item)=>item.lessonAvailable||item.questionAvailable)
+  const candidates=actionable
     .map((item)=>recommendationFor(item,macroSummary.find((macro)=>macro.macroCode===item.macroCode)?.officialWeight??0))
     .filter((item):item is StudyRecommendation=>Boolean(item))
     .sort((a,b)=>b.priority-a.priority||a.pdCode.localeCompare(b.pdCode,undefined,{numeric:true}))
@@ -183,26 +225,16 @@ export function buildStudyEngineSnapshot(input:StudyEngineInput):StudyEngineSnap
   }
   if(today.length===0&&candidates[0]){today.push(candidates[0]);minutes=candidates[0].targetMinutes}
 
-  const weakPdCodes=mastery
+  const weakPdCodes=actionable
     .filter((item)=>item.evidenceCount>0&&item.score<60)
     .sort((a,b)=>a.score-b.score||b.unresolvedErrors-a.unresolvedErrors)
     .slice(0,20).map((item)=>item.pdCode)
-  const masteredPdCodes=mastery.filter((item)=>item.score>=85&&item.confidence>=60).map((item)=>item.pdCode)
+  const masteredPdCodes=actionable.filter((item)=>item.score>=85&&item.confidence>=60).map((item)=>item.pdCode)
 
   return{
-    generatedAt:now.toISOString(),
-    overallMastery,
-    coveragePercent,
-    readinessScore,
-    readinessLabel:readinessLabel(readinessScore),
-    readyForExam,
-    recentOfficialExamAverage,
-    dueReviews:mastery.filter((item)=>item.evidenceCount>0&&item.overdue).length,
-    recommendedMinutes:minutes,
-    today,
-    macroSummary,
-    mastery,
-    weakPdCodes,
-    masteredPdCodes,
+    generatedAt:now.toISOString(),overallMastery,coveragePercent,readinessScore,
+    readinessLabel:readinessLabel(readinessScore),readyForExam,recentOfficialExamAverage,
+    dueReviews:actionable.filter((item)=>item.evidenceCount>0&&item.overdue).length,
+    recommendedMinutes:minutes,today,macroSummary,mastery,weakPdCodes,masteredPdCodes,
   }
 }
