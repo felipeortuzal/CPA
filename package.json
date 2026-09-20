@@ -1,7 +1,7 @@
 {
   "name": "cpa-study-platform",
   "private": true,
-  "version": "0.11.0",
+  "version": "0.12.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,9 +13,10 @@
     "test:watch": "vitest",
     "validate:curriculum": "node scripts/validate-curriculum.mjs",
     "validate:questions": "vitest run content/cpa/questions/questions.validation.test.ts",
-    "validate": "npm run validate:curriculum && npm run validate:questions && npm run validate:sources && npm test && npm run typecheck && npm run build",
+    "validate": "npm run validate:curriculum && npm run validate:questions && npm run validate:sources && npm run validate:experience && npm test && npm run lint && npm run typecheck && npm run build",
     "validate:sources": "node scripts/validate-official-sources.mjs",
-    "check:sources": "node scripts/check-official-sources.mjs"
+    "check:sources": "node scripts/check-official-sources.mjs",
+    "validate:experience": "node scripts/validate-v12-experience.mjs"
   },
   "dependencies": {
     "idb": "^8.0.3",

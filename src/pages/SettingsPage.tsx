@@ -4,7 +4,7 @@ import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { certifications } from '../data/certifications'
 import { useStudent } from '../features/profile/StudentProvider'
-import { createBackup, downloadBackup, importBackup, parseBackupFile, resetAllProgress } from '../lib/storage/backup'
+import { createBackup, downloadBackup, getBackupSummary, importBackup, parseBackupFile, resetAllProgress } from '../lib/storage/backup'
 
 const inputClass = 'w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 dark:border-white/10 dark:bg-white/5 dark:text-white'
 
@@ -51,8 +51,9 @@ export function SettingsPage() {
     setBusyAction('import'); setMessage(null); setError(null)
     try {
       const backup = await parseBackupFile(file)
-      const name = backup.profile?.displayName ?? 'sem perfil'
-      const ok = window.confirm(`Importar o backup de ${name}? Os dados locais atuais serão substituídos somente após esta confirmação.`)
+      const summary = getBackupSummary(backup)
+      const name = summary.profileName ?? 'sem perfil'
+      const ok = window.confirm(`Importar o backup de ${name}?\n\nAulas: ${summary.lessons}\nMini quizzes: ${summary.quizzes}\nQuestões respondidas: ${summary.questions}\nSimulados: ${summary.simulations}\nErros: ${summary.errors}\n\nOs dados locais atuais só serão substituídos após esta confirmação.`)
       if (!ok) return
       await importBackup(backup)
       await refresh()

@@ -346,6 +346,60 @@ O workflow não possui permissão para editar aulas ou questões.
 
 A validação estrutural do manifesto (`npm run validate:sources`) faz parte do CI normal e bloqueia IDs duplicados, URLs não oficiais, campos inválidos e divergência das versões centrais atualmente registradas.
 
+## Experiência final, offline e uso simples — v0.12
+
+A V12 não adiciona uma nova grande funcionalidade acadêmica. Ela fecha a experiência operacional para Felipe e Thó: iniciar, atualizar, estudar offline, recuperar backup e usar a plataforma em desktop ou celular sem depender de login ou backend.
+
+### Para o Thó — primeira instalação no Windows
+
+1. Instale **Git** e **Node.js 22 ou superior**.
+2. Abra o Prompt de Comando na pasta onde quer guardar o projeto.
+3. Execute:
+
+```bash
+git clone https://github.com/felipeortuzal/CPA.git
+cd CPA
+npm install
+```
+
+4. Depois disso, para estudar, basta dar duplo clique em **`start-cpa.bat`**.
+5. Na primeira abertura, informe **Thó** quando a plataforma perguntar como pode te chamar.
+
+O progresso fica no **IndexedDB do navegador desse computador**. Fechar a janela, desligar o PC, rodar `npm install`, `git pull` ou atualizar o código não apaga esse progresso.
+
+### Uso normal
+
+- **Estudar:** duplo clique em `start-cpa.bat`.
+- **Atualizar:** feche o servidor e dê duplo clique em `update-cpa.bat`.
+- O atualizador usa `git pull --ff-only`, não executa reset forçado e para se encontrar alterações locais.
+- Depois do pull, ele sincroniza as dependências com `npm install`.
+- Para levar o progresso a outro computador/navegador, use **Configurações > Dados e Backup**.
+
+### Offline / PWA
+
+O build PWA usa cache versionado `cpa-study-v12`, limpa caches antigos e mantém precache dos assets empacotados. Depois que a aplicação e seus assets já foram carregados, conteúdo local, aulas, questões, simulados e progresso continuam utilizáveis sem conexão.
+
+Quando o navegador fica offline, a interface mostra um aviso discreto. Links e verificações externas podem falhar, mas o estudo local não é bloqueado.
+
+### Segurança do backup
+
+O backup v2 continua cobrindo perfil, aulas, quizzes, tentativas de questões, favoritos, flashcards/revisões, erros, simulados, sessões, streak, preferências e planos de estudo.
+
+A V12 reforça a validação interna do arquivo, limita importações a 25 MB, mostra um resumo antes da confirmação e mantém a importação transacional: se o backup falhar na gravação, a transação não é concluída.
+
+### Acessibilidade e performance
+
+- rotas acadêmicas carregam por **lazy loading/code splitting**;
+- fallback de carregamento consistente;
+- Error Boundary global com recuperação sem apagar dados;
+- link “Pular para o conteúdo principal”;
+- navegação principal identificada semanticamente;
+- menu mobile fecha com `Esc`;
+- foco visível;
+- respeito a `prefers-reduced-motion`;
+- aviso de estado offline com `aria-live`;
+- desktop-first, mantendo responsividade mobile e dark/light mode.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -361,14 +415,16 @@ Nunca apagar o banco como estratégia de migration.
 npm run validate:curriculum
 npm run validate:questions
 npm run validate:sources
+npm run validate:experience
 npm test
+npm run lint
 npm run typecheck
 npm run build
 ```
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, manifesto/impacto de fontes V11, repetição espaçada, fila de revisão e Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, manifesto/impacto de fontes V11, experiência offline/PWA V12, backup completo, lazy loading e acessibilidade, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 

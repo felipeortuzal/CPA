@@ -963,6 +963,137 @@ Cobrir:
 - TypeScript strict;
 - build de produção.
 
+## Experiência final, offline e facilidade de uso — implementado na v0.12
+
+A V12 é uma etapa de acabamento operacional. Não deve introduzir grande funcionalidade acadêmica nova nem alterar conteúdo regulatório já validado.
+
+### Objetivo
+
+Felipe e Thó devem conseguir usar a mesma base de código em computadores separados, com progresso independente e local, sem login, Supabase, Firebase, servidor remoto ou API paga.
+
+Fluxo esperado no Windows para uma instalação já configurada:
+
+1. duplo clique em `start-cpa.bat`;
+2. navegador abre a aplicação;
+3. estudar normalmente;
+4. fechar sem perder progresso.
+
+Para atualizar:
+
+1. fechar o servidor local;
+2. executar `update-cpa.bat`;
+3. fazer pull somente por fast-forward;
+4. sincronizar dependências;
+5. preservar IndexedDB.
+
+### Scripts Windows
+
+`start-cpa.bat` deve:
+
+- trabalhar a partir da própria pasta do projeto;
+- validar `package.json`, Node e npm;
+- exigir Node.js 22 ou superior;
+- instalar dependências apenas quando `node_modules` não existir;
+- iniciar Vite e abrir o navegador;
+- não executar reset, limpeza ou qualquer operação no IndexedDB.
+
+`update-cpa.bat` deve:
+
+- validar Git, Node e npm;
+- recusar atualização automática quando houver alterações locais não commitadas;
+- usar `git pull --ff-only`;
+- executar `npm install --no-audit --no-fund`;
+- nunca usar `git reset --hard`, `git clean -f` ou comando destrutivo equivalente;
+- explicar claramente que o progresso do navegador não é apagado.
+
+### PWA e offline
+
+O PWA deve:
+
+- manter cache versionado;
+- limpar caches obsoletos;
+- precachear assets empacotados;
+- suportar fallback de navegação para `index.html`;
+- atualizar o service worker de forma segura;
+- não depender de rede para o conteúdo local já empacotado.
+
+A interface deve detectar `navigator.onLine` e mostrar estado offline informativo. Estar offline não pode bloquear aulas, questões, simulados, revisão, flashcards, Dashboard, trilha ou progresso local.
+
+### Performance
+
+Aplicar code splitting/lazy loading nas páginas pesadas para reduzir o bundle inicial.
+
+Manter fallback de carregamento consistente e não exibir tela branca enquanto chunks são carregados.
+
+### Tratamento de erro
+
+Adicionar Error Boundary global.
+
+Se houver falha inesperada de renderização:
+
+- informar que os dados locais continuam preservados;
+- permitir recarregar;
+- permitir voltar ao início;
+- nunca sugerir apagar o IndexedDB como correção automática.
+
+### Acessibilidade
+
+Obrigatório:
+
+- link para pular ao conteúdo principal;
+- `main` identificável e focável;
+- `nav`/menus com labels;
+- menu mobile fechável por Esc;
+- controles principais com aria-label quando necessário;
+- foco visível;
+- respeitar `prefers-reduced-motion`;
+- mensagens de conectividade com região semântica/aria-live.
+
+### Backup
+
+O backup continua na versão v2 e deve manter compatibilidade com v1.
+
+A V12 deve:
+
+- validar estrutura interna dos stores, não somente o envelope;
+- continuar cobrindo todos os dados pessoais atuais;
+- limitar tamanho de arquivo importado para evitar importação acidental excessiva;
+- mostrar resumo antes da confirmação;
+- rejeitar backup de `databaseVersion` futura;
+- garantir por teste que uma rejeição de versão futura não apaga os dados atuais;
+- garantir roundtrip representativo de todos os stores.
+
+Não criar migration se não houver mudança real do schema. `DB_VERSION` deve continuar 2.
+
+### Validação da experiência V12
+
+Criar validação estática para garantir:
+
+- existência e segurança dos scripts Windows;
+- ausência de comandos destrutivos no atualizador;
+- configuração PWA/cache;
+- lazy loading;
+- Error Boundary;
+- estado offline;
+- skip link;
+- foco visível e reduced motion;
+- documentação simples para o Thó.
+
+A validação entra no CI como `npm run validate:experience`.
+
+### Exclusões
+
+A V12 não deve:
+
+- adicionar ranking Felipe x Thó;
+- adicionar IA;
+- adicionar API paga;
+- adicionar servidor remoto;
+- adicionar login;
+- implementar outra certificação;
+- reescrever conteúdo regulatório;
+- alterar a arquitetura local-first.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.
@@ -981,6 +1112,7 @@ E, quando existirem/aplicarem:
 - `npm run validate:curriculum`
 - `npm run validate:questions`
 - `npm run validate:sources`
+- `npm run validate:experience`
 - demais scripts de validação adicionados por versões futuras
 
 Se qualquer check falhar:
