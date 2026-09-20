@@ -718,6 +718,123 @@ Cobrir, no mínimo:
 - compatibilidade com a Central de Revisão V8;
 - persistência do snapshot diário.
 
+## Plano de Estudos para a Data da Prova — implementado na v0.10
+
+A V10 adiciona planejamento adaptativo e local, sem IA externa, backend ou API paga.
+
+### Entradas
+
+O aluno pode informar:
+
+- data prevista da prova;
+- dias da semana disponíveis;
+- minutos por dia;
+- data de início, opcional.
+
+A data da prova é opcional. Sem data definida, a plataforma deve continuar útil em um plano contínuo e nunca inventar contagem regressiva.
+
+### Evidências usadas
+
+O plano deve considerar:
+
+- Programa Detalhado e pesos oficiais 20% / 40% / 30% / 10%;
+- progresso e cobertura;
+- domínio e prontidão da V9;
+- erros e recorrência;
+- flashcards/revisões;
+- simulados;
+- tempo disponível por sessão;
+- dias restantes e dias da semana disponíveis.
+
+### Fases obrigatórias
+
+Quando houver data e tempo suficiente, distribuir o cronograma entre:
+
+1. Fundamentos;
+2. Cobertura;
+3. Prática;
+4. Consolidação;
+5. Simulados;
+6. Revisão final.
+
+Com janelas curtas, comprimir as fases sem remover prática, simulados e revisão final. A proximidade da prova deve aumentar proporcionalmente a presença de simulados e reduzir introdução de conteúdo novo.
+
+### Agenda diária
+
+Gerar agenda clicável com:
+
+- data;
+- fase;
+- minutos planejados;
+- atividades;
+- rota direta para a funcionalidade correspondente.
+
+Rotas podem levar a:
+
+- aula/trilha;
+- questões;
+- revisão;
+- flashcards;
+- Caderno de Erros;
+- Simulados.
+
+Nenhuma tarefa pode ultrapassar a disponibilidade diária configurada.
+
+### Recálculo
+
+O plano deve ser derivado do estado atual, não de uma agenda rígida.
+
+Recalcular quando houver:
+
+- atraso em relação ao cronograma;
+- avanço acima do esperado;
+- melhora ou piora de domínio/desempenho;
+- novos erros;
+- revisões vencidas;
+- mudança de data;
+- remoção da data.
+
+Usuário adiantado deve deslocar relativamente mais tempo para prática, consolidação e simulados. Usuário atrasado deve comprimir cobertura e priorizar lacunas de maior impacto sem abandonar prática.
+
+### Funcionamento sem data
+
+Sem prova definida:
+
+- gerar janela móvel de 14 sessões disponíveis;
+- usar dias e minutos configurados;
+- escolher fases de acordo com cobertura e domínio atuais;
+- não exibir dias restantes;
+- não ativar artificialmente uma Revisão Final.
+
+### Persistência e backup
+
+Reutilizar `studyPlans`:
+
+- `exam-plan:settings` para configuração;
+- `exam-plan:current` para snapshot gerado.
+
+Esses registros já entram no backup JSON porque `studyPlans` faz parte do backup v2.
+
+Não foi necessária migration do IndexedDB. `DB_VERSION` permanece 2.
+
+### Testes obrigatórios da V10
+
+Cobrir:
+
+- prova em 90 dias;
+- prova em 30 dias;
+- prova em 7 dias;
+- maior proporção de simulados perto da prova;
+- aluno atrasado;
+- aluno adiantado;
+- melhora/piora com recálculo;
+- funcionamento sem data;
+- alteração de data;
+- remoção de data;
+- persistência e inclusão no backup;
+- limite de minutos por sessão;
+- rotas clicáveis válidas.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.

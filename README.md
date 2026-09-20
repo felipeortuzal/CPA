@@ -253,6 +253,42 @@ O Dashboard também mostra:
 
 A V9 continua 100% local/offline e não usa IA externa, API paga ou backend. Não foi necessária migration do IndexedDB; `DB_VERSION` permanece 2.
 
+## Plano de Estudos para a data da prova — v0.10
+
+A V10 adiciona um planejador local e adaptativo em **Plano de Estudos**.
+
+O aluno informa:
+
+- data prevista da prova, quando houver;
+- início do plano, opcional;
+- dias da semana disponíveis;
+- minutos disponíveis por dia.
+
+O plano combina o Programa Detalhado, pesos oficiais, progresso real, domínio V9, erros, flashcards, simulados, tempo disponível e dias restantes.
+
+Fases:
+
+1. Fundamentos
+2. Cobertura
+3. Prática
+4. Consolidação
+5. Simulados
+6. Revisão final
+
+A agenda diária é clicável e abre diretamente aula, questões, revisão, flashcards, Caderno de Erros ou Simulados.
+
+O plano é recalculado quando:
+
+- o aluno atrasa ou fica adiantado em relação ao tempo restante;
+- cobertura/domínio mudam;
+- desempenho melhora ou piora;
+- surgem novos erros ou revisões;
+- a data da prova é alterada ou removida.
+
+Conforme a prova se aproxima, cresce a proporção de dias com simulados e revisão final. O sistema também funciona **sem data da prova**, em uma janela móvel de 14 sessões, sem inventar contagem regressiva.
+
+Configuração e snapshot atual são persistidos no store `studyPlans` e entram automaticamente no backup JSON já existente. **Não foi necessária migration**; `DB_VERSION` permanece 2.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -274,7 +310,7 @@ npm run build
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, repetição espaçada, fila de revisão e Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 

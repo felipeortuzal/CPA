@@ -18,6 +18,7 @@ import { SimulationHistoryPage } from './pages/SimulationHistoryPage'
 import { SimulationResultPage } from './pages/SimulationResultPage'
 import { SimulationsPage } from './pages/SimulationsPage'
 import { SourcesPage } from './pages/SourcesPage'
+import { StudyPlanPage } from './pages/StudyPlanPage'
 import { WelcomePage } from './pages/WelcomePage'
 
 const router = createBrowserRouter([
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
     { path:'questoes', element:<QuestionsPage/> },
     { path:'simulados', element:<SimulationsPage/> },
     { path:'simulados/historico', element:<SimulationHistoryPage/> },
+    { path:'plano', element:<StudyPlanPage/> },
     { path:'revisao', element:<ReviewPage/> },
     { path:'flashcards', element:<FlashcardsPage/> },
     { path:'erros', element:<ErrorNotebookPage/> },
