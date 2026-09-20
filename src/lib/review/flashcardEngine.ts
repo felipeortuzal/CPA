@@ -34,7 +34,7 @@ export function getLatestFlashcardState(flashcardId:string,reviews:FlashcardRevi
     reviewCount:latest.reviewCount??rows.length,
     correctStreak:latest.correctStreak??0,
     lastRating:latest.rating,
-    due:!latest.nextReviewAt||new Date(latest.nextReviewAt).getTime()<=now.getTime(),
+    due:!nextReview||new Date(nextReview).getTime()<=now.getTime(),
   }
 }
 
