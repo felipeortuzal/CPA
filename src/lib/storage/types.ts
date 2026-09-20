@@ -26,7 +26,7 @@ export interface FavoriteRecord { id: string; itemType: 'lesson' | 'question' | 
 export interface StoredFlashcard { id: string; pdCode: string | null; front: string; back: string; createdAt: string; updatedAt: string }
 export interface FlashcardReviewRecord { id: string; flashcardId: string; rating: 'again' | 'hard' | 'good' | 'easy'; reviewedAt: string; lastReviewed?: string; nextReview?: string | null; interval?: number; ease?: number; reviewCount?: number; correctStreak?: number; nextReviewAt?: string | null }
 export interface QuestionBookmarkRecord { id: string; questionId: string; createdAt: string }
-export interface ErrorRecord { id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; resolvedAt: string | null; wrongCount?: number; lastWrongAt?: string }
+export interface ErrorRecord { id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; questionId?: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; date?: string; resolvedAt: string | null; resolved?: boolean; reviewStatus?: 'doubt' | 'understood' | 'review_later'; wrongCount?: number; errorCount?: number; attemptCount?: number; lastWrongAt?: string; lastErrorAt?: string }
 
 export interface SimulationPerformance { correct: number; total: number; percent: number }
 export interface SimulationQuestionResult {
