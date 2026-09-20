@@ -118,7 +118,7 @@ function recommendationFor(item:PDMastery,macroWeight:number):StudyRecommendatio
   if(!kind)return null
   const targetMinutes=kind==='learn'?20:kind==='review'?12:15
   const priority=Math.round(
-    (100-item.score)+macroWeight*.6+(item.overdue?20:0)+(item.unresolvedErrors>0?30:0)+(item.hasDoubt?15:0)+(item.lessonAvailable&&item.score===0?20:0)
+    (100-item.score)+macroWeight*.6+(item.overdue?20:0)+(item.unresolvedErrors>0?100:0)+(item.hasDoubt?15:0)+(item.lessonAvailable&&item.score===0?20:0)
   )
   const route=kind==='recover_error'||kind==='practice'
     ?`/questoes?pd=${encodeURIComponent(item.pdCode)}`
