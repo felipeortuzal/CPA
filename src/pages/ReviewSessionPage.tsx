@@ -42,7 +42,6 @@ export function ReviewSessionPage(){
   async function resolveError(){
     if(!current?.errorId)return
     await markQuestionErrorResolved(current.errorId)
-    await recordSignificantActivity()
     advance()
   }
 
