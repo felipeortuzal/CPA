@@ -23,7 +23,7 @@ export function ReviewPage(){
     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>V8 · Central de Revisão</Badge><span className="text-sm text-slate-500">fila automática + repetição espaçada</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">O que revisar agora</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">A fila combina flashcards vencidos, erros recorrentes, baixo domínio, dúvidas e conteúdo antigo usando os dados reais do Study Engine.</p></div><Button variant="secondary" onClick={()=>void refresh()}><RefreshCw className="h-4 w-4"/>Atualizar fila</Button></div>
 
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-      <Card><Brain className="h-5 w-5 text-emerald-500"/><p className="mt-3 text-2xl font-black">{center.dueFlashcards}</p><p className="text-sm font-semibold">Flashcards vencidos</p></Card>
+      <Card><Brain className="h-5 w-5 text-emerald-500"/><p className="mt-3 text-2xl font-black">{center.dueFlashcards}</p><p className="text-sm font-semibold">Flashcards para revisar</p></Card>
       <Card><AlertTriangle className="h-5 w-5 text-rose-500"/><p className="mt-3 text-2xl font-black">{center.unresolvedErrors}</p><p className="text-sm font-semibold">Erros pendentes</p></Card>
       <Card><AlertTriangle className="h-5 w-5 text-orange-500"/><p className="mt-3 text-2xl font-black">{center.recurrentErrors}</p><p className="text-sm font-semibold">Erros recorrentes</p></Card>
       <Card><Target className="h-5 w-5 text-violet-500"/><p className="mt-3 text-2xl font-black">{center.weakPdCount}</p><p className="text-sm font-semibold">PDs abaixo de 60</p></Card>
