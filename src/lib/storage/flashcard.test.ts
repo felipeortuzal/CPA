@@ -2,7 +2,7 @@ import 'fake-indexeddb/auto'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cpaLessonFlashcards } from '../../../content/cpa/flashcards'
 import { macro1Lessons } from '../../../content/cpa/lessons/macro-1'
-import { resetAllProgress } from './backup'
+import { createBackup, resetAllProgress } from './backup'
 import { closeDatabase } from './database'
 import { createCustomFlashcard, getActiveFlashcards, getFlashcardReviews, reviewFlashcard } from './repositories/flashcardRepository'
 import { markLessonOpened } from './repositories/learningRepository'
@@ -36,5 +36,10 @@ describe('V8 flashcards local-first',()=>{
     expect(rows[1].reviewCount).toBe(2)
     expect(rows[1].correctStreak).toBe(2)
     expect(rows[1].ease).toBeGreaterThan(2.5)
+    const backup=await createBackup()
+    const backedUp=backup.flashcardReviews.filter((row)=>row.flashcardId===card.id)
+    expect(backedUp).toHaveLength(2)
+    expect(backedUp[1].nextReview).toBe(rows[1].nextReview)
+    expect(backedUp[1].correctStreak).toBe(2)
   })
 })
