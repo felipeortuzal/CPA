@@ -40,7 +40,7 @@ Currículo versionado:
 - Programa Detalhado CPA ANBIMA v1.2
 - revisão 04/06/2025
 - vigência 01/01/2026
-- verificado novamente em 16/09/2026
+- verificado novamente em 20/09/2026
 
 Modo Prova:
 
@@ -289,6 +289,63 @@ Conforme a prova se aproxima, cresce a proporção de dias com simulados e revis
 
 Configuração e snapshot atual são persistidos no store `studyPlans` e entram automaticamente no backup JSON já existente. **Não foi necessária migration**; `DB_VERSION` permanece 2.
 
+## Central de Atualizações Oficiais — v0.11
+
+A V11 cria uma camada de rastreabilidade e monitoramento das fontes oficiais sem transformar a plataforma em dependente de internet.
+
+### Manifesto oficial
+
+`content/sources.json` registra as fontes oficiais utilizadas ou monitoradas pela CPA, incluindo:
+
+- Programa Detalhado;
+- edital dos exames;
+- guia de elaboração de questões;
+- caderno oficial de questões CPA;
+- ANBIMA, Banco Central, CVM, SUSEP, PREVIC, B3, Tesouro Direto, FGC, ANPD, Planalto e demais fontes já usadas no conteúdo.
+
+Cada entrada mantém ID, instituição, título, URL, tipo, data de verificação, versão conhecida quando aplicável, escopo e estratégia de fingerprint.
+
+### Mapa de impacto
+
+A página **Fontes e Atualizações** mostra, por `sourceId`:
+
+- PD Codes afetados;
+- quantidade de itens do currículo;
+- aulas afetadas;
+- questões afetadas;
+- tópicos;
+- funcionalidades sensíveis, como Modo Prova e Question Engine.
+
+O Programa Detalhado é indexado contra os 590 itens curriculares. O guia e o caderno oficiais de questões são tratados como referências de desenho para as 100 questões autorais.
+
+### Monitor de mudanças
+
+`npm run check:sources`:
+
+1. acessa as fontes com timeout;
+2. calcula fingerprint por conteúdo ou metadados;
+3. compara com o estado anterior;
+4. gera `.source-monitor/report.json`;
+5. classifica cada fonte como `baseline`, `unchanged`, `changed` ou `unreachable`.
+
+A primeira execução cria a baseline. Falha de rede não encerra o processo com erro e nunca impede o estudo offline.
+
+Mudança detectada **não altera conteúdo automaticamente**. Ela apenas sinaliza que currículo, aula, questão ou regra de prova associada deve ser revisada por uma pessoa.
+
+### GitHub Actions
+
+O workflow **Official Source Watch** roda semanalmente e também pode ser executado manualmente. Ele:
+
+- valida o manifesto;
+- restaura o fingerprint anterior por cache;
+- executa a checagem;
+- publica resumo no GitHub Actions;
+- envia o relatório JSON como artifact por 30 dias.
+
+O workflow não possui permissão para editar aulas ou questões.
+
+A validação estrutural do manifesto (`npm run validate:sources`) faz parte do CI normal e bloqueia IDs duplicados, URLs não oficiais, campos inválidos e divergência das versões centrais atualmente registradas.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -303,6 +360,7 @@ Nunca apagar o banco como estratégia de migration.
 ```bash
 npm run validate:curriculum
 npm run validate:questions
+npm run validate:sources
 npm test
 npm run typecheck
 npm run build
@@ -310,7 +368,7 @@ npm run build
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, repetição espaçada, fila de revisão e Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, plano de estudos V10, cenários de 90/30/7 dias, manifesto/impacto de fontes V11, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 

@@ -48,7 +48,7 @@ Programa Detalhado CPA ANBIMA atualmente versionado no projeto:
 - versão: 1.2
 - revisão: 04/06/2025
 - vigência: 01/01/2026
-- última verificação: 16/09/2026
+- última verificação: 20/09/2026
 
 Antes de qualquer nova produção de conteúdo, verificar novamente a ANBIMA.
 
@@ -67,7 +67,7 @@ Edital dos Exames de Certificação Profissional ANBIMA:
 
 - versão: 1.4
 - data: 28/05/2026
-- verificado em: 16/09/2026
+- verificado em: 20/09/2026
 
 Para a CPA o edital confirma:
 
@@ -204,11 +204,12 @@ Sidebar:
 - Conteúdos
 - Questões
 - Simulados
+- Plano de Estudos
 - Revisão
 - Flashcards
 - Caderno de Erros
 - Estatísticas
-- Fontes
+- Fontes e Atualizações
 - Configurações
 
 Topo com seletor de certificação, preparado para expansão futura.
@@ -835,6 +836,133 @@ Cobrir:
 - limite de minutos por sessão;
 - rotas clicáveis válidas.
 
+## Central de Atualizações Oficiais — implementado na v0.11
+
+A V11 adiciona monitoramento de fontes oficiais sem tornar o estudo dependente de rede e sem permitir reescrita automática de conteúdo regulatório.
+
+### Manifesto
+
+Manter `content/sources.json` como catálogo versionado das fontes oficiais monitoradas.
+
+Cada fonte deve possuir, no mínimo:
+
+- id/sourceId;
+- instituição;
+- título;
+- URL oficial;
+- tipo/categoria;
+- certification;
+- sourceType;
+- lastVerified;
+- knownVersion quando aplicável;
+- fingerprintMode;
+- scope;
+- topics;
+- note/status.
+
+Fontes centrais obrigatórias:
+
+- Programa Detalhado CPA;
+- página oficial dos Programas Detalhados;
+- edital de exames vigente;
+- Guia de Elaboração de Questões;
+- Caderno de Questões CPA.
+
+### Política obrigatória
+
+O monitor nunca pode:
+
+- reescrever aulas;
+- alterar questões;
+- trocar PD Codes;
+- alterar regras do Modo Prova;
+- mudar gabaritos;
+- atualizar versões automaticamente.
+
+Toda mudança detectada deve virar **sinal para revisão humana**.
+
+Falha de internet, timeout, bloqueio por CORS/site ou indisponibilidade de fonte nunca pode impedir o uso offline da plataforma.
+
+### Mapa de impacto
+
+A aplicação deve conseguir mapear uma fonte para o conteúdo potencialmente afetado:
+
+- sourceId;
+- pdCode;
+- tópicos;
+- itens do currículo;
+- aulas;
+- questões;
+- funcionalidades.
+
+O Programa Detalhado deve ser tratado como impacto crítico sobre o currículo completo.
+
+O edital deve ser tratado como impacto crítico sobre Modo Prova/Simulados.
+
+Guia e Caderno de Questões devem ser tratados como impacto de desenho sobre o Question Engine, sem copiar questões oficiais.
+
+### Página Fontes e Atualizações
+
+A rota `/fontes` deve apresentar:
+
+- documentos centrais e versões conhecidas;
+- data da última verificação editorial;
+- status;
+- política de atualização;
+- explicação do monitor automático;
+- busca por fonte, tema ou PD Code;
+- filtro por instituição;
+- mapa de impacto expansível;
+- links oficiais.
+
+O status mostrado pela aplicação vem do manifesto versionado. A checagem remota ocorre fora do runtime de estudo.
+
+### Checagem remota
+
+`scripts/check-official-sources.mjs` deve:
+
+- funcionar em Node sem dependências pagas;
+- usar timeout e concorrência limitada;
+- calcular fingerprint de conteúdo ou metadados;
+- manter estado anterior separado;
+- gerar relatório JSON local;
+- detectar baseline, unchanged, changed e unreachable;
+- sair com sucesso em falhas individuais de rede;
+- oferecer modo estrito opcional apenas para mudanças.
+
+`scripts/validate-official-sources.mjs` deve validar estrutura, IDs, domínios oficiais, datas e documentos centrais.
+
+### Automação
+
+Criar workflow `Official Source Watch`:
+
+- execução semanal;
+- execução manual;
+- Node 22;
+- cache do estado anterior;
+- relatório como artifact;
+- resumo visível no GitHub Actions;
+- permissão somente de leitura do conteúdo.
+
+O workflow não deve criar commits nem atualizar material didático automaticamente.
+
+### Testes/validação obrigatórios da V11
+
+Cobrir:
+
+- IDs únicos;
+- fontes centrais obrigatórias;
+- toda fonte usada por aulas/questões presente no manifesto;
+- Programa Detalhado impactando os 590 itens;
+- guia/caderno de questões mapeados para as 100 questões autorais;
+- política `automaticRewrite=false`;
+- política `networkFailureBlocksStudy=false`;
+- validação estrutural do manifesto;
+- monitor tolerando internet indisponível;
+- monitor detectando mudança de fingerprint;
+- TypeScript strict;
+- build de produção.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.
@@ -852,6 +980,7 @@ E, quando existirem/aplicarem:
 - `npm run lint`
 - `npm run validate:curriculum`
 - `npm run validate:questions`
+- `npm run validate:sources`
 - demais scripts de validação adicionados por versões futuras
 
 Se qualquer check falhar:

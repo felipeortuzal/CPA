@@ -1,0 +1,763 @@
+{
+  "schemaVersion": 1,
+  "certification": "CPA",
+  "generatedAt": "2026-09-20",
+  "policy": {
+    "priority": [
+      "ANBIMA / ANBIMA Edu",
+      "CVM",
+      "Banco Central do Brasil",
+      "Tesouro Nacional / Tesouro Direto",
+      "Receita Federal",
+      "B3",
+      "SUSEP / PREVIC / demais órgãos oficiais"
+    ],
+    "automaticRewrite": false,
+    "networkFailureBlocksStudy": false,
+    "changePolicy": "Mudanças são sinalizadas para revisão humana. A plataforma nunca reescreve aulas, questões ou regras de prova automaticamente."
+  },
+  "sources": [
+    {
+      "id": "ANBIMA_PD",
+      "institution": "ANBIMA",
+      "title": "Programa Detalhado CPA — versão 1.2",
+      "url": "https://www.anbima.com.br/data/files/6A/52/6F/A1/BED73910B07B2739B82BA2A8/Programa-Detalhado-CPA-ANBIMA.pdf",
+      "kind": "program",
+      "sourceType": "pdf",
+      "status": "verified",
+      "lastVerified": "2026-09-20",
+      "knownVersion": "1.2",
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "curriculum",
+        "lessons",
+        "questions"
+      ],
+      "topics": [
+        "Programa Detalhado",
+        "macrotemas",
+        "PD Codes"
+      ],
+      "note": "Fonte de verdade do conteúdo cobrado na CPA. Mudanças exigem revisão humana antes de alterar currículo ou aulas."
+    },
+    {
+      "id": "ANBIMA_PROGRAMS_PAGE",
+      "institution": "ANBIMA",
+      "title": "Programas detalhados CPA, C-Pro I e C-Pro R",
+      "url": "https://www.anbima.com.br/pt_br/especial/pds-certificacoes-distribuicao.htm",
+      "kind": "program_index",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-20",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "curriculum",
+        "sources"
+      ],
+      "topics": [
+        "programas detalhados",
+        "materiais de questões"
+      ],
+      "note": "Página índice oficial para localizar novas versões do Programa Detalhado e materiais de elaboração de questões."
+    },
+    {
+      "id": "ANBIMA_EXAM_NOTICE",
+      "institution": "ANBIMA",
+      "title": "Edital dos Exames de Certificação Profissional ANBIMA — versão 1.4",
+      "url": "https://www.anbima.com.br/data/files/98/96/A6/10/9C24C910CF6A83C9F82BA2A8/Edital-dos-Exames-de-Certificacao-Profissional-Anbima.pdf",
+      "kind": "exam_rules",
+      "sourceType": "pdf",
+      "status": "verified",
+      "lastVerified": "2026-09-20",
+      "knownVersion": "1.4",
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "exam",
+        "simulations"
+      ],
+      "topics": [
+        "50 questões",
+        "2h30",
+        "35 acertos",
+        "formatos de questão"
+      ],
+      "note": "Fonte de verdade para regras do exame. A checagem nunca altera o Modo Prova automaticamente."
+    },
+    {
+      "id": "ANBIMA_QUESTION_GUIDE",
+      "institution": "ANBIMA",
+      "title": "Guia de Elaboração de Questões das Certificações ANBIMA",
+      "url": "https://www.anbima.com.br/data/files/40/C6/A8/5E/FCBF891048BA3F89EA2BA2A8/Guia-de-Elaboracao-de-Questao-Certificacoes-Anbima.pdf",
+      "kind": "question_design",
+      "sourceType": "pdf",
+      "status": "verified",
+      "lastVerified": "2026-09-20",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "questions"
+      ],
+      "topics": [
+        "contexto profissional",
+        "comando",
+        "distratores",
+        "níveis cognitivos"
+      ],
+      "note": "Usado para estilo e qualidade do banco autoral; nunca para copiar questões."
+    },
+    {
+      "id": "ANBIMA_QUESTION_BOOK_CPA",
+      "institution": "ANBIMA",
+      "title": "Caderno de Questões CPA — ANBIMA",
+      "url": "https://www.anbima.com.br/data/files/DF/86/EE/B6/EB6F8910C03A3F89B82BA2A8/Caderno-de-questoes-CPA.pdf",
+      "kind": "question_design",
+      "sourceType": "pdf",
+      "status": "verified",
+      "lastVerified": "2026-09-20",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "questions"
+      ],
+      "topics": [
+        "estilo oficial",
+        "cases",
+        "árvore de diálogo"
+      ],
+      "note": "Referência pública de estilo. O banco da plataforma permanece original."
+    },
+    {
+      "id": "ANBIMA_DISTRIBUICAO",
+      "institution": "ANBIMA",
+      "title": "Código de Distribuição de Produtos de Investimento",
+      "url": "https://www.anbima.com.br/pt_br/autorregular/codigos/distribuicao-de-produtos-de-investimento.htm",
+      "kind": "self_regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_SFN",
+      "institution": "Banco Central do Brasil",
+      "title": "Sistema Financeiro Nacional",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/sfn",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_SPB",
+      "institution": "Banco Central do Brasil",
+      "title": "Sistema de Pagamentos Brasileiro",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/spb",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_MONETARY",
+      "institution": "Banco Central do Brasil",
+      "title": "Política monetária e inflação",
+      "url": "https://www.bcb.gov.br/controleinflacao",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_POLITICA",
+      "institution": "Banco Central do Brasil",
+      "title": "Política monetária e inflação",
+      "url": "https://www.bcb.gov.br/controleinflacao",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_SELIC",
+      "institution": "Banco Central do Brasil",
+      "title": "Taxa Selic",
+      "url": "https://www.bcb.gov.br/controleinflacao/taxaselic",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_CAMBIO",
+      "institution": "Banco Central do Brasil",
+      "title": "Câmbio e capitais internacionais",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/cambio",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_PIX",
+      "institution": "Banco Central do Brasil",
+      "title": "Pix",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/pix",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_SCR",
+      "institution": "Banco Central do Brasil",
+      "title": "Sistema de Informações de Créditos (SCR)",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/scr",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_OPEN_FINANCE",
+      "institution": "Banco Central do Brasil",
+      "title": "Open Finance",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/cliente-open-finance",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_DREX",
+      "institution": "Banco Central do Brasil",
+      "title": "Drex",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/drex",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_ESTABILIDADE",
+      "institution": "Banco Central do Brasil",
+      "title": "Estabilidade financeira",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "BCB_BASILEIA",
+      "institution": "Banco Central do Brasil",
+      "title": "Recomendações de Basileia",
+      "url": "https://www.bcb.gov.br/estabilidadefinanceira/recomendacoesbasileia",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CMN",
+      "institution": "Ministério da Fazenda",
+      "title": "Conselho Monetário Nacional",
+      "url": "https://www.gov.br/fazenda/pt-br/assuntos/cmn",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Institucional — CVM",
+      "url": "https://www.gov.br/cvm/pt-br/acesso-a-informacao-cvm/institucional",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM_30",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Resolução CVM nº 30",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol030.html",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM_RES30",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Resolução CVM nº 30",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol030.html",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM_62",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Resolução CVM nº 62",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol062.html",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM_175",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Resolução CVM nº 175 — fundos de investimento",
+      "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CVM_ESG",
+      "institution": "Comissão de Valores Mobiliários",
+      "title": "Finanças sustentáveis — regulação",
+      "url": "https://www.gov.br/cvm/pt-br/assuntos/financas-sustentaveis/regulacao",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "SUSEP",
+      "institution": "Superintendência de Seguros Privados",
+      "title": "Institucional",
+      "url": "https://www.gov.br/susep/pt-br/acesso-a-informacao/institucional",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "SUSEP_PREVIDENCIA",
+      "institution": "Superintendência de Seguros Privados",
+      "title": "PGBL e VGBL",
+      "url": "https://www.gov.br/susep/pt-br/assuntos/meu-futuro-seguro/seguros-previdencia-e-capitalizacao/providencia-complementar-aberta/pgbl-vgbl",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "SUSEP_OPEN_INSURANCE",
+      "institution": "Superintendência de Seguros Privados",
+      "title": "Open Insurance",
+      "url": "https://www.gov.br/susep/pt-br/assuntos/open-insurance",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "PREVIC",
+      "institution": "Superintendência Nacional de Previdência Complementar",
+      "title": "Previdência complementar fechada",
+      "url": "https://www.gov.br/previc/pt-br",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "CNPC",
+      "institution": "Ministério da Previdência Social",
+      "title": "Conselho Nacional de Previdência Complementar",
+      "url": "https://www.gov.br/previdencia/pt-br/assuntos/previdencia-complementar/conselho-nacional-de-previdencia-complementar",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "FGC",
+      "institution": "Fundo Garantidor de Créditos",
+      "title": "Garantia FGC",
+      "url": "https://www.fgc.org.br/sobre-garantia-fgc",
+      "kind": "reference",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "TESOURO_DIRETO",
+      "institution": "Tesouro Nacional",
+      "title": "Tesouro Direto",
+      "url": "https://www.tesourodireto.com.br/",
+      "kind": "reference",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "B3",
+      "institution": "B3",
+      "title": "Institucional e infraestrutura de mercado",
+      "url": "https://www.b3.com.br/pt_br/b3/institucional/",
+      "kind": "reference",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "IBGE",
+      "institution": "Instituto Brasileiro de Geografia e Estatística",
+      "title": "Inflação e indicadores econômicos",
+      "url": "https://www.ibge.gov.br/explica/inflacao.php",
+      "kind": "reference",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "ANPD_LGPD",
+      "institution": "Autoridade Nacional de Proteção de Dados",
+      "title": "Perguntas frequentes — LGPD",
+      "url": "https://www.gov.br/anpd/pt-br/acesso-a-informacao/perguntas-frequentes",
+      "kind": "regulation",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "metadata",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "PLANALTO_LGPD",
+      "institution": "Presidência da República",
+      "title": "Lei nº 13.709/2018 — LGPD",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm",
+      "kind": "law",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "PLANALTO_LRF",
+      "institution": "Presidência da República",
+      "title": "Lei Complementar nº 101/2000 — Lei de Responsabilidade Fiscal",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm",
+      "kind": "law",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    },
+    {
+      "id": "PLANALTO_LIBERDADE",
+      "institution": "Presidência da República",
+      "title": "Lei nº 13.874/2019 — Liberdade Econômica",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13874.htm",
+      "kind": "law",
+      "sourceType": "html",
+      "status": "verified",
+      "lastVerified": "2026-09-14",
+      "knownVersion": null,
+      "fingerprintMode": "content",
+      "certification": "CPA",
+      "scope": [
+        "lessons",
+        "questions"
+      ],
+      "topics": [],
+      "note": "Fonte oficial monitorada. Mudança detectada exige revisão humana do conteúdo impactado."
+    }
+  ]
+}

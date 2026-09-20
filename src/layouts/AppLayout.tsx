@@ -5,7 +5,7 @@ import { CertificationSelector } from '../components/CertificationSelector'
 import { useStudent } from '../features/profile/StudentProvider'
 import { useTheme } from '../hooks/useTheme'
 
-const nav = [['Dashboard','/',LayoutDashboard],['Trilha de Estudos','/trilha',GraduationCap],['Conteúdos','/conteudos',BookOpen],['Questões','/questoes',ClipboardCheck],['Simulados','/simulados',FileText],['Plano de Estudos','/plano',CalendarDays],['Revisão','/revisao',RotateCcw],['Flashcards','/flashcards',Brain],['Caderno de Erros','/erros',Target],['Estatísticas','/estatisticas',BarChart3],['Fontes','/fontes',FileText]] as const
+const nav = [['Dashboard','/',LayoutDashboard],['Trilha de Estudos','/trilha',GraduationCap],['Conteúdos','/conteudos',BookOpen],['Questões','/questoes',ClipboardCheck],['Simulados','/simulados',FileText],['Plano de Estudos','/plano',CalendarDays],['Revisão','/revisao',RotateCcw],['Flashcards','/flashcards',Brain],['Caderno de Erros','/erros',Target],['Estatísticas','/estatisticas',BarChart3],['Fontes e Atualizações','/fontes',FileText]] as const
 
 export function AppLayout() {
   const [mobileOpen,setMobileOpen] = useState(false)

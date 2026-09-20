@@ -1,0 +1,66 @@
+name: Official Source Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  source-watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate source manifest
+        run: npm run validate:sources
+
+      - name: Restore previous source state
+        uses: actions/cache@v4
+        with:
+          path: .source-monitor/state.json
+          key: official-source-state-${{ github.run_id }}
+          restore-keys: |
+            official-source-state-
+
+      - name: Check official sources
+        run: npm run check:sources
+
+      - name: Add monitor summary
+        if: always()
+        run: |
+          node - <<'NODE' >> "$GITHUB_STEP_SUMMARY"
+          const fs=require('node:fs')
+          const path='.source-monitor/report.json'
+          if(!fs.existsSync(path)){
+            console.log('## Official Source Watch')
+            console.log('')
+            console.log('No report was generated.')
+            process.exit(0)
+          }
+          const report=JSON.parse(fs.readFileSync(path,'utf8'))
+          console.log('## Official Source Watch')
+          console.log('')
+          console.log(`- Total: **${report.summary.total}**`)
+          console.log(`- Alteradas: **${report.summary.changed}**`)
+          console.log(`- Inacessíveis: **${report.summary.unreachable}**`)
+          console.log(`- Baseline criada: **${report.summary.baseline}**`)
+          console.log(`- Inalteradas: **${report.summary.unchanged}**`)
+          console.log('')
+          console.log('Mudanças são apenas sinalizadas para revisão humana; nenhum conteúdo é reescrito automaticamente.')
+          NODE
+
+      - name: Upload source report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-report-${{ github.run_number }}
+          path: .source-monitor/report.json
+          if-no-files-found: warn
+          retention-days: 30

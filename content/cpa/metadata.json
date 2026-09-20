@@ -5,7 +5,7 @@
   "elaborationDate": "2024-09-02",
   "revisionDate": "2025-06-04",
   "effectiveFrom": "2026-01-01",
-  "lastVerified": "2026-09-16",
+  "lastVerified": "2026-09-20",
   "officialSource": {
     "id": "ANBIMA_CPA_PD_1_2",
     "name": "ANBIMA — Programa Detalhado CPA",
@@ -13,9 +13,25 @@
     "landingPage": "https://www.anbima.com.br/pt_br/especial/pds-certificacoes-distribuicao.htm"
   },
   "macroTopics": [
-    { "pdCode": "1", "title": "Estrutura e dinâmica do sistema financeiro nacional", "weight": 20 },
-    { "pdCode": "2", "title": "Produtos do mercado financeiro", "weight": 40 },
-    { "pdCode": "3", "title": "Relacionamento com o cliente (prospecção, atendimento e suporte)", "weight": 30 },
-    { "pdCode": "4", "title": "Inovação e desenvolvimento de mercado", "weight": 10 }
+    {
+      "pdCode": "1",
+      "title": "Estrutura e dinâmica do sistema financeiro nacional",
+      "weight": 20
+    },
+    {
+      "pdCode": "2",
+      "title": "Produtos do mercado financeiro",
+      "weight": 40
+    },
+    {
+      "pdCode": "3",
+      "title": "Relacionamento com o cliente (prospecção, atendimento e suporte)",
+      "weight": 30
+    },
+    {
+      "pdCode": "4",
+      "title": "Inovação e desenvolvimento de mercado",
+      "weight": 10
+    }
   ]
 }
