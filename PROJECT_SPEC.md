@@ -514,13 +514,97 @@ As recomendações do plano diário só podem apontar para ações realmente dis
 
 Um snapshot compacto por dia é salvo em `studyPlans`, store já existente desde v1. Não foi necessária migration de schema na v0.7.
 
-## Flashcards — evolução futura
+## Central de Revisão, Flashcards e Caderno de Erros — implementado na v0.8
 
-As aulas já contêm flashcards e a arquitetura local suporta reviews, mas a fila completa de repetição espaçada dos flashcards pertence às próximas etapas.
+### Central de Revisão
 
-## Caderno de Erros — implementado
+A página **Revisão** combina o Study Engine da V7 com uma fila operacional priorizada por:
 
-Respostas incorretas do Question Engine e dos simulados entram automaticamente no mesmo Caderno de Erros. O registro deve preservar questão, PD, resposta dada, resposta correta, data, recorrência e estado resolvido/não resolvido.
+- flashcards vencidos;
+- questões erradas;
+- erros recorrentes;
+- baixo desempenho;
+- dúvidas;
+- conteúdos antigos/não dominados que já possuem evidência de estudo.
+
+Modos:
+
+- 5 minutos;
+- 10 minutos;
+- 20 minutos;
+- Revisão de Véspera.
+
+A Revisão de Véspera não deve introduzir matéria nova. Só pode usar conteúdo já ativado/estudado, erros, flashcards vencidos e pontos fracos.
+
+Cada sessão congela a fila escolhida no início para evitar reordenação enquanto o aluno revisa.
+
+### Flashcards
+
+O conteúdo dos flashcards oficiais das aulas continua no GitHub e não deve ser duplicado no IndexedDB.
+
+Flashcards de aula são ativados quando a aula correspondente é aberta. Flashcards pessoais podem existir apenas localmente.
+
+Avaliações obrigatórias:
+
+- Again;
+- Hard;
+- Good;
+- Easy.
+
+Cada nova revisão deve persistir:
+
+- lastReviewed;
+- nextReview;
+- interval;
+- ease;
+- reviewCount;
+- correctStreak.
+
+Manter histórico completo de revisões. Backups antigos com o campo legado `nextReviewAt` devem continuar compatíveis.
+
+A heurística de repetição espaçada é local e transparente; não deve ser apresentada como modelo científico infalível.
+
+### Caderno de Erros
+
+Respostas incorretas do Question Engine e dos simulados entram automaticamente no mesmo Caderno de Erros.
+
+Registros novos preservam:
+
+- questionId;
+- pdCode;
+- date/criado em;
+- selectedAnswer;
+- correctAnswer;
+- attemptCount;
+- errorCount;
+- lastErrorAt;
+- resolved/resolvedAt;
+- recorrência.
+
+Estados de revisão:
+
+- Ainda tenho dúvida;
+- Entendi;
+- Revisar depois.
+
+Nenhum desses estados apaga o histórico. Se uma questão marcada como entendida for errada novamente, o erro deve ser reaberto automaticamente.
+
+Erros recorrentes e erros marcados como dúvida devem receber prioridade maior na Central de Revisão.
+
+### Persistência da V8
+
+A V8 reutiliza os stores locais existentes `flashcardReviews`, `flashcards`, `errors` e `studyPlans`. Não foi necessária migration de schema; `DB_VERSION` permanece 2.
+
+Testes obrigatórios da V8:
+
+- agendamento Again/Hard/Good/Easy;
+- compatibilidade com reviews legados;
+- histórico/persistência dos flashcards;
+- ativação de flashcards conforme aula estudada;
+- priorização da fila;
+- orçamento dos modos 5/10/20;
+- Revisão de Véspera sem conteúdo novo;
+- estados e reabertura do Caderno de Erros.
 
 ## PWA
 
