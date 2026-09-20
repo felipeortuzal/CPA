@@ -52,6 +52,7 @@ for (const code of terminalCodes) if (!definitionSet.has(code)) throw new Error(
 for (const code of definitionCodes) if (!module1Codes.has(code) || !terminalCodes.includes(code)) throw new Error(`Definição não corresponde a item terminal oficial: ${code}`)
 
 const sourceFile = fs.readFileSync(path.join(contentDir, 'lessons', 'sources.ts'), 'utf8')
-if (!sourceFile.includes("const verifiedAt='2026-09-14'") && !sourceFile.includes("const verifiedAt = '2026-09-14'")) throw new Error('Fontes das aulas não registram verifiedAt 2026-09-14')
+const expectedVerifiedAt = metadata.lastVerified
+if (!expectedVerifiedAt || !sourceFile.includes(`verifiedAt='${expectedVerifiedAt}'`)) throw new Error(`Fontes das aulas não registram verifiedAt ${expectedVerifiedAt}`)
 
 console.log(`CPA ${metadata.programVersion}: ${items.length} itens curriculares, 4 macrotemas, pesos ${weightSum}% e ${terminalCodes.length} aulas terminais do Macrotema 1 validadas.`)
