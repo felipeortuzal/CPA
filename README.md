@@ -195,6 +195,64 @@ Marcar um erro como entendido não apaga seu histórico. Se a mesma questão for
 
 A V8 reutiliza os stores `flashcardReviews`, `errors` e `studyPlans` já existentes. **Não foi necessária migration do IndexedDB**, então o progresso anterior é preservado.
 
+## Study Engine e Prontidão CPA — v0.9
+
+A V9 substitui o score simplificado da V7 por um motor de domínio mais conservador e baseado em múltiplas evidências.
+
+Por **PD Code**, o domínio 0–100 agora considera:
+
+- status da aula, sem tratar simples abertura como domínio;
+- mini quiz;
+- questões recentes, com peso maior para questões difíceis;
+- erros pendentes e recorrentes;
+- simulados, com peso maior para Modo Prova completo e recente;
+- revisões de flashcards;
+- recência da evidência e tempo desde revisão.
+
+Níveis centralizados:
+
+- 0–29: Fraco
+- 30–59: Em aprendizado
+- 60–79: Bom
+- 80–100: Dominado
+
+O motor mantém um estado separado de suficiência da amostra. Com pouca evidência, a interface mostra **Dados insuficientes** em vez de inventar uma pontuação precisa.
+
+### Falsa confiança
+
+Aula marcada como estudada/dominada não basta. Quando há prática suficiente e o desempenho continua baixo, o PD recebe o alerta:
+
+> Estudado, mas precisa de prática.
+
+Isso também aumenta sua prioridade na Central de Revisão.
+
+### Prontidão CPA
+
+O Dashboard possui um indicador **Prontidão CPA** de 0–100 apenas quando há dados mínimos. Ele combina:
+
+- cobertura do edital;
+- domínio dos PDs, ponderado pelos pesos oficiais 20/40/30/10;
+- simulados completos recentes;
+- desempenho recente;
+- consistência;
+- equilíbrio entre os macrotemas.
+
+Simulados completos recentes possuem peso maior. O texto obrigatório é:
+
+> Indicador interno baseado no seu desempenho na plataforma. Não é garantia de aprovação.
+
+Quando a amostra ainda é pequena, aparece **Dados insuficientes**.
+
+O Dashboard também mostra:
+
+- até 3 recomendações de estudo baseadas em dados reais;
+- ranking de pontos fracos;
+- falsa confiança;
+- cobertura com amostra suficiente;
+- média recente de Modo Prova.
+
+A V9 continua 100% local/offline e não usa IA externa, API paga ou backend. Não foi necessária migration do IndexedDB; `DB_VERSION` permanece 2.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -216,7 +274,7 @@ npm run build
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine, repetição espaçada, fila de revisão e Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine V9, prontidão, falsa confiança, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 

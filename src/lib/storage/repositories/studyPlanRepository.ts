@@ -6,14 +6,22 @@ export interface PersistedStudyPlan {
   generatedAt: string
   overallMastery: number
   coveragePercent: number
-  readinessScore: number
+  sufficientCoveragePercent: number
+  readinessScore: number | null
+  readinessDataStatus: StudyEngineSnapshot['readinessDataStatus']
   readinessLabel: string
+  readinessMessage: string
+  readinessBreakdown: StudyEngineSnapshot['readinessBreakdown']
   readyForExam: boolean
   recentOfficialExamAverage: number | null
+  officialExamCount: number
+  recentPracticeAccuracy: number | null
   dueReviews: number
   recommendedMinutes: number
   today: StudyEngineSnapshot['today']
+  recommendations: StudyEngineSnapshot['recommendations']
   macroSummary: StudyEngineSnapshot['macroSummary']
+  weakTopics: StudyEngineSnapshot['weakTopics']
   weakPdCodes: string[]
 }
 
@@ -22,18 +30,12 @@ function dateKey(value:string){return value.slice(0,10)}
 export async function saveDailyStudyPlan(snapshot:StudyEngineSnapshot){
   const db=await getDatabase()
   const payload:PersistedStudyPlan={
-    generatedAt:snapshot.generatedAt,
-    overallMastery:snapshot.overallMastery,
-    coveragePercent:snapshot.coveragePercent,
-    readinessScore:snapshot.readinessScore,
-    readinessLabel:snapshot.readinessLabel,
-    readyForExam:snapshot.readyForExam,
-    recentOfficialExamAverage:snapshot.recentOfficialExamAverage,
-    dueReviews:snapshot.dueReviews,
-    recommendedMinutes:snapshot.recommendedMinutes,
-    today:snapshot.today,
-    macroSummary:snapshot.macroSummary,
-    weakPdCodes:snapshot.weakPdCodes,
+    generatedAt:snapshot.generatedAt,overallMastery:snapshot.overallMastery,coveragePercent:snapshot.coveragePercent,
+    sufficientCoveragePercent:snapshot.sufficientCoveragePercent,readinessScore:snapshot.readinessScore,readinessDataStatus:snapshot.readinessDataStatus,
+    readinessLabel:snapshot.readinessLabel,readinessMessage:snapshot.readinessMessage,readinessBreakdown:snapshot.readinessBreakdown,
+    readyForExam:snapshot.readyForExam,recentOfficialExamAverage:snapshot.recentOfficialExamAverage,officialExamCount:snapshot.officialExamCount,
+    recentPracticeAccuracy:snapshot.recentPracticeAccuracy,dueReviews:snapshot.dueReviews,recommendedMinutes:snapshot.recommendedMinutes,
+    today:snapshot.today,recommendations:snapshot.recommendations,macroSummary:snapshot.macroSummary,weakTopics:snapshot.weakTopics,weakPdCodes:snapshot.weakPdCodes,
   }
   const record:StudyPlanRecord={id:`daily:${dateKey(snapshot.generatedAt)}`,payload,updatedAt:snapshot.generatedAt}
   await db.put('studyPlans',record)

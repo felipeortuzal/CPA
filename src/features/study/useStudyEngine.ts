@@ -4,6 +4,7 @@ import { macro1LessonMap } from '../../../content/cpa/lessons/macro-1'
 import { buildStudyEngineSnapshot } from '../../lib/study-engine/engine'
 import type { StudyEngineSnapshot } from '../../lib/study-engine/types'
 import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
+import { getActiveFlashcards, getFlashcardReviews } from '../../lib/storage/repositories/flashcardRepository'
 import { getAllLessonProgress, getQuizAttempts } from '../../lib/storage/repositories/learningRepository'
 import { getQuestionAttempts, getQuestionErrors } from '../../lib/storage/repositories/questionRepository'
 import { getSimulations } from '../../lib/storage/repositories/simulationRepository'
@@ -11,6 +12,7 @@ import { saveDailyStudyPlan } from '../../lib/storage/repositories/studyPlanRepo
 import { useStudent } from '../profile/StudentProvider'
 
 const questionPdCodes=new Set(cpaQuestions.map((question)=>question.pdCode))
+const questionDifficultyById=new Map(cpaQuestions.map((question)=>[question.id,question.difficulty]))
 const lessonPdCodes=new Set(macro1LessonMap.keys())
 
 export function useStudyEngine(){
@@ -20,11 +22,12 @@ export function useStudyEngine(){
   const load=useCallback(async()=>{
     if(!profile){setSnapshot(null);setLoading(false);return}
     setLoading(true)
-    const [lessonProgress,quizAttempts,questionAttempts,simulations,errors]=await Promise.all([
-      getAllLessonProgress(),getQuizAttempts(),getQuestionAttempts(),getSimulations(),getQuestionErrors(true),
+    const [lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcards,flashcardReviews]=await Promise.all([
+      getAllLessonProgress(),getQuizAttempts(),getQuestionAttempts(),getSimulations(),getQuestionErrors(true),getActiveFlashcards(),getFlashcardReviews(),
     ])
+    const flashcardPdById=new Map(flashcards.map((card)=>[card.id,card.pdCode]))
     const next=buildStudyEngineSnapshot({
-      lessonProgress,quizAttempts,questionAttempts,simulations,errors,
+      lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcardReviews,flashcardPdById,questionDifficultyById,
       lessonPdCodes,questionPdCodes,dailyGoalMinutes:profile.dailyGoalMinutes,
     })
     setSnapshot(next)

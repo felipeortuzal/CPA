@@ -606,6 +606,118 @@ Testes obrigatórios da V8:
 - Revisão de Véspera sem conteúdo novo;
 - estados e reabertura do Caderno de Erros.
 
+## Study Engine e Prontidão para a Prova — implementado na v0.9
+
+A V9 refina o Study Engine sem IA externa, sem API e sem backend. Todo cálculo é determinístico, local e baseado no histórico real do IndexedDB.
+
+### Domínio por PD
+
+Cada PD mantém score interno de domínio 0–100, confiança e suficiência da amostra.
+
+Evidências permitidas:
+
+- aula/progresso;
+- mini quiz;
+- questões, com peso por dificuldade e recência;
+- erros e recorrência;
+- simulados;
+- flashcards;
+- tempo desde a última evidência/revisão.
+
+Abrir uma aula, concluir uma aula ou obter um único acerto nunca pode produzir domínio alto sozinho.
+
+Níveis obrigatórios e centralizados:
+
+- 0–29: Fraco;
+- 30–59: Em aprendizado;
+- 60–79: Bom;
+- 80–100: Dominado.
+
+O motor deve distinguir `insufficient`, `partial` e `sufficient`. Quando a amostra for insuficiente, a UI deve escrever **Dados insuficientes** em vez de apresentar uma precisão artificial.
+
+### Dificuldade, recência e simulados
+
+Questões difíceis têm peso maior que questões médias e fáceis na evidência prática.
+
+Evidências recentes têm peso maior que evidências antigas.
+
+Respostas de simulados entram no domínio por PD. Modo Prova completo deve ter peso maior do que simulados curtos, e resultados completos recentes devem ter prioridade na Prontidão CPA.
+
+### Falsa confiança
+
+Detectar quando o aluno marcou/atingiu aula como estudada ou dominada, mas possui amostra prática suficiente com baixo desempenho.
+
+Mensagem obrigatória:
+
+> Estudado, mas precisa de prática.
+
+Falsa confiança deve aumentar a prioridade de treino/revisão e aparecer no Dashboard/Central de Revisão.
+
+### Prontidão CPA
+
+Criar indicador `Prontidão CPA` 0–100 apenas quando houver amostra mínima.
+
+Fatores:
+
+- cobertura do edital;
+- domínio dos PDs;
+- simulados completos;
+- desempenho recente;
+- consistência;
+- equilíbrio entre os macrotemas.
+
+O domínio geral continua ponderado pelos pesos oficiais:
+
+- Tema 1: 20%;
+- Tema 2: 40%;
+- Tema 3: 30%;
+- Tema 4: 10%.
+
+Se os dados forem insuficientes, não inventar score: mostrar **Dados insuficientes**.
+
+Disclaimer obrigatório:
+
+> Indicador interno baseado no seu desempenho na plataforma. Não é garantia de aprovação.
+
+O indicador serve para orientar estudo e nunca deve ser descrito como previsão de aprovação.
+
+### Recomendações e fraquezas
+
+Gerar no máximo **3 recomendações** por vez, sempre justificadas por dados reais.
+
+Exemplos de justificativa aceitável:
+
+- baixo acerto recente;
+- erros recorrentes;
+- falsa confiança;
+- revisão vencida;
+- falta de prática suficiente;
+- PD relevante ainda sem evidência.
+
+Manter ranking de pontos fracos com PD, macrotema, domínio, amostra, acurácia quando houver, erros e motivo.
+
+### Persistência da V9
+
+Persistir snapshot diário compacto no store `studyPlans`, incluindo prontidão, breakdown, recomendações e fraquezas.
+
+A V9 reutiliza os stores existentes. Não foi necessária migration; `DB_VERSION` permanece 2.
+
+### Testes obrigatórios da V9
+
+Cobrir, no mínimo:
+
+- estado vazio com Dados insuficientes;
+- aula isolada sem domínio artificial;
+- falsa confiança;
+- peso maior de questão difícil;
+- efeito moderado de flashcards;
+- peso maior de simulado completo recente;
+- faixas Fraco / Em aprendizado / Bom / Dominado;
+- máximo de 3 recomendações;
+- prontidão somente com amostra suficiente;
+- compatibilidade com a Central de Revisão V8;
+- persistência do snapshot diário.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.
