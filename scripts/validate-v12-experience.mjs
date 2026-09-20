@@ -22,7 +22,8 @@ for(const unsafe of ['git reset --hard','git clean -f','rd /s','rmdir /s','del /
   if(files.update.toLowerCase().includes(unsafe.toLowerCase()))errors.push(`update-cpa.bat contains unsafe operation: ${unsafe}`)
 }
 
-for(const needle of ["cacheId: 'cpa-study-v12'","cleanupOutdatedCaches: true","navigateFallback: 'index.html'","registerType: 'autoUpdate'"])requireText('vite.config.ts',files.vite,needle)
+if(!/cacheId:\s*['"]cpa-study-v\d+['"]/.test(files.vite))errors.push('vite.config.ts: missing versioned cpa-study-vN cacheId')
+for(const needle of ["cleanupOutdatedCaches: true","navigateFallback: 'index.html'","registerType: 'autoUpdate'"])requireText('vite.config.ts',files.vite,needle)
 requireText('src/App.tsx',files.app,"lazy(() => import(")
 requireText('src/App.tsx',files.app,'AppErrorBoundary')
 requireText('src/layouts/AppLayout.tsx',files.layout,'OfflineBanner')
