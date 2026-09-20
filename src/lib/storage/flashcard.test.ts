@@ -1,7 +1,7 @@
 import 'fake-indexeddb/auto'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cpaLessonFlashcards } from '../../../content/cpa/flashcards'
-import { macro1Lessons } from '../../../content/cpa/lessons/macro-1'
+import { cpaLessons } from '../../../content/cpa/lessons'
 import { createBackup, resetAllProgress } from './backup'
 import { closeDatabase } from './database'
 import { createCustomFlashcard, getActiveFlashcards, getFlashcardReviews, reviewFlashcard } from './repositories/flashcardRepository'
@@ -13,7 +13,7 @@ describe('V8 flashcards local-first',()=>{
   afterEach(async()=>{await closeDatabase()})
 
   it('ativa somente flashcards de aulas abertas e cartões pessoais',async()=>{
-    const lesson=macro1Lessons[0]
+    const lesson=cpaLessons[0]
     expect(await getActiveFlashcards()).toHaveLength(0)
     await markLessonOpened(lesson.pdCode)
     const lessonCards=cpaLessonFlashcards.filter((card)=>card.pdCode===lesson.pdCode)
@@ -23,7 +23,7 @@ describe('V8 flashcards local-first',()=>{
   })
 
   it('salva histórico e métricas de repetição espaçada',async()=>{
-    const lesson=macro1Lessons[0]
+    const lesson=cpaLessons[0]
     await markLessonOpened(lesson.pdCode)
     const card=(await getActiveFlashcards())[0]
     await reviewFlashcard(card.id,'good',new Date('2026-09-20T12:00:00Z'))

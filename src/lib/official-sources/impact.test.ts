@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import rawSources from '../../../content/sources.json'
 import { cpaCurriculum } from '../../../content/cpa/curriculum'
-import { macro1Lessons } from '../../../content/cpa/lessons/macro-1'
+import { cpaLessons } from '../../../content/cpa/lessons'
 import { cpaQuestions } from '../../../content/cpa/questions'
 import { officialSourceById, officialSourceImpactById, officialSources } from './impact'
 
@@ -16,7 +16,7 @@ describe('V11 fontes oficiais e mapa de impacto',()=>{
 
   it('cobre toda fonte usada pelas aulas e questões',()=>{
     const used=new Set<string>()
-    for(const lesson of macro1Lessons)for(const source of lesson.officialSources)used.add(source.id)
+    for(const lesson of cpaLessons)for(const source of lesson.officialSources)used.add(source.id)
     for(const question of cpaQuestions)for(const source of question.officialSources)used.add(source.id)
     const missing=[...used].filter((id)=>!officialSourceById.has(id))
     expect(missing).toEqual([])
@@ -34,7 +34,7 @@ describe('V11 fontes oficiais e mapa de impacto',()=>{
   it('mapeia guia e caderno oficiais para o banco autoral sem copiar conteúdo',()=>{
     expect(officialSourceImpactById.get('ANBIMA_QUESTION_GUIDE')?.questionCount).toBe(cpaQuestions.length)
     expect(officialSourceImpactById.get('ANBIMA_QUESTION_BOOK_CPA')?.questionCount).toBe(cpaQuestions.length)
-    expect(cpaQuestions).toHaveLength(100)
+    expect(cpaQuestions.length).toBeGreaterThanOrEqual(500)
   })
 
   it('mantém a política sem reescrita automática e sem dependência de rede para estudar',()=>{

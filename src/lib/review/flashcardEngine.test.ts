@@ -4,9 +4,9 @@ import { getLatestFlashcardState, scheduleFlashcardReview } from './flashcardEng
 import type { FlashcardReviewRecord } from '../storage/types'
 
 describe('V8 flashcard spaced repetition',()=>{
-  it('gera IDs únicos para os 420 flashcards das 105 aulas',()=>{
-    expect(cpaLessonFlashcards).toHaveLength(420)
-    expect(new Set(cpaLessonFlashcards.map((card)=>card.id)).size).toBe(420)
+  it('gera IDs únicos para os flashcards de todas as 445 aulas',()=>{
+    expect(cpaLessonFlashcards).toHaveLength(1780)
+    expect(new Set(cpaLessonFlashcards.map((card)=>card.id)).size).toBe(1780)
   })
 
   it('considera cartão sem histórico como vencido e novo',()=>{

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AlertCircle, BookOpen, CheckCircle2, CircleHelp, Heart, Search, Star } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { macro1LessonMap, macro1Lessons } from '../../content/cpa/lessons/macro-1'
+import { cpaLessonMap, cpaLessons, lessonGroups } from '../../content/cpa/lessons'
 import type { CPALesson } from '../../content/cpa/lessons/types'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -10,8 +10,6 @@ import { Progress } from '../components/ui/Progress'
 import { useStudyTimer } from '../hooks/useStudyTimer'
 import { getLessonProgress, isLessonFavorite, markLessonOpened, markLessonStudied, saveQuizAttempt, toggleLessonDoubt, toggleLessonFavorite } from '../lib/storage/repositories/learningRepository'
 import type { LessonProgressRecord } from '../lib/storage/types'
-
-const verified = '14/09/2026'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   return <section className="scroll-mt-24"><h2 className="mb-3 text-lg font-bold tracking-tight">{title}</h2>{children}</section>
@@ -73,15 +71,13 @@ function MiniQuiz({ lesson, progress, onSaved }: { lesson: CPALesson; progress: 
 function LessonSidebar({ lesson }: { lesson: CPALesson }) {
   const [query, setQuery] = useState('')
   const normalized = query.trim().toLowerCase()
-  const items = normalized ? macro1Lessons.filter((item) => [item.pdCode, item.title, item.oneSentence, ...item.searchTerms].join(' ').toLowerCase().includes(normalized)) : macro1Lessons
-  const groups = ['1.1', '1.2', '1.3', '1.4']
-
+  const items = normalized ? cpaLessons.filter((item) => [item.pdCode, item.title, item.oneSentence, ...item.searchTerms].join(' ').toLowerCase().includes(normalized)) : cpaLessons
   return <aside className="space-y-4 xl:sticky xl:top-24 xl:max-h-[calc(100vh-7rem)] xl:overflow-auto">
     <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar aula..." className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs outline-none focus:border-emerald-400 dark:border-white/10 dark:bg-white/5" /></div>
-    {groups.map((group) => {
-      const groupItems = items.filter((item) => item.pdCode.startsWith(`${group}.`))
+    {lessonGroups.map((group) => {
+      const groupItems = items.filter((item) => item.pdCode.startsWith(`${group.code}.`) || item.pdCode === group.code)
       if (!groupItems.length) return null
-      return <div key={group}><p className="mb-2 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-300">{group}</p><div className="space-y-1">{groupItems.map((item) => <Link key={item.pdCode} to={`/conteudos/${item.pdCode}`} className={`block rounded-lg px-2.5 py-2 text-xs leading-4 transition ${item.pdCode === lesson.pdCode ? 'bg-emerald-400/15 font-semibold text-emerald-800 dark:text-emerald-200' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'}`}><span className="mr-1.5 font-mono font-bold">{item.pdCode}</span>{item.title}</Link>)}</div></div>
+      return <div key={group.code}><p className="mb-2 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-300">{group.code} · {group.title}</p><div className="space-y-1">{groupItems.map((item) => <Link key={item.pdCode} to={`/conteudos/${item.pdCode}`} className={`block rounded-lg px-2.5 py-2 text-xs leading-4 transition ${item.pdCode === lesson.pdCode ? 'bg-emerald-400/15 font-semibold text-emerald-800 dark:text-emerald-200' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'}`}><span className="mr-1.5 font-mono font-bold">{item.pdCode}</span>{item.title}</Link>)}</div></div>
     })}
   </aside>
 }
@@ -89,10 +85,10 @@ function LessonSidebar({ lesson }: { lesson: CPALesson }) {
 export function LessonPage() {
   const { pdCode } = useParams()
   const navigate = useNavigate()
-  const lesson = pdCode ? macro1LessonMap.get(pdCode) : undefined
-  const index = lesson ? macro1Lessons.findIndex((item) => item.pdCode === lesson.pdCode) : -1
-  const previous = index > 0 ? macro1Lessons[index - 1] : null
-  const next = index >= 0 && index < macro1Lessons.length - 1 ? macro1Lessons[index + 1] : null
+  const lesson = pdCode ? cpaLessonMap.get(pdCode) : undefined
+  const index = lesson ? cpaLessons.findIndex((item) => item.pdCode === lesson.pdCode) : -1
+  const previous = index > 0 ? cpaLessons[index - 1] : null
+  const next = index >= 0 && index < cpaLessons.length - 1 ? cpaLessons[index + 1] : null
   const [progress, setProgress] = useState<LessonProgressRecord | null>(null)
   const [favorite, setFavorite] = useState(false)
   const [busy, setBusy] = useState(false)
@@ -107,9 +103,9 @@ export function LessonPage() {
     return () => { active = false }
   }, [lesson])
 
-  const position = useMemo(() => index >= 0 ? `${index + 1} de ${macro1Lessons.length}` : '', [index])
+  const position = useMemo(() => index >= 0 ? `${index + 1} de ${cpaLessons.length}` : '', [index])
 
-  if (!lesson) return <div className="mx-auto max-w-3xl"><Card><div className="py-10 text-center"><AlertCircle className="mx-auto h-8 w-8 text-amber-500" /><h1 className="mt-3 text-xl font-bold">Aula não encontrada</h1><p className="mt-2 text-sm text-slate-500">Nesta etapa existem aulas completas apenas para os pontos terminais do Macrotema 1.</p><Button className="mt-5" onClick={() => navigate('/conteudos')}>Voltar aos conteúdos</Button></div></Card></div>
+  if (!lesson) return <div className="mx-auto max-w-3xl"><Card><div className="py-10 text-center"><AlertCircle className="mx-auto h-8 w-8 text-amber-500" /><h1 className="mt-3 text-xl font-bold">Aula não encontrada</h1><p className="mt-2 text-sm text-slate-500">Aulas completas estão disponíveis para todos os 445 PDs terminais da CPA.</p><Button className="mt-5" onClick={() => navigate('/conteudos')}>Voltar aos conteúdos</Button></div></Card></div>
 
   const lessonPdCode = lesson.pdCode
   async function study() { setBusy(true); try { setProgress(await markLessonStudied(lessonPdCode)) } finally { setBusy(false) } }
@@ -118,7 +114,7 @@ export function LessonPage() {
   return <div className="mx-auto max-w-7xl"><div className="grid gap-6 xl:grid-cols-[250px_minmax(0,1fr)]">
     <LessonSidebar lesson={lesson} />
     <div className="min-w-0 space-y-6">
-      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>PD {lesson.pdCode}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">Verificado em: {verified} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
+      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>PD {lesson.pdCode}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">Verificado em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
 
       <Card className="border-emerald-400/25 bg-emerald-400/[0.06]"><p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-300">Em uma frase</p><p className="mt-3 text-lg font-semibold leading-7">{lesson.oneSentence}</p></Card>
 
@@ -137,7 +133,7 @@ export function LessonPage() {
 
       <MiniQuiz lesson={lesson} progress={progress} onSaved={setProgress} />
 
-      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">Última verificação: {verified}</p></div>)}</div></Card>
+      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">Última verificação: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${source.verifiedAt}T12:00:00`))}</p></div>)}</div></Card>
 
       <Card className="space-y-4">
         <div className="flex flex-wrap gap-3">

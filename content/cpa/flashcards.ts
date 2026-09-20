@@ -1,4 +1,4 @@
-import { macro1Lessons } from './lessons/macro-1'
+import { cpaLessons } from './lessons'
 
 export interface CPAFlashcard {
   id: string
@@ -9,7 +9,7 @@ export interface CPAFlashcard {
   source: 'lesson' | 'custom'
 }
 
-export const cpaLessonFlashcards: CPAFlashcard[] = macro1Lessons.flatMap((lesson) =>
+export const cpaLessonFlashcards: CPAFlashcard[] = cpaLessons.flatMap((lesson) =>
   lesson.flashcards.map((card, index) => ({
     id: `lesson:${lesson.pdCode}:${index + 1}`,
     certification: 'CPA' as const,

@@ -3,7 +3,7 @@ import { macro1Definitions } from './macro-1-definitions'
 import { lessonSources, type LessonSourceId } from './sources'
 import type { CPALesson, LessonComparison, LessonFormula } from './types'
 
-const verifiedAt='2026-09-14'
+const verifiedAt='2026-09-20'
 const formulas:Record<string,LessonFormula[]>={
 '1.3.1':[{name:'Relação exata entre taxa nominal, real e inflação',expression:'1 + i_nominal = (1 + i_real) × (1 + inflação)',explanation:'Para isolar a taxa real, divida 1 + taxa nominal por 1 + inflação e subtraia 1.'}],
 '1.3.2':[{name:'Juros simples',expression:'M = C × (1 + i × n)',explanation:'O juro incide sempre sobre o capital inicial C.'},{name:'Juros compostos',expression:'M = C × (1 + i)^n',explanation:'Cada período incorpora os juros acumulados ao capital.'}],

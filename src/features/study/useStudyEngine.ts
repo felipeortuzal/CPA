@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { cpaQuestions } from '../../../content/cpa/questions'
-import { macro1LessonMap } from '../../../content/cpa/lessons/macro-1'
+import { cpaLessonMap } from '../../../content/cpa/lessons'
 import { buildStudyEngineSnapshot } from '../../lib/study-engine/engine'
 import type { StudyEngineSnapshot } from '../../lib/study-engine/types'
 import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
@@ -13,7 +13,7 @@ import { useStudent } from '../profile/StudentProvider'
 
 const questionPdCodes=new Set(cpaQuestions.map((question)=>question.pdCode))
 const questionDifficultyById=new Map(cpaQuestions.map((question)=>[question.id,question.difficulty]))
-const lessonPdCodes=new Set(macro1LessonMap.keys())
+const lessonPdCodes=new Set(cpaLessonMap.keys())
 
 export function useStudyEngine(){
   const {profile}=useStudent()

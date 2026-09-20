@@ -1,5 +1,7 @@
 import type { LessonSource } from './types'
-const verifiedAt='2026-09-14'
+
+const verifiedAt='2026-09-20'
+
 export const lessonSources={
   ANBIMA_PD:{id:'ANBIMA_PD',institution:'ANBIMA',title:'Programa Detalhado CPA — versão 1.2',url:'https://www.anbima.com.br/data/files/6A/52/6F/A1/BED73910B07B2739B82BA2A8/Programa-Detalhado-CPA-ANBIMA.pdf',verifiedAt},
   ANBIMA_DISTRIBUICAO:{id:'ANBIMA_DISTRIBUICAO',institution:'ANBIMA',title:'Código de Distribuição de Produtos de Investimento',url:'https://www.anbima.com.br/pt_br/autorregular/codigos/distribuicao-de-produtos-de-investimento.htm',verifiedAt},
@@ -10,15 +12,34 @@ export const lessonSources={
   BCB_CAMBIO:{id:'BCB_CAMBIO',institution:'Banco Central do Brasil',title:'Câmbio e capitais internacionais',url:'https://www.bcb.gov.br/estabilidadefinanceira/cambio',verifiedAt},
   BCB_ESTABILIDADE:{id:'BCB_ESTABILIDADE',institution:'Banco Central do Brasil',title:'Estabilidade financeira',url:'https://www.bcb.gov.br/estabilidadefinanceira',verifiedAt},
   BCB_BASILEIA:{id:'BCB_BASILEIA',institution:'Banco Central do Brasil',title:'Recomendações de Basileia',url:'https://www.bcb.gov.br/estabilidadefinanceira/recomendacoesbasileia',verifiedAt},
+  BCB_PIX:{id:'BCB_PIX',institution:'Banco Central do Brasil',title:'Pix',url:'https://www.bcb.gov.br/estabilidadefinanceira/pix',verifiedAt},
+  BCB_SCR:{id:'BCB_SCR',institution:'Banco Central do Brasil',title:'Sistema de Informações de Créditos (SCR)',url:'https://www.bcb.gov.br/estabilidadefinanceira/scr',verifiedAt},
+  BCB_OPEN_FINANCE:{id:'BCB_OPEN_FINANCE',institution:'Banco Central do Brasil',title:'Open Finance',url:'https://www.bcb.gov.br/estabilidadefinanceira/cliente-open-finance',verifiedAt},
+  BCB_DREX:{id:'BCB_DREX',institution:'Banco Central do Brasil',title:'Drex',url:'https://www.bcb.gov.br/estabilidadefinanceira/drex',verifiedAt},
+  BCB_COE:{id:'BCB_COE',institution:'Banco Central do Brasil',title:'Resolução CMN nº 5.166/2024 — emissão de COE',url:'https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?numero=5166&tipo=Resolu%C3%A7%C3%A3o+CMN',verifiedAt},
   CMN:{id:'CMN',institution:'Ministério da Fazenda',title:'Conselho Monetário Nacional',url:'https://www.gov.br/fazenda/pt-br/assuntos/cmn',verifiedAt},
   CVM:{id:'CVM',institution:'Comissão de Valores Mobiliários',title:'Sobre a CVM',url:'https://www.gov.br/cvm/pt-br/acesso-a-informacao-cvm/institucional',verifiedAt},
   CVM_RES30:{id:'CVM_RES30',institution:'Comissão de Valores Mobiliários',title:'Resolução CVM 30',url:'https://conteudo.cvm.gov.br/legislacao/resolucoes/resol030.html',verifiedAt},
+  CVM_175:{id:'CVM_175',institution:'Comissão de Valores Mobiliários',title:'Resolução CVM 175 — texto consolidado',url:'https://conteudo.cvm.gov.br/legislacao/resolucoes/resol175.html',verifiedAt},
+  CVM_COE:{id:'CVM_COE',institution:'Comissão de Valores Mobiliários',title:'Resolução CVM 8 — ofertas de COE',url:'https://conteudo.cvm.gov.br/legislacao/resolucoes/resol008.html',verifiedAt},
+  CVM_62:{id:'CVM_62',institution:'Comissão de Valores Mobiliários',title:'Resolução CVM 62 — práticas ilícitas no mercado',url:'https://conteudo.cvm.gov.br/legislacao/resolucoes/resol062.html',verifiedAt},
+  CVM_ESG:{id:'CVM_ESG',institution:'Comissão de Valores Mobiliários',title:'Finanças sustentáveis — regulação',url:'https://www.gov.br/cvm/pt-br/assuntos/financas-sustentaveis/regulacao',verifiedAt},
   SUSEP:{id:'SUSEP',institution:'Superintendência de Seguros Privados',title:'Institucional',url:'https://www.gov.br/susep/pt-br/acesso-a-informacao/institucional',verifiedAt},
+  SUSEP_PREVIDENCIA:{id:'SUSEP_PREVIDENCIA',institution:'Superintendência de Seguros Privados',title:'PGBL e VGBL',url:'https://www.gov.br/susep/pt-br/assuntos/meu-futuro-seguro/seguros-previdencia-e-capitalizacao/providencia-complementar-aberta/pgbl-vgbl',verifiedAt},
   PREVIC:{id:'PREVIC',institution:'Superintendência Nacional de Previdência Complementar',title:'Previdência complementar fechada',url:'https://www.gov.br/previc/pt-br',verifiedAt},
   CNPC:{id:'CNPC',institution:'Ministério da Previdência Social',title:'Conselho Nacional de Previdência Complementar',url:'https://www.gov.br/previdencia/pt-br/assuntos/previdencia-complementar/conselho-nacional-de-previdencia-complementar',verifiedAt},
+  FGC:{id:'FGC',institution:'Fundo Garantidor de Créditos',title:'Sobre a garantia FGC',url:'https://www.fgc.org.br/sobre-garantia-fgc',verifiedAt},
+  TESOURO_DIRETO:{id:'TESOURO_DIRETO',institution:'Tesouro Nacional',title:'Tesouro Direto — produtos e regras',url:'https://www.tesourodireto.com.br/produtos/nossos-produtos',verifiedAt},
+  RECEITA_2026:{id:'RECEITA_2026',institution:'Receita Federal',title:'Tributação de 2026 — tabelas e rendimentos de capital',url:'https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda/tabelas/2026',verifiedAt},
   B3:{id:'B3',institution:'B3',title:'Infraestrutura do mercado financeiro',url:'https://www.b3.com.br/pt_br/b3/institucional/',verifiedAt},
   IBGE:{id:'IBGE',institution:'Instituto Brasileiro de Geografia e Estatística',title:'Inflação e indicadores econômicos',url:'https://www.ibge.gov.br/explica/inflacao.php',verifiedAt},
+  ANPD_LGPD:{id:'ANPD_LGPD',institution:'Autoridade Nacional de Proteção de Dados',title:'Perguntas frequentes — LGPD',url:'https://www.gov.br/anpd/pt-br/acesso-a-informacao/perguntas-frequentes',verifiedAt},
+  PLANALTO_LGPD:{id:'PLANALTO_LGPD',institution:'Presidência da República',title:'Lei nº 13.709/2018 — LGPD',url:'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm',verifiedAt},
   PLANALTO_LRF:{id:'PLANALTO_LRF',institution:'Presidência da República',title:'Lei Complementar nº 101/2000 — Lei de Responsabilidade Fiscal',url:'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp101.htm',verifiedAt},
-  PLANALTO_LIBERDADE:{id:'PLANALTO_LIBERDADE',institution:'Presidência da República',title:'Lei nº 13.874/2019 — Liberdade Econômica',url:'https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13874.htm',verifiedAt}
+  PLANALTO_LIBERDADE:{id:'PLANALTO_LIBERDADE',institution:'Presidência da República',title:'Lei nº 13.874/2019 — Liberdade Econômica',url:'https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2019/lei/l13874.htm',verifiedAt},
+  PLANALTO_AML:{id:'PLANALTO_AML',institution:'Presidência da República',title:'Lei nº 9.613/1998 — lavagem de dinheiro',url:'https://www.planalto.gov.br/ccivil_03/leis/l9613.htm',verifiedAt},
+  PLANALTO_SIGILO:{id:'PLANALTO_SIGILO',institution:'Presidência da República',title:'Lei Complementar nº 105/2001 — sigilo das operações financeiras',url:'https://www.planalto.gov.br/ccivil_03/leis/lcp/lcp105.htm',verifiedAt},
+  PLANALTO_MERCADO:{id:'PLANALTO_MERCADO',institution:'Presidência da República',title:'Lei nº 6.385/1976 — mercado de valores mobiliários',url:'https://www.planalto.gov.br/ccivil_03/leis/l6385.htm',verifiedAt},
 } satisfies Record<string,LessonSource>
+
 export type LessonSourceId=keyof typeof lessonSources

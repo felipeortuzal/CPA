@@ -1,6 +1,6 @@
 import rawManifest from '../../../content/sources.json'
 import { cpaCurriculum } from '../../../content/cpa/curriculum'
-import { macro1Lessons } from '../../../content/cpa/lessons/macro-1'
+import { cpaLessons } from '../../../content/cpa/lessons'
 import { cpaQuestions } from '../../../content/cpa/questions'
 
 export type OfficialSourceStatus='verified'|'review_required'
@@ -59,7 +59,7 @@ function sortPdCodes(values:string[]){
 
 export function buildOfficialSourceImpacts():OfficialSourceImpact[]{
   return officialSources.map((source)=>{
-    const directLessons=macro1Lessons.filter((lesson)=>lesson.officialSources.some((item)=>item.id===source.id))
+    const directLessons=cpaLessons.filter((lesson)=>lesson.officialSources.some((item)=>item.id===source.id))
     const directQuestions=questionDesignSources.has(source.id)
       ?cpaQuestions
       :cpaQuestions.filter((question)=>question.officialSources.some((item)=>item.id===source.id))
