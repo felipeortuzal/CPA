@@ -37,7 +37,7 @@ describe('V8 flashcards local-first',()=>{
     expect(rows[1].correctStreak).toBe(2)
     expect(rows[1].ease).toBeGreaterThan(2.5)
     const backup=await createBackup()
-    const backedUp=backup.flashcardReviews.filter((row)=>row.flashcardId===card.id)
+    const backedUp=backup.flashcardReviews.filter((row)=>row.flashcardId===card.id).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt))
     expect(backedUp).toHaveLength(2)
     expect(backedUp[1].nextReview).toBe(rows[1].nextReview)
     expect(backedUp[1].correctStreak).toBe(2)
