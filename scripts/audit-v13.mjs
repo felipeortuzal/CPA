@@ -66,7 +66,7 @@ const codeFiles=(await walk('src')).filter((file)=>/\.(ts|tsx)$/.test(file))
 const scriptFiles=(await walk('scripts')).filter((file)=>/\.(mjs|js)$/.test(file))
 for(const file of [...codeFiles,...scriptFiles]){
   const content=await read(file)
-  if(/\bTODO\b|\bFIXME\b/.test(content))failures.push(`${file}: TODO/FIXME remains`)
+  if(/\/\/\s*(?:TODO|FIXME)\b|\/\*\s*(?:TODO|FIXME)\b|^\s*\*\s*(?:TODO|FIXME)\b/m.test(content))failures.push(`${file}: TODO/FIXME comment remains`)
   if(file.startsWith('src/')&&/VITE_SUPABASE|createClient\(|firebase/i.test(content))failures.push(`${file}: legacy remote-backend reference remains`)
 }
 for(const file of [
