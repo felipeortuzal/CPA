@@ -123,7 +123,7 @@ function recommendationFor(item:PDMastery,macroWeight:number):StudyRecommendatio
   const route=kind==='recover_error'||kind==='practice'
     ?`/questoes?pd=${encodeURIComponent(item.pdCode)}`
     :`/conteudos/${encodeURIComponent(item.pdCode)}`
-  return{pdCode:item.pdCode,title:item.title,macroCode:item.macroCode,kind,score,priority,reason,targetMinutes,route}
+  return{pdCode:item.pdCode,title:item.title,macroCode:item.macroCode,kind,score:item.score,priority,reason,targetMinutes,route}
 }
 
 function readinessLabel(score:number){
