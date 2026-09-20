@@ -606,6 +606,52 @@ Testes obrigatórios da V8:
 - Revisão de Véspera sem conteúdo novo;
 - estados e reabertura do Caderno de Erros.
 
+## Política de CI e commits — obrigatória a partir da V9
+
+Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.
+
+Evitar fazer push de estados intermediários quebrados. Arquivos que dependem uns dos outros devem ser implementados e validados em conjunto antes do commit/push.
+
+Antes de **cada push**, executar localmente todos os checks relevantes disponíveis no projeto, incluindo no mínimo:
+
+- `npm test`
+- `npm run typecheck`
+- `npm run build`
+
+E, quando existirem/aplicarem:
+
+- `npm run lint`
+- `npm run validate:curriculum`
+- `npm run validate:questions`
+- demais scripts de validação adicionados por versões futuras
+
+Se qualquer check falhar:
+
+1. não fazer push ainda;
+2. corrigir a causa real;
+3. executar novamente a suíte relevante;
+4. só então commitar e enviar.
+
+Evitar o padrão:
+
+`commit A incompleto → CI falha → commit B completa dependência → CI falha → commit C corrige`.
+
+Preferir:
+
+`implementar conjunto dependente localmente → testar → corrigir → commit funcional → push`.
+
+Não desabilitar testes, typecheck, validações ou reduzir cobertura apenas para obter CI verde.
+
+Commits pequenos continuam permitidos quando forem **autocontidos e verdes**. Não agrupar mudanças não relacionadas apenas para reduzir quantidade de commits.
+
+Ao concluir cada versão:
+
+- executar a suíte completa;
+- confirmar que o último commit da branch está verde no GitHub Actions;
+- somente então considerar a versão concluída ou pronta para merge.
+
+Falhas antigas de commits intermediários não exigem reescrita do histórico se um commit posterior corrigiu a causa e o estado final da branch está verde.
+
 ## PWA
 
 Permitir instalação e uso offline dos conteúdos, questões e simulados já empacotados. Não exigir sincronização remota.
