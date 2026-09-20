@@ -28,7 +28,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        cacheId: 'cpa-study-v13',
+        cacheId: 'cpa-study-v21',
         globPatterns: ['**/*.{js,css,html,svg,woff2,json}'],
         cleanupOutdatedCaches: true,
         clientsClaim: true,

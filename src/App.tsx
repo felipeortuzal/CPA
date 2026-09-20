@@ -1,10 +1,8 @@
 import { lazy, Suspense } from 'react'
-import { BarChart3 } from 'lucide-react'
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { AppErrorBoundary } from './components/system/AppErrorBoundary'
 import { StudentProvider, useStudent } from './features/profile/StudentProvider'
 import { AppLayout } from './layouts/AppLayout'
-import { PlaceholderPage } from './pages/PlaceholderPage'
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 const ContentsPage = lazy(() => import('./pages/ContentsPage').then((module) => ({ default: module.ContentsPage })))
@@ -22,6 +20,8 @@ const SimulationResultPage = lazy(() => import('./pages/SimulationResultPage').t
 const SimulationsPage = lazy(() => import('./pages/SimulationsPage').then((module) => ({ default: module.SimulationsPage })))
 const SourcesPage = lazy(() => import('./pages/SourcesPage').then((module) => ({ default: module.SourcesPage })))
 const StudyPlanPage = lazy(() => import('./pages/StudyPlanPage').then((module) => ({ default: module.StudyPlanPage })))
+const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })))
+const ActiveStudyPage = lazy(() => import('./pages/ActiveStudyPage').then((module) => ({ default: module.ActiveStudyPage })))
 const WelcomePage = lazy(() => import('./pages/WelcomePage').then((module) => ({ default: module.WelcomePage })))
 
 const router = createBrowserRouter([
@@ -34,10 +34,11 @@ const router = createBrowserRouter([
     { path:'simulados', element:<SimulationsPage/> },
     { path:'simulados/historico', element:<SimulationHistoryPage/> },
     { path:'plano', element:<StudyPlanPage/> },
+    { path:'estudo-ativo', element:<ActiveStudyPage/> },
     { path:'revisao', element:<ReviewPage/> },
     { path:'flashcards', element:<FlashcardsPage/> },
     { path:'erros', element:<ErrorNotebookPage/> },
-    { path:'estatisticas', element:<PlaceholderPage title="Estatísticas" description="A plataforma já registra aulas, quizzes, questões, simulados e planos do Study Engine para análises mais profundas nas próximas etapas." icon={BarChart3}/> },
+    { path:'estatisticas', element:<AnalyticsPage/> },
     { path:'fontes', element:<SourcesPage/> },
     { path:'configuracoes', element:<SettingsPage/> },
   ]},

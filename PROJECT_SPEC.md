@@ -1176,6 +1176,160 @@ Registrar explicitamente:
 - demais certificações são futuras;
 - ranking Felipe × Thó permanece fora do escopo atual.
 
+
+## Roadmap CPA-only V14–V21 — implementado
+
+Até nova decisão explícita, o projeto permanece focado exclusivamente na CPA. O objetivo deste ciclo é profundidade acadêmica e qualidade de estudo, não expansão de certificações.
+
+### V14 — Produtos de investimentos
+
+Completar todas as aulas terminais do bloco 2.1:
+
+- renda fixa;
+- renda variável;
+- COE;
+- fundos de investimento;
+- tributação de fundos;
+- FIIs.
+
+O Lesson Engine deve deixar de assumir que apenas o Macrotema 1 possui aula.
+
+### V15 — Previdência e crédito
+
+Completar:
+
+- 2.2 Produtos de Previdência Complementar;
+- 2.3 Produtos de financiamento.
+
+### V16 — Serviços bancários e seguros
+
+Completar:
+
+- 2.4 Serviços bancários;
+- 2.5 Seguros de vida e patrimoniais.
+
+Ao final da V16, o Macrotema 2 deve possuir 167 aulas terminais completas.
+
+### V17 — Relacionamento com o cliente
+
+Completar todas as 110 aulas terminais do Macrotema 3, incluindo:
+
+- planejamento financeiro;
+- orçamento, crédito e reserva;
+- perfil e adequação;
+- suitability;
+- ética e atendimento;
+- conflitos de interesse;
+- riscos operacionais/regulatórios;
+- PLD/FTP e KYC;
+- LGPD e sigilo bancário;
+- ilícitos e abusos de mercado.
+
+### V18 — Inovação e desenvolvimento de mercado
+
+Completar as 63 aulas terminais do Macrotema 4, incluindo:
+
+- ESG;
+- investimentos sustentáveis;
+- blockchain;
+- smart contracts;
+- tokenização;
+- criptoativos e Drex;
+- Open Finance;
+- IA e machine learning;
+- fintechs;
+- ecossistema de pagamentos.
+
+Ao final da V18 devem existir exatamente:
+
+- 445 aulas terminais;
+- 105 no Tema 1;
+- 167 no Tema 2;
+- 110 no Tema 3;
+- 63 no Tema 4;
+- 4 flashcards por aula;
+- 3 perguntas de mini quiz por aula.
+
+### V19 — Question Bank 2.0
+
+Preservar as 100 questões autorais existentes e acrescentar cobertura autoral de todos os 445 PDs terminais.
+
+Requisitos:
+
+- mínimo de uma questão por PD terminal;
+- tipos multiple_choice, case e dialog_tree;
+- foco em aplicação profissional;
+- distratores plausíveis;
+- nenhuma questão privada ou vazada;
+- materiais públicos ANBIMA usados apenas como referência de estilo;
+- PD, fonte, dificuldade, cognição e explicações obrigatórios;
+- validação contra duplicatas e atalhos proibidos.
+
+Estado esperado: 545 questões totais.
+
+### V20 — Estatísticas avançadas
+
+Substituir o placeholder de Estatísticas por análises locais baseadas em dados reais:
+
+- acurácia acumulada;
+- acurácia recente;
+- desempenho por macrotema;
+- desempenho por dificuldade;
+- evolução de simulados;
+- heatmap de PDs;
+- erros recorrentes;
+- tempo ativo;
+- associação descritiva entre tempo e prática.
+
+Quando a amostra não existir, mostrar ausência de dados em vez de inventar score.
+
+### V21 — Estudo Ativo
+
+Criar uma Central de Estudo Ativo que reutilize os motores existentes:
+
+- interleaving entre temas;
+- treino por fraquezas;
+- recuperação ativa por flashcards;
+- revisão de véspera;
+- repetição espaçada;
+- busca por conceitos e fórmulas;
+- links para aula completa.
+
+O modo intercalado curto deve preservar aproximadamente a distribuição oficial 20/40/30/10.
+
+### Integração obrigatória do ciclo
+
+Ao fim da V21:
+
+- Dashboard deve reconhecer 445 aulas;
+- Trilha deve abrir aula de qualquer PD terminal;
+- Contents/Lesson devem cobrir os quatro temas;
+- Study Engine deve considerar 445 aulas e 545 questões;
+- Central de Revisão deve ativar flashcards de qualquer tema estudado;
+- Plano de Estudos deve poder recomendar qualquer PD;
+- Question Engine deve revisar conteúdo em qualquer tema;
+- Central de Fontes deve mapear todas as fontes usadas;
+- backup e IndexedDB devem continuar compatíveis;
+- DB_VERSION continua 2 porque nenhuma store nova é necessária.
+
+### Validação final V21
+
+Obrigatório:
+
+- `npm run validate:curriculum`;
+- `npm run validate:lessons`;
+- `npm run validate:questions`;
+- `npm run validate:sources`;
+- `npm run validate:experience`;
+- `npm run audit:v13`;
+- `npm run validate:v21`;
+- `npm test`;
+- `npm run lint`;
+- `npm run typecheck`;
+- `npm run build`.
+
+A V21 só é concluída quando branch final e `main` estiverem verdes.
+
 ## Política de CI e commits — obrigatória a partir da V9
 
 Esta regra vale para todas as próximas versões, branches e conversas que trabalhem neste repositório.

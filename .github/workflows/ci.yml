@@ -14,10 +14,12 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: npm run validate:curriculum
+      - run: npm run validate:lessons
       - run: npm run validate:questions
       - run: npm run validate:sources
       - run: npm run validate:experience
       - run: npm run audit:v13
+      - run: npm run validate:v21
       - run: npm test
       - run: npm run lint
       - run: npm run typecheck

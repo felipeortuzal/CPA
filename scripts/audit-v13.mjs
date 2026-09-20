@@ -4,7 +4,7 @@ import path from 'node:path'
 const root=process.cwd()
 const failures=[]
 const notes=[]
-const requiredRoutes=['/trilha','/conteudos','/questoes','/simulados','/plano','/revisao','/flashcards','/erros','/fontes','/configuracoes']
+const requiredRoutes=['/trilha','/conteudos','/questoes','/simulados','/plano','/estudo-ativo','/revisao','/flashcards','/erros','/estatisticas','/fontes','/configuracoes']
 const requiredStores=['profile','lessonProgress','quizAttempts','questionAttempts','favorites','flashcards','flashcardReviews','questionBookmarks','errors','simulations','studySessions','activityDays','preferences','studyPlans']
 
 async function read(file){return fs.readFile(path.join(root,file),'utf8')}
@@ -32,7 +32,7 @@ const pkg=JSON.parse(pkgRaw)
 const metadata=JSON.parse(metadataRaw)
 const sources=JSON.parse(sourcesRaw)
 
-expect(pkg.version==='0.13.0',`package version must be 0.13.0, received ${pkg.version}`)
+expect(/^0\.(?:1[3-9]|2[0-9])\.0$/.test(pkg.version),`package version must be >=0.13.0 in the CPA-only roadmap, received ${pkg.version}`)
 expect(!Object.keys({...pkg.dependencies,...pkg.devDependencies}).some((name)=>/supabase|firebase/i.test(name)),'remote backend dependency found')
 expect(metadata.programVersion==='1.2','Programa Detalhado version drifted from 1.2')
 expect(metadata.revisionDate==='2025-06-04','Programa Detalhado revision date drifted')
@@ -50,7 +50,7 @@ for(const store of requiredStores)requireText(db,store,'database')
 requireText(backup,'const BACKUP_VERSION = 2 as const','backup')
 requireText(backup,'25 * 1024 * 1024','backup')
 requireText(backup,'backup.databaseVersion > DB_VERSION','backup')
-requireText(vite,"cacheId: 'cpa-study-v13'",'vite')
+expect(/cacheId:\s*['"]cpa-study-v\\d+['"]/.test(vite),'vite: missing versioned cpa-study-vN cacheId')
 requireText(vite,'devOptions:','vite')
 requireText(vite,'enabled: true','vite')
 requireText(vite,"navigateFallback: 'index.html'",'vite')
@@ -76,9 +76,9 @@ for(const file of [
   expect(!(await exists(file)),`dead placeholder file still exists: ${file}`)
 }
 
-requireText(readme,'105 aulas','README')
-requireText(readme,'420 flashcards','README')
-requireText(readme,'100 questões','README')
+requireText(readme,'445 aulas','README')
+requireText(readme,'1.780 flashcards','README')
+requireText(readme,'545 questões','README')
 requireText(readme,'50 questões','README')
 requireText(readme,'35 acertos','README')
 requireText(readme,'Para o Thó','README')
