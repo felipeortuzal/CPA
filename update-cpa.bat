@@ -32,14 +32,14 @@ if errorlevel 1 (
 )
 
 set "DIRTY="
-for /f "delims=" %%i in ('git status --porcelain') do set "DIRTY=1"
+for /f "delims=" %%i in ('git status --porcelain -- . ":(exclude)package-lock.json"') do set "DIRTY=1"
 if defined DIRTY (
   echo.
   echo [ATENCAO] Existem arquivos locais modificados nesta pasta.
   echo O atualizador nao vai sobrescrever nada automaticamente.
   echo Resolva ou salve essas alteracoes manualmente e execute novamente.
   echo.
-  git status --short
+  git status --short -- . ":(exclude)package-lock.json"
   pause
   exit /b 1
 )
@@ -56,7 +56,7 @@ if errorlevel 1 (
 
 echo.
 echo 2/2 - Sincronizando dependencias...
-call npm install --no-audit --no-fund
+call npm install --no-audit --no-fund --no-package-lock
 if errorlevel 1 (
   echo.
   echo [ERRO] O codigo foi atualizado, mas npm install falhou.

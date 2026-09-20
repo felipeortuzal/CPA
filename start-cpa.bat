@@ -34,7 +34,7 @@ if %NODE_MAJOR% LSS 22 (
 if not exist node_modules (
   echo.
   echo Primeira execucao: instalando dependencias...
-  call npm install --no-audit --no-fund
+  call npm install --no-audit --no-fund --no-package-lock
   if errorlevel 1 (
     echo.
     echo [ERRO] Nao foi possivel instalar as dependencias.

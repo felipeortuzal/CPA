@@ -57,7 +57,7 @@ Também é possível usar o terminal:
 
 ```bash
 git pull --ff-only
-npm install
+npm install --no-package-lock
 npm run dev
 ```
 
@@ -73,7 +73,7 @@ No Prompt de Comando:
 ```bash
 git clone https://github.com/felipeortuzal/CPA.git
 cd CPA
-npm install
+npm install --no-package-lock
 ```
 
 Depois da primeira instalação:
