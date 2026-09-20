@@ -23,11 +23,12 @@ export function getLatestFlashcardState(flashcardId:string,reviews:FlashcardRevi
   const rows=reviews.filter((row)=>row.flashcardId===flashcardId).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt))
   const latest=rows.at(-1)
   if(!latest)return{flashcardId,lastReviewedAt:null,nextReviewAt:null,intervalDays:0,ease:2.5,reviewCount:0,correctStreak:0,lastRating:null,due:true}
-  const intervalDays=latest.intervalDays??Math.max(1,Math.round((latest.nextReviewAt?new Date(latest.nextReviewAt).getTime()-new Date(latest.reviewedAt).getTime():DAY_MS)/DAY_MS))
+  const nextReview=latest.nextReview??latest.nextReviewAt??null
+  const intervalDays=latest.interval??Math.max(1,Math.round((nextReview?new Date(nextReview).getTime()-new Date(latest.reviewedAt).getTime():DAY_MS)/DAY_MS))
   return{
     flashcardId,
-    lastReviewedAt:latest.reviewedAt,
-    nextReviewAt:latest.nextReviewAt,
+    lastReviewedAt:latest.lastReviewed??latest.reviewedAt,
+    nextReviewAt:nextReview,
     intervalDays,
     ease:latest.ease??2.5,
     reviewCount:latest.reviewCount??rows.length,
@@ -66,9 +67,9 @@ export function scheduleFlashcardReview(flashcardId:string,rating:FlashcardRatin
     flashcardId,
     rating,
     reviewedAt,
-    lastReviewedAt:reviewedAt,
-    nextReviewAt:addDays(now,intervalDays),
-    intervalDays,
+    lastReviewed:reviewedAt,
+    nextReview:addDays(now,intervalDays),
+    interval:intervalDays,
     ease:Number(ease.toFixed(2)),
     reviewCount:previous.reviewCount+1,
     correctStreak,
