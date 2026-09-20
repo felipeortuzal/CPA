@@ -83,18 +83,26 @@ export async function finishSimulation(id: string, forcedTimeUsedSeconds?: numbe
     if (!question) continue
     const errorId = `question:${question.id}`
     const current = await db.get('errors', errorId)
+    const errorCount = (current?.errorCount ?? current?.wrongCount ?? 0) + 1
     const error: ErrorRecord = {
       id: errorId,
       sourceType: 'question',
       sourceId: question.id,
+      questionId: question.id,
       pdCode: question.pdCode,
       prompt: question.prompt,
       selectedAnswer: question.options[row.selectedAnswer!],
       correctAnswer: question.options[question.correctAnswer],
       createdAt: current?.createdAt ?? completedAt,
+      date: current?.date ?? current?.createdAt ?? completedAt,
       resolvedAt: null,
-      wrongCount: (current?.wrongCount ?? 0) + 1,
+      resolved: false,
+      reviewStatus: 'doubt',
+      wrongCount: errorCount,
+      errorCount,
+      attemptCount: (current?.attemptCount ?? 0) + 1,
       lastWrongAt: completedAt,
+      lastErrorAt: completedAt,
     }
     await db.put('errors', error)
   }
