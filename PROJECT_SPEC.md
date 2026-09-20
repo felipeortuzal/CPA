@@ -482,9 +482,41 @@ Salvar cada simulado no IndexedDB com:
 
 A página `Simulados > Histórico` deve mostrar gráfico de evolução, média, melhor resultado e acesso ao detalhamento de cada tentativa.
 
-## Flashcards/revisão — evolução futura
+## Study Engine e Revisão — implementado na v0.7
 
-As aulas já contêm flashcards e a arquitetura local suporta reviews, mas a fila completa de repetição espaçada e revisão inteligente pertence às próximas etapas.
+A página **Revisão** é alimentada por um Study Engine local e determinístico.
+
+Objetivos:
+
+- calcular domínio 0–100 por PD;
+- manter confiança separada do score para não tratar pouca evidência como domínio sólido;
+- respeitar a hierarquia completa do Programa Detalhado;
+- decidir automaticamente o que estudar hoje;
+- priorizar erros pendentes, dúvidas, revisões vencidas e lacunas relevantes;
+- ponderar o domínio geral pelos pesos oficiais 20/40/30/10;
+- usar a meta diária configurada pelo aluno para dimensionar o plano;
+- criar revisão espaçada com intervalos heurísticos de 1 a 30 dias;
+- usar simulados completos recentes como uma das evidências do indicador interno de preparação.
+
+Evidências aceitas pelo motor:
+
+- status/progresso de aula;
+- melhor mini quiz;
+- tentativas de questões;
+- respostas em simulados;
+- recência;
+- dúvidas;
+- erros ainda não resolvidos.
+
+O score de preparação nunca deve ser apresentado como garantia de aprovação.
+
+As recomendações do plano diário só podem apontar para ações realmente disponíveis na versão atual. Não recomendar uma aula inexistente dos Macrotemas 2–4; quando houver questão ancorada nesses PDs, usar treino de questões.
+
+Um snapshot compacto por dia é salvo em `studyPlans`, store já existente desde v1. Não foi necessária migration de schema na v0.7.
+
+## Flashcards — evolução futura
+
+As aulas já contêm flashcards e a arquitetura local suporta reviews, mas a fila completa de repetição espaçada dos flashcards pertence às próximas etapas.
 
 ## Caderno de Erros — implementado
 
