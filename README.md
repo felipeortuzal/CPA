@@ -135,6 +135,66 @@ O indicador de preparação é apenas uma ferramenta de estudo e **não é garan
 
 Um snapshot compacto do plano diário é salvo no store `studyPlans`, já existente desde a v1. Não foi necessária nova migration do IndexedDB.
 
+## Central de Revisão, Flashcards e Caderno de Erros — v0.8
+
+A V8 transforma **Revisão**, **Flashcards** e **Caderno de Erros** em um único ciclo de recuperação ativa.
+
+### Central de Revisão
+
+A fila automática combina:
+
+- flashcards vencidos;
+- questões erradas ainda pendentes;
+- erros recorrentes;
+- PDs com baixo domínio;
+- dúvidas marcadas;
+- conteúdos antigos cuja revisão venceu.
+
+Modos disponíveis:
+
+- 5 minutos;
+- 10 minutos;
+- 20 minutos;
+- Revisão de Véspera — somente conteúdo já visto, sem introduzir matéria nova.
+
+A fila é priorizada, mas cada sessão congela os itens escolhidos no início para não mudar de ordem durante o estudo.
+
+### Flashcards
+
+Os **420 flashcards** das 105 aulas do Macrotema 1 continuam versionados no GitHub. Eles só entram na fila depois que a respectiva aula foi aberta. O IndexedDB guarda apenas o histórico pessoal.
+
+Avaliações:
+
+- `Again`
+- `Hard`
+- `Good`
+- `Easy`
+
+Cada revisão persiste:
+
+- `lastReviewed`
+- `nextReview`
+- `interval`
+- `ease`
+- `reviewCount`
+- `correctStreak`
+
+O histórico completo de avaliações é mantido. Também é possível criar flashcards pessoais locais.
+
+### Caderno de Erros
+
+Erros do Question Engine e dos simulados preservam histórico e recorrência. Registros novos mantêm, além dos campos legados, `questionId`, data, contagem de tentativas, contagem de erros, último erro e estado resolvido.
+
+Estados de revisão:
+
+- Ainda tenho dúvida
+- Entendi
+- Revisar depois
+
+Marcar um erro como entendido não apaga seu histórico. Se a mesma questão for errada novamente, o erro é reaberto automaticamente e volta à fila.
+
+A V8 reutiliza os stores `flashcardReviews`, `errors` e `studyPlans` já existentes. **Não foi necessária migration do IndexedDB**, então o progresso anterior é preservado.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -156,8 +216,8 @@ npm run build
 
 Ou execute tudo com `npm run validate`.
 
-Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, modos de treino e integração com Caderno de Erros.
+Os testes cobrem currículo, banco de questões, persistência local, geração dos simulados, composição oficial 10/20/15/5, corte 35, Study Engine, repetição espaçada, fila de revisão e Caderno de Erros.
 
 ## Próximas etapas
 
-Ainda não fazem parte desta versão: repetição espaçada completa dos flashcards, analytics avançado, ranking Felipe x Thó, aulas completas dos Macrotemas 2–4 e demais certificações.
+Ainda não fazem parte desta versão: analytics avançado, ranking Felipe x Thó, aulas completas dos Macrotemas 2–4 e demais certificações.
