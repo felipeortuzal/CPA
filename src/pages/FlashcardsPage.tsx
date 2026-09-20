@@ -32,7 +32,7 @@ export function FlashcardsPage(){
   const [error,setError]=useState('')
 
   const cards=useMemo(()=>flashcards.map((card)=>({card,state:getLatestFlashcardState(card.id,reviews)})),[flashcards,reviews])
-  const due=useMemo(()=>cards.filter(({state})=>state.due).sort((a,b)=>(a.state.nextReviewAt??'').localeCompare(b.state.nextReviewAt??'')||a.card.id.localeCompare(b.card.id)),[cards])
+  const due=useMemo(()=>cards.filter(({state})=>state.due).sort((a,b)=>(a.state.nextReviewAt??'9999').localeCompare(b.state.nextReviewAt??'9999')||a.card.id.localeCompare(b.card.id)),[cards])
   const reviewed=cards.filter(({state})=>state.reviewCount>0).length
   const mature=cards.filter(({state})=>state.intervalDays>=7&&state.correctStreak>=2).length
   const current=due[0]
