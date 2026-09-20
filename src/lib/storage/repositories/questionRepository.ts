@@ -27,18 +27,27 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
   if (!attempt.isCorrect) {
     const errorId = `question:${question.id}`
     const current = await db.get('errors', errorId)
+    const attemptsForQuestion = await db.getAllFromIndex('questionAttempts', 'by-question-id', question.id)
+    const errorCount = (current?.errorCount ?? current?.wrongCount ?? 0) + 1
     const error: ErrorRecord = {
       id: errorId,
       sourceType: 'question',
       sourceId: question.id,
+      questionId: question.id,
       pdCode: question.pdCode,
       prompt: question.prompt,
       selectedAnswer: question.options[selectedAnswer],
       correctAnswer: question.options[question.correctAnswer],
       createdAt: current?.createdAt ?? now,
+      date: current?.date ?? current?.createdAt ?? now,
       resolvedAt: null,
-      wrongCount: (current?.wrongCount ?? 0) + 1,
+      resolved: false,
+      reviewStatus: 'doubt',
+      wrongCount: errorCount,
+      errorCount,
+      attemptCount: attemptsForQuestion.length,
       lastWrongAt: now,
+      lastErrorAt: now,
     }
     await db.put('errors', error)
   }
@@ -69,9 +78,15 @@ export async function getQuestionErrors(includeResolved = false) {
   return errors.filter((error) => error.sourceType === 'question' && (includeResolved || !error.resolvedAt))
 }
 
-export async function markQuestionErrorResolved(errorId: string) {
+export async function setQuestionErrorReviewStatus(errorId: string, status: 'doubt' | 'understood' | 'review_later') {
   const db = await getDatabase(); const current = await db.get('errors', errorId)
   if (!current || current.sourceType !== 'question') return null
-  const next: ErrorRecord = { ...current, resolvedAt: new Date().toISOString() }
+  const now = new Date().toISOString()
+  const understood = status === 'understood'
+  const next: ErrorRecord = { ...current, reviewStatus: status, resolved: understood, resolvedAt: understood ? now : null }
   await db.put('errors', next); await recordSignificantActivity(); notifyStorageChanged(); return next
+}
+
+export async function markQuestionErrorResolved(errorId: string) {
+  return setQuestionErrorReviewStatus(errorId, 'understood')
 }
