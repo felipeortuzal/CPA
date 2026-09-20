@@ -104,6 +104,37 @@ Erros respondidos incorretamente entram automaticamente no Caderno de Erros. Que
 
 O histórico em **Simulados > Histórico** mostra gráfico de evolução, média, melhor resultado e acesso ao detalhamento de cada tentativa.
 
+## Study Engine — v0.7
+
+A página **Revisão** agora é alimentada por um Study Engine local que calcula um score de domínio **0–100 por PD** e um score separado de confiança.
+
+O cálculo usa somente evidências reais já salvas:
+
+- status da aula e mini quiz;
+- tentativas de questões;
+- respostas em simulados;
+- recência do estudo;
+- dúvidas marcadas;
+- erros ainda não resolvidos.
+
+O motor respeita a hierarquia completa do Programa Detalhado: evidências ancoradas em PDs intermediários também entram no score agregado dos nós-pai. O plano diário, porém, recomenda apenas ações realmente disponíveis na versão atual (aula, treino de questões ou correção de erro).
+
+A V7 gera automaticamente:
+
+- domínio ponderado pelos pesos oficiais 20/40/30/10;
+- cobertura com evidência;
+- domínio e confiança por PD;
+- revisões vencidas;
+- assuntos fracos;
+- recomendação do que estudar hoje;
+- duração sugerida baseada na meta diária configurada;
+- ciclos de revisão entre 1 e 30 dias conforme o domínio;
+- indicador interno de preparação, combinando domínio, cobertura e os últimos simulados completos.
+
+O indicador de preparação é apenas uma ferramenta de estudo e **não é garantia de aprovação**.
+
+Um snapshot compacto do plano diário é salvo no store `studyPlans`, já existente desde a v1. Não foi necessária nova migration do IndexedDB.
+
 ## Persistência local
 
 A camada fica em `src/lib/storage/`. O schema continua em `DB_VERSION = 2` porque o store `simulations` já existia desde v1; esta versão apenas tipa e passa a usar essa estrutura existente.
@@ -129,4 +160,4 @@ Os testes cobrem currículo, banco de questões, persistência local, geração 
 
 ## Próximas etapas
 
-Ainda não fazem parte desta versão: revisão inteligente completa, repetição espaçada dos flashcards, analytics avançado, ranking Felipe x Thó, aulas completas dos Macrotemas 2–4 e demais certificações.
+Ainda não fazem parte desta versão: repetição espaçada completa dos flashcards, analytics avançado, ranking Felipe x Thó, aulas completas dos Macrotemas 2–4 e demais certificações.
