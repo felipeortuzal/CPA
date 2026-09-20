@@ -73,5 +73,5 @@ export async function markQuestionErrorResolved(errorId: string) {
   const db = await getDatabase(); const current = await db.get('errors', errorId)
   if (!current || current.sourceType !== 'question') return null
   const next: ErrorRecord = { ...current, resolvedAt: new Date().toISOString() }
-  await db.put('errors', next); notifyStorageChanged(); return next
+  await db.put('errors', next); await recordSignificantActivity(); notifyStorageChanged(); return next
 }
