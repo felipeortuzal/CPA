@@ -66,7 +66,7 @@ export function buildReviewCenter(
     queue.push({
       id:`error:${error.id}`,type:'error',pdCode:error.pdCode,title:error.prompt,
       reason:wrongCount>=2?`Erro recorrente: ${wrongCount} ocorrências.`:'Questão errada ainda não resolvida.',
-      priority:220+wrongCount*25,estimatedMinutes:3,route:`/questoes?question=${encodeURIComponent(error.sourceId)}`,errorId:error.id,
+      priority:220+wrongCount*25+(error.reviewStatus==='doubt'?35:error.reviewStatus==='review_later'?15:0),estimatedMinutes:3,route:`/questoes?question=${encodeURIComponent(error.sourceId)}`,errorId:error.id,
     })
   }
 
