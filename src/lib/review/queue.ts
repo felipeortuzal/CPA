@@ -38,6 +38,7 @@ function daysOverdue(nextReviewAt:string|null,now:Date){
 function masteryCandidates(snapshot:StudyEngineSnapshot){
   const seen=new Set<string>()
   return snapshot.mastery.filter((item)=>{
+    if(!item.lessonAvailable&&!item.questionAvailable)return false
     if(seen.has(item.pdCode))return false
     seen.add(item.pdCode)
     return item.evidenceCount>0&&(item.score<70||item.overdue||item.hasDoubt)
@@ -96,8 +97,8 @@ export function buildReviewCenter(
     dueFlashcards:queue.filter((item)=>item.type==='flashcard').length,
     unresolvedErrors:unresolved.length,
     recurrentErrors:unresolved.filter((error)=>(error.wrongCount??1)>=2).length,
-    weakPdCount:study.mastery.filter((item)=>item.evidenceCount>0&&item.score<60).length,
-    overdueContent:study.mastery.filter((item)=>item.evidenceCount>0&&item.overdue).length,
+    weakPdCount:study.mastery.filter((item)=>(item.lessonAvailable||item.questionAvailable)&&item.evidenceCount>0&&item.score<60).length,
+    overdueContent:study.mastery.filter((item)=>(item.lessonAvailable||item.questionAvailable)&&item.evidenceCount>0&&item.overdue).length,
   }
 }
 
