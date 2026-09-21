@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom'
 import { AppErrorBoundary } from './components/system/AppErrorBoundary'
 import { StudentProvider, useStudent } from './features/profile/StudentProvider'
 import { AppLayout } from './layouts/AppLayout'
@@ -24,7 +24,7 @@ const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then((module) =
 const ActiveStudyPage = lazy(() => import('./pages/ActiveStudyPage').then((module) => ({ default: module.ActiveStudyPage })))
 const WelcomePage = lazy(() => import('./pages/WelcomePage').then((module) => ({ default: module.WelcomePage })))
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   { path:'/', element:<AppLayout/>, children:[
     { index:true, element:<DashboardPage/> },
     { path:'trilha', element:<CurriculumPage/> },

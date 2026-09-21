@@ -42,6 +42,29 @@ Conteúdo verificado em 20/09/2026:
 
 O repositório também monitora Guia de Elaboração de Questões, Caderno de Questões CPA e demais fontes regulatórias oficiais usadas nas aulas.
 
+## Abrir no navegador — sem instalar nada
+
+A plataforma também está preparada para **GitHub Pages**. Depois que o Pages for habilitado no repositório, o acesso será:
+
+```text
+https://felipeortuzal.github.io/CPA/
+```
+
+Para o Thó, esse é o modo recomendado:
+
+1. abrir o link no Chrome/Edge/Safari;
+2. informar o nome na primeira abertura;
+3. estudar normalmente;
+4. voltar sempre pelo mesmo link e pelo mesmo navegador.
+
+Ele **não precisa instalar Git, Node.js, clonar o repositório ou executar arquivos .bat**.
+
+O aplicativo continua local-first: o site é carregado pelo GitHub Pages, mas **perfil, progresso, respostas, simulados, flashcards, erros e planos ficam no IndexedDB do navegador dele**. O seu progresso e o dele continuam separados.
+
+As rotas usam hash routing, então páginas internas continuam funcionando no GitHub Pages sem servidor próprio. A PWA continua podendo ser instalada pelo navegador se vocês quiserem, mas isso é opcional.
+
+> Importante: limpar os dados do site/navegador pode apagar o progresso local. Para segurança, use Configurações > Dados e Backup periodicamente.
+
 ## Como abrir — Felipe
 
 Se o projeto já está instalado:
