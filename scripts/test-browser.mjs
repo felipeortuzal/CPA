@@ -58,6 +58,52 @@ try {
   await page.getByRole('button', { name: 'Finalizar agora', exact: true }).click()
   await expect(page).toHaveURL(/resultado$/)
   expect((await getData('simulations'))[0].payload.result.unansweredCount).toBe(9)
+  await expect(page.locator('a[href^="#/conteudos/2."]').first()).toBeVisible()
+
+  // In-app navigation must reset quiz state, without relying on a page reload.
+  await goto('conteudos')
+  await page.locator('a[href^="#/conteudos/"]').first().click()
+  await expect(page.getByRole('heading', { name: 'Mini quiz', exact: true })).toBeVisible()
+  const lessonUrl = page.url()
+  const fields = page.locator('fieldset')
+  for (let i = 0; i < await fields.count(); i++) await fields.nth(i).getByRole('radio').first().check()
+  await page.getByRole('button', { name: 'Corrigir quiz' }).evaluate(button => { button.click(); button.click() })
+  await expect(page.getByRole('button', { name: 'Refazer quiz' })).toBeVisible()
+  expect(await getData('quizAttempts')).toHaveLength(1)
+  await page.getByRole('link').filter({ hasText: 'Próxima aula' }).click()
+  await expect(page).not.toHaveURL(lessonUrl)
+  await expect(page.getByRole('button', { name: 'Corrigir quiz' })).toBeDisabled()
+  expect(await page.locator('input[type=radio]:checked').count()).toBe(0)
+
+  await goto('flashcards')
+  await page.getByRole('button', { name: 'Mostrar resposta' }).click()
+  // A failed write must remain retryable and must not advance the queue.
+  await page.evaluate(() => {
+    window.originalTransaction = IDBDatabase.prototype.transaction
+    IDBDatabase.prototype.transaction = function (stores, mode, ...args) {
+      if (mode === 'readwrite' && [...(typeof stores === 'string' ? [stores] : stores)].includes('flashcardReviews')) throw new DOMException('Sem espaço para salvar a revisão', 'QuotaExceededError')
+      return window.originalTransaction.call(this, stores, mode, ...args)
+    }
+  })
+  await page.getByRole('button', { name: /Good/ }).click()
+  await expect(page.getByRole('alert')).toContainText('Sem espaço')
+  expect(await getData('flashcardReviews')).toHaveLength(0)
+  await page.evaluate(() => { IDBDatabase.prototype.transaction = window.originalTransaction })
+  await page.getByRole('button', { name: /Good/ }).evaluate(button => { button.click(); button.click() })
+  await expect(page.getByRole('button', { name: 'Mostrar resposta' })).toBeVisible()
+  expect(await getData('flashcardReviews')).toHaveLength(1)
+
+  const routes = ['', 'trilha', 'conteudos', 'plano', 'estudo-ativo', 'revisao', 'flashcards', 'erros', 'estatisticas', 'fontes', 'simulados', 'simulados/historico', 'configuracoes']
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 })
+    for (const route of routes) {
+      await goto(route)
+      await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible()
+      await expect(page.getByRole('heading', { name: /Progresso indisponível|Algo deu errado/ })).toHaveCount(0)
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Overflow on ${route || 'dashboard'} at ${width}px`).toBe(true)
+    }
+  }
+  await page.setViewportSize({ width: 1440, height: 1000 })
 
   await goto('configuracoes')
   const downloadEvent = page.waitForEvent('download')
@@ -96,5 +142,5 @@ try {
   await blockedContext.close()
   expect(requests).toEqual([])
   expect(errors).toEqual([])
-  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, desktop/mobile, blocked-storage recovery screen, zero network requests and zero page errors.')
+  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, all main routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
 } finally { await browser.close() }

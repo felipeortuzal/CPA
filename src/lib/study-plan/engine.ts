@@ -1,3 +1,5 @@
+import { calendarDate } from './validation'
+import { toLocalDateKey } from '../storage/repositories/activityRepository'
 import type { StudyEngineSnapshot, StudyRecommendation, WeakTopic } from '../study-engine/types'
 import type { ExamStudyPlan, ExamStudyPlanSettings, PaceStatus, PhaseSummary, PlannedTask, StudyPlanDay, StudyPlanPhase } from './types'
 
@@ -22,18 +24,20 @@ function normalizeWeekdays(values:number[]){return [...new Set(values.filter((va
 
 export function normalizeStudyPlanSettings(settings:ExamStudyPlanSettings):ExamStudyPlanSettings{
   const weekdays=normalizeWeekdays(settings.availableWeekdays)
-  return{...settings,availableWeekdays:weekdays.length?weekdays:[1,2,3,4,5],minutesPerDay:clamp(Math.round(settings.minutesPerDay||30),5,600)}
+  const examDate=calendarDate(settings.examDate)?settings.examDate:null
+  const startDate=calendarDate(settings.startDate)?settings.startDate:null
+  return{...settings,examDate,startDate,availableWeekdays:weekdays.length?weekdays:[1,2,3,4,5],minutesPerDay:clamp(Math.round(Number.isFinite(settings.minutesPerDay)?settings.minutesPerDay:30),5,600)}
 }
 
 function studyDates(settings:ExamStudyPlanSettings,now:Date){
   const normalized=normalizeStudyPlanSettings(settings)
-  const today=parseDate(dateKey(now))
+  const today=parseDate(toLocalDateKey(now))
   const configuredStart=normalized.startDate?parseDate(normalized.startDate):today
   const start=configuredStart>today?configuredStart:today
   const result:string[]=[]
   if(normalized.examDate){
     const exam=parseDate(normalized.examDate)
-    for(let cursor=start;cursor<exam;cursor=addDays(cursor,1))if(isStudyDay(cursor,normalized.availableWeekdays))result.push(dateKey(cursor))
+    for(let cursor=start;cursor<exam&&cursor<addDays(today,366);cursor=addDays(cursor,1))if(isStudyDay(cursor,normalized.availableWeekdays))result.push(dateKey(cursor))
     return result
   }
   let cursor=start
@@ -43,7 +47,7 @@ function studyDates(settings:ExamStudyPlanSettings,now:Date){
 
 function expectedProgress(settings:ExamStudyPlanSettings,studyDatesCount:number,now:Date){
   if(!settings.examDate||!settings.startDate)return null
-  const start=parseDate(settings.startDate),exam=parseDate(settings.examDate),today=parseDate(dateKey(now))
+  const start=parseDate(settings.startDate),exam=parseDate(settings.examDate),today=parseDate(toLocalDateKey(now))
   if(today<=start)return 0
   if(today>=exam)return 100
   const total=Math.max(1,calendarDays(start,exam))
@@ -160,7 +164,7 @@ export function generateExamStudyPlan(settingsInput:ExamStudyPlanSettings,study:
   const settings=normalizeStudyPlanSettings(settingsInput)
   const dates=studyDates(settings,now)
   const exam=settings.examDate?parseDate(settings.examDate):null
-  const daysUntilExam=exam?calendarDays(parseDate(dateKey(now)),exam):null
+  const daysUntilExam=exam?calendarDays(parseDate(toLocalDateKey(now)),exam):null
   const paceStatus=paceOf(settings,study,dates.length,now)
   const allocations=settings.examDate?allocatePhaseDays(dates.length,phaseWeights(dates.length,study,paceStatus)):PHASES.map(()=>0)
   const agenda:StudyPlanDay[]=dates.map((date,index)=>{
@@ -176,6 +180,7 @@ export function generateExamStudyPlan(settingsInput:ExamStudyPlanSettings,study:
   const paceMessage=paceStatus==='ahead'?'Você está adiantado em relação ao tempo restante; o plano desloca mais minutos para prática, consolidação e simulados.':paceStatus==='behind'?'Você está atrasado em relação ao tempo restante; o plano comprime cobertura e prioriza os PDs de maior impacto sem abandonar prática.':paceStatus==='continuous'?'Sem data definida: o plano funciona em janela móvel de 14 sessões e se recalcula conforme seu progresso.':'Seu ritmo está compatível com o tempo restante até a prova.'
   const recommendationBasis=[
     `Cobertura atual: ${study.coveragePercent}%`,
+    ...(daysUntilExam!==null&&daysUntilExam>366?['Agenda limitada aos próximos 366 dias; recalculada a cada acesso.']:[]),
     `Domínio ponderado: ${study.overallMastery}%`,
     study.readinessScore===null?'Prontidão: dados insuficientes':`Prontidão interna: ${study.readinessScore}%`,
     `${study.weakTopics.length} ponto(s) fraco(s) priorizado(s)`,

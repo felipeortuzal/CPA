@@ -3,7 +3,7 @@ import { cpaQuestions } from '../../../content/cpa/questions'
 import { cpaLessonMap } from '../../../content/cpa/lessons'
 import { buildStudyEngineSnapshot } from '../../lib/study-engine/engine'
 import type { StudyEngineSnapshot } from '../../lib/study-engine/types'
-import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, reportStorageError } from '../../lib/storage/events'
 import { getActiveFlashcards, getFlashcardReviews } from '../../lib/storage/repositories/flashcardRepository'
 import { getAllLessonProgress, getQuizAttempts } from '../../lib/storage/repositories/learningRepository'
 import { getQuestionAttempts, getQuestionErrors } from '../../lib/storage/repositories/questionRepository'
@@ -22,17 +22,18 @@ export function useStudyEngine(){
   const load=useCallback(async()=>{
     if(!profile){setSnapshot(null);setLoading(false);return}
     setLoading(true)
-    const [lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcards,flashcardReviews]=await Promise.all([
-      getAllLessonProgress(),getQuizAttempts(),getQuestionAttempts(),getSimulations(),getQuestionErrors(true),getActiveFlashcards(),getFlashcardReviews(),
-    ])
-    const flashcardPdById=new Map(flashcards.map((card)=>[card.id,card.pdCode]))
-    const next=buildStudyEngineSnapshot({
-      lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcardReviews,flashcardPdById,questionDifficultyById,
-      lessonPdCodes,questionPdCodes,dailyGoalMinutes:profile.dailyGoalMinutes,
-    })
-    setSnapshot(next)
-    await saveDailyStudyPlan(next)
-    setLoading(false)
+    try {
+      const [lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcards,flashcardReviews]=await Promise.all([
+        getAllLessonProgress(),getQuizAttempts(),getQuestionAttempts(),getSimulations(),getQuestionErrors(true),getActiveFlashcards(),getFlashcardReviews(),
+      ])
+      const flashcardPdById=new Map(flashcards.map((card)=>[card.id,card.pdCode]))
+      const next=buildStudyEngineSnapshot({
+        lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcardReviews,flashcardPdById,questionDifficultyById,
+        lessonPdCodes,questionPdCodes,dailyGoalMinutes:profile.dailyGoalMinutes,
+      })
+      setSnapshot(next)
+      await saveDailyStudyPlan(next)
+    } catch { reportStorageError() } finally { setLoading(false) }
   },[profile])
   useEffect(()=>{void load();const listener=()=>void load();window.addEventListener(STORAGE_CHANGED_EVENT,listener);return()=>window.removeEventListener(STORAGE_CHANGED_EVENT,listener)},[load])
   return useMemo(()=>({snapshot,loading,refresh:load}),[snapshot,loading,load])

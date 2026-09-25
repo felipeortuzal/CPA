@@ -2,11 +2,11 @@ import { useEffect, useMemo, useState } from 'react'
 import { AlertTriangle, CheckCircle2, History, RotateCcw, Target } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { cpaQuestionMap } from '../../content/cpa/questions'
-import { macro1LessonMap } from '../../content/cpa/lessons/macro-1'
+import { cpaLessonMap } from '../../content/cpa/lessons'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
-import { STORAGE_CHANGED_EVENT } from '../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, reportStorageError } from '../lib/storage/events'
 import { getQuestionErrors, setQuestionErrorReviewStatus } from '../lib/storage/repositories/questionRepository'
 import type { ErrorRecord } from '../lib/storage/types'
 
@@ -23,7 +23,7 @@ export function ErrorNotebookPage(){
     setErrors(rows.sort((a,b)=>(b.lastWrongAt??b.createdAt).localeCompare(a.lastWrongAt??a.createdAt)))
     setLoading(false)
   }
-  useEffect(()=>{void load();const listener=()=>void load();window.addEventListener(STORAGE_CHANGED_EVENT,listener);return()=>window.removeEventListener(STORAGE_CHANGED_EVENT,listener)},[])
+  useEffect(()=>{void load().catch(reportStorageError);const listener=()=>void load().catch(reportStorageError);window.addEventListener(STORAGE_CHANGED_EVENT,listener);return()=>window.removeEventListener(STORAGE_CHANGED_EVENT,listener)},[])
 
   const pending=errors.filter((error)=>!error.resolvedAt)
   const recurrent=pending.filter((error)=>(error.wrongCount??1)>=2)
@@ -59,7 +59,7 @@ export function ErrorNotebookPage(){
         <div className="mt-4 grid gap-3 md:grid-cols-2"><div className="rounded-xl bg-rose-400/10 p-3"><p className="text-xs font-semibold text-rose-700 dark:text-rose-300">Sua última resposta</p><p className="mt-1 text-sm">{error.selectedAnswer??'—'}</p></div><div className="rounded-xl bg-emerald-400/10 p-3"><p className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">Resposta correta</p><p className="mt-1 text-sm">{error.correctAnswer??'—'}</p></div></div>
         {question?<p className="mt-4 text-sm leading-6 text-slate-500">{question.explanation}</p>:null}
         <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 rounded-xl bg-slate-50 p-3 text-[11px] text-slate-500 dark:bg-white/[0.03]"><span className="inline-flex items-center gap-1"><History className="h-3.5 w-3.5"/>Primeiro erro: {formatDate(error.createdAt)}</span><span>Último erro: {formatDate(error.lastWrongAt??error.createdAt)}</span><span>Ocorrências: <strong>{count}</strong></span>{error.resolvedAt?<span>Resolvido em: {formatDate(error.resolvedAt)}</span>:null}</div>
-        <div className="mt-5 flex flex-wrap gap-2"><Link to={`/questoes?question=${encodeURIComponent(error.sourceId)}`}><Button variant="secondary"><RotateCcw className="h-4 w-4"/>Refazer questão</Button></Link>{error.pdCode?<Link to={macro1LessonMap.has(error.pdCode)?`/conteudos/${error.pdCode}`:'/trilha'}><Button variant="secondary">Revisar conteúdo</Button></Link>:null}{!error.resolvedAt?<><Button variant="secondary" onClick={()=>void setQuestionErrorReviewStatus(error.id,'doubt')}>Ainda tenho dúvida</Button><Button variant="secondary" onClick={()=>void setQuestionErrorReviewStatus(error.id,'review_later')}>Revisar depois</Button><Button onClick={()=>void setQuestionErrorReviewStatus(error.id,'understood')}><CheckCircle2 className="h-4 w-4"/>Entendi</Button></>:null}</div>
+        <div className="mt-5 flex flex-wrap gap-2"><Link to={`/questoes?question=${encodeURIComponent(error.sourceId)}`}><Button variant="secondary"><RotateCcw className="h-4 w-4"/>Refazer questão</Button></Link>{error.pdCode?<Link to={cpaLessonMap.has(error.pdCode)?`/conteudos/${error.pdCode}`:'/trilha'}><Button variant="secondary">Revisar conteúdo</Button></Link>:null}{!error.resolvedAt?<><Button variant="secondary" onClick={()=>void setQuestionErrorReviewStatus(error.id,'doubt').catch(reportStorageError)}>Ainda tenho dúvida</Button><Button variant="secondary" onClick={()=>void setQuestionErrorReviewStatus(error.id,'review_later').catch(reportStorageError)}>Revisar depois</Button><Button onClick={()=>void setQuestionErrorReviewStatus(error.id,'understood').catch(reportStorageError)}><CheckCircle2 className="h-4 w-4"/>Entendi</Button></>:null}</div>
       </Card>
     })}</div>}
   </div>

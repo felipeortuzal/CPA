@@ -54,3 +54,26 @@ describe('V10 plano de estudos para a data da prova',()=>{
     expect(plan.agenda.every((day)=>day.tasks.every((task)=>task.route.startsWith('/')))).toBe(true)
   })
 })
+
+
+describe('calendar robustness', () => {
+  it('normalizes invalid legacy start dates without an endless rolling loop', () => {
+    const plan = generateExamStudyPlan(settings(null, 'invalid'), study(), now)
+    expect(plan.agenda).toHaveLength(14)
+    expect(plan.agenda[0].date).toBe('2026-09-20')
+  })
+  it('bounds far-future agendas and explains the planning horizon', () => {
+    const plan = generateExamStudyPlan(settings('9999-12-31'), study(), now)
+    expect(plan.agenda).toHaveLength(366)
+    expect(plan.recommendationBasis.join(' ')).toContain('366 dias')
+  })
+  it('uses local calendar getters rather than the UTC date for today', () => {
+    const localToday = new Date('2026-09-26T01:00:00Z')
+    // This instant is September 25 in São Paulo.
+    localToday.getFullYear = () => 2026
+    localToday.getMonth = () => 8
+    localToday.getDate = () => 25
+    const plan = generateExamStudyPlan(settings(null, null), study(), localToday)
+    expect(plan.agenda[0].date).toBe('2026-09-25')
+  })
+})

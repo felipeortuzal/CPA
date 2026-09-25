@@ -1,4 +1,8 @@
-# Atualização vigente — V22 (25/09/2026 UTC)
+# Atualização vigente — V23 (25/09/2026 UTC)
+
+A V23 mantém o escopo local/offline da V22 e corrige concorrência nas aulas, quizzes, revisões, favoritos, perfil e tempo de estudo; isola o estado por aula; valida campos adicionais de backup; trata falhas de leitura/gravação; amplia os testes de navegador e exige sua aprovação antes do deploy. A agenda usa o dia local e limita o planejamento até a prova aos próximos 366 dias, com aviso na interface. Relatório: `V23_REPORT.md`.
+
+# Histórico — V22 (25/09/2026 UTC)
 
 Esta seção prevalece sobre afirmações de prontidão, validação editorial ou distribuição feitas nas versões históricas abaixo.
 

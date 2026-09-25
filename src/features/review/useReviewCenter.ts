@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { CPAFlashcard } from '../../../content/cpa/flashcards'
 import { buildReviewCenter, type ReviewCenterSnapshot } from '../../lib/review/queue'
-import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, reportStorageError } from '../../lib/storage/events'
 import { getActiveFlashcards, getFlashcardReviews } from '../../lib/storage/repositories/flashcardRepository'
 import { getQuestionErrors } from '../../lib/storage/repositories/questionRepository'
 import type { ErrorRecord, FlashcardReviewRecord } from '../../lib/storage/types'
@@ -16,8 +16,10 @@ export function useReviewCenter(){
 
   const load=useCallback(async()=>{
     setLoading(true)
-    const [cards,reviewRows,errorRows]=await Promise.all([getActiveFlashcards(),getFlashcardReviews(),getQuestionErrors(true)])
-    setFlashcards(cards);setReviews(reviewRows);setErrors(errorRows);setLoading(false)
+    try {
+      const [cards,reviewRows,errorRows]=await Promise.all([getActiveFlashcards(),getFlashcardReviews(),getQuestionErrors(true)])
+      setFlashcards(cards);setReviews(reviewRows);setErrors(errorRows);
+    } catch { reportStorageError() } finally { setLoading(false) }
   },[])
 
   useEffect(()=>{

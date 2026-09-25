@@ -24,7 +24,7 @@ describe('V12 backup completo e importação segura',()=>{
     await db.put('studySessions',{id:'session-1',activityType:'lesson',pdCode:'1.1.1.1.1',startedAt:now,endedAt:now,activeSeconds:120})
     await db.put('activityDays',{date:'2026-09-20',events:1,lastActivityAt:now})
     await db.put('preferences',{id:'preferences',theme:'dark',updatedAt:now})
-    await db.put('studyPlans',{id:'exam-plan:settings',payload:{examDate:'2026-12-10'},updatedAt:now})
+    await db.put('studyPlans',{id:'exam-plan:settings',payload:{examDate:'2026-12-10',startDate:null,availableWeekdays:[1,2,3,4,5],minutesPerDay:45,updatedAt:now},updatedAt:now})
 
     const backup=await createBackup()
     expect(validateBackup(backup)).toBe(true)

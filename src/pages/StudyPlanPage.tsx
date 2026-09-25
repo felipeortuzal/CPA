@@ -1,3 +1,6 @@
+import { useAsyncAction } from '../hooks/useAsyncAction'
+import { reportStorageError } from '../lib/storage/events'
+import { toLocalDateKey } from '../lib/storage/repositories/activityRepository'
 import { useEffect, useMemo, useState, type FormEvent } from 'react'
 import { ArrowRight, CalendarDays, CheckCircle2, Clock3, RefreshCw, Target } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -29,23 +32,24 @@ export function StudyPlanPage(){
   const [showAll,setShowAll]=useState(false)
   const [message,setMessage]=useState('')
   const [error,setError]=useState('')
+  const {busy,error:saveError,run}=useAsyncAction()
 
   useEffect(()=>{if(profile&&!saved)setMinutes(profile.dailyGoalMinutes)},[profile,saved])
-  useEffect(()=>{void (async()=>{const settings=await getExamStudyPlanSettings();if(settings){setSaved(settings);setExamDate(settings.examDate??'');setStartDate(settings.startDate??'');setMinutes(settings.minutesPerDay);setDays(settings.availableWeekdays)}setLoaded(true)})()},[])
+  useEffect(()=>{void (async()=>{const settings=await getExamStudyPlanSettings();if(settings){setSaved(settings);setExamDate(settings.examDate??'');setStartDate(settings.startDate??'');setMinutes(settings.minutesPerDay);setDays(settings.availableWeekdays)}setLoaded(true)})().catch(reportStorageError)},[])
 
   const effective=useMemo<ExamStudyPlanSettings>(()=>saved??{examDate:null,startDate:null,availableWeekdays:[1,2,3,4,5],minutesPerDay:profile?.dailyGoalMinutes??30,updatedAt:new Date().toISOString()},[saved,profile])
   const plan=useMemo(()=>study?generateExamStudyPlan(effective,study):null,[effective,study])
-  useEffect(()=>{if(plan)void saveExamStudyPlanSnapshot(plan)},[plan])
+  useEffect(()=>{if(plan)void saveExamStudyPlanSnapshot(plan).catch(reportStorageError)},[plan])
 
   function toggleDay(day:number){setDays((current)=>current.includes(day)?current.filter((item)=>item!==day):[...current,day].sort((a,b)=>a-b))}
   async function persist(nextExamDate:string|null){
     setMessage('');setError('')
     if(days.length===0){setError('Selecione pelo menos um dia disponível para estudar.');return}
-    if(minutes<5||minutes>600){setError('Defina entre 5 e 600 minutos por dia.');return}
+    if(!Number.isFinite(minutes)||minutes<5||minutes>600){setError('Defina entre 5 e 600 minutos por dia.');return}
     if(nextExamDate&&startDate&&startDate>=nextExamDate){setError('O início do plano deve ser anterior à data da prova.');return}
-    if(nextExamDate&&nextExamDate<new Date().toISOString().slice(0,10)){setError('A data da prova não pode estar no passado.');return}
+    if(nextExamDate&&nextExamDate<toLocalDateKey(new Date())){setError('A data da prova não pode estar no passado.');return}
     const next:ExamStudyPlanSettings={examDate:nextExamDate,startDate:startDate||null,availableWeekdays:days,minutesPerDay:minutes,updatedAt:new Date().toISOString()}
-    await saveExamStudyPlanSettings(next);setSaved(next);setExamDate(nextExamDate??'');setMessage(nextExamDate?'Plano salvo e recalculado.':'Data da prova removida. O plano passou para modo contínuo.')
+    await run(async()=>{await saveExamStudyPlanSettings(next);setSaved(next);setExamDate(nextExamDate??'');setMessage(nextExamDate?'Plano salvo e recalculado.':'Data da prova removida. O plano passou para modo contínuo.')})
   }
   async function submit(event:FormEvent){event.preventDefault();await persist(examDate||null)}
 
@@ -64,10 +68,10 @@ export function StudyPlanPage(){
           <label className="block"><span className="mb-1.5 block text-sm font-semibold">Início do plano <span className="font-normal text-slate-400">(opcional)</span></span><input className={inputClass} type="date" value={startDate} onChange={(event)=>setStartDate(event.target.value)}/></label>
           <label className="block"><span className="mb-1.5 block text-sm font-semibold">Minutos por dia</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={5} max={600} step={5} value={minutes} onChange={(event)=>setMinutes(Number(event.target.value))}/><Clock3 className="h-5 w-5 shrink-0 text-slate-400"/></div></label>
           <div><p className="mb-2 text-sm font-semibold">Dias disponíveis</p><div className="grid grid-cols-4 gap-2 sm:grid-cols-7 xl:grid-cols-4">{weekdays.map(([label,day])=><button type="button" key={day} onClick={()=>toggleDay(day)} className={`rounded-xl border px-2 py-2 text-xs font-bold transition ${days.includes(day)?'border-emerald-400 bg-emerald-400/12 text-emerald-700 dark:text-emerald-300':'border-slate-200 text-slate-500 dark:border-white/10'}`}>{label}</button>)}</div></div>
-          <div className="flex flex-wrap gap-2"><Button type="submit"><RefreshCw className="h-4 w-4"/>Salvar e recalcular</Button>{saved?.examDate?<Button type="button" variant="secondary" onClick={()=>void persist(null)}>Remover data da prova</Button>:null}</div>
+          <div className="flex flex-wrap gap-2"><Button disabled={busy} type="submit"><RefreshCw className="h-4 w-4"/>Salvar e recalcular</Button>{saved?.examDate?<Button disabled={busy} type="button" variant="secondary" onClick={()=>void persist(null)}>Remover data da prova</Button>:null}</div>
         </form>
         {message?<div className="mt-4 flex items-center gap-2 rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-4 w-4"/>{message}</div>:null}
-        {error?<p className="mt-4 rounded-xl bg-rose-400/10 p-3 text-sm text-rose-700 dark:text-rose-300">{error}</p>:null}
+        {error||saveError?<p role="alert" className="mt-4 rounded-xl bg-rose-400/10 p-3 text-sm text-rose-700 dark:text-rose-300">{error||saveError}</p>:null}
       </Card>
 
       <Card className="overflow-hidden p-0">

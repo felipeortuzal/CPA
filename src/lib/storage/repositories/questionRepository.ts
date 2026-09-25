@@ -3,7 +3,7 @@ import type { CPAQuestion } from '../../../../content/cpa/questions/types'
 import { getDatabase } from '../database'
 import { notifyStorageChanged } from '../events'
 import type { ErrorRecord, FavoriteRecord, QuestionAttemptRecord } from '../types'
-import { recordSignificantActivity, toLocalDateKey } from './activityRepository'
+import { recordActivityInStore, toLocalDateKey } from './activityRepository'
 
 export async function getQuestionAttempts(questionId?: string) {
   const db = await getDatabase()
@@ -76,10 +76,10 @@ export async function isQuestionFavorite(questionId: string) {
 }
 
 export async function toggleQuestionFavorite(questionId: string) {
-  const db = await getDatabase(); const id = `question:${questionId}`; const current = await db.get('favorites', id)
-  if (current) { await db.delete('favorites', id); notifyStorageChanged(); return false }
+  const db = await getDatabase(); const id = `question:${questionId}`; const tx = db.transaction('favorites', 'readwrite'); const current = await tx.store.get(id)
+  if (current) { await tx.store.delete(id); await tx.done; notifyStorageChanged(); return false }
   const favorite: FavoriteRecord = { id, itemType: 'question', itemId: questionId, createdAt: new Date().toISOString() }
-  await db.put('favorites', favorite); notifyStorageChanged(); return true
+  await tx.store.put(favorite); await tx.done; notifyStorageChanged(); return true
 }
 
 export async function getQuestionFavorites() {
@@ -93,12 +93,12 @@ export async function getQuestionErrors(includeResolved = false) {
 }
 
 export async function setQuestionErrorReviewStatus(errorId: string, status: 'doubt' | 'understood' | 'review_later') {
-  const db = await getDatabase(); const current = await db.get('errors', errorId)
+  const db = await getDatabase(); const tx = db.transaction(['errors','activityDays'], 'readwrite'); const current = await tx.objectStore('errors').get(errorId)
   if (!current || current.sourceType !== 'question') return null
   const now = new Date().toISOString()
   const understood = status === 'understood'
   const next: ErrorRecord = { ...current, reviewStatus: status, resolved: understood, resolvedAt: understood ? now : null }
-  await db.put('errors', next); await recordSignificantActivity(); notifyStorageChanged(); return next
+  await tx.objectStore('errors').put(next); await recordActivityInStore(tx.objectStore('activityDays')); await tx.done; notifyStorageChanged(); return next
 }
 
 export async function markQuestionErrorResolved(errorId: string) {

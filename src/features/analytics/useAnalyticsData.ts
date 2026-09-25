@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { buildAnalyticsSnapshot, type AnalyticsSnapshot } from '../../lib/analytics/engine'
-import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, reportStorageError } from '../../lib/storage/events'
 import { getStudySessions } from '../../lib/storage/repositories/activityRepository'
 import { getAllLessonProgress, getQuizAttempts } from '../../lib/storage/repositories/learningRepository'
 import { getQuestionAttempts, getQuestionErrors } from '../../lib/storage/repositories/questionRepository'
@@ -12,16 +12,17 @@ export function useAnalyticsData(){
 
   const load=useCallback(async()=>{
     setLoading(true)
-    const [attempts,errors,simulations,sessions,lessons,quizzes]=await Promise.all([
-      getQuestionAttempts(),
-      getQuestionErrors(true),
-      getSimulations(),
-      getStudySessions(),
-      getAllLessonProgress(),
-      getQuizAttempts(),
-    ])
-    setSnapshot(buildAnalyticsSnapshot({attempts,errors,simulations,sessions,lessons,quizzes}))
-    setLoading(false)
+    try {
+      const [attempts,errors,simulations,sessions,lessons,quizzes]=await Promise.all([
+        getQuestionAttempts(),
+        getQuestionErrors(true),
+        getSimulations(),
+        getStudySessions(),
+        getAllLessonProgress(),
+        getQuizAttempts(),
+      ])
+      setSnapshot(buildAnalyticsSnapshot({attempts,errors,simulations,sessions,lessons,quizzes}))
+    } catch { reportStorageError() } finally { setLoading(false) }
   },[])
 
   useEffect(()=>{

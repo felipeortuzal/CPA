@@ -1,3 +1,4 @@
+import { reportStorageError } from '../lib/storage/events'
 import { useEffect, useMemo, useState } from 'react'
 import { ArrowRight, History, TrendingUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -18,7 +19,7 @@ function EvolutionChart({rows}:{rows:SimulationRecord[]}){
 
 export function SimulationHistoryPage(){
   const [rows,setRows]=useState<SimulationRecord[]>([]);const [loading,setLoading]=useState(true);const [filter,setFilter]=useState<'all'|'official_exam'>('all')
-  useEffect(()=>{void getSimulations().then((items)=>{setRows(items.filter((item)=>item.completedAt&&item.payload.result));setLoading(false)})},[])
+  useEffect(()=>{void getSimulations().then((items)=>{setRows(items.filter((item)=>item.completedAt&&item.payload.result));setLoading(false)}).catch(reportStorageError)},[])
   const filtered=useMemo(()=>rows.filter((row)=>filter==='all'||row.payload.mode===filter),[rows,filter])
   const chronological=useMemo(()=>[...filtered].sort((a,b)=>a.completedAt!.localeCompare(b.completedAt!)),[filtered])
   const best=filtered.length?Math.max(...filtered.map((row)=>row.payload.result?.scorePercent??0)):0

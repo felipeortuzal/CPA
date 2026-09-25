@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { cpaCurriculum } from '../../../content/cpa/curriculum'
 import { cpaLessons } from '../../../content/cpa/lessons'
-import { STORAGE_CHANGED_EVENT } from '../../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, reportStorageError } from '../../lib/storage/events'
 import { calculateStreak, getActivityDays, getStudySessions } from '../../lib/storage/repositories/activityRepository'
 import { getAllLessonProgress, getQuizAttempts } from '../../lib/storage/repositories/learningRepository'
 import { useStudent } from '../profile/StudentProvider'
@@ -46,44 +46,45 @@ export function useDashboardData(){
   const load=useCallback(async()=>{
     if(!profile){setData(null);setLoading(false);return}
     setLoading(true)
-    const [progressRows,quizzes,sessions,activityDays]=await Promise.all([getAllLessonProgress(),getQuizAttempts(),getStudySessions(),getActivityDays()])
-    const studiedRows=progressRows.filter((row)=>row.status==='completed'||row.status==='mastered')
-    const studiedCodes=new Set(studiedRows.map((row)=>row.pdCode))
-    const lessonsStudied=cpaLessons.filter((lesson)=>studiedCodes.has(lesson.pdCode)).length
-    const cpaStudied=[...studiedCodes].filter((code)=>terminals.has(code)).length
-    const total=quizzes.reduce((sum,row)=>sum+row.total,0)
-    const correct=quizzes.reduce((sum,row)=>sum+row.correct,0)
-    const times=[...progressRows.map((row)=>row.lastStudiedAt),...quizzes.map((row)=>row.completedAt),...sessions.flatMap((row)=>row.endedAt?[row.endedAt]:[])].sort()
-    const inProgress=[...progressRows].filter((row)=>row.status==='in_progress').sort((a,b)=>b.lastStudiedAt.localeCompare(a.lastStudiedAt))[0]
-    const next=(inProgress&&cpaLessons.find((lesson)=>lesson.pdCode===inProgress.pdCode))??cpaLessons.find((lesson)=>!studiedCodes.has(lesson.pdCode))??null
+    try {
+      const [progressRows,quizzes,sessions,activityDays]=await Promise.all([getAllLessonProgress(),getQuizAttempts(),getStudySessions(),getActivityDays()])
+      const studiedRows=progressRows.filter((row)=>row.status==='completed'||row.status==='mastered')
+      const studiedCodes=new Set(studiedRows.map((row)=>row.pdCode))
+      const lessonsStudied=cpaLessons.filter((lesson)=>studiedCodes.has(lesson.pdCode)).length
+      const cpaStudied=[...studiedCodes].filter((code)=>terminals.has(code)).length
+      const total=quizzes.reduce((sum,row)=>sum+row.total,0)
+      const correct=quizzes.reduce((sum,row)=>sum+row.correct,0)
+      const times=[...progressRows.map((row)=>row.lastStudiedAt),...quizzes.map((row)=>row.completedAt),...sessions.flatMap((row)=>row.endedAt?[row.endedAt]:[])].sort()
+      const inProgress=[...progressRows].filter((row)=>row.status==='in_progress').sort((a,b)=>b.lastStudiedAt.localeCompare(a.lastStudiedAt))[0]
+      const next=(inProgress&&cpaLessons.find((lesson)=>lesson.pdCode===inProgress.pdCode))??cpaLessons.find((lesson)=>!studiedCodes.has(lesson.pdCode))??null
 
-    const themeProgress=(Object.keys(themeMeta) as Array<keyof typeof themeMeta>).map((macroCode)=>{
-      const lessons=cpaLessons.filter((lesson)=>lesson.pdCode.startsWith(macroCode+'.'))
-      const studied=lessons.filter((lesson)=>studiedCodes.has(lesson.pdCode)).length
-      return{
-        macroCode,
-        title:themeMeta[macroCode].title,
-        weight:themeMeta[macroCode].weight,
-        total:lessons.length,
-        studied,
-        progress:lessons.length?Math.round(studied/lessons.length*100):0,
-      }
-    })
+      const themeProgress=(Object.keys(themeMeta) as Array<keyof typeof themeMeta>).map((macroCode)=>{
+        const lessons=cpaLessons.filter((lesson)=>lesson.pdCode.startsWith(macroCode+'.'))
+        const studied=lessons.filter((lesson)=>studiedCodes.has(lesson.pdCode)).length
+        return{
+          macroCode,
+          title:themeMeta[macroCode].title,
+          weight:themeMeta[macroCode].weight,
+          total:lessons.length,
+          studied,
+          progress:lessons.length?Math.round(studied/lessons.length*100):0,
+        }
+      })
 
-    setData({
-      name:profile.displayName,
-      cpaProgress:terminals.size?Math.round(cpaStudied/terminals.size*100):0,
-      lessonsStudied,
-      availableLessons:cpaLessons.length,
-      themeProgress,
-      quizzesCompleted:quizzes.length,
-      accuracy:total?Math.round(correct/total*100):null,
-      studyHours:Math.round(sessions.reduce((sum,row)=>sum+row.activeSeconds,0)/360)*.1,
-      streak:calculateStreak(activityDays.map((row)=>row.date)),
-      lastActivity:times.at(-1)??null,
-      continueLesson:next?{pdCode:next.pdCode,title:next.title}:null,
-    })
-    setLoading(false)
+      setData({
+        name:profile.displayName,
+        cpaProgress:terminals.size?Math.round(cpaStudied/terminals.size*100):0,
+        lessonsStudied,
+        availableLessons:cpaLessons.length,
+        themeProgress,
+        quizzesCompleted:quizzes.length,
+        accuracy:total?Math.round(correct/total*100):null,
+        studyHours:Math.round(sessions.reduce((sum,row)=>sum+row.activeSeconds,0)/360)*.1,
+        streak:calculateStreak(activityDays.map((row)=>row.date)),
+        lastActivity:times.at(-1)??null,
+        continueLesson:next?{pdCode:next.pdCode,title:next.title}:null,
+      })
+    } catch { reportStorageError() } finally { setLoading(false) }
   },[profile])
 
   useEffect(()=>{
