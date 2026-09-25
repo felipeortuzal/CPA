@@ -50,7 +50,7 @@ export function ErrorNotebookPage(){
     ] as [Filter,string][]).map(([value,label])=><button key={value} onClick={()=>setFilter(value)} className={`rounded-xl border px-3 py-2 text-xs font-semibold ${filter===value?'border-emerald-400 bg-emerald-400/10 text-emerald-700 dark:text-emerald-300':'border-slate-200 dark:border-white/10'}`}>{label}</button>)}</div>
 
     {loading?<Card><p className="py-10 text-center text-sm text-slate-500">Carregando erros...</p></Card>:visible.length===0?<Card><div className="py-12 text-center"><Target className="mx-auto h-9 w-9 text-emerald-400"/><h2 className="mt-3 text-lg font-bold">Nenhum erro neste filtro</h2><p className="mt-1 text-sm text-slate-500">{filter==='pending'?'Sua fila de erros pendentes está limpa.':'Não há registros para esta visualização.'}</p><Link to="/questoes"><Button className="mt-5">Treinar questões</Button></Link></div></Card>:<div className="space-y-4">{visible.map((error)=>{
-      const question=cpaQuestionMap.get(error.sourceId)
+      const question=error.questionSnapshot??cpaQuestionMap.get(error.sourceId)
       const count=error.wrongCount??1
       const recurrentError=count>=2&&!error.resolvedAt
       return <Card key={error.id} className={error.resolvedAt?'opacity-65':''}>

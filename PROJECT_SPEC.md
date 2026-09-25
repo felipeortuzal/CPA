@@ -1,3 +1,20 @@
+# Atualização vigente — V22 (25/09/2026 UTC)
+
+Esta seção prevalece sobre afirmações de prontidão, validação editorial ou distribuição feitas nas versões históricas abaixo.
+
+- Entrega principal: `CPA_Study.html`, gerado da mesma aplicação por `npm run build`, sem instalação ou servidor para o aluno.
+- Persistência no IndexedDB já existente, schema v2 preservado. HTML/site/navegadores podem ter armazenamentos independentes; transferir progresso por JSON.
+- Novas respostas e simulados conservam snapshots do conteúdo. Questões geradas mantêm IDs históricos por PD através de `coverage-ids.json`.
+- Backup: leitura consistente e substituição transacional, validação de simulados e cópia anterior baixada pela interface. Falhas não podem limpar o histórico.
+- Nenhum gabarito ganha status `verified` automaticamente por ter um link ou data. Banco atual: 100 questões autorais e 445 geradas, com revisão individual pendente.
+- `dialog_tree` é um identificador legado; o formato implementado é diálogo contextualizado de múltipla escolha. Não há ainda árvores ramificadas validadas.
+- `official_exam` é mantido como chave de compatibilidade; novos registros usam o rótulo Treino completo CPA e não classificam aprovação. Excluem a cobertura gerada.
+- Primeira tentativa, repetições e questões únicas são exibidas separadamente, com simulados identificados à parte.
+- Sem backend, autenticação remota ou infraestrutura paga.
+- Validação e limitações: ver `V22_REPORT.md`. As descrições históricas abaixo documentam intenções anteriores, não comprovam testes ou verificação financeira.
+
+---
+
 # PROJECT_SPEC.md
 
 Você está trabalhando no repositório GitHub `CPA`.

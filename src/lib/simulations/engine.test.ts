@@ -5,11 +5,12 @@ import { deriveWeakPdCodes, generateSimulation, gradeSimulation, OFFICIAL_EXAM }
 const macroCounts = (ids:string[]) => ids.reduce<Record<string,number>>((acc,id)=>{const question=cpaQuestions.find((item)=>item.id===id)!;const macro=question.pdCode.split('.')[0];acc[macro]=(acc[macro]??0)+1;return acc},{})
 
 describe('simulation engine CPA',()=>{
-  it('gera a prova oficial com 50 questões, 2h30, corte 35 e pesos 20/40/30/10',()=>{
+  it('gera treino completo com 50 questões autorais e 2h30, sem alegar aprovação oficial',()=>{
     const exam=generateSimulation(cpaQuestions,{mode:'official_exam',random:()=>0.42})
     expect(exam.questionCount).toBe(50)
     expect(exam.durationSeconds).toBe(9000)
-    expect(exam.cutoff).toBe(35)
+    expect(exam.cutoff).toBeNull()
+    expect(exam.questionIds.every((id)=>!id.startsWith('CPA-COV-'))).toBe(true)
     expect(macroCounts(exam.questionIds)).toEqual({'1':10,'2':20,'3':15,'4':5})
     expect(new Set(exam.questionIds).size).toBe(50)
     expect(OFFICIAL_EXAM.cutoff).toBe(35)

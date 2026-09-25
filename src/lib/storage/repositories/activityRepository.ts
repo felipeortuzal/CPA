@@ -19,9 +19,9 @@ export function calculateStreak(dayKeys: string[], today = new Date()) {
 }
 
 export async function recordSignificantActivity(at = new Date()) {
-  const db = await getDatabase(); const key = toLocalDateKey(at); const current = await db.get('activityDays', key)
+  const db = await getDatabase(); const key = toLocalDateKey(at); const tx = db.transaction('activityDays', 'readwrite'); const current = await tx.store.get(key)
   const record: ActivityDayRecord = { date: key, events: (current?.events ?? 0) + 1, lastActivityAt: at.toISOString() }
-  await db.put('activityDays', record); notifyStorageChanged(); return record
+  await tx.store.put(record); await tx.done; notifyStorageChanged(); return record
 }
 export async function getActivityDays() { return (await getDatabase()).getAll('activityDays') }
 

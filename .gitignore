@@ -6,4 +6,5 @@ dist
 .DS_Store
 *.tsbuildinfo
 .source-monitor/
-package-lock.json
+test-results/
+playwright-report/

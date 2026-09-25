@@ -20,6 +20,10 @@ export function makeQuestion(draft: QuestionDraft): CPAQuestion {
   const alternatives = orderAlternatives(draft)
   return {
     id: draft.id,
+    origin: 'authored',
+    reviewStatus: draft.reviewStatus ?? 'draft',
+    conceptId: draft.conceptId ?? draft.pdCode,
+    reviewEvidence: draft.reviewEvidence,
     certification: 'CPA',
     pdCode: draft.pdCode,
     macroTopic: draft.macroTopic,

@@ -58,7 +58,8 @@ function LoadingScreen() {
 }
 
 function LocalApp() {
-  const { profile, loading } = useStudent()
+  const { profile, loading, storageError, refresh } = useStudent()
+  if (storageError) return <div role="alert" className="mx-auto max-w-xl p-8"><h1 className="text-2xl font-bold">Progresso indisponível</h1><p className="my-4">{storageError}</p><button className="rounded-xl bg-emerald-400 p-3 text-slate-950" onClick={() => void refresh()}>Tentar novamente</button></div>
   if (loading) return <div className="grid min-h-screen place-items-center bg-slate-50 text-sm text-slate-500 dark:bg-[#07111c] dark:text-slate-300" role="status" aria-live="polite">Carregando seus estudos...</div>
   if (!profile) return <Suspense fallback={<LoadingScreen/>}><WelcomePage/></Suspense>
   return <Suspense fallback={<LoadingScreen/>}><RouterProvider router={router}/></Suspense>

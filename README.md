@@ -2,18 +2,18 @@
 
 Plataforma local, gratuita e offline-first para estudar a **CPA — Certificado Profissional ANBIMA** do modelo vigente em 2026.
 
-## Estado atual — v0.21
+## Estado atual — v0.22
 
 A plataforma está focada exclusivamente na CPA e contém:
 
 - Programa Detalhado CPA v1.2 estruturado em **590 nós curriculares**;
 - **445 aulas completas**, uma para cada PD terminal;
 - **1.780 flashcards** de aula, além de flashcards pessoais;
-- **545 questões originais**;
+- **545 questões** (100 autorais e 445 exercícios gerados automaticamente; revisão individual pendente);
 - cobertura de questões em todos os 445 PDs terminais;
-- Modo Prova com **50 questões**, 2h30 e corte de **35 acertos**;
+- Treino completo com **50 questões autorais** e 2h30, sem estimativa de aprovação;
 - Simulado 10, Simulado 20, por tema, pontos fracos e somente inéditas;
-- Study Engine com domínio, confiança, falsa confiança e Prontidão CPA;
+- Indicadores internos de estudo com domínio, confiança e detecção de baixa evidência;
 - Plano de Estudos adaptativo à data da prova;
 - Central de Revisão, repetição espaçada e Caderno de Erros;
 - Estatísticas avançadas e heatmap por PD;
@@ -25,12 +25,12 @@ Nenhuma questão privada ou vazada é usada. O banco é autoral e usa materiais 
 
 ## Base oficial
 
-Conteúdo verificado em 20/09/2026:
+Referências cadastradas na V21 (data legada: 20/09/2026; isso não comprova revisão individual de cada questão):
 
 - Programa Detalhado CPA ANBIMA v1.2;
 - revisão 04/06/2025;
 - vigência 01/01/2026;
-- pesos oficiais:
+- distribuição de estudo atualmente configurada:
   - Tema 1: 20%;
   - Tema 2: 40%;
   - Tema 3: 30%;
@@ -42,7 +42,26 @@ Conteúdo verificado em 20/09/2026:
 
 O repositório também monitora Guia de Elaboração de Questões, Caderno de Questões CPA e demais fontes regulatórias oficiais usadas nas aulas.
 
-## Abrir no navegador — sem instalar nada
+## Abrir o arquivo local — sem instalar nada
+
+1. Baixe **[CPA_Study.html](CPA_Study.html)** (no GitHub, use o botão de baixar arquivo bruto).
+2. Guarde em uma pasta fixa e abra com Chrome ou Edge.
+3. Informe um nome local ou clique em **Já tenho um backup** para restaurar seu JSON.
+4. Use **Configurações → Exportar progresso** ao terminar os estudos.
+
+O arquivo contém a mesma aplicação, aulas e questões do site, inclusive as rotas antes carregadas sob demanda. Funciona sem servidor, npm, instalação ou conexão. Links das fontes exigem internet.
+
+**O progresso fica no navegador, não dentro do HTML.** Não há identificação da máquina ou sincronização entre dispositivos. Antes de mover, renomear ou substituir o HTML, exporte o JSON. O site e o HTML podem ter armazenamentos separados; transfira o progresso por backup. Não use uma janela privada para guardar progresso duradouro.
+
+Para atualizar: exporte o JSON, baixe o HTML novo, abra e importe o backup se necessário. Uma importação substitui os dados locais; pela interface, uma cópia dos dados anteriores é baixada antes da substituição. Backups legados v1/v2 válidos continuam aceitos; payloads malformados são recusados.
+
+### Limites editoriais atuais
+
+As 445 questões de cobertura são geradas por regras e permanecem identificadas como rascunhos. As outras 100 são autorais, também sem conferência individual comprovada nesta auditoria. Os links de referência e datas antigas não constituem validação de gabarito. A aplicação conserva todos os IDs existentes.
+
+Os diálogos atuais são questões objetivas, **não árvores de decisão com ramificações**. O treino completo exclui a cobertura gerada e não mostra aprovação/reprovação. Não há ainda um simulado fiel homologado ao formato oficial. O indicador de estudo é descritivo do desempenho neste banco.
+
+## Acesso pelo site
 
 A plataforma também está preparada para **GitHub Pages**. Depois que o Pages for habilitado no repositório, o acesso será:
 
@@ -200,13 +219,13 @@ A página Questões permite filtrar por tema, subtema, dificuldade, tipo, não r
 
 Resposta errada entra automaticamente no Caderno de Erros.
 
-## Modo Prova
+## Treino completo
 
-Configuração oficial local:
+Configuração pedagógica local, não uma réplica validada do exame:
 
 - 50 questões;
 - 2h30;
-- corte: 35/50;
+- sem classificação de aprovação;
 - Tema 1: 10 questões;
 - Tema 2: 20;
 - Tema 3: 15;
@@ -217,7 +236,7 @@ Durante a prova não são mostrados gabarito, correção, assunto ou dica.
 Ao finalizar:
 
 - resultado;
-- aprovado/reprovado;
+- percentual de acertos (sem previsão de aprovação);
 - tempo utilizado;
 - desempenho por tema;
 - dificuldade;
@@ -361,3 +380,18 @@ As validações impedem, entre outras regressões:
 - PWA via Workbox.
 
 Sem login, sem servidor obrigatório, sem API paga e com custo obrigatório de **R$ 0**.
+
+## Desenvolvimento e validação V22
+
+```sh
+npm ci
+npm run validate
+npx playwright install chromium
+npm run test:browser
+```
+
+`npm run build` gera o site em `dist/` e o arquivo `CPA_Study.html` na raiz e em `dist/`. O empacotamento usa a mesma aplicação e não precisa de plugin externo de HTML único. Execute novamente o build sempre que alterar o código. A CI publica o HTML como artefato para download.
+
+Novas tentativas guardam revisão do conteúdo, IDs das alternativas e uma cópia da questão. Novos simulados guardam as questões completas para preservar gabaritos, explicações e resultados após atualizações. Registros anteriores à V22 não podem recuperar uma cópia histórica que nunca foi salva; para eles, continua existindo a leitura do banco atual.
+
+Veja [V22_REPORT.md](V22_REPORT.md) para correções, verificação e limitações.

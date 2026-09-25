@@ -62,7 +62,7 @@ export function DashboardPage(){
     <Card className="overflow-hidden p-0">
       <div className="border-b border-slate-200 bg-slate-950 p-5 text-white dark:border-white/10">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">V9 · Study Engine</p><h2 className="mt-1 text-2xl font-black">Prontidão CPA</h2></div>
+          <div><p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">Evolução nos estudos</p><h2 className="mt-1 text-2xl font-black">Indicador de estudo</h2></div>
           {study?<div className="sm:text-right"><p className="text-3xl font-black">{study.readinessScore===null?'Dados insuficientes':`${study.readinessScore}%`}</p><p className="text-xs text-slate-400">{study.readinessLabel}</p></div>:null}
         </div>
       </div>

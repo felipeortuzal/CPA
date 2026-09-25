@@ -20,7 +20,7 @@ describe('V12 backup completo e importação segura',()=>{
     await db.put('flashcardReviews',{id:'review-1',flashcardId:'card-1',rating:'good',reviewedAt:now,lastReviewed:now,nextReview:null,interval:1,ease:2.5,reviewCount:1,correctStreak:1})
     await db.put('questionBookmarks',{id:'bookmark-1',questionId:'CPA-T1-001',createdAt:now})
     await db.put('errors',{id:'error-1',sourceType:'question',sourceId:'CPA-T1-002',questionId:'CPA-T1-002',pdCode:'1.1.1.1.1',prompt:'Teste',selectedAnswer:'B',correctAnswer:'A',createdAt:now,resolvedAt:null})
-    await db.put('simulations',{id:'sim-1',certification:'CPA',score:null,questionCount:10,completedAt:null,payload:{mode:'quick10',label:'Simulado 10',theme:null,questionIds:[],answers:{},markedForReview:[],notes:'',startedAt:now,durationSeconds:1800,cutoff:null,result:null}})
+    await db.put('simulations',{id:'sim-1',certification:'CPA',score:null,questionCount:1,completedAt:null,payload:{mode:'quick10',label:'Simulado 10',theme:null,questionIds:['CPA-T1-001'],answers:{'CPA-T1-001':null},markedForReview:[],notes:'',startedAt:now,durationSeconds:1800,cutoff:null,result:null}})
     await db.put('studySessions',{id:'session-1',activityType:'lesson',pdCode:'1.1.1.1.1',startedAt:now,endedAt:now,activeSeconds:120})
     await db.put('activityDays',{date:'2026-09-20',events:1,lastActivityAt:now})
     await db.put('preferences',{id:'preferences',theme:'dark',updatedAt:now})

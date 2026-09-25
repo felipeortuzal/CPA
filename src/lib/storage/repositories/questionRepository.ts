@@ -1,8 +1,9 @@
+import { questionRevision, optionId } from '../../questionSnapshot'
 import type { CPAQuestion } from '../../../../content/cpa/questions/types'
 import { getDatabase } from '../database'
 import { notifyStorageChanged } from '../events'
 import type { ErrorRecord, FavoriteRecord, QuestionAttemptRecord } from '../types'
-import { recordSignificantActivity } from './activityRepository'
+import { recordSignificantActivity, toLocalDateKey } from './activityRepository'
 
 export async function getQuestionAttempts(questionId?: string) {
   const db = await getDatabase()
@@ -18,16 +19,24 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
     questionId: question.id,
     pdCode: question.pdCode,
     selectedAnswer,
+    questionVersion: questionRevision(question),
+    selectedOptionId: optionId(question, selectedAnswer),
+    correctOptionId: optionId(question, question.correctAnswer),
+    questionSnapshot: structuredClone(question),
+    mode: 'practice',
     correctAnswer: question.correctAnswer,
     isCorrect: selectedAnswer === question.correctAnswer,
     answeredAt: now,
   }
-  await db.put('questionAttempts', attempt)
+  const tx = db.transaction(['questionAttempts', 'errors', 'activityDays'], 'readwrite')
+  const attemptsStore = tx.objectStore('questionAttempts')
+  const errorsStore = tx.objectStore('errors')
+  await attemptsStore.put(attempt)
 
   if (!attempt.isCorrect) {
     const errorId = `question:${question.id}`
-    const current = await db.get('errors', errorId)
-    const attemptsForQuestion = await db.getAllFromIndex('questionAttempts', 'by-question-id', question.id)
+    const current = await errorsStore.get(errorId)
+    const attemptsForQuestion = await attemptsStore.index('by-question-id').getAll(question.id)
     const errorCount = (current?.errorCount ?? current?.wrongCount ?? 0) + 1
     const error: ErrorRecord = {
       id: errorId,
@@ -35,6 +44,7 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
       sourceId: question.id,
       questionId: question.id,
       pdCode: question.pdCode,
+      questionSnapshot: structuredClone(question),
       prompt: question.prompt,
       selectedAnswer: question.options[selectedAnswer],
       correctAnswer: question.options[question.correctAnswer],
@@ -49,10 +59,14 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
       lastWrongAt: now,
       lastErrorAt: now,
     }
-    await db.put('errors', error)
+    await errorsStore.put(error)
   }
 
-  await recordSignificantActivity()
+  const day = toLocalDateKey(now)
+  const activityStore = tx.objectStore('activityDays')
+  const activity = await activityStore.get(day)
+  await activityStore.put({ date: day, events: (activity?.events ?? 0) + 1, lastActivityAt: now })
+  await tx.done
   notifyStorageChanged()
   return attempt
 }

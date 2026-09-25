@@ -18,7 +18,7 @@ const errors=[]
 const expect=(condition,message)=>{if(!condition)errors.push(message)}
 const has=(content,needle,label)=>expect(content.includes(needle),label+': missing '+needle)
 
-expect(files.pkg.version==='0.21.0','package.json must be version 0.21.0')
+expect(Number(files.pkg.version.split('.')[1])>=21,'package.json must preserve V21 or newer capabilities')
 has(files.lessons,'cpaLessons.length!==445','lessons index')
 has(files.questions,'cpaQuestions.length!==545','questions index')
 has(files.flashcards,'cpaLessons.flatMap','flashcards')
