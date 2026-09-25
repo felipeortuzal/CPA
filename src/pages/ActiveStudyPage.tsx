@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react'
+import { useAsyncAction } from '../hooks/useAsyncAction'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Brain, Calculator, Layers3, MoonStar, Search, Sparkles, Target, Zap } from 'lucide-react'
 import { Link, useNavigate } from 'react-router-dom'
 import { cpaLessons } from '../../content/cpa/lessons'
@@ -19,7 +20,9 @@ export function ActiveStudyPage(){
   const navigate=useNavigate()
   const {flashcards,reviews,loading,refresh}=useReviewCenter()
   const [revealed,setRevealed]=useState(false)
+  const { busy: saving, error: saveError, run } = useAsyncAction()
   const [busy,setBusy]=useState(false)
+  const startLock=useRef(false)
   const [message,setMessage]=useState('')
   const [query,setQuery]=useState('')
 
@@ -28,6 +31,7 @@ export function ActiveStudyPage(){
     .filter(({state})=>state.due)
     .sort((a,b)=>(a.state.nextReviewAt??'9999').localeCompare(b.state.nextReviewAt??'9999')||a.card.id.localeCompare(b.card.id)),[flashcards,reviews])
   const recall=due[0]
+  useEffect(()=>setRevealed(false),[recall?.card.id])
 
   const library=useMemo(()=>{
     const normalized=query.trim().toLocaleLowerCase('pt-BR')
@@ -37,6 +41,8 @@ export function ActiveStudyPage(){
   },[query])
 
   async function start(mode:'quick10'|'weak'){
+    if(startLock.current)return
+    startLock.current=true
     setBusy(true);setMessage('')
     try{
       if(mode==='quick10'){
@@ -52,17 +58,21 @@ export function ActiveStudyPage(){
       navigate('/prova/'+record.id)
     }catch(error){
       setMessage(error instanceof Error?error.message:'Não foi possível iniciar o treino.')
-    }finally{setBusy(false)}
+    }finally{startLock.current=false;setBusy(false)}
   }
 
   async function rate(rating:FlashcardRating){
-    if(!recall)return
-    await reviewFlashcard(recall.card.id,rating)
-    setRevealed(false)
-    await refresh()
+    await run(async () => {
+      if(!recall)return
+      await reviewFlashcard(recall.card.id,rating)
+      setRevealed(false)
+      await refresh()
+
+    })
   }
 
   return <div className="mx-auto max-w-7xl space-y-6">
+    {saveError?<p role="alert" className="text-sm text-rose-600">{saveError}</p>:null}
     <div><div className="mb-2 flex items-center gap-2"><Badge>V21 · Estudo Ativo</Badge><span className="text-sm text-slate-500">recuperação + interleaving + revisão</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Estudo Ativo</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Troque releitura passiva por recuperação, mistura de assuntos e prática orientada pelos seus erros. Todos os modos abaixo usam o mesmo histórico local da plataforma.</p></div>
 
     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -82,7 +92,7 @@ export function ActiveStudyPage(){
           <p className="mt-5 text-lg font-bold leading-7">{recall.card.front}</p>
           {!revealed?<Button className="mt-6 w-full" onClick={()=>setRevealed(true)}>Revelar resposta</Button>:<>
             <div className="mt-5 rounded-2xl bg-emerald-400/10 p-4 text-sm leading-7">{recall.card.back}</div>
-            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">{(Object.keys(ratingLabel) as FlashcardRating[]).map((rating)=><button key={rating} onClick={()=>void rate(rating)} className="rounded-xl border border-slate-200 px-3 py-2.5 text-xs font-bold hover:border-emerald-400 dark:border-white/10">{ratingLabel[rating]}</button>)}</div>
+            <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">{(Object.keys(ratingLabel) as FlashcardRating[]).map((rating)=><button key={rating} disabled={saving} onClick={()=>void rate(rating)} className="rounded-xl border border-slate-200 px-3 py-2.5 text-xs font-bold hover:border-emerald-400 dark:border-white/10">{ratingLabel[rating]}</button>)}</div>
           </>}
         </div>}
       </Card>

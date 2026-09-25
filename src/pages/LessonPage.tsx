@@ -1,3 +1,5 @@
+import { reportStorageError } from '../lib/storage/events'
+import { useAsyncAction } from '../hooks/useAsyncAction'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AlertCircle, BookOpen, CheckCircle2, CircleHelp, Heart, Search, Star } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -29,28 +31,26 @@ function statusLabel(progress: LessonProgressRecord | null) {
 function MiniQuiz({ lesson, progress, onSaved }: { lesson: CPALesson; progress: LessonProgressRecord | null; onSaved: (progress: LessonProgressRecord) => void }) {
   const [answers, setAnswers] = useState<number[]>(() => lesson.miniQuiz.map(() => -1))
   const [submitted, setSubmitted] = useState(false)
-  const [saving, setSaving] = useState(false)
+  const { busy: saving, error, run } = useAsyncAction()
   const correct = answers.reduce((sum, answer, index) => sum + (answer === lesson.miniQuiz[index].correctIndex ? 1 : 0), 0)
   const score = Math.round(correct / lesson.miniQuiz.length * 100)
 
   async function submit() {
     if (answers.some((answer) => answer < 0)) return
-    setSaving(true)
-    try {
+    await run(async () => {
       const result = await saveQuizAttempt(lesson.pdCode, answers, correct, lesson.miniQuiz.length)
       onSaved(result.progress)
       setSubmitted(true)
-    } finally {
-      setSaving(false)
-    }
+    })
   }
 
   return <Card className="space-y-5">
+    {error ? <p role="alert" className="text-sm text-rose-600">{error}</p> : null}
     <div className="flex flex-wrap items-center justify-between gap-3">
-      <div><h2 className="text-lg font-bold">Mini quiz</h2><p className="mt-1 text-sm text-slate-500">3 perguntas · domínio exige aula estudada + pelo menos 75%.</p></div>
+      <div><h2 className="text-lg font-bold">Mini quiz</h2><p className="mt-1 text-sm text-slate-500">{lesson.miniQuiz.length} perguntas · domínio exige aula estudada + pelo menos 75%.</p></div>
       {progress?.quizBestScore !== null && progress?.quizBestScore !== undefined ? <Badge>Melhor: {progress.quizBestScore}%</Badge> : null}
     </div>
-    {lesson.miniQuiz.map((item, questionIndex) => <fieldset key={item.question} className="space-y-3 rounded-2xl border border-slate-200 p-4 dark:border-white/10" disabled={submitted}>
+    {lesson.miniQuiz.map((item, questionIndex) => <fieldset key={item.question} className="space-y-3 rounded-2xl border border-slate-200 p-4 dark:border-white/10" disabled={submitted || saving}>
       <legend className="px-1 text-sm font-semibold">{questionIndex + 1}. {item.question}</legend>
       <div className="space-y-2">{item.options.map((option, optionIndex) => {
         const checked = answers[questionIndex] === optionIndex
@@ -84,6 +84,10 @@ function LessonSidebar({ lesson }: { lesson: CPALesson }) {
 
 export function LessonPage() {
   const { pdCode } = useParams()
+  return <LessonContent key={pdCode} pdCode={pdCode} />
+}
+
+function LessonContent({ pdCode }: { pdCode: string | undefined }) {
   const navigate = useNavigate()
   const lesson = pdCode ? cpaLessonMap.get(pdCode) : undefined
   const index = lesson ? cpaLessons.findIndex((item) => item.pdCode === lesson.pdCode) : -1
@@ -91,15 +95,16 @@ export function LessonPage() {
   const next = index >= 0 && index < cpaLessons.length - 1 ? cpaLessons[index + 1] : null
   const [progress, setProgress] = useState<LessonProgressRecord | null>(null)
   const [favorite, setFavorite] = useState(false)
-  const [busy, setBusy] = useState(false)
+  const { busy, error, run } = useAsyncAction()
   useStudyTimer(lesson?.pdCode ?? null)
 
   useEffect(() => {
     if (!lesson) return
     let active = true
     void Promise.all([markLessonOpened(lesson.pdCode), isLessonFavorite(lesson.pdCode)]).then(([nextProgress, nextFavorite]) => {
+
       if (active) { setProgress(nextProgress); setFavorite(nextFavorite) }
-    })
+    }).catch(reportStorageError)
     return () => { active = false }
   }, [lesson])
 
@@ -108,13 +113,14 @@ export function LessonPage() {
   if (!lesson) return <div className="mx-auto max-w-3xl"><Card><div className="py-10 text-center"><AlertCircle className="mx-auto h-8 w-8 text-amber-500" /><h1 className="mt-3 text-xl font-bold">Aula não encontrada</h1><p className="mt-2 text-sm text-slate-500">Aulas completas estão disponíveis para todos os 445 PDs terminais da CPA.</p><Button className="mt-5" onClick={() => navigate('/conteudos')}>Voltar aos conteúdos</Button></div></Card></div>
 
   const lessonPdCode = lesson.pdCode
-  async function study() { setBusy(true); try { setProgress(await markLessonStudied(lessonPdCode)) } finally { setBusy(false) } }
+  async function study() { await run(async () => { setProgress(await markLessonStudied(lessonPdCode)) }) }
   const progressValue = progress?.status === 'mastered' ? 100 : progress?.status === 'completed' ? 80 : progress?.status === 'in_progress' ? 25 : 0
 
   return <div className="mx-auto max-w-7xl"><div className="grid gap-6 xl:grid-cols-[250px_minmax(0,1fr)]">
     <LessonSidebar lesson={lesson} />
     <div className="min-w-0 space-y-6">
-      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>PD {lesson.pdCode}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">Verificado em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
+      {error ? <p role="alert" className="text-sm text-rose-600">{error}</p> : null}
+      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>PD {lesson.pdCode}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
 
       <Card className="border-emerald-400/25 bg-emerald-400/[0.06]"><p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-300">Em uma frase</p><p className="mt-3 text-lg font-semibold leading-7">{lesson.oneSentence}</p></Card>
 
@@ -133,13 +139,13 @@ export function LessonPage() {
 
       <MiniQuiz lesson={lesson} progress={progress} onSaved={setProgress} />
 
-      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">Última verificação: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${source.verifiedAt}T12:00:00`))}</p></div>)}</div></Card>
+      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${source.verifiedAt}T12:00:00`))}</p></div>)}</div></Card>
 
       <Card className="space-y-4">
         <div className="flex flex-wrap gap-3">
           <Button disabled={busy || progress?.status === 'completed' || progress?.status === 'mastered'} onClick={() => void study()}><CheckCircle2 className="h-4 w-4" />{progress?.status === 'mastered' ? 'Dominado' : progress?.status === 'completed' ? 'Estudado' : busy ? 'Salvando...' : 'Marcar como estudado'}</Button>
-          <Button variant={progress?.hasDoubt ? 'primary' : 'secondary'} onClick={() => void toggleLessonDoubt(lesson.pdCode).then(setProgress)}><CircleHelp className="h-4 w-4" />{progress?.hasDoubt ? 'Dúvida marcada' : 'Tenho dúvida'}</Button>
-          <Button variant={favorite ? 'primary' : 'secondary'} onClick={() => void toggleLessonFavorite(lesson.pdCode).then(setFavorite)}>{favorite ? <Star className="h-4 w-4" /> : <Heart className="h-4 w-4" />}{favorite ? 'Favoritado' : 'Favoritar'}</Button>
+          <Button variant={progress?.hasDoubt ? 'primary' : 'secondary'} disabled={busy} onClick={() => void run(async () => { setProgress(await toggleLessonDoubt(lesson.pdCode)) })}><CircleHelp className="h-4 w-4" />{progress?.hasDoubt ? 'Dúvida marcada' : 'Tenho dúvida'}</Button>
+          <Button variant={favorite ? 'primary' : 'secondary'} disabled={busy} onClick={() => void run(async () => { setFavorite(await toggleLessonFavorite(lesson.pdCode)) })}>{favorite ? <Star className="h-4 w-4" /> : <Heart className="h-4 w-4" />}{favorite ? 'Favoritado' : 'Favoritar'}</Button>
           <Link to={`/questoes?pd=${encodeURIComponent(lesson.pdCode)}`}><Button variant="secondary"><BookOpen className="h-4 w-4" />Treinar este assunto</Button></Link>
         </div>
         <p className="text-xs text-slate-500">Abre o Question Engine filtrado pelo PD {lesson.pdCode}. Se ainda não houver questão exatamente nesse PD, a tela mostrará um estado vazio para você ajustar os filtros.</p>

@@ -2,7 +2,7 @@
 
 Plataforma local, gratuita e offline-first para estudar a **CPA — Certificado Profissional ANBIMA** do modelo vigente em 2026.
 
-## Estado atual — v0.22
+## Estado atual — v0.23
 
 A plataforma está focada exclusivamente na CPA e contém:
 
@@ -395,3 +395,12 @@ npm run test:browser
 Novas tentativas guardam revisão do conteúdo, IDs das alternativas e uma cópia da questão. Novos simulados guardam as questões completas para preservar gabaritos, explicações e resultados após atualizações. Registros anteriores à V22 não podem recuperar uma cópia histórica que nunca foi salva; para eles, continua existindo a leitura do banco atual.
 
 Veja [V22_REPORT.md](V22_REPORT.md) para correções, verificação e limitações.
+
+
+## Auditoria V23
+
+A V23 corrige perda de progresso em gravações simultâneas, respostas de mini quiz que permaneciam ao mudar de aula, avaliações duplicadas de flashcards e links de revisão dos temas 2–4. Backups agora validam também o agendamento dos cartões e as configurações do plano. Datas do plano respeitam o dia local; agendas distantes usam uma janela de 366 dias, indicada na tela.
+
+A publicação no Pages executa os testes de navegador antes do deploy, inclusive quando o envio é feito diretamente em `main`. Vitest foi atualizado para 4.1.11; a auditoria npm desta revisão não apontou vulnerabilidades conhecidas.
+
+Veja [V23_REPORT.md](V23_REPORT.md) para escopo, evidências e limites da varredura.

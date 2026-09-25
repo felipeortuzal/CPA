@@ -20,7 +20,7 @@ function clamp(value:number,min:number,max:number){return Math.max(min,Math.min(
 function addDays(value:Date,days:number){return new Date(value.getTime()+days*DAY_MS).toISOString()}
 
 export function getLatestFlashcardState(flashcardId:string,reviews:FlashcardReviewRecord[],now=new Date()):FlashcardState{
-  const rows=reviews.filter((row)=>row.flashcardId===flashcardId).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt))
+  const rows=reviews.filter((row)=>row.flashcardId===flashcardId).sort((a,b)=>a.reviewedAt.localeCompare(b.reviewedAt) || (a.reviewCount ?? 0) - (b.reviewCount ?? 0))
   const latest=rows.at(-1)
   if(!latest)return{flashcardId,lastReviewedAt:null,nextReviewAt:null,intervalDays:0,ease:2.5,reviewCount:0,correctStreak:0,lastRating:null,due:true}
   const nextReview=latest.nextReview??latest.nextReviewAt??null

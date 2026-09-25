@@ -2,7 +2,7 @@ import { cpaLessonFlashcards, type CPAFlashcard } from '../../../../content/cpa/
 import { getDatabase } from '../database'
 import { notifyStorageChanged } from '../events'
 import type { FlashcardReviewRecord, StoredFlashcard } from '../types'
-import { recordSignificantActivity } from './activityRepository'
+import { recordActivityInStore } from './activityRepository'
 import { scheduleFlashcardReview, type FlashcardRating } from '../../review/flashcardEngine'
 
 export async function getFlashcardReviews(flashcardId?:string){
@@ -21,9 +21,13 @@ export async function createCustomFlashcard(front:string,back:string,pdCode:stri
 }
 
 export async function deleteCustomFlashcard(id:string){
-  const db=await getDatabase();await db.delete('flashcards',id)
-  const reviews=await db.getAllFromIndex('flashcardReviews','by-flashcard-id',`custom:${id}`)
-  const tx=db.transaction('flashcardReviews','readwrite');for(const review of reviews)await tx.store.delete(review.id);await tx.done
+  const db=await getDatabase()
+  const tx=db.transaction(['flashcards','flashcardReviews'],'readwrite')
+  await tx.objectStore('flashcards').delete(id)
+  const store=tx.objectStore('flashcardReviews')
+  const reviews=await store.index('by-flashcard-id').getAll(`custom:${id}`)
+  for(const review of reviews)await store.delete(review.id)
+  await tx.done
   notifyStorageChanged()
 }
 
@@ -42,10 +46,15 @@ export async function getActiveFlashcards(){
 }
 
 export async function reviewFlashcard(flashcardId:string,rating:FlashcardRating,at=new Date()){
-  const reviews=await getFlashcardReviews(flashcardId)
+  const db=await getDatabase()
+  const tx=db.transaction(['flashcards','flashcardReviews','activityDays'],'readwrite')
+  if(flashcardId.startsWith('custom:') && !await tx.objectStore('flashcards').get(flashcardId.slice(7))) throw new Error('Este flashcard foi excluído. Atualize a fila.')
+  const store=tx.objectStore('flashcardReviews')
+  const reviews=await store.index('by-flashcard-id').getAll(flashcardId)
   const record:FlashcardReviewRecord=scheduleFlashcardReview(flashcardId,rating,reviews,at)
-  await (await getDatabase()).put('flashcardReviews',record)
-  await recordSignificantActivity(at)
+  await store.put(record)
+  await recordActivityInStore(tx.objectStore('activityDays'),at)
+  await tx.done
   notifyStorageChanged()
   return record
 }

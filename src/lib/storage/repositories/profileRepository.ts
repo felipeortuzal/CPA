@@ -15,12 +15,14 @@ export async function createProfile(displayName: string): Promise<LocalProfile> 
 
 export async function updateProfile(patch: Partial<Pick<LocalProfile, 'displayName' | 'currentCertification' | 'dailyGoalMinutes'>>): Promise<LocalProfile> {
   const db = await getDatabase()
-  const current = await db.get('profile', 'local')
+  const tx = db.transaction('profile', 'readwrite')
+  const current = await tx.store.get('local')
   if (!current) throw new Error('Perfil local ainda não foi criado.')
   const next: LocalProfile = { ...current, ...patch, displayName: patch.displayName !== undefined ? patch.displayName.trim() : current.displayName, updatedAt: new Date().toISOString() }
   if (!next.displayName) throw new Error('Informe um nome.')
   if (!Number.isFinite(next.dailyGoalMinutes) || next.dailyGoalMinutes < 5 || next.dailyGoalMinutes > 600) throw new Error('A meta diária deve ficar entre 5 e 600 minutos.')
-  await db.put('profile', next)
+  await tx.store.put(next)
+  await tx.done
   notifyStorageChanged()
   return next
 }

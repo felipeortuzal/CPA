@@ -18,10 +18,18 @@ export function calculateStreak(dayKeys: string[], today = new Date()) {
   return streak
 }
 
-export async function recordSignificantActivity(at = new Date()) {
-  const db = await getDatabase(); const key = toLocalDateKey(at); const tx = db.transaction('activityDays', 'readwrite'); const current = await tx.store.get(key)
+export async function recordActivityInStore(store: { get(key: string): Promise<ActivityDayRecord | undefined>; put(value: ActivityDayRecord): Promise<string> }, at = new Date()) {
+  const key = toLocalDateKey(at)
+  const current = await store.get(key)
   const record: ActivityDayRecord = { date: key, events: (current?.events ?? 0) + 1, lastActivityAt: at.toISOString() }
-  await tx.store.put(record); await tx.done; notifyStorageChanged(); return record
+  await store.put(record)
+  return record
+}
+
+export async function recordSignificantActivity(at = new Date()) {
+  const tx = (await getDatabase()).transaction('activityDays', 'readwrite')
+  const record = await recordActivityInStore(tx.store, at)
+  await tx.done; notifyStorageChanged(); return record
 }
 export async function getActivityDays() { return (await getDatabase()).getAll('activityDays') }
 
@@ -31,11 +39,12 @@ export async function beginStudySession(activityType: StudySessionRecord['activi
   await (await getDatabase()).put('studySessions', record); return record
 }
 export async function addActiveStudySeconds(id: string, seconds: number) {
-  const db = await getDatabase(); const current = await db.get('studySessions', id); if (!current) return
-  await db.put('studySessions', { ...current, activeSeconds: current.activeSeconds + Math.max(0, seconds), endedAt: new Date().toISOString() }); notifyStorageChanged()
+  if (!Number.isFinite(seconds) || seconds < 0) throw new Error('Tempo de estudo inválido.')
+  const db = await getDatabase(); const tx = db.transaction('studySessions', 'readwrite'); const current = await tx.store.get(id); if (!current) return
+  await tx.store.put({ ...current, activeSeconds: current.activeSeconds + Math.max(0, seconds), endedAt: new Date().toISOString() }); await tx.done; notifyStorageChanged()
 }
 export async function endStudySession(id: string) {
-  const db = await getDatabase(); const current = await db.get('studySessions', id); if (!current) return
-  await db.put('studySessions', { ...current, endedAt: new Date().toISOString() }); notifyStorageChanged()
+  const db = await getDatabase(); const tx = db.transaction('studySessions', 'readwrite'); const current = await tx.store.get(id); if (!current) return
+  await tx.store.put({ ...current, endedAt: new Date().toISOString() }); await tx.done; notifyStorageChanged()
 }
 export async function getStudySessions() { return (await getDatabase()).getAll('studySessions') }

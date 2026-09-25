@@ -1,3 +1,4 @@
+import { calendarDate, validStudyPlanSettings } from '../study-plan/validation'
 import { validQuestion, validSimulation, finite, natural } from './validation'
 import { DB_VERSION, deleteLocalDatabase, getDatabase } from './database'
 import { notifyStorageChanged } from './events'
@@ -12,6 +13,7 @@ const reviewRatings = new Set(['again','hard','good','easy'])
 
 function isRecord(value: unknown): value is Record<string, unknown> { return typeof value === 'object' && value !== null && !Array.isArray(value) }
 function isNullableString(value: unknown) { return value === null || typeof value === 'string' }
+function nullableDate(value: unknown) { return value === null || validDate(value) }
 function validDate(value: unknown) { return typeof value === 'string' && !Number.isNaN(Date.parse(value)) }
 
 export interface BackupSummary {
@@ -47,26 +49,26 @@ export function validateBackup(value: unknown): value is LocalBackup {
   if (value.backupVersion === 2 && !Array.isArray(value.questionAttempts)) return false
 
   const progress = value.lessonProgress as unknown[]
-  if (!progress.every((row) => isRecord(row) && typeof row.pdCode === 'string' && lessonStatuses.has(String(row.status)) && validDate(row.openedAt) && validDate(row.lastStudiedAt) && isNullableString(row.completedAt) && isNullableString(row.masteredAt) && typeof row.hasDoubt === 'boolean' && (row.quizBestScore === null || (finite(row.quizBestScore) && row.quizBestScore >= 0 && row.quizBestScore <= 100)))) return false
+  if (!progress.every((row) => isRecord(row) && typeof row.pdCode === 'string' && lessonStatuses.has(String(row.status)) && validDate(row.openedAt) && validDate(row.lastStudiedAt) && nullableDate(row.completedAt) && nullableDate(row.masteredAt) && typeof row.hasDoubt === 'boolean' && (row.quizBestScore === null || (finite(row.quizBestScore) && row.quizBestScore >= 0 && row.quizBestScore <= 100)))) return false
 
   const quizzes = value.quizAttempts as unknown[]
-  if (!quizzes.every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.pdCode === 'string' && Array.isArray(row.answers) && row.answers.every(natural) && natural(row.correct) && natural(row.total) && row.total > 0 && row.correct <= row.total && finite(row.score) && row.score >= 0 && row.score <= 100 && validDate(row.completedAt))) return false
+  if (!quizzes.every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.pdCode === 'string' && Array.isArray(row.answers) && row.answers.every(natural) && natural(row.correct) && natural(row.total) && row.total > 0 && row.answers.length === row.total && row.correct <= row.total && finite(row.score) && row.score >= 0 && row.score <= 100 && row.score === Math.round(row.correct / row.total * 100) && validDate(row.completedAt))) return false
 
   if (value.backupVersion === 2) {
     const attempts = value.questionAttempts as unknown[]
-    if (!attempts.every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.questionId === 'string' && typeof row.pdCode === 'string' && typeof row.isCorrect === 'boolean' && natural(row.selectedAnswer) && row.selectedAnswer < 4 && natural(row.correctAnswer) && row.correctAnswer < 4 && row.isCorrect === (row.selectedAnswer === row.correctAnswer) && (row.questionSnapshot === undefined || validQuestion(row.questionSnapshot)) && validDate(row.answeredAt))) return false
+    if (!attempts.every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.questionId === 'string' && typeof row.pdCode === 'string' && typeof row.isCorrect === 'boolean' && natural(row.selectedAnswer) && row.selectedAnswer < 4 && natural(row.correctAnswer) && row.correctAnswer < 4 && row.isCorrect === (row.selectedAnswer === row.correctAnswer) && (row.questionSnapshot === undefined || (validQuestion(row.questionSnapshot) && row.questionSnapshot.id === row.questionId && row.questionSnapshot.pdCode === row.pdCode && row.questionSnapshot.correctAnswer === row.correctAnswer)) && validDate(row.answeredAt))) return false
   }
 
   if (!(value.favorites as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.itemId === 'string' && ['lesson','question','flashcard'].includes(String(row.itemType)) && validDate(row.createdAt))) return false
   if (!(value.flashcards as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && (row.pdCode === null || typeof row.pdCode === 'string') && typeof row.front === 'string' && typeof row.back === 'string' && validDate(row.createdAt) && validDate(row.updatedAt))) return false
-  if (!(value.flashcardReviews as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.flashcardId === 'string' && reviewRatings.has(String(row.rating)) && validDate(row.reviewedAt))) return false
+  if (!(value.flashcardReviews as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.flashcardId === 'string' && reviewRatings.has(String(row.rating)) && validDate(row.reviewedAt) && ['nextReview','nextReviewAt'].every(key => row[key] === undefined || nullableDate(row[key])) && (row.lastReviewed === undefined || validDate(row.lastReviewed)) && ['interval','reviewCount','correctStreak'].every(key => row[key] === undefined || natural(row[key])) && (row.ease === undefined || (finite(row.ease) && row.ease >= 1.3 && row.ease <= 3)))) return false
   if (!(value.questionBookmarks as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.questionId === 'string' && validDate(row.createdAt))) return false
-  if (!(value.errors as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.sourceId === 'string' && ['quiz','question','simulation'].includes(String(row.sourceType)) && isNullableString(row.pdCode) && typeof row.prompt === 'string' && isNullableString(row.selectedAnswer) && isNullableString(row.correctAnswer) && validDate(row.createdAt) && isNullableString(row.resolvedAt) && (row.questionSnapshot === undefined || validQuestion(row.questionSnapshot)))) return false
+  if (!(value.errors as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.sourceId === 'string' && ['quiz','question','simulation'].includes(String(row.sourceType)) && isNullableString(row.pdCode) && typeof row.prompt === 'string' && isNullableString(row.selectedAnswer) && isNullableString(row.correctAnswer) && validDate(row.createdAt) && nullableDate(row.resolvedAt) && ['wrongCount','errorCount','attemptCount'].every(key => row[key] === undefined || natural(row[key])) && ['date','lastWrongAt','lastErrorAt'].every(key => row[key] === undefined || validDate(row[key])) && (row.resolved === undefined || typeof row.resolved === 'boolean') && (row.reviewStatus === undefined || ['doubt','understood','review_later'].includes(String(row.reviewStatus))) && (row.questionSnapshot === undefined || validQuestion(row.questionSnapshot)))) return false
   if (!(value.simulations as unknown[]).every(validSimulation)) return false
-  if (!(value.studySessions as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && typeof row.activityType === 'string' && isNullableString(row.pdCode) && validDate(row.startedAt) && isNullableString(row.endedAt) && finite(row.activeSeconds) && row.activeSeconds >= 0)) return false
-  if (!(value.activityDays as unknown[]).every((row) => isRecord(row) && typeof row.date === 'string' && natural(row.events) && validDate(row.lastActivityAt))) return false
-  if (!(value.preferences as unknown[]).every((row) => isRecord(row) && row.id === 'preferences' && validDate(row.updatedAt))) return false
-  if (!(value.studyPlans as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && validDate(row.updatedAt) && 'payload' in row)) return false
+  if (!(value.studySessions as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && ['lesson','quiz','flashcard','questions','simulation','review'].includes(String(row.activityType)) && isNullableString(row.pdCode) && validDate(row.startedAt) && nullableDate(row.endedAt) && finite(row.activeSeconds) && row.activeSeconds >= 0)) return false
+  if (!(value.activityDays as unknown[]).every((row) => isRecord(row) && calendarDate(row.date) && natural(row.events) && validDate(row.lastActivityAt))) return false
+  if (!(value.preferences as unknown[]).every((row) => isRecord(row) && row.id === 'preferences' && validDate(row.updatedAt) && (row.theme === undefined || ['light','dark'].includes(String(row.theme))) && ['reduceMotion','lessonSidebarOpen'].every(key => row[key] === undefined || typeof row[key] === 'boolean'))) return false
+  if (!(value.studyPlans as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && validDate(row.updatedAt) && 'payload' in row && (row.id !== 'exam-plan:settings' || validStudyPlanSettings(row.payload)))) return false
   for (const key of value.backupVersion === 2 ? v2ArrayKeys : baseArrayKeys) {
     const rows = value[key] as Record<string, unknown>[]
     const ids = rows.map((row) => row[key === 'lessonProgress' ? 'pdCode' : key === 'activityDays' ? 'date' : 'id'])
