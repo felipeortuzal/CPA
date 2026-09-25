@@ -53,8 +53,9 @@ export function SettingsPage() {
       const backup = await parseBackupFile(file)
       const summary = getBackupSummary(backup)
       const name = summary.profileName ?? 'sem perfil'
-      const ok = window.confirm(`Importar o backup de ${name}?\n\nAulas: ${summary.lessons}\nMini quizzes: ${summary.quizzes}\nQuestões respondidas: ${summary.questions}\nSimulados: ${summary.simulations}\nErros: ${summary.errors}\n\nOs dados locais atuais só serão substituídos após esta confirmação.`)
+      const ok = window.confirm(`Importar o backup de ${name}?\n\nAulas: ${summary.lessons}\nMini quizzes: ${summary.quizzes}\nQuestões respondidas: ${summary.questions}\nSimulados: ${summary.simulations}\nErros: ${summary.errors}\n\nUma cópia dos dados atuais será baixada antes da substituição.`)
       if (!ok) return
+      downloadBackup(await createBackup(), '-antes-da-importacao')
       await importBackup(backup)
       await refresh()
       setMessage('Backup importado. Seu progresso local foi restaurado.')
@@ -89,7 +90,7 @@ export function SettingsPage() {
     </Card>
 
     <Card>
-      <div className="mb-5 flex items-start gap-3"><DatabaseBackup className="mt-0.5 h-5 w-5 text-emerald-500"/><div><h2 className="font-semibold">Dados e Backup</h2><p className="mt-1 text-sm leading-6 text-slate-500">O conteúdo da CPA vem do GitHub. Seu nome, progresso, quizzes, favoritos, estatísticas e demais dados pessoais ficam no IndexedDB deste navegador.</p></div></div>
+      <div className="mb-5 flex items-start gap-3"><DatabaseBackup className="mt-0.5 h-5 w-5 text-emerald-500"/><div><h2 className="font-semibold">Dados e Backup</h2><p className="mt-2 text-sm font-semibold">Faça um backup ao terminar seus estudos. Guarde o JSON junto do HTML.</p><p className="mt-1 text-sm leading-6 text-slate-500">O conteúdo está incluído nesta versão. Seu nome, progresso, quizzes, favoritos, estatísticas e demais dados pessoais ficam no IndexedDB deste navegador.</p></div></div>
       <div className="grid gap-3 sm:grid-cols-2">
         <Button variant="secondary" disabled={busyAction !== null} onClick={() => void exportProgress()}><Download className="h-4 w-4"/>Exportar progresso</Button>
         <Button variant="secondary" disabled={busyAction !== null} onClick={() => inputRef.current?.click()}><Upload className="h-4 w-4"/>Importar progresso</Button>
@@ -100,6 +101,6 @@ export function SettingsPage() {
 
     {message ? <div className="flex items-center gap-2 rounded-xl bg-emerald-400/10 p-3 text-sm text-emerald-700 dark:text-emerald-300"><CheckCircle2 className="h-4 w-4"/>{message}</div> : null}
     {error ? <p className="rounded-xl bg-rose-400/10 p-3 text-sm text-rose-700 dark:text-rose-300">{error}</p> : null}
-    <Card><h2 className="font-semibold">Privacidade</h2><p className="mt-2 text-sm leading-6 text-slate-500">Nenhum dado de estudo é enviado para servidor obrigatório. Felipe e Thó possuem bancos locais independentes nos próprios navegadores/computadores. Atualizar o código com <code>git pull</code> não apaga o IndexedDB.</p></Card>
+    <Card><h2 className="font-semibold">Privacidade</h2><p className="mt-2 text-sm leading-6 text-slate-500">Nenhum dado de estudo é enviado para servidor obrigatório. Felipe e Thó possuem bancos locais independentes nos próprios navegadores/computadores. O HTML e o site têm progressos separados. Exporte antes de atualizar, mover ou renomear o HTML, limpar o navegador ou trocar de computador. Importe o backup para continuar no novo local.</p></Card>
   </div>
 }

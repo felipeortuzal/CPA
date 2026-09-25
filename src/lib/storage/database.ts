@@ -49,11 +49,13 @@ function migrateV2(db: IDBPDatabase<CPAStudyDB>) {
 export function getDatabase() {
   if (!databasePromise) {
     databasePromise = openDB<CPAStudyDB>(DB_NAME, DB_VERSION, {
+      blocking() { void closeDatabase() },
+      terminated() { databasePromise = null },
       upgrade(db, oldVersion) {
         if (oldVersion < 1) migrateV1(db)
         if (oldVersion < 2) migrateV2(db)
       },
-    })
+    }).catch((cause) => { databasePromise = null; throw cause })
   }
   return databasePromise
 }

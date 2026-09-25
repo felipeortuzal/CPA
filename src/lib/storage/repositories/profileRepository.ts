@@ -19,7 +19,7 @@ export async function updateProfile(patch: Partial<Pick<LocalProfile, 'displayNa
   if (!current) throw new Error('Perfil local ainda não foi criado.')
   const next: LocalProfile = { ...current, ...patch, displayName: patch.displayName !== undefined ? patch.displayName.trim() : current.displayName, updatedAt: new Date().toISOString() }
   if (!next.displayName) throw new Error('Informe um nome.')
-  if (next.dailyGoalMinutes < 5 || next.dailyGoalMinutes > 600) throw new Error('A meta diária deve ficar entre 5 e 600 minutos.')
+  if (!Number.isFinite(next.dailyGoalMinutes) || next.dailyGoalMinutes < 5 || next.dailyGoalMinutes > 600) throw new Error('A meta diária deve ficar entre 5 e 600 minutos.')
   await db.put('profile', next)
   notifyStorageChanged()
   return next

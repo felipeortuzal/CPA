@@ -1,3 +1,5 @@
+import type { CPAQuestion } from '../../../content/cpa/questions/types'
+
 export type LessonStatus = 'not_started' | 'in_progress' | 'completed' | 'mastered'
 
 export interface LocalProfile {
@@ -21,12 +23,12 @@ export interface LessonProgressRecord {
 }
 
 export interface QuizAttemptRecord { id: string; pdCode: string; answers: number[]; correct: number; total: number; score: number; completedAt: string }
-export interface QuestionAttemptRecord { id: string; questionId: string; pdCode: string; selectedAnswer: number; correctAnswer: number; isCorrect: boolean; answeredAt: string }
+export interface QuestionAttemptRecord { questionVersion?: string; selectedOptionId?: string; correctOptionId?: string; questionSnapshot?: CPAQuestion; mode?: 'practice' | 'review'; id: string; questionId: string; pdCode: string; selectedAnswer: number; correctAnswer: number; isCorrect: boolean; answeredAt: string }
 export interface FavoriteRecord { id: string; itemType: 'lesson' | 'question' | 'flashcard'; itemId: string; createdAt: string }
 export interface StoredFlashcard { id: string; pdCode: string | null; front: string; back: string; createdAt: string; updatedAt: string }
 export interface FlashcardReviewRecord { id: string; flashcardId: string; rating: 'again' | 'hard' | 'good' | 'easy'; reviewedAt: string; lastReviewed?: string; nextReview?: string | null; interval?: number; ease?: number; reviewCount?: number; correctStreak?: number; nextReviewAt?: string | null }
 export interface QuestionBookmarkRecord { id: string; questionId: string; createdAt: string }
-export interface ErrorRecord { id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; questionId?: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; date?: string; resolvedAt: string | null; resolved?: boolean; reviewStatus?: 'doubt' | 'understood' | 'review_later'; wrongCount?: number; errorCount?: number; attemptCount?: number; lastWrongAt?: string; lastErrorAt?: string }
+export interface ErrorRecord { questionSnapshot?: CPAQuestion; id: string; sourceType: 'quiz' | 'question' | 'simulation'; sourceId: string; questionId?: string; pdCode: string | null; prompt: string; selectedAnswer: string | null; correctAnswer: string | null; createdAt: string; date?: string; resolvedAt: string | null; resolved?: boolean; reviewStatus?: 'doubt' | 'understood' | 'review_later'; wrongCount?: number; errorCount?: number; attemptCount?: number; lastWrongAt?: string; lastErrorAt?: string }
 
 export interface SimulationPerformance { correct: number; total: number; percent: number }
 export interface SimulationQuestionResult {
@@ -54,6 +56,8 @@ export interface SimulationResultSnapshot {
   questionResults: SimulationQuestionResult[]
 }
 export interface SimulationPayload {
+  questionSnapshots?: CPAQuestion[]
+  currentIndex?: number
   mode: 'official_exam' | 'quick10' | 'quick20' | 'theme' | 'weak' | 'unseen'
   label: string
   theme: string | null

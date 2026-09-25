@@ -1,3 +1,4 @@
+import coverageIds from './coverage-ids.json'
 import { cpaLessons } from '../lessons'
 import type { CPAQuestion, CognitiveLevel, QuestionDifficulty, QuestionType } from './types'
 
@@ -117,8 +118,12 @@ export const generatedCoverageQuestions:CPAQuestion[]=cpaLessons.map((lesson,ind
           :`O PD ${lesson.pdCode} exige analisar as características específicas do tema, e não importar automaticamente a regra de outro produto.`
   }
   return{
-    id:`CPA-COV-${String(index+1).padStart(3,'0')}`,
+    // Preserve V21 IDs even if lessons are reordered or inserted.
+    id:(coverageIds as Record<string,string>)[lesson.pdCode] ?? `CPA-COV-PD-${lesson.pdCode}`,
     certification:'CPA',
+    origin:'generated',
+    reviewStatus:'draft',
+    conceptId:lesson.pdCode,
     pdCode:lesson.pdCode,
     macroTopic:macroLabels[lesson.pdCode.split('.')[0]]??'CPA',
     topic:lesson.title,

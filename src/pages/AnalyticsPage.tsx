@@ -36,17 +36,23 @@ export function AnalyticsPage(){
   const avgAccuracyWithPractice=daysWithBoth.length?Math.round(daysWithBoth.reduce((sum,day)=>sum+(day.accuracy??0),0)/daysWithBoth.length):null
 
   return <div className="mx-auto max-w-7xl space-y-6">
-    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>V20 · Analytics CPA</Badge><span className="text-sm text-slate-500">100% local</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Estatísticas</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Use seus dados reais para decidir o que estudar. Nenhuma métrica é enviada para servidor e nenhuma porcentagem é inventada quando não há amostra.</p></div><Button variant="secondary" onClick={()=>void refresh()}><RefreshCw className="h-4 w-4"/>Atualizar</Button></div>
+    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>Desempenho CPA</Badge><span className="text-sm text-slate-500">100% local</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Estatísticas</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Use seus dados reais para decidir o que estudar. Nenhuma métrica é enviada para servidor e nenhuma porcentagem é inventada quando não há amostra.</p></div><Button variant="secondary" onClick={()=>void refresh()}><RefreshCw className="h-4 w-4"/>Atualizar</Button></div>
 
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-      <Stat label="Questões respondidas" value={String(s.totalAnswered)} helper={s.overallAccuracy===null?'sem acurácia ainda':s.overallAccuracy+'% de acerto acumulado'} icon={Target}/>
-      <Stat label="Acerto recente" value={s.recentAccuracy===null?'—':s.recentAccuracy+'%'} helper="últimos 30 dias no Question Engine" icon={Activity}/>
+      <Stat label="Tentativas de questões" value={String(s.totalAnswered)} helper={s.overallAccuracy===null?'sem acurácia ainda':s.overallAccuracy+'% de acerto acumulado'} icon={Target}/>
+      <Stat label="Acerto recente" value={s.recentAccuracy===null?'—':s.recentAccuracy+'%'} helper="últimos 30 dias no treinos de questões" icon={Activity}/>
       <Stat label="Tempo ativo" value={(Math.round(s.studyMinutes/60*10)/10)+'h'} helper={activeDays.length+' dia(s) ativos nos últimos 30'} icon={Clock3}/>
       <Stat label="Simulados" value={s.simulationAverage===null?'—':s.simulationAverage+'%'} helper="média dos simulados concluídos" icon={BarChart3}/>
     </div>
 
+    <div className="grid gap-4 sm:grid-cols-3">
+      <Stat label="Questões diferentes" value={String(s.uniqueQuestions)} helper="cobertura nos treinos de questões" icon={Target}/>
+      <Stat label="Primeira tentativa" value={s.firstAttemptAccuracy===null?'—':s.firstAttemptAccuracy+'%'} helper="antes de repetir cada questão nos treinos" icon={Activity}/>
+      <Stat label="Tentativas repetidas" value={s.repeatAccuracy===null?'—':s.repeatAccuracy+'%'} helper={s.repeatAttempts+' repetição(ões); simulados separados'} icon={RefreshCw}/>
+    </div>
+
     <div className="grid gap-6 xl:grid-cols-2">
-      <Card><h2 className="font-bold">Desempenho por tema</h2><p className="mt-1 text-xs text-slate-500">Question Engine + respostas de simulados.</p><div className="mt-5 space-y-5">{s.byMacro.map((row)=><Bar key={row.label} label={row.label} value={row.percent} total={row.total}/>)}</div></Card>
+      <Card><h2 className="font-bold">Desempenho por tema</h2><p className="mt-1 text-xs text-slate-500">treinos de questões + respostas de simulados.</p><div className="mt-5 space-y-5">{s.byMacro.map((row)=><Bar key={row.label} label={row.label} value={row.percent} total={row.total}/>)}</div></Card>
       <Card><h2 className="font-bold">Desempenho por dificuldade</h2><p className="mt-1 text-xs text-slate-500">Ajuda a detectar acerto alto sustentado só por questões fáceis.</p><div className="mt-5 space-y-5">{s.byDifficulty.map((row)=><Bar key={row.label} label={row.label} value={row.percent} total={row.total}/>)}</div><div className="mt-6 rounded-xl bg-slate-100 p-4 text-xs leading-5 text-slate-500 dark:bg-white/5"><strong>Mini quizzes:</strong> {s.quizAverage===null?'sem amostra':s.quizAverage+'% de média'} · <strong>Aulas estudadas:</strong> {s.lessonsStudied}/445.</div></Card>
     </div>
 

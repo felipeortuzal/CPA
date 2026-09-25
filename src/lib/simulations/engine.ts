@@ -32,7 +32,7 @@ export const QUICK10_COUNTS = { '1': 2, '2': 4, '3': 3, '4': 1 } as const
 export const QUICK20_COUNTS = { '1': 4, '2': 8, '3': 6, '4': 2 } as const
 
 const modeLabels: Record<SimulationMode, string> = {
-  official_exam: 'Modo Prova CPA',
+  official_exam: 'Treino completo CPA',
   quick10: 'Simulado 10',
   quick20: 'Simulado 20',
   theme: 'Simulado por tema',
@@ -96,9 +96,10 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
   let theme: string | null = request.theme ?? null
 
   if (request.mode === 'official_exam') {
-    selected = pickWeighted(questions, OFFICIAL_EXAM.themeCounts, random)
+    selected = pickWeighted(questions.filter((question) => question.origin !== 'generated'), OFFICIAL_EXAM.themeCounts, random)
     durationSeconds = OFFICIAL_EXAM.durationSeconds
-    cutoff = OFFICIAL_EXAM.cutoff
+    // The current bank has no validated branching decision trees. Do not claim exam readiness.
+    cutoff = null
   } else if (request.mode === 'quick10') {
     selected = pickWeighted(questions, QUICK10_COUNTS, random)
     durationSeconds = 30 * 60

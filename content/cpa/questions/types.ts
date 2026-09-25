@@ -11,6 +11,10 @@ export interface QuestionOfficialSource {
 }
 
 export interface CPAQuestion {
+  reviewStatus?: 'draft' | 'reviewed' | 'verified'
+  origin?: 'authored' | 'generated'
+  conceptId?: string
+  reviewEvidence?: string
   id: string
   certification: 'CPA'
   pdCode: string

@@ -1,3 +1,4 @@
+import coverageIds from './coverage-ids.json'
 import { describe, expect, it } from 'vitest'
 import { cpaCurriculum } from '../curriculum'
 import { cpaLessons } from '../lessons'
@@ -75,4 +76,11 @@ describe('banco original de questões CPA', () => {
       expect(text).not.toContain('nenhuma das anteriores')
     }
   })
+})
+
+// Historical IDs must remain associated with the same curriculum concept.
+it('keeps generated question IDs stable across lesson ordering', () => {
+  const generated = cpaQuestions.filter((question) => question.origin === 'generated')
+  expect(Object.fromEntries(generated.map((question) => [question.pdCode, question.id]))).toEqual(coverageIds)
+  expect(generated.every((question) => question.conceptId === question.pdCode && question.reviewStatus === 'draft')).toBe(true)
 })

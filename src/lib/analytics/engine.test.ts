@@ -17,6 +17,10 @@ describe('V20 analytics engine',()=>{
       now:new Date('2026-09-20T15:00:00Z'),
     })
     expect(snapshot.totalAnswered).toBe(3)
+    expect(snapshot.uniqueQuestions).toBe(2)
+    expect(snapshot.firstAttemptAccuracy).toBe(50)
+    expect(snapshot.repeatAccuracy).toBe(0)
+    expect(snapshot.repeatAttempts).toBe(1)
     expect(snapshot.overallAccuracy).toBe(33)
     expect(snapshot.recentAccuracy).toBe(33)
     expect(snapshot.studyMinutes).toBe(30)

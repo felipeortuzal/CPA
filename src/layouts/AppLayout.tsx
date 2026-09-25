@@ -38,7 +38,7 @@ export function AppLayout() {
           <NavLink aria-label="Abrir configurações" to="/configuracoes" className="grid h-10 w-10 place-items-center rounded-full bg-slate-900 text-xs font-bold text-white dark:bg-emerald-400 dark:text-slate-950">{initials||'A'}</NavLink>
         </div>
       </header>
-      <OfflineBanner/>
+      <OfflineBanner/>{window.location.protocol==='file:'?<div className="bg-amber-50 px-4 py-2 text-xs text-amber-900 dark:bg-amber-400/10 dark:text-amber-200">Arquivo local · Exporte seu progresso antes de atualizar ou mover este HTML. <NavLink className="font-bold underline" to="/configuracoes">Abrir backup</NavLink></div>:null}
       <main id="main-content" tabIndex={-1} className="p-4 sm:p-6 lg:p-8"><Outlet/></main>
     </div>
   </div>
