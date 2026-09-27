@@ -62,6 +62,8 @@ try {
 
   // In-app navigation must reset quiz state, without relying on a page reload.
   await goto('conteudos')
+  await page.locator('a[href^="#/modulos/"]').first().click()
+  await page.getByText(/Aprofunde o módulo/).click()
   await page.locator('a[href^="#/conteudos/"]').first().click()
   await expect(page.getByRole('heading', { name: 'Mini quiz', exact: true })).toBeVisible()
   const lessonUrl = page.url()
@@ -93,7 +95,29 @@ try {
   await expect(page.getByRole('button', { name: 'Mostrar resposta' })).toBeVisible()
   expect(await getData('flashcardReviews')).toHaveLength(1)
 
-  const routes = ['', 'trilha', 'conteudos', 'plano', 'estudo-ativo', 'revisao', 'flashcards', 'erros', 'estatisticas', 'fontes', 'simulados', 'simulados/historico', 'configuracoes']
+  await page.setViewportSize({width:390,height:844})
+  await goto('modulos/economia')
+  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
+  await page.getByRole('checkbox').first().click()
+  await expect.poll(async () => (await getData('studyPlans')).find(row => row.id === 'course:economia')?.payload.readSections.length).toBe(1)
+  await page.reload()
+  await expect(page.getByRole('checkbox').first()).toBeChecked()
+  await page.getByRole('button', {name:'Iniciar simulado do módulo',exact:true}).evaluate(button => {button.click();button.click()})
+  await expect(page.getByText('Questão 1 de 6',{exact:true})).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+  const moduleExams = (await getData('simulations')).filter(row => row.payload.mode === 'module')
+  expect(moduleExams).toHaveLength(1)
+  expect(moduleExams[0].payload.moduleId).toBe('economia')
+  expect(moduleExams[0].payload.questionSnapshots.every(q => q.origin === 'authored' && (q.pdCode === '1.2' || q.pdCode.startsWith('1.2.')))).toBe(true)
+  await goto('modulos/economia')
+  await page.getByRole('button', {name:'Continuar simulado do módulo',exact:true}).click()
+  await page.getByRole('button', {name:'Finalizar',exact:true}).click()
+  await page.getByRole('button', {name:'Finalizar agora',exact:true}).click()
+  await expect(page.getByRole('heading', {name:'Correção completa do módulo'})).toBeVisible()
+  await page.getByRole('link', {name:'Voltar ao módulo'}).click()
+  await expect(page.getByRole('button', {name:'Refazer simulado do módulo',exact:true})).toBeVisible()
+
+  const routes = ['', 'trilha', 'conteudos', 'edital', 'modulos/economia', 'modulos/atendimento-etica', 'modulos/tecnologia', 'plano', 'estudo-ativo', 'revisao', 'flashcards', 'erros', 'estatisticas', 'fontes', 'simulados', 'simulados/historico', 'configuracoes']
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: 900 })
     for (const route of routes) {
@@ -111,7 +135,9 @@ try {
   const download = await downloadEvent
   const backup = JSON.parse(await readFile(await download.path(), 'utf8'))
   expect(backup.questionAttempts).toHaveLength(1)
-  expect(backup.simulations[0].payload.questionSnapshots).toHaveLength(10)
+  expect(backup.simulations.find(row => row.payload.mode === 'quick10').payload.questionSnapshots).toHaveLength(10)
+  expect(backup.simulations.find(row => row.payload.mode === 'module').payload.moduleId).toBe('economia')
+  expect(backup.studyPlans.find(row => row.id === 'course:economia').payload.readSections).toHaveLength(1)
 
   const otherContext = await browser.newContext({ offline: true })
   const other = await otherContext.newPage()
@@ -121,18 +147,18 @@ try {
   await expect(other.getByRole('heading', { name: /Indicador de estudo/ })).toBeVisible()
   await other.goto(`${fileUrl}#/estatisticas`)
   await expect(other.getByText('Primeira tentativa', { exact: true })).toBeVisible()
+  await other.goto(`${fileUrl}#/modulos/economia`)
+  await expect(other.getByRole('checkbox').first()).toBeChecked()
+  await expect(other.getByRole('button',{name:'Refazer simulado do módulo',exact:true})).toBeVisible()
   await otherContext.close()
 
-  await goto('estatisticas')
-  await expect(page.getByText('Primeira tentativa', { exact: true })).toBeVisible()
+  await goto('conteudos')
   await mkdir('test-results', { recursive: true })
   await page.screenshot({ path: 'test-results/offline-desktop.png', fullPage: true })
   await page.setViewportSize({ width: 390, height: 844 })
-  await goto('questoes')
-  await expect(page.getByRole('heading', { name: 'Questões', exact: true })).toBeVisible()
+  await goto('modulos/economia')
+  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
   await page.screenshot({ path: 'test-results/offline-mobile.png', fullPage: true })
-  const overflow = await page.evaluate(() => [...document.querySelectorAll('body *')].filter(el=>el.getBoundingClientRect().right>innerWidth+1).slice(0,8).map(el=>({tag:el.tagName,classes:el.className,width:el.getBoundingClientRect().width})))
-  if(overflow.length) console.log('Mobile overflow:',overflow)
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   const blockedContext = await browser.newContext({ offline: true })
   await blockedContext.addInitScript(() => { IDBFactory.prototype.open = () => { throw new DOMException('Storage blocked', 'SecurityError') } })
@@ -142,5 +168,5 @@ try {
   await blockedContext.close()
   expect(requests).toEqual([])
   expect(errors).toEqual([])
-  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, all main routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
+  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, reading persistence, module exam isolation/resume/correction, 17 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
 } finally { await browser.close() }

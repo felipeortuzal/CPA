@@ -1433,3 +1433,13 @@ Antes de concluir uma mudança relevante:
 10. documentar mudanças e pendências reais.
 
 Não deixar TODOs quando for possível concluir a implementação.
+
+## V24 — módulos de leitura
+
+- 20 módulos cobrem exatamente uma vez os 445 pontos de consulta do programa.
+- Cada módulo tem leitura autoral, exemplo resolvido, comparação, recuperação ativa e simulado próprio de 6–10 questões autorais.
+- Leitura salva em `studyPlans` sob `course:<moduleId>`; payload versionado com IDs de seções. Não altera progresso de aulas.
+- Modo `module` e `moduleId` opcional nos simulados; snapshots preservam correções e histórico. Backups antigos permanecem compatíveis; novos backups validam módulos e seções.
+- Navegação principal por títulos, consulta técnica em `/edital`; IDs e URLs de aulas preservados.
+- 583 questões: 138 autorais, incluindo 38 novos casos, e 445 exercícios gerados. Módulos excluem exercícios gerados.
+- Materiais gratuitos externos são links; leituras e exercícios novos não reproduzem apostilas de terceiros.

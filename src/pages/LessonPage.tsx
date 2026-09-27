@@ -1,9 +1,10 @@
+import { moduleForPd, matchesModule } from '../../content/cpa/course/modules'
 import { reportStorageError } from '../lib/storage/events'
 import { useAsyncAction } from '../hooks/useAsyncAction'
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AlertCircle, BookOpen, CheckCircle2, CircleHelp, Heart, Search, Star } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { cpaLessonMap, cpaLessons, lessonGroups } from '../../content/cpa/lessons'
+import { cpaLessonMap, cpaLessons } from '../../content/cpa/lessons'
 import type { CPALesson } from '../../content/cpa/lessons/types'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -70,15 +71,12 @@ function MiniQuiz({ lesson, progress, onSaved }: { lesson: CPALesson; progress: 
 
 function LessonSidebar({ lesson }: { lesson: CPALesson }) {
   const [query, setQuery] = useState('')
-  const normalized = query.trim().toLowerCase()
-  const items = normalized ? cpaLessons.filter((item) => [item.pdCode, item.title, item.oneSentence, ...item.searchTerms].join(' ').toLowerCase().includes(normalized)) : cpaLessons
+  const module = moduleForPd(lesson.pdCode)
+  const items = cpaLessons.filter(item => (!module || matchesModule(module,item.pdCode)) && [item.title,item.pdCode,...item.searchTerms].join(' ').toLowerCase().includes(query.trim().toLowerCase()))
   return <aside className="space-y-4 xl:sticky xl:top-24 xl:max-h-[calc(100vh-7rem)] xl:overflow-auto">
-    <div className="relative"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Buscar aula..." className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs outline-none focus:border-emerald-400 dark:border-white/10 dark:bg-white/5" /></div>
-    {lessonGroups.map((group) => {
-      const groupItems = items.filter((item) => item.pdCode.startsWith(`${group.code}.`) || item.pdCode === group.code)
-      if (!groupItems.length) return null
-      return <div key={group.code}><p className="mb-2 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-300">{group.code} · {group.title}</p><div className="space-y-1">{groupItems.map((item) => <Link key={item.pdCode} to={`/conteudos/${item.pdCode}`} className={`block rounded-lg px-2.5 py-2 text-xs leading-4 transition ${item.pdCode === lesson.pdCode ? 'bg-emerald-400/15 font-semibold text-emerald-800 dark:text-emerald-200' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'}`}><span className="mr-1.5 font-mono font-bold">{item.pdCode}</span>{item.title}</Link>)}</div></div>
-    })}
+    {module && <Link to={`/modulos/${module.id}`} className="block text-sm font-bold text-emerald-700 dark:text-emerald-300">← {module.title}</Link>}
+    <div className="relative"><Search className="absolute left-3 top-3 h-4 w-4 text-slate-400"/><input aria-label="Buscar aula neste módulo" value={query} onChange={event => setQuery(event.target.value)} placeholder="Buscar neste módulo..." className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-3 text-xs dark:border-white/10 dark:bg-white/5"/></div>
+    <div className="space-y-1">{items.map(item => <Link key={item.pdCode} to={`/conteudos/${item.pdCode}`} className={`block rounded-lg px-3 py-2 text-xs leading-5 ${item.pdCode === lesson.pdCode ? 'bg-emerald-400/15 font-semibold text-emerald-700 dark:text-emerald-300' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'}`}>{item.title}</Link>)}</div>
   </aside>
 }
 
@@ -120,7 +118,7 @@ function LessonContent({ pdCode }: { pdCode: string | undefined }) {
     <LessonSidebar lesson={lesson} />
     <div className="min-w-0 space-y-6">
       {error ? <p role="alert" className="text-sm text-rose-600">{error}</p> : null}
-      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>PD {lesson.pdCode}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
+      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>{moduleForPd(lesson.pdCode)?.title ?? 'Aula de consulta'}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">PD {lesson.pdCode} · Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
 
       <Card className="border-emerald-400/25 bg-emerald-400/[0.06]"><p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-300">Em uma frase</p><p className="mt-3 text-lg font-semibold leading-7">{lesson.oneSentence}</p></Card>
 
@@ -139,7 +137,7 @@ function LessonContent({ pdCode }: { pdCode: string | undefined }) {
 
       <MiniQuiz lesson={lesson} progress={progress} onSaved={setProgress} />
 
-      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${source.verifiedAt}T12:00:00`))}</p></div>)}</div></Card>
+      <Card><h2 className="font-bold">Fontes oficiais</h2><p className="mt-1 text-xs text-slate-500">Material didático original; os links abaixo sustentam o conteúdo regulatório e institucional.</p><div className="mt-4 space-y-3">{lesson.officialSources.map((source) => <div key={source.id} className="rounded-xl border border-slate-200 p-3 dark:border-white/10"><p className="text-sm font-semibold">{source.institution} · {source.title}</p><a href={source.url} target="_blank" rel="noreferrer" className="mt-1 block break-all text-xs text-emerald-700 hover:underline dark:text-emerald-300">{source.url}</a><p className="mt-1 text-xs text-slate-500">PD {lesson.pdCode} · Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${source.verifiedAt}T12:00:00`))}</p></div>)}</div></Card>
 
       <Card className="space-y-4">
         <div className="flex flex-wrap gap-3">
@@ -152,8 +150,8 @@ function LessonContent({ pdCode }: { pdCode: string | undefined }) {
       </Card>
 
       <div className="grid gap-3 sm:grid-cols-2">
-        {previous ? <Link to={`/conteudos/${previous.pdCode}`}><Card className="h-full transition hover:border-emerald-400/40"><p className="text-xs text-slate-500">← Aula anterior</p><p className="mt-1 text-sm font-semibold">{previous.pdCode} · {previous.title}</p></Card></Link> : <div />}
-        {next ? <Link to={`/conteudos/${next.pdCode}`}><Card className="h-full text-right transition hover:border-emerald-400/40"><p className="text-xs text-slate-500">Próxima aula →</p><p className="mt-1 text-sm font-semibold">{next.pdCode} · {next.title}</p></Card></Link> : null}
+        {previous ? <Link to={`/conteudos/${previous.pdCode}`}><Card className="h-full transition hover:border-emerald-400/40"><p className="text-xs text-slate-500">← Aula anterior</p><p className="mt-1 text-sm font-semibold">{previous.title}</p></Card></Link> : <div />}
+        {next ? <Link to={`/conteudos/${next.pdCode}`}><Card className="h-full text-right transition hover:border-emerald-400/40"><p className="text-xs text-slate-500">Próxima aula →</p><p className="mt-1 text-sm font-semibold">{next.title}</p></Card></Link> : null}
       </div>
     </div>
   </div></div>

@@ -1,10 +1,13 @@
 import type { CPAQuestion, QuestionDifficulty } from '../../../content/cpa/questions/types'
 import type { QuestionAttemptRecord, SimulationRecord, SimulationResultSnapshot } from '../storage/types'
 
-export type SimulationMode = 'official_exam' | 'quick10' | 'quick20' | 'theme' | 'weak' | 'unseen'
+import { courseModuleMap, matchesModule } from '../../../content/cpa/course/modules'
+
+export type SimulationMode = 'module' | 'official_exam' | 'quick10' | 'quick20' | 'theme' | 'weak' | 'unseen'
 
 export interface SimulationRequest {
   mode: SimulationMode
+  moduleId?: string
   theme?: '1' | '2' | '3' | '4'
   seenQuestionIds?: Set<string>
   performanceSamples?: Array<{ pdCode: string; isCorrect: boolean }>
@@ -13,6 +16,7 @@ export interface SimulationRequest {
 
 export interface SimulationDefinition {
   mode: SimulationMode
+  moduleId?: string
   label: string
   questionCount: number
   durationSeconds: number
@@ -32,6 +36,7 @@ export const QUICK10_COUNTS = { '1': 2, '2': 4, '3': 3, '4': 1 } as const
 export const QUICK20_COUNTS = { '1': 4, '2': 8, '3': 6, '4': 2 } as const
 
 const modeLabels: Record<SimulationMode, string> = {
+  module: 'Simulado do módulo',
   official_exam: 'Treino completo CPA',
   quick10: 'Simulado 10',
   quick20: 'Simulado 20',
@@ -95,7 +100,15 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
   let cutoff: number | null = null
   let theme: string | null = request.theme ?? null
 
-  if (request.mode === 'official_exam') {
+  if (request.mode === 'module') {
+    const module = courseModuleMap.get(request.moduleId ?? '')
+    if (!module) throw new Error('Módulo não encontrado.')
+    const pool = questions.filter((q) => q.origin === 'authored' && matchesModule(module, q.pdCode))
+    if (pool.length < 6) throw new Error('Este módulo ainda não possui questões suficientes.')
+    selected = shuffle(pool, random).slice(0, 10)
+    durationSeconds = selected.length * 3 * 60
+    theme = null
+  } else if (request.mode === 'official_exam') {
     selected = pickWeighted(questions.filter((question) => question.origin !== 'generated'), OFFICIAL_EXAM.themeCounts, random)
     durationSeconds = OFFICIAL_EXAM.durationSeconds
     // The current bank has no validated branching decision trees. Do not claim exam readiness.
@@ -134,7 +147,8 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
   if (!selected.length) throw new Error('Não foi possível gerar o simulado com os filtros atuais.')
   return {
     mode: request.mode,
-    label: modeLabels[request.mode],
+    label: request.mode === 'module' ? `Simulado · ${courseModuleMap.get(request.moduleId!)!.title}` : modeLabels[request.mode],
+    ...(request.mode === 'module' ? { moduleId: request.moduleId } : {}),
     questionCount: selected.length,
     durationSeconds,
     cutoff,

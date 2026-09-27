@@ -58,7 +58,8 @@ export interface SimulationResultSnapshot {
 export interface SimulationPayload {
   questionSnapshots?: CPAQuestion[]
   currentIndex?: number
-  mode: 'official_exam' | 'quick10' | 'quick20' | 'theme' | 'weak' | 'unseen'
+  moduleId?: string
+  mode: 'module' | 'official_exam' | 'quick10' | 'quick20' | 'theme' | 'weak' | 'unseen'
   label: string
   theme: string | null
   questionIds: string[]

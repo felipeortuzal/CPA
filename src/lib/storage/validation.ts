@@ -1,3 +1,4 @@
+import { courseModuleMap } from '../../../content/cpa/course/modules'
 import type { CPAQuestion } from '../../../content/cpa/questions/types'
 import type { SimulationRecord } from './types'
 
@@ -24,8 +25,9 @@ export function validQuestion(value: unknown): value is CPAQuestion {
 export function validSimulation(value: unknown): value is SimulationRecord {
   if (!isRecord(value) || typeof value.id !== 'string' || value.certification !== 'CPA' || !natural(value.questionCount) || value.questionCount === 0 || !isRecord(value.payload)) return false
   const p = value.payload
-  if (!['official_exam', 'quick10', 'quick20', 'theme', 'weak', 'unseen'].includes(String(p.mode)) || typeof p.label !== 'string' || !(p.theme === null || typeof p.theme === 'string')) return false
+  if (!['module', 'official_exam', 'quick10', 'quick20', 'theme', 'weak', 'unseen'].includes(String(p.mode)) || typeof p.label !== 'string' || !(p.theme === null || typeof p.theme === 'string')) return false
   if (!strings(p.questionIds) || p.questionIds.length !== value.questionCount || new Set(p.questionIds).size !== p.questionIds.length || !isRecord(p.answers)) return false
+  if (p.mode === 'module' && (typeof p.moduleId !== 'string' || !courseModuleMap.has(p.moduleId))) return false
   const ids = new Set(p.questionIds)
   if (Object.keys(p.answers).length !== ids.size || !Object.entries(p.answers).every(([id, v]) => ids.has(id) && answer(v))) return false
   if (!strings(p.markedForReview) || !p.markedForReview.every((id) => ids.has(id)) || new Set(p.markedForReview).size !== p.markedForReview.length) return false

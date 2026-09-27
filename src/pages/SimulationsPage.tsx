@@ -65,6 +65,7 @@ export function SimulationsPage() {
       <Link to="/simulados/historico"><Button variant="secondary"><History className="h-4 w-4"/>Histórico ({completed.length})</Button></Link>
     </div>
 
+    <Link to="/conteudos" className="block rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-5"><h2 className="font-bold">Simulados dos 20 módulos</h2><p className="mt-2 text-sm leading-6 text-slate-500">Escolha um assunto, revise a leitura e faça o simulado ao final. Cada módulo tem de 6 a 10 questões autorais comentadas.</p><span className="mt-3 block text-sm font-bold text-emerald-700 dark:text-emerald-300">Escolher módulo →</span></Link>
     {active ? <Card className="border-amber-300 bg-amber-50 dark:border-amber-400/20 dark:bg-amber-400/[0.06]"><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-700 dark:text-amber-300">Simulado em andamento</p><p className="mt-1 font-semibold">{active.payload.label} · {active.questionCount} questões</p></div><Button onClick={() => navigate(`/prova/${active.id}`)}>Continuar <ArrowRight className="h-4 w-4"/></Button></div></Card> : null}
 
     <Card className="overflow-hidden p-0">

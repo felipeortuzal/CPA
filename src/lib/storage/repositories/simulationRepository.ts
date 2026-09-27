@@ -27,6 +27,7 @@ export async function createSimulation(definition: SimulationDefinition) {
     completedAt: null,
     payload: {
       mode: definition.mode,
+      ...(definition.moduleId ? { moduleId: definition.moduleId } : {}),
       label: definition.label,
       theme: definition.theme,
       questionIds: [...definition.questionIds],
