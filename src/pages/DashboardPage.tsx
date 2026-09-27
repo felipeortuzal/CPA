@@ -24,7 +24,8 @@ const factorLabel={
 export function DashboardPage(){
   const {data:d,loading}=useDashboardData()
   const {snapshot:study,loading:studyLoading}=useStudyEngine()
-  if(loading||!d)return <div className="mx-auto max-w-7xl space-y-6"><Skeleton className="h-24"/><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{Array.from({length:4}).map((_,i)=><Skeleton key={i} className="h-28"/>)}</div><Skeleton className="h-80"/></div>
+  if(loading||!d)return <div className="mx-auto max-w-7xl space-y-6">
+    <Link to="/conteudos" className="block rounded-3xl border border-emerald-400/30 bg-gradient-to-r from-emerald-400/10 to-sky-400/5 p-6"><p className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-300">Sua trilha CPA</p><h2 className="mt-2 text-2xl font-bold">20 módulos para aprender com calma</h2><p className="mt-2 text-sm leading-6 text-slate-500">Leitura guiada, exemplos resolvidos e um simulado por módulo.</p><span className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-emerald-700 dark:text-emerald-300">Abrir meus módulos <ArrowRight className="h-4 w-4"/></span></Link><Skeleton className="h-24"/><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{Array.from({length:4}).map((_,i)=><Skeleton key={i} className="h-28"/>)}</div><Skeleton className="h-80"/></div>
 
   return <div className="mx-auto max-w-7xl space-y-6">
     <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">

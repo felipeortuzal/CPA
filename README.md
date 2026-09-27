@@ -9,7 +9,7 @@ A plataforma está focada exclusivamente na CPA e contém:
 - Programa Detalhado CPA v1.2 estruturado em **590 nós curriculares**;
 - **445 aulas completas**, uma para cada PD terminal;
 - **1.780 flashcards** de aula, além de flashcards pessoais;
-- **545 questões** (100 autorais e 445 exercícios gerados automaticamente; revisão individual pendente);
+- **583 questões** (138 autorais e 445 exercícios gerados automaticamente; revisão individual pendente);
 - cobertura de questões em todos os 445 PDs terminais;
 - Treino completo com **50 questões autorais** e 2h30, sem estimativa de aprovação;
 - Simulado 10, Simulado 20, por tema, pontos fracos e somente inéditas;
@@ -190,9 +190,9 @@ Status:
 
 Dominado exige aula estudada e melhor mini quiz >= 75%.
 
-## Question Engine — 545 questões
+## Question Engine — 583 questões
 
-O banco preserva as 100 questões originais das primeiras versões e adiciona **445 novas questões autorais**, garantindo pelo menos uma questão em cada PD terminal.
+O banco preserva as 100 questões originais, acrescenta 38 casos autorais para os módulos e mantém **445 exercícios gerados automaticamente**, um por PD terminal. Os exercícios gerados continuam com revisão individual pendente e não participam dos simulados de módulo.
 
 Tipos:
 
@@ -404,3 +404,13 @@ A V23 corrige perda de progresso em gravações simultâneas, respostas de mini 
 A publicação no Pages executa os testes de navegador antes do deploy, inclusive quando o envio é feito diretamente em `main`. Vitest foi atualizado para 4.1.11; a auditoria npm desta revisão não apontou vulnerabilidades conhecidas.
 
 Veja [V23_REPORT.md](V23_REPORT.md) para escopo, evidências e limites da varredura.
+
+## V24 — estudo em 20 módulos
+
+A navegação principal apresenta 20 módulos temáticos em vez de uma árvore de códigos. Cada módulo oferece leitura autoral, caso resolvido, comparação, pegadinhas, revisão por perguntas e um simulado de 6–10 questões autorais do próprio assunto. A correção completa inclui acertos, erros e questões em branco.
+
+As 445 aulas completas de consulta continuam acessíveis dentro dos módulos; `/edital` mantém a hierarquia oficial. Marcar uma leitura não conclui automaticamente as aulas correspondentes. Leituras e resultados de módulo são salvos localmente e incluídos no backup, sem alterar os IDs do histórico anterior.
+
+Há links para o caderno oficial da ANBIMA e materiais gratuitos da Elite Bancária e TopInvest. Os sites externos podem exigir cadastro e internet. As leituras e os 38 novos casos são originais, sem reprodução de apostilas de terceiros.
+
+Veja [V24_REPORT.md](V24_REPORT.md) para escopo e validação.

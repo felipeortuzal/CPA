@@ -6,7 +6,7 @@ import { OfflineBanner } from '../components/system/OfflineBanner'
 import { useStudent } from '../features/profile/StudentProvider'
 import { useTheme } from '../hooks/useTheme'
 
-const nav = [['Dashboard','/',LayoutDashboard],['Trilha de Estudos','/trilha',GraduationCap],['Conteúdos','/conteudos',BookOpen],['Questões','/questoes',ClipboardCheck],['Simulados','/simulados',FileText],['Plano de Estudos','/plano',CalendarDays],['Estudo Ativo','/estudo-ativo',Layers3],['Revisão','/revisao',RotateCcw],['Flashcards','/flashcards',Brain],['Caderno de Erros','/erros',Target],['Estatísticas','/estatisticas',BarChart3],['Fontes e Atualizações','/fontes',FileText]] as const
+const nav = [['Dashboard','/',LayoutDashboard],['Módulos de estudo','/trilha',GraduationCap],['Mapa do edital','/edital',BookOpen],['Questões','/questoes',ClipboardCheck],['Simulados','/simulados',FileText],['Plano de Estudos','/plano',CalendarDays],['Estudo Ativo','/estudo-ativo',Layers3],['Revisão','/revisao',RotateCcw],['Flashcards','/flashcards',Brain],['Caderno de Erros','/erros',Target],['Estatísticas','/estatisticas',BarChart3],['Fontes e Atualizações','/fontes',FileText]] as const
 
 export function AppLayout() {
   const [mobileOpen,setMobileOpen] = useState(false)

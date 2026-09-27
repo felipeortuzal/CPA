@@ -5,6 +5,7 @@ import { StudentProvider, useStudent } from './features/profile/StudentProvider'
 import { AppLayout } from './layouts/AppLayout'
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then((module) => ({ default: module.DashboardPage })))
+const ModulePage = lazy(() => import('./pages/ModulePage').then((module) => ({ default: module.ModulePage })))
 const ContentsPage = lazy(() => import('./pages/ContentsPage').then((module) => ({ default: module.ContentsPage })))
 const CurriculumPage = lazy(() => import('./pages/CurriculumPage').then((module) => ({ default: module.CurriculumPage })))
 const ErrorNotebookPage = lazy(() => import('./pages/ErrorNotebookPage').then((module) => ({ default: module.ErrorNotebookPage })))
@@ -27,7 +28,9 @@ const WelcomePage = lazy(() => import('./pages/WelcomePage').then((module) => ({
 const router = createHashRouter([
   { path:'/', element:<AppLayout/>, children:[
     { index:true, element:<DashboardPage/> },
-    { path:'trilha', element:<CurriculumPage/> },
+    { path:'trilha', element:<ContentsPage/> },
+    { path:'edital', element:<CurriculumPage/> },
+    { path:'modulos/:moduleId', element:<ModulePage/> },
     { path:'conteudos', element:<ContentsPage/> },
     { path:'conteudos/:pdCode', element:<LessonPage/> },
     { path:'questoes', element:<QuestionsPage/> },

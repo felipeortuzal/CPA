@@ -20,7 +20,7 @@ const has=(content,needle,label)=>expect(content.includes(needle),label+': missi
 
 expect(Number(files.pkg.version.split('.')[1])>=21,'package.json must preserve V21 or newer capabilities')
 has(files.lessons,'cpaLessons.length!==445','lessons index')
-has(files.questions,'cpaQuestions.length!==545','questions index')
+has(files.questions,'cpaQuestions.length!==583','questions index')
 has(files.flashcards,'cpaLessons.flatMap','flashcards')
 has(files.app,"path:'estatisticas', element:<AnalyticsPage/>",'App analytics route')
 has(files.app,"path:'estudo-ativo', element:<ActiveStudyPage/>",'App active-study route')
@@ -35,7 +35,7 @@ has(files.update,'git pull --ff-only','updater')
 expect(!/git reset --hard|git clean -f/i.test(files.update),'updater contains destructive Git command')
 has(files.readme,'445 aulas completas','README')
 has(files.readme,'1.780 flashcards','README')
-has(files.readme,'545 questões','README')
+has(files.readme,'583 questões','README')
 has(files.readme,'update-cpa.bat','README')
 expect(!/C-Pro\s*[RI]/i.test(files.readme),'README should remain CPA-only for this roadmap')
 
@@ -44,4 +44,4 @@ if(errors.length){
   for(const error of errors)console.error('- '+error)
   process.exit(1)
 }
-console.log('V21 CPA-only validation passed: 445 lessons, 1,780 flashcards, 545 questions, analytics and active study wired.')
+console.log('V21 CPA-only validation passed: 445 lessons, 1,780 flashcards, 583 questions, analytics and active study wired.')

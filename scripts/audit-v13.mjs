@@ -44,7 +44,7 @@ expect(sourceById.get('ANBIMA_PD')?.knownVersion==='1.2','ANBIMA_PD version mism
 expect(sourceById.get('ANBIMA_EXAM_NOTICE')?.knownVersion==='1.4','ANBIMA_EXAM_NOTICE version mismatch')
 for(const id of ['ANBIMA_PD','ANBIMA_PROGRAMS_PAGE','ANBIMA_EXAM_NOTICE','ANBIMA_QUESTION_GUIDE','ANBIMA_QUESTION_BOOK_CPA'])expect(sourceById.has(id),`missing central official source: ${id}`)
 
-for(const route of requiredRoutes)expect(app.includes(route)||layout.includes(route),`required route/navigation missing: ${route}`)
+for(const route of requiredRoutes)expect(app.includes(`path:'${route.slice(1)}'`)||app.includes(route)||layout.includes(route),`required route/navigation missing: ${route}`)
 requireText(db,'export const DB_VERSION = 2','database')
 for(const store of requiredStores)requireText(db,store,'database')
 requireText(backup,'const BACKUP_VERSION = 2 as const','backup')
@@ -78,7 +78,7 @@ for(const file of [
 
 requireText(readme,'445 aulas','README')
 requireText(readme,'1.780 flashcards','README')
-requireText(readme,'545 questões','README')
+requireText(readme,'583 questões','README')
 requireText(readme,'50 questões','README')
 requireText(readme,'35 acertos','README')
 requireText(readme,'Para o Thó','README')
