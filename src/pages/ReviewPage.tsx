@@ -1,49 +1,14 @@
-import { AlertTriangle, ArrowRight, Brain, CalendarClock, Clock3, MoonStar, RefreshCw, Target, Zap } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { Badge } from '../components/ui/Badge'
-import { Button } from '../components/ui/Button'
+import { useDailyStudy } from '../hooks/useDailyStudy'
 import { Card } from '../components/ui/Card'
-import { Progress } from '../components/ui/Progress'
-import { useReviewCenter } from '../features/review/useReviewCenter'
-
-const typeLabel={flashcard:'Flashcard',error:'Erro',content:'Conteúdo'} as const
-
-export function ReviewPage(){
-  const {center,study,loading,refresh}=useReviewCenter()
-  if(loading||!center||!study)return <div className="mx-auto max-w-7xl"><Card><p className="py-12 text-center text-sm text-slate-500">Montando sua fila de revisão...</p></Card></div>
-
-  const modes=[
-    {mode:'5',title:'5 minutos',description:'Uma revisão curtíssima para não quebrar a sequência.',icon:Zap},
-    {mode:'10',title:'10 minutos',description:'Mistura erros, flashcards e pontos fracos de maior prioridade.',icon:Clock3},
-    {mode:'20',title:'20 minutos',description:'Bloco mais completo para consolidar conteúdo sem entrar em simulado.',icon:Target},
-    {mode:'eve',title:'Revisão de Véspera',description:'Só conteúdo já visto: erros, vencidos e pontos fracos. Nada de matéria nova.',icon:MoonStar},
-  ]
-
-  return <div className="mx-auto max-w-7xl space-y-6">
-    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>V9 · Central de Revisão</Badge><span className="text-sm text-slate-500">fila V8 + domínio e prontidão V9</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">O que revisar agora</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">A fila combina flashcards vencidos, erros recorrentes, falsa confiança, baixo domínio, dúvidas e conteúdo antigo usando os dados reais do Study Engine.</p></div><Button variant="secondary" onClick={()=>void refresh()}><RefreshCw className="h-4 w-4"/>Atualizar fila</Button></div>
-
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
-      <Card><Brain className="h-5 w-5 text-emerald-500"/><p className="mt-3 text-2xl font-black">{center.dueFlashcards}</p><p className="text-sm font-semibold">Flashcards para revisar</p></Card>
-      <Card><AlertTriangle className="h-5 w-5 text-rose-500"/><p className="mt-3 text-2xl font-black">{center.unresolvedErrors}</p><p className="text-sm font-semibold">Erros pendentes</p></Card>
-      <Card><AlertTriangle className="h-5 w-5 text-orange-500"/><p className="mt-3 text-2xl font-black">{center.recurrentErrors}</p><p className="text-sm font-semibold">Erros recorrentes</p></Card>
-      <Card><Target className="h-5 w-5 text-violet-500"/><p className="mt-3 text-2xl font-black">{center.weakPdCount}</p><p className="text-sm font-semibold">PDs fracos</p></Card>
-      <Card><CalendarClock className="h-5 w-5 text-amber-500"/><p className="mt-3 text-2xl font-black">{center.overdueContent}</p><p className="text-sm font-semibold">Conteúdos vencidos</p></Card>
-      <Card><AlertTriangle className="h-5 w-5 text-yellow-500"/><p className="mt-3 text-2xl font-black">{study.falseConfidencePdCodes.length}</p><p className="text-sm font-semibold">Falsa confiança</p></Card>
-    </div>
-
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">{modes.map(({mode,title,description,icon:Icon})=><Card key={mode} className="flex flex-col"><div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-400/12 text-emerald-700 dark:text-emerald-300"><Icon className="h-5 w-5"/></div><h2 className="mt-4 font-bold">{title}</h2><p className="mt-1 flex-1 text-sm leading-6 text-slate-500">{description}</p><Link className="mt-5" to={`/revisao/sessao?mode=${mode}`}><Button className="w-full" disabled={center.queue.length===0}>Começar <ArrowRight className="h-4 w-4"/></Button></Link></Card>)}</div>
-
-    <div className="grid gap-6 xl:grid-cols-[1.35fr_.65fr]">
-      <Card className="overflow-hidden p-0">
-        <div className="flex items-center justify-between border-b border-slate-200 p-5 dark:border-white/10"><div><h2 className="font-bold">Fila priorizada</h2><p className="mt-1 text-xs text-slate-500">Erros recorrentes e falsa confiança sobem na prioridade.</p></div><span className="text-sm font-black">{center.queue.length} itens</span></div>
-        {center.queue.length===0?<div className="p-10 text-center"><p className="font-bold">Fila zerada.</p><p className="mt-1 text-sm text-slate-500">Estude, responda questões ou abra aulas para gerar novas revisões.</p></div>:<div className="divide-y divide-slate-100 dark:divide-white/[0.06]">{center.queue.slice(0,12).map((item,index)=><div key={item.id} className="flex items-start gap-3 p-4"><div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-xs font-black dark:bg-white/5">{index+1}</div><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center gap-2"><Badge>{typeLabel[item.type]}</Badge>{item.pdCode?<span className="font-mono text-[11px] font-bold text-emerald-600 dark:text-emerald-300">PD {item.pdCode}</span>:null}<span className="text-[11px] text-slate-400">~{item.estimatedMinutes} min</span></div><p className="mt-1 line-clamp-2 text-sm font-semibold">{item.title}</p><p className="mt-1 text-xs leading-5 text-slate-500">{item.reason}</p></div>{item.route?<Link to={item.route}><Button variant="secondary">Abrir</Button></Link>:null}</div>)}</div>}
-      </Card>
-
-      <div className="space-y-4">
-        <Card><div className="flex items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-400">Prontidão CPA</p><p className="mt-1 text-3xl font-black">{study.readinessScore===null?'—':`${study.readinessScore}%`}</p></div><Target className="h-6 w-6 text-violet-500"/></div><p className="mt-2 text-sm font-semibold">{study.readinessLabel}</p><Progress value={study.readinessScore??0}/><p className="mt-3 text-xs leading-5 text-slate-500">{study.readinessMessage}</p>{study.readinessDataStatus==='insufficient'?<p className="mt-2 rounded-lg bg-amber-400/10 px-3 py-2 text-[11px] font-semibold text-amber-700 dark:text-amber-300">Não exibimos um score preciso enquanto a amostra é pequena.</p>:null}</Card>
-        <Card><div className="flex items-center gap-2"><Brain className="h-5 w-5 text-emerald-500"/><h2 className="font-bold">Flashcards</h2></div><p className="mt-2 text-sm leading-6 text-slate-500">Revise com Again, Hard, Good e Easy. O histórico agora também entra como evidência moderada de domínio.</p><Link to="/flashcards"><Button variant="secondary" className="mt-4 w-full">Abrir Flashcards</Button></Link></Card>
-        <Card><h2 className="font-bold">Por macrotema</h2><div className="mt-4 space-y-4">{study.macroSummary.map((item)=><div key={item.macroCode}><div className="mb-1 flex items-center justify-between text-xs"><span className="font-semibold">Tema {item.macroCode} · peso {item.officialWeight}%</span><span>{item.score}/100</span></div><Progress value={item.score}/><p className="mt-1 text-[11px] text-slate-400">{item.coveragePercent}% cobertura · {item.sufficientPercent}% com amostra suficiente</p></div>)}</div></Card>
-      </div>
-    </div>
+import { Button } from '../components/ui/Button'
+export function ReviewPage() {
+  const daily=useDailyStudy()
+  const session=daily.sessions.review
+  const steps=session?.steps??daily.review
+  if(daily.loading)return <Card><p role="status">Montando sua revisão...</p></Card>
+  return <div className="mx-auto max-w-5xl space-y-6"><header><h1 className="text-3xl font-bold">Revisão de hoje</h1><p className="mt-3 max-w-3xl text-sm leading-7 text-slate-500">Uma sessão que mistura erros, flashcards, pontos fracos e conceitos antigos. Você responde e recebe feedback aqui, sem precisar escolher uma ferramenta a cada etapa.</p></header><Card className="border-emerald-400/30"><h2 className="text-2xl font-bold">{steps.reduce((sum,s)=>sum+s.minutes,0)} minutos estimados</h2><p className="mt-3 text-sm leading-7 text-slate-500">{steps.filter(s=>s.type==='question'&&s.errorId).length} erros · {steps.filter(s=>s.type==='flashcard').length} flashcards · {steps.filter(s=>s.type==='question'&&!s.errorId).length} questões de reforço e revisão espaçada.</p>{steps.length?<Link to="/hoje?kind=review" className="mt-5 inline-block"><Button>{session?.index===steps.length?'Ver revisão concluída':session?'Continuar revisão':'Começar revisão'}</Button></Link>:<p className="mt-4 text-sm">Nenhuma pendência selecionada. <Link to="/conteudos" className="font-bold text-emerald-700 dark:text-emerald-300">Continue um módulo →</Link></p>}</Card>
+    <section><h2 className="mb-3 text-lg font-bold">Na sua fila</h2><ol className="space-y-2">{steps.map((step,i)=><li key={step.id} className="rounded-xl border border-slate-200 p-3 text-sm dark:border-white/10"><span className="mr-3 font-bold text-emerald-700 dark:text-emerald-300">{i+1}</span>{step.reason}{session&&i<session.index?' · realizada ou pulada':''}</li>)}</ol></section>
+    <details className="rounded-2xl border border-slate-200 p-5 dark:border-white/10"><summary className="cursor-pointer font-semibold">Escolher uma ferramenta de revisão</summary><div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold text-emerald-700 dark:text-emerald-300"><Link to="/erros">Caderno de erros</Link><Link to="/flashcards">Flashcards</Link><Link to="/estudo-ativo">Estudo ativo</Link><Link to="/revisao/sessao?mode=5">Sessão livre de 5 minutos</Link><Link to="/revisao/sessao?mode=eve">Revisão de véspera</Link></div></details>
   </div>
 }

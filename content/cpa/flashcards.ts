@@ -6,7 +6,7 @@ export interface CPAFlashcard {
   pdCode: string | null
   front: string
   back: string
-  source: 'lesson' | 'custom'
+  source: 'lesson' | 'custom' | 'module'
 }
 
 export const cpaLessonFlashcards: CPAFlashcard[] = cpaLessons.flatMap((lesson) =>

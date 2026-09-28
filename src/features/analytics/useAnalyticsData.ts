@@ -1,3 +1,4 @@
+import { reviewedEvidence } from '../../lib/qualityEvidence'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { buildAnalyticsSnapshot, type AnalyticsSnapshot } from '../../lib/analytics/engine'
 import { STORAGE_CHANGED_EVENT, reportStorageError } from '../../lib/storage/events'
@@ -21,7 +22,7 @@ export function useAnalyticsData(){
         getAllLessonProgress(),
         getQuizAttempts(),
       ])
-      setSnapshot(buildAnalyticsSnapshot({attempts,errors,simulations,sessions,lessons,quizzes}))
+      setSnapshot(buildAnalyticsSnapshot({...reviewedEvidence(attempts,simulations,errors),sessions,lessons,quizzes}))
     } catch { reportStorageError() } finally { setLoading(false) }
   },[])
 

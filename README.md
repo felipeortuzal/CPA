@@ -2,14 +2,26 @@
 
 Plataforma local, gratuita e offline-first para estudar a **CPA — Certificado Profissional ANBIMA** do modelo vigente em 2026.
 
-## Estado atual — v0.23
+## Comece a estudar — sem instalar programas
+
+Abra **[CPA Study](https://felipeortuzal.github.io/CPA/)**, informe seu nome e use **Começar sessão de hoje**. Para o Thó e demais alunos, esse é o caminho recomendado. Para estudar sem internet, baixe [CPA_Study.html](CPA_Study.html) e abra em Chrome ou Edge. Instruções de Git e Node são apenas para desenvolvimento, mais abaixo.
+
+A trilha principal tem **20 módulos**, com leitura, exemplos, comparações, revisão e um **simulado de 8 questões ao final de cada módulo**. Os 445 pontos do edital ficam na biblioteca de aprofundamento. Cada módulo tem 15 questões autorais; as inéditas têm prioridade ao refazer o simulado.
+
+A sessão diária combina leitura, prática e revisão, salva a etapa atual e pode ser retomada. A revisão de hoje intercala erros pendentes, flashcards previstos, assuntos fracos e questões praticadas há pelo menos 7 dias. Itens pulados ficam registrados; uma nova fila é montada no próximo dia.
+
+**Concluir não é dominar.** Conclusão exige ler as partes e finalizar um simulado, independentemente da nota. Domínio exige 12 questões distintas revisadas, três dias de prática, intervalo mínimo de sete dias, acerto recente de pelo menos 80%, duas práticas recentes consistentes e simulado elegível com pelo menos 70%. Evidência de mais de 30 dias pede revisão. Os módulos permanecem livres para navegar.
+
+O progresso fica neste navegador. Em **Configurações**, exporte seu backup, veja a versão e a data da revisão editorial e consulte atualizações manualmente. O app mostra um lembrete discreto após prática acumulada. A data de exportação indica a solicitação do download; confira se o JSON foi salvo. Abas do mesmo site se atualizam entre si; isso não sincroniza dispositivos nem combina os dados do site com os do HTML.
+
+## Estado atual — v0.25
 
 A plataforma está focada exclusivamente na CPA e contém:
 
 - Programa Detalhado CPA v1.2 estruturado em **590 nós curriculares**;
 - **445 aulas completas**, uma para cada PD terminal;
 - **1.780 flashcards** de aula, além de flashcards pessoais;
-- **583 questões** (138 autorais e 445 exercícios gerados automaticamente; revisão individual pendente);
+- **745 questões** (300 autorais revisadas e 445 exercícios gerados automaticamente, ainda em rascunho);
 - cobertura de questões em todos os 445 PDs terminais;
 - Treino completo com **50 questões autorais** e 2h30, sem estimativa de aprovação;
 - Simulado 10, Simulado 20, por tema, pontos fracos e somente inéditas;
@@ -57,13 +69,13 @@ Para atualizar: exporte o JSON, baixe o HTML novo, abra e importe o backup se ne
 
 ### Limites editoriais atuais
 
-As 445 questões de cobertura são geradas por regras e permanecem identificadas como rascunhos. As outras 100 são autorais, também sem conferência individual comprovada nesta auditoria. Os links de referência e datas antigas não constituem validação de gabarito. A aplicação conserva todos os IDs existentes.
+As 445 questões de cobertura são geradas por regras e permanecem identificadas como rascunhos. As 300 autorais passaram por revisão editorial assistida, com registro por ID e revisão exata do texto. Isso não equivale a homologação pela ANBIMA ou verificação regulatória independente. Nenhuma é apresentada como verificada. Os links de referência e datas antigas não constituem validação de gabarito. A aplicação conserva todos os IDs existentes.
 
 Os diálogos atuais são questões objetivas, **não árvores de decisão com ramificações**. O treino completo exclui a cobertura gerada e não mostra aprovação/reprovação. Não há ainda um simulado fiel homologado ao formato oficial. O indicador de estudo é descritivo do desempenho neste banco.
 
 ## Acesso pelo site
 
-A plataforma também está preparada para **GitHub Pages**. Depois que o Pages for habilitado no repositório, o acesso será:
+O site está publicado no **GitHub Pages**:
 
 ```text
 https://felipeortuzal.github.io/CPA/
@@ -84,7 +96,7 @@ As rotas usam hash routing, então páginas internas continuam funcionando no Gi
 
 > Importante: limpar os dados do site/navegador pode apagar o progresso local. Para segurança, use Configurações > Dados e Backup periodicamente.
 
-## Como abrir — Felipe
+## Desenvolvimento — instalação local opcional
 
 Se o projeto já está instalado:
 
@@ -103,7 +115,7 @@ npm install --no-package-lock
 npm run dev
 ```
 
-## Para o Thó — primeira instalação
+## Ambiente de desenvolvimento — primeira instalação
 
 Requisitos:
 
@@ -190,9 +202,9 @@ Status:
 
 Dominado exige aula estudada e melhor mini quiz >= 75%.
 
-## Question Engine — 583 questões
+## Banco de questões — 745 questões
 
-O banco preserva as 100 questões originais, acrescenta 38 casos autorais para os módulos e mantém **445 exercícios gerados automaticamente**, um por PD terminal. Os exercícios gerados continuam com revisão individual pendente e não participam dos simulados de módulo.
+O banco preserva as 100 questões originais, acrescenta 200 casos autorais para os módulos e mantém **445 exercícios gerados automaticamente**, um por PD terminal. Os exercícios gerados continuam com revisão individual pendente e não participam de nenhum simulado nem dos indicadores de desempenho.
 
 Tipos:
 
@@ -414,3 +426,15 @@ As 445 aulas completas de consulta continuam acessíveis dentro dos módulos; `/
 Há links para o caderno oficial da ANBIMA e materiais gratuitos da Elite Bancária e TopInvest. Os sites externos podem exigir cadastro e internet. As leituras e os 38 novos casos são originais, sem reprodução de apostilas de terceiros.
 
 Veja [V24_REPORT.md](V24_REPORT.md) para escopo e validação.
+
+## Consolidação V25
+
+- Início centrado nos módulos, na sessão diária e na revisão de hoje.
+- Menu agrupado em Início, Estudar, Praticar, Revisar e Progresso; fontes e configurações secundárias.
+- 300 questões autorais com revisão editorial vinculada ao conteúdo; 445 exercícios automáticos fora das métricas e dos simulados.
+- Sessões diárias persistidas, com proteção contra cliques duplicados e retomada após recarga.
+- Conclusão e domínio separados, sem impedir a navegação livre.
+- Exportação de backup registrada, lembrete discreto, consulta manual de versão e atualização de dados entre abas do mesmo site.
+- Mantidos CPA apenas, backup v1/v2, banco local versão 2 e monitoramento de fontes sem reescrita automática do conteúdo.
+
+Validação: `npm run validate` cobre currículo, aulas, questões, fontes, integridade, 114 testes, TypeScript e builds web/HTML. `npm run test:browser` testa o HTML offline no Chromium. `npm run test:cross-browser` executa o teste de navegação, teclado, sessão e abas no Chromium, Firefox e WebKit pelo CI. WebKit automatizado não substitui avaliação em aparelhos Safari reais.

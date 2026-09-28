@@ -10,12 +10,12 @@ export async function getQuestionAttempts(questionId?: string) {
   return questionId ? db.getAllFromIndex('questionAttempts', 'by-question-id', questionId) : db.getAll('questionAttempts')
 }
 
-export async function answerQuestion(question: CPAQuestion, selectedAnswer: number): Promise<QuestionAttemptRecord> {
+export async function answerQuestion(question: CPAQuestion, selectedAnswer: number, options?: { id: string; mode: 'practice' | 'review' }): Promise<QuestionAttemptRecord> {
   if (!Number.isInteger(selectedAnswer) || selectedAnswer < 0 || selectedAnswer >= question.options.length) throw new Error('Alternativa inválida.')
   const db = await getDatabase()
   const now = new Date().toISOString()
   const attempt: QuestionAttemptRecord = {
-    id: crypto.randomUUID(),
+    id: options?.id ?? crypto.randomUUID(),
     questionId: question.id,
     pdCode: question.pdCode,
     selectedAnswer,
@@ -23,7 +23,7 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
     selectedOptionId: optionId(question, selectedAnswer),
     correctOptionId: optionId(question, question.correctAnswer),
     questionSnapshot: structuredClone(question),
-    mode: 'practice',
+    mode: options?.mode ?? 'practice',
     correctAnswer: question.correctAnswer,
     isCorrect: selectedAnswer === question.correctAnswer,
     answeredAt: now,
@@ -31,6 +31,7 @@ export async function answerQuestion(question: CPAQuestion, selectedAnswer: numb
   const tx = db.transaction(['questionAttempts', 'errors', 'activityDays'], 'readwrite')
   const attemptsStore = tx.objectStore('questionAttempts')
   const errorsStore = tx.objectStore('errors')
+  if (options?.id) { const previous = await attemptsStore.get(options.id); if (previous) { await tx.done; return previous } }
   await attemptsStore.put(attempt)
 
   if (!attempt.isCorrect) {
