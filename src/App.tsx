@@ -4,6 +4,7 @@ import { AppErrorBoundary } from './components/system/AppErrorBoundary'
 import { StudentProvider, useStudent } from './features/profile/StudentProvider'
 import { AppLayout } from './layouts/AppLayout'
 
+const DailySessionPage = lazy(() => import('./pages/DailySessionPage').then(module => ({default:module.DailySessionPage})))
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 const ModulePage = lazy(() => import('./pages/ModulePage').then((module) => ({ default: module.ModulePage })))
 const ContentsPage = lazy(() => import('./pages/ContentsPage').then((module) => ({ default: module.ContentsPage })))
@@ -28,6 +29,7 @@ const WelcomePage = lazy(() => import('./pages/WelcomePage').then((module) => ({
 const router = createHashRouter([
   { path:'/', element:<AppLayout/>, children:[
     { index:true, element:<DashboardPage/> },
+    { path:'hoje', element:<DailySessionPage/> },
     { path:'trilha', element:<ContentsPage/> },
     { path:'edital', element:<CurriculumPage/> },
     { path:'modulos/:moduleId', element:<ModulePage/> },

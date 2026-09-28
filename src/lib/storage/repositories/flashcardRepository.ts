@@ -1,3 +1,6 @@
+import { courseModuleMap } from '../../../../content/cpa/course/modules'
+import { moduleReadings } from '../../../../content/cpa/course/readings'
+import { validCourseProgress } from './courseRepository'
 import { cpaLessonFlashcards, type CPAFlashcard } from '../../../../content/cpa/flashcards'
 import { getDatabase } from '../database'
 import { notifyStorageChanged } from '../events'
@@ -37,21 +40,29 @@ export function toCustomCPAFlashcard(card:StoredFlashcard):CPAFlashcard{
 
 export async function getActiveFlashcards(){
   const db=await getDatabase()
-  const [progress,custom]=await Promise.all([db.getAll('lessonProgress'),db.getAll('flashcards')])
+  const [progress,custom,plans]=await Promise.all([db.getAll('lessonProgress'),db.getAll('flashcards'),db.getAll('studyPlans')])
   const activePdCodes=new Set(progress.filter((row)=>row.status!=='not_started').map((row)=>row.pdCode))
+  const moduleCards:CPAFlashcard[]=plans.flatMap(row=>{
+    const payload=row.payload
+    if(!validCourseProgress(payload,row.id)||!payload.readSections.length)return []
+    return moduleReadings[payload.moduleId].recall.map((card,i)=>({id:`module:${payload.moduleId}:${i}`,certification:'CPA' as const,pdCode:courseModuleMap.get(payload.moduleId)!.prefixes[0],front:card.question,back:card.answer,source:'module' as const}))
+  })
   return[
+    ...moduleCards,
     ...cpaLessonFlashcards.filter((card)=>card.pdCode&&activePdCodes.has(card.pdCode)),
     ...custom.map(toCustomCPAFlashcard),
   ]
 }
 
-export async function reviewFlashcard(flashcardId:string,rating:FlashcardRating,at=new Date()){
+export async function reviewFlashcard(flashcardId:string,rating:FlashcardRating,at=new Date(),id?:string){
   const db=await getDatabase()
   const tx=db.transaction(['flashcards','flashcardReviews','activityDays'],'readwrite')
   if(flashcardId.startsWith('custom:') && !await tx.objectStore('flashcards').get(flashcardId.slice(7))) throw new Error('Este flashcard foi excluído. Atualize a fila.')
   const store=tx.objectStore('flashcardReviews')
+  if(id){const previous=await store.get(id);if(previous){await tx.done;return previous}}
   const reviews=await store.index('by-flashcard-id').getAll(flashcardId)
   const record:FlashcardReviewRecord=scheduleFlashcardReview(flashcardId,rating,reviews,at)
+  if(id)record.id=id
   await store.put(record)
   await recordActivityInStore(tx.objectStore('activityDays'),at)
   await tx.done

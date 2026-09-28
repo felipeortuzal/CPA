@@ -1,3 +1,5 @@
+import { reviewedEvidence } from '../../lib/qualityEvidence'
+import { isReviewed } from '../../../content/cpa/questions/quality'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { cpaQuestions } from '../../../content/cpa/questions'
 import { cpaLessonMap } from '../../../content/cpa/lessons'
@@ -11,7 +13,7 @@ import { getSimulations } from '../../lib/storage/repositories/simulationReposit
 import { saveDailyStudyPlan } from '../../lib/storage/repositories/studyPlanRepository'
 import { useStudent } from '../profile/StudentProvider'
 
-const questionPdCodes=new Set(cpaQuestions.map((question)=>question.pdCode))
+const questionPdCodes=new Set(cpaQuestions.filter(isReviewed).map((question)=>question.pdCode))
 const questionDifficultyById=new Map(cpaQuestions.map((question)=>[question.id,question.difficulty]))
 const lessonPdCodes=new Set(cpaLessonMap.keys())
 
@@ -27,8 +29,9 @@ export function useStudyEngine(){
         getAllLessonProgress(),getQuizAttempts(),getQuestionAttempts(),getSimulations(),getQuestionErrors(true),getActiveFlashcards(),getFlashcardReviews(),
       ])
       const flashcardPdById=new Map(flashcards.map((card)=>[card.id,card.pdCode]))
+      const eligible = reviewedEvidence(questionAttempts,simulations,errors)
       const next=buildStudyEngineSnapshot({
-        lessonProgress,quizAttempts,questionAttempts,simulations,errors,flashcardReviews,flashcardPdById,questionDifficultyById,
+        lessonProgress,quizAttempts,questionAttempts:eligible.attempts,simulations:eligible.simulations,errors:eligible.errors,flashcardReviews,flashcardPdById,questionDifficultyById,
         lessonPdCodes,questionPdCodes,dailyGoalMinutes:profile.dailyGoalMinutes,
       })
       setSnapshot(next)

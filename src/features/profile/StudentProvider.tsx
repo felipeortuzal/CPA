@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type PropsWithChildren } from 'react'
-import { STORAGE_CHANGED_EVENT, STORAGE_ERROR_EVENT } from '../../lib/storage/events'
+import { STORAGE_CHANGED_EVENT, STORAGE_ERROR_EVENT, initializeStorageSync } from '../../lib/storage/events'
 import { createProfile, getProfile, updateProfile } from '../../lib/storage/repositories/profileRepository'
 import type { LocalProfile } from '../../lib/storage/types'
 
@@ -21,7 +21,7 @@ export function StudentProvider({ children }: PropsWithChildren) {
     catch { setStorageError('Não foi possível acessar o progresso salvo neste navegador. Verifique as permissões de armazenamento e tente novamente. Seus dados não foram apagados.') }
     finally { setLoading(false) }
   }, [])
-  useEffect(() => { void refresh(); const listener = () => { void refresh() }; window.addEventListener(STORAGE_CHANGED_EVENT, listener); return () => window.removeEventListener(STORAGE_CHANGED_EVENT, listener) }, [refresh])
+  useEffect(() => { initializeStorageSync(); void refresh(); const listener = () => { void refresh() }; window.addEventListener(STORAGE_CHANGED_EVENT, listener); return () => window.removeEventListener(STORAGE_CHANGED_EVENT, listener) }, [refresh])
   useEffect(() => {
     const onError = () => setStorageError('Não foi possível ler ou salvar o progresso. Verifique o espaço e as permissões do navegador e tente novamente. Os dados já salvos foram preservados.')
     window.addEventListener(STORAGE_ERROR_EVENT, onError)

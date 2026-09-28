@@ -1,0 +1,3229 @@
+[
+  {
+    "id": "CPA-Q001",
+    "revision": "71168bad",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Órgãos normativos. Critério: No Sistema Financeiro Nacional, o CMN exerce função normativa superior em matérias monetária, creditícia e cambial, enquanto o BCB executa políticas e supervisiona instituições sob sua competência.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-Q002",
+    "revision": "643ef916",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Supervisão. Critério: A CVM regula, desenvolve e fiscaliza o mercado de valores mobiliários, incluindo temas ligados a emissores, ofertas e intermediários sob sua competência.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q003",
+    "revision": "5a785334",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Supervisão. Critério: A Superintendência de Seguros Privados (SUSEP) supervisiona, entre outros, a previdência complementar aberta. A PREVIC atua sobre entidades fechadas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-Q004",
+    "revision": "43bf4a6b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Operadores e participantes. Critério: Instituições de pagamento integram o ecossistema financeiro e viabilizam serviços de pagamento, mas sua natureza e autorizações não se confundem automaticamente com as de instituições bancárias.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-Q005",
+    "revision": "be3edec1",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Mecanismos de garantia. Critério: A garantia do FGC alcança determinados créditos contra instituições participantes, como CDBs elegíveis, dentro de regras e limites. Debêntures não estão entre os produtos cobertos e o FGC não cobre oscilação de mercado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "FGC"
+    ]
+  },
+  {
+    "id": "CPA-Q006",
+    "revision": "0482876c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Sistema de Pagamentos Brasileiro. Critério: O SPB reúne arranjos, sistemas, regras e procedimentos essenciais à transferência de fundos e à liquidação de obrigações, com relevância para segurança e estabilidade financeira.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-Q007",
+    "revision": "12b68f2f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Política monetária. Critério: Política monetária contracionista busca tornar as condições financeiras mais restritivas, reduzindo estímulos à demanda e ajudando no processo de convergência da inflação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY",
+      "BCB_SELIC"
+    ]
+  },
+  {
+    "id": "CPA-Q008",
+    "revision": "1163d160",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Instrumentos de política monetária. Critério: Operações de mercado aberto são instrumento de política monetária usado pelo Banco Central para administrar liquidez e manter as taxas de curto prazo próximas da orientação definida.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-Q009",
+    "revision": "bafc3dc6",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Selic e DI. Critério: As três referências podem caminhar próximas, mas têm origem e função distintas. A meta Selic é decisão do Copom; a Selic efetiva e a DI decorrem de mercados específicos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SELIC"
+    ]
+  },
+  {
+    "id": "CPA-Q010",
+    "revision": "3f699aba",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Política fiscal. Critério: Resultados fiscais, dívida e condições de financiamento interagem com expectativas, prêmio de risco e taxas de juros. A relação não é mecânica em todo momento, mas é economicamente relevante.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "PLANALTO_LRF"
+    ]
+  },
+  {
+    "id": "CPA-Q011",
+    "revision": "0688c736",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxa nominal e real. Critério: A taxa real mede variação de poder de compra. A subtração é uma aproximação; a relação exata é multiplicativa pela fórmula de Fisher.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-Q012",
+    "revision": "990fc9d2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capitalização simples e composta. Critério: Nos juros compostos, os juros acumulados passam a integrar a base dos períodos seguintes. Nos simples, a base permanece o principal inicial.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q013",
+    "revision": "75178003",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Valor presente e valor futuro. Critério: VP = 110.000 / 1,10 = 100.000. Descontar um fluxo futuro significa trazê-lo para a data atual por uma taxa compatível com o período.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q014",
+    "revision": "09e703b9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxa Interna de Retorno. Critério: A Taxa Interna de Retorno (TIR) é definida como a taxa de desconto que zera o VPL de um conjunto de fluxos.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q015",
+    "revision": "9a1cfef4",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Sistemas de amortização. Critério: No Sistema de Amortização Constante (SAC), a amortização é constante e os juros caem com o saldo, reduzindo prestações. Na Tabela Price, a prestação é constante em condições fixas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q016",
+    "revision": "dd02fb1f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Infraestruturas de mercado. Critério: A contraparte central se interpõe nas operações elegíveis e administra risco de contraparte. Depositário central exerce função distinta, relacionada à guarda escritural e controle de posições.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-Q017",
+    "revision": "0978ece1",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Estabilidade financeira e Basileia. Critério: Regras prudenciais e padrões de Basileia buscam fortalecer capital, liquidez e gestão de riscos para aumentar resiliência das instituições e do sistema.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-Q018",
+    "revision": "91cc1173",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Classificação de investidores. Critério: Classificações como investidor profissional ou qualificado seguem critérios regulatórios. A instituição deve verificar o enquadramento e manter os procedimentos e registros cabíveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q019",
+    "revision": "c4dc9be8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Suitability. Critério: Suitability exige avaliar a adequação do produto ao perfil, objetivos, situação e horizonte do cliente, com informações atualizadas e comunicação clara sobre riscos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q020",
+    "revision": "0e407f20",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Transparência na remuneração. Critério: Transparência sobre remuneração e conflitos de interesse ajuda o cliente a compreender incentivos presentes na distribuição e integra as boas práticas de conduta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q021",
+    "revision": "86d6b329",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Títulos públicos federais. Critério: O Tesouro Selic é usualmente associado a objetivos de liquidez e menor sensibilidade a oscilações de juros do que títulos prefixados ou indexados à inflação de prazo longo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "TESOURO_DIRETO"
+    ]
+  },
+  {
+    "id": "CPA-Q022",
+    "revision": "beecddfd",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Tesouro Prefixado. Critério: Preço e taxa de títulos prefixados têm relação inversa. Se as taxas exigidas pelo mercado sobem, o valor presente dos fluxos tende a cair.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "TESOURO_DIRETO"
+    ]
+  },
+  {
+    "id": "CPA-Q023",
+    "revision": "baf22fd9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Tesouro IPCA+. Critério: O Tesouro IPCA+ remunera por inflação mais taxa real conforme as condições contratadas. Se vendido antes do vencimento, seu preço pode oscilar com as taxas de mercado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "TESOURO_DIRETO"
+    ]
+  },
+  {
+    "id": "CPA-Q024",
+    "revision": "0931fb36",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: CDB. Critério: CDB é dívida da instituição emissora. A proteção do FGC pode mitigar perdas em hipóteses e limites previstos, mas não muda a natureza do emissor nem elimina todos os riscos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "FGC"
+    ]
+  },
+  {
+    "id": "CPA-Q025",
+    "revision": "bcbcb49b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: LCI e LCA. Critério: LCI está entre os produtos que podem contar com garantia do FGC conforme regras e limites. Debêntures não integram essa cobertura.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "FGC"
+    ]
+  },
+  {
+    "id": "CPA-Q026",
+    "revision": "ece49179",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Debêntures. Critério: Debênture é valor mobiliário de dívida emitido por companhia, com condições de remuneração e pagamento definidas na emissão.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q027",
+    "revision": "78d4a99f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: CRI e CRA. Critério: CRI é instrumento de securitização e não está entre os produtos cobertos pelo FGC. Lastro e estrutura não eliminam risco de crédito ou liquidez.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "FGC"
+    ]
+  },
+  {
+    "id": "CPA-Q028",
+    "revision": "fae0f4f3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Rating. Critério: Rating expressa uma opinião/classificação sobre risco de crédito segundo metodologia específica. Não elimina incerteza nem substitui análise de adequação e dos demais riscos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q029",
+    "revision": "eab9848c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Poupança. Critério: A remuneração da poupança segue regras associadas à data de aniversário dos depósitos. Um saque antes dessa data pode afetar a remuneração esperada daquele período.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-Q030",
+    "revision": "cfa39147",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: IOF em renda fixa. Critério: Em determinadas aplicações de renda fixa, resgates dentro do período sujeito à tabela regressiva de IOF podem reduzir o rendimento líquido. A tributação deve ser analisada conforme o produto.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q031",
+    "revision": "c21028f0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: IPO e OPA. Critério: IPO é a oferta pública inicial de ações. Follow-on é uma oferta subsequente realizada por companhia que já acessou o mercado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q032",
+    "revision": "d91e89a1",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Mercado primário e secundário. Critério: No mercado primário ocorre a emissão/captação. No secundário, investidores negociam títulos já emitidos entre si.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q033",
+    "revision": "d151d3b2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Classes de ações e valores mobiliários. Critério: Units são certificados de depósito de valores mobiliários que podem reunir diferentes espécies/classes conforme a estrutura da companhia.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-Q034",
+    "revision": "62747de2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Grupamento e desdobramento. Critério: Desdobramento divide cada ação em mais unidades, ajustando o preço proporcionalmente. O evento, isoladamente, não cria valor econômico para o acionista.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-Q035",
+    "revision": "438192ad",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: COE. Critério: As modalidades diferem quanto à proteção do valor nominal na estrutura. Mesmo no COE protegido, permanecem riscos como o de crédito do emissor e as condições do produto.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q036",
+    "revision": "2a5bad0e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Estrutura de fundos. Critério: A Resolução CVM 175 modernizou a estrutura dos fundos, admitindo classes e subclasses e a segregação patrimonial entre classes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q037",
+    "revision": "bba54817",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Segregação patrimonial. Critério: A segregação patrimonial é uma característica importante da estrutura por classes, separando patrimônios e responsabilidades conforme as regras aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q038",
+    "revision": "56e6e6b9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Classes abertas e fechadas. Critério: Classes abertas admitem resgate conforme suas regras; classes fechadas não permitem resgate ordinário antes do prazo/encerramento, salvo hipóteses previstas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q039",
+    "revision": "14af25cc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Prestadores de serviços de fundos. Critério: A gestão profissional da carteira envolve decisões de investimento e desinvestimento dentro da política do fundo. Administração e outros serviços possuem atribuições próprias.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q040",
+    "revision": "f5a4ad40",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxas de fundos. Critério: Taxas integram a análise econômica do investimento. Elas não determinam sozinhas a qualidade do fundo, mas afetam o resultado líquido e devem ser comparadas com estratégia e riscos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q041",
+    "revision": "38d547b9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Crédito privado em fundos. Critério: Exposição relevante a crédito privado exige atenção ao risco de crédito dos emissores, além dos demais riscos da carteira. Fundo não recebe garantia automática do FGC.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q042",
+    "revision": "ed262274",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Tipos de fundos. Critério: Fundos de ações são estruturados para manter exposição relevante a ativos relacionados ao mercado acionário conforme os requisitos regulatórios aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-Q043",
+    "revision": "1e5fbf95",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Riscos de FII. Critério: FII pode enfrentar vacância, crédito dos locatários/devedores, liquidez de cotas e riscos do mercado imobiliário. Patrimônio real não elimina volatilidade ou perdas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q044",
+    "revision": "e701359c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Fundos imobiliários de tijolo e papel. Critério: FIIs de tijolo concentram ativos imobiliários físicos; FIIs de papel concentram títulos e recebíveis imobiliários. Há também estruturas híbridas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q045",
+    "revision": "2ae5c732",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: PGBL e VGBL. Critério: A SUSEP diferencia a base tributável: PGBL tributa o montante resgatado/benefício; VGBL tributa a parcela de rendimentos, observadas as regras e o regime escolhido.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q046",
+    "revision": "5fa78fed",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: PGBL. Critério: O PGBL pode permitir dedução das contribuições na base do IR até o limite legal para quem atende às condições, incluindo uso do modelo completo. A adequação depende da situação do cliente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q047",
+    "revision": "74feeec5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Regimes de tributação da previdência. Critério: Regimes progressivo e regressivo têm estruturas distintas. A decisão deve considerar prazo, renda, forma de benefício/resgate e contexto tributário, sem regra universal de melhor opção.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q048",
+    "revision": "d5586aee",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Portabilidade em previdência. Critério: Portabilidade permite transferir recursos entre planos compatíveis conforme regras aplicáveis, sem caracterizar simplesmente um resgate para disponibilidade ao participante.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q049",
+    "revision": "04dc9c1e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Transformação da reserva em renda. Critério: A transformação da reserva envolve modalidades com características diferentes. A recomendação deve conectar regras do plano, necessidade de renda, proteção de beneficiários e risco de longevidade.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q050",
+    "revision": "fef61809",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: SCR. Critério: O SCR reúne informações sobre operações de crédito reportadas ao Banco Central e apoia análise e supervisão do sistema de crédito, observadas as regras de acesso.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SCR"
+    ]
+  },
+  {
+    "id": "CPA-Q051",
+    "revision": "de6cae54",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Empréstimo, financiamento e leasing. Critério: A destinação dos recursos é uma diferença típica: financiamento costuma estar ligado à aquisição específica, enquanto empréstimo tende a ter uso livre. Custos, garantias e prazo também importam.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SCR"
+    ]
+  },
+  {
+    "id": "CPA-Q052",
+    "revision": "876dce1c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cartão de crédito. Critério: Pagamento parcial pode levar ao financiamento do saldo conforme regras do cartão, com juros e demais encargos. O cliente deve compreender o custo e avaliar alternativas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q053",
+    "revision": "0920b352",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Crédito consignado. Critério: O desconto direto e a previsibilidade de recebimento podem reduzir risco de crédito e contribuir para taxas menores, mas não eliminam juros, análise nem limites de comprometimento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q054",
+    "revision": "05c20e83",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: CDC. Critério: Garantias podem reduzir a severidade de perda e afetar preço/condições do crédito, mas não eliminam risco nem substituem análise de capacidade de pagamento.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SCR"
+    ]
+  },
+  {
+    "id": "CPA-Q055",
+    "revision": "9f411dc0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Pix. Critério: O Pix permite transferências e pagamentos em poucos segundos, com funcionamento contínuo, apoiado por infraestrutura específica do Banco Central.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-Q056",
+    "revision": "ab943d41",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Seguro prestamista. Critério: Seguro prestamista é ligado a obrigações financeiras e pode cobrir saldo devedor ou parcelas em eventos previstos, conforme condições contratuais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-Q057",
+    "revision": "937df5df",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Escolha entre PGBL e VGBL. Critério: A recomendação entre PGBL e VGBL exige analisar modelo de declaração, renda tributável, contribuições, horizonte e forma de tributação futura.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-Q058",
+    "revision": "6f7e5d12",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Adequação de FII. Critério: FIIs podem ter baixa liquidez e preço de mercado variável. Um objetivo muito curto e com necessidade certa de caixa exige atenção especial à compatibilidade do produto.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q059",
+    "revision": "4dfbb8b6",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Concessão responsável de crédito. Critério: Concessão de crédito deve considerar capacidade financeira e informações consistentes. Omissão de dívidas prejudica a análise e pode elevar risco de superendividamento.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SCR"
+    ]
+  },
+  {
+    "id": "CPA-Q060",
+    "revision": "b3bc788b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Seguro prestamista no atendimento. Critério: Seguro prestamista possui coberturas e condições contratuais específicas. Não deve ser apresentado como garantia irrestrita de qualquer atraso ou saldo devedor.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-Q061",
+    "revision": "798602b4",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Idade, risco e produtos. Critério: Ciclo de vida e idade são relevantes, mas não substituem a avaliação do conjunto de objetivos, horizonte, situação financeira e tolerância a risco.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q062",
+    "revision": "854c2774",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Ciclo de vida financeiro. Critério: Na fase de acumulação, o foco costuma estar na formação de patrimônio por meio de poupança e investimentos para objetivos futuros.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q063",
+    "revision": "cc8e62e6",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capacidade de poupança. Critério: A diferença entre receitas e despesas é ponto de partida para estimar capacidade de poupança e construir um plano, que ainda deve considerar irregularidades e objetivos.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q064",
+    "revision": "d86ede7e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Reserva de emergência. Critério: Reserva de emergência existe para atender necessidades inesperadas; por isso, liquidez e preservação de capital costumam ser prioridades relevantes.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q065",
+    "revision": "28efa024",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Patrimônio líquido pessoal. Critério: Patrimônio líquido pessoal corresponde, de forma simplificada, aos ativos menos as obrigações: 500 - 180 = 320 mil.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q066",
+    "revision": "011b3d48",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Processo de planejamento financeiro. Critério: Planejamento financeiro é processo contínuo: após implementação, deve haver monitoramento e revisão quando a situação ou os objetivos mudam.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q067",
+    "revision": "75a5143b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Investimento, risco e horizonte. Critério: A orientação financeira deve conectar características do investimento às necessidades concretas do cliente, incluindo horizonte e tolerância a risco.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q068",
+    "revision": "ad469cfc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Diversificação. Critério: Diversificação busca reduzir riscos específicos por distribuição entre exposições diferentes, sem garantir retorno ou eliminar todo risco.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q069",
+    "revision": "13c49901",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Escuta ativa. Critério: Escuta ativa envolve atenção genuína, confirmação de entendimento e perguntas que ajudam a compreender necessidades antes de orientar.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q070",
+    "revision": "1f0133a8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Gestão de dívidas. Critério: Gestão de dívidas exige comparar custo efetivo, prazo e capacidade de pagamento. Refinanciar pode ajudar quando reduz custo e vem acompanhado de controle orçamentário.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q071",
+    "revision": "65bf8ca4",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dimensionamento da reserva de emergência. Critério: Dimensionamento é contextual. Quanto maior a incerteza de renda e a dependência do caixa, maior pode ser a necessidade de colchão de liquidez.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q072",
+    "revision": "4ff7faeb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Metas financeiras. Critério: Metas financeiras úteis são específicas e mensuráveis, com prazo e prioridade, permitindo estimar poupança necessária e acompanhar progresso.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q073",
+    "revision": "76681481",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Planejamento para aposentadoria. Critério: Planejamento para aposentadoria é uma projeção de fluxos: depende de tempo, necessidade de renda, poupança, patrimônio, retorno e longevidade, entre outras premissas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q074",
+    "revision": "82291724",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Financiamento de emergências. Critério: Urgência não elimina a necessidade de comparar custo e capacidade de pagamento. A escolha deve resolver a necessidade sem criar desequilíbrio financeiro desnecessário.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q075",
+    "revision": "6b0cbf6f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Gestão de investimentos. Critério: Gestão de investimentos inclui monitorar mudanças de peso, risco e objetivos. Rebalanceamento pode restabelecer a alocação estratégica quando apropriado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q076",
+    "revision": "0af782dc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Adequação de produtos. Critério: Suitability não se resume a retorno. Horizonte, liquidez, objetivos e tolerância/capacidade de risco devem ser compatíveis com o produto.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q077",
+    "revision": "b89d1713",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Informações da clientela. Critério: Informações desatualizadas podem comprometer suitability. Mudanças de renda, patrimônio, objetivo e horizonte justificam revisão do diagnóstico.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q078",
+    "revision": "bd14a978",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Produto e objetivo da clientela. Critério: Adequação deve conectar produto ao objetivo concreto. Um cliente pode tolerar risco no patrimônio de longo prazo e ainda precisar de solução conservadora para um compromisso próximo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q079",
+    "revision": "4802b936",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Monitoramento de suitability. Critério: Suitability é processo que exige atualização conforme regras e mudanças relevantes no cliente ou nos produtos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-Q080",
+    "revision": "48e0a15b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Comunicação clara. Critério: Comunicação deve ser clara, transparente e equilibrada, permitindo decisão informada e evitando destaque seletivo de benefícios.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q081",
+    "revision": "a247cd67",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Benefícios e incentivos. Critério: Incentivos financeiros podem influenciar recomendações. A instituição deve identificar, gerir e, quando aplicável, comunicar conflitos, preservando adequação e interesse do cliente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q082",
+    "revision": "95394e9b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: PLDFT baseada em risco. Critério: Abordagem baseada em risco parte da identificação e avaliação dos riscos para direcionar controles e recursos de forma proporcional, sem eliminar obrigações mínimas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-Q083",
+    "revision": "8c065ef2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Conheça seu cliente (KYC). Critério: Cadastro atualizado e compreensão da capacidade financeira ajudam a identificar incompatibilidades e proteger instituição e profissional no processo de prevenção.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q084",
+    "revision": "4be32d13",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de imagem. Critério: Deterioração de reputação e confiança caracteriza risco de imagem. Dependendo da conduta, também podem existir consequências legais e regulatórias.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q085",
+    "revision": "a0c83ca1",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: LGPD no atendimento. Critério: A LGPD adota princípios que incluem necessidade, finalidade e adequação. Coleta indiscriminada sem propósito claro conflita com esses fundamentos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANPD_LGPD",
+      "PLANALTO_LGPD"
+    ]
+  },
+  {
+    "id": "CPA-Q086",
+    "revision": "7dd77675",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Spoofing. Critério: Spoofing envolve uso de ordens sem intenção genuína de execução para criar sinal enganoso de oferta ou demanda e influenciar o mercado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_62"
+    ]
+  },
+  {
+    "id": "CPA-Q087",
+    "revision": "c056422b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Front running. Critério: Front running é negociação em benefício próprio com base no conhecimento prévio de ordem relevante de cliente, prejudicando integridade e equidade.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_62"
+    ]
+  },
+  {
+    "id": "CPA-Q088",
+    "revision": "c0c38df7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Adequação ao perfil. Critério: Adequação é individual e considera objetivos, conhecimento, situação e tolerância/capacidade de risco. Comparações com terceiros não substituem o processo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q089",
+    "revision": "251ab816",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Gerenciamento de expectativas. Critério: Atendimento ético exige alinhar expectativas a risco, horizonte e incerteza, sem promessas indevidas de retorno.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q090",
+    "revision": "2c49fb8b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: KYC e movimentação incompatível. Critério: Incompatibilidade entre perfil e movimentação é sinal que exige diligência segundo políticas e abordagem baseada em risco, sem prejulgar o cliente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANBIMA_DISTRIBUICAO"
+    ]
+  },
+  {
+    "id": "CPA-Q091",
+    "revision": "cab4f793",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: ESG. Critério: ESG organiza fatores ambientais (E), sociais (S) e de governança (G). Emissões, relações de trabalho e estrutura de governança são exemplos típicos dessas dimensões.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-Q092",
+    "revision": "e1b49a16",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Finanças descentralizadas. Critério: DeFi descreve aplicações financeiras baseadas em redes distribuídas e protocolos programáveis, com arquitetura distinta de muitos arranjos tradicionais.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q093",
+    "revision": "b1bb2555",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Smart contracts. Critério: Smart contracts são programas que executam regras previamente codificadas quando condições definidas são atendidas, dentro da infraestrutura em que foram implantados.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q094",
+    "revision": "88348961",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Tokenização. Critério: Tokenização altera a representação e possível negociação de direitos, mas riscos do ativo, da infraestrutura, da custódia e do enquadramento regulatório permanecem relevantes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-Q095",
+    "revision": "c01e152f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Open Finance. Critério: Open Finance brasileiro é centrado em compartilhamento padronizado e seguro de dados/serviços mediante consentimento do cliente e regras de governança.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-Q096",
+    "revision": "c0d77097",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Open Investment. Critério: Open Investment amplia o compartilhamento padronizado de informações e serviços relativos a investimentos dentro do ecossistema de Open Finance.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-Q097",
+    "revision": "97e158ff",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: IA no atendimento. Critério: IA pode apoiar atendimento, mas exige governança, monitoramento, tratamento de erros e respeito a regras de conduta e proteção de dados.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "ANPD_LGPD"
+    ]
+  },
+  {
+    "id": "CPA-Q098",
+    "revision": "7b507e66",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Aplicações de smart contracts. Critério: Smart contracts executam regras programadas, mas podem depender de código, infraestrutura e dados externos. Automação não elimina riscos tecnológicos, jurídicos ou de segurança.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-Q099",
+    "revision": "9285ea8e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Open Finance e crédito. Critério: Com consentimento, o compartilhamento pode enriquecer a análise de risco e aumentar competição. A decisão de crédito continua sujeita a políticas e riscos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-Q100",
+    "revision": "2276700b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Sandbox regulatório. Critério: Sandbox regulatório é mecanismo de experimentação supervisionada dentro de parâmetros do regulador. Não é dispensa geral ou permanente de obrigações.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN",
+      "CVM"
+    ]
+  },
+  {
+    "id": "CPA-MOD001",
+    "revision": "3218a364",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Inflação e poder de compra. Critério: A variação real é 1,04/1,06 − 1 = −1,89%. O salário compra menos, apesar do aumento nominal.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-MOD002",
+    "revision": "309612b3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Desinflação. Critério: Desinflação é redução da taxa de inflação. Uma taxa positiva menor ainda indica aumento do nível de preços.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-MOD003",
+    "revision": "ef73ab44",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Juros compostos. Critério: O montante é 1.000 × 1,10² = 1.210. No segundo ano, os juros incidem também sobre os R$ 100 do primeiro.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD004",
+    "revision": "f5e5eb93",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Liquidez e solvência. Critério: Patrimônio positivo não garante dinheiro disponível no vencimento das obrigações. O descasamento pode gerar falta de liquidez.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-MOD005",
+    "revision": "229408da",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: COE e proteção nominal. Critério: Proteção nominal se refere ao valor em moeda e às condições do COE. Não equivale a correção pela inflação, liquidez diária ou ausência de risco de crédito.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD006",
+    "revision": "08578a6f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Retorno total de FII. Critério: O saldo é 90 + 8 − 100 = −2. Dividindo pelo investimento de 100, o retorno total é −2%.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-MOD007",
+    "revision": "d3e820ba",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: FII de recebíveis. Critério: Recebíveis expõem a carteira a risco de crédito, além de outros riscos. Garantias podem mitigar perdas, mas sua execução e valor precisam ser avaliados.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-MOD008",
+    "revision": "02141f0e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Liquidez de cotas. Critério: A saída de um FII fechado listado normalmente depende da negociação das cotas. Pode haver oscilação de preço e dificuldade de venda.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-MOD009",
+    "revision": "1a2eda03",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Pix e prevenção a fraudes. Critério: A foto e a urgência podem ser usadas em engenharia social. Confirmar por canal independente e verificar o destinatário reduz o risco de fraude.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-MOD010",
+    "revision": "e8ffd45f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cartão de crédito. Critério: O pagamento parcial pode financiar o saldo conforme regras e condições aplicáveis. É preciso analisar encargos e alternativas de pagamento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD011",
+    "revision": "d1aa7b12",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Consórcio. Critério: A liberação do crédito depende da contemplação e das condições do grupo. A necessidade em data certa pode ser incompatível com essa incerteza.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD012",
+    "revision": "2312a886",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Conta e serviços. Critério: A escolha deve refletir o uso, as condições contratuais e a informação clara sobre tarifas e serviços aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD013",
+    "revision": "25f41e0a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Meio de pagamento e crédito. Critério: O canal ou meio de pagamento não elimina a natureza do financiamento. Se há crédito contratado, é preciso analisar os encargos e o vencimento.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-MOD014",
+    "revision": "19e95554",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Franquia do seguro. Critério: Na hipótese indicada, a participação do segurado é de R$ 2.000 e a indenização é 7.000 − 2.000 = 5.000. As condições reais dependem do contrato.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-MOD015",
+    "revision": "befe3d01",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Prêmio e indenização. Critério: Prêmio é a contraprestação pela cobertura. Indenização é o pagamento previsto em razão de evento coberto, respeitadas as condições contratuais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-MOD016",
+    "revision": "2d8c15df",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Exclusões contratuais. Critério: O alcance da cobertura decorre das condições contratuais. Nome comercial amplo não substitui a leitura de limites e exclusões.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-MOD017",
+    "revision": "b2a807f4",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capitalização. Critério: Capitalização tem regras próprias de formação do capital, sorteio e carregamento. A equivalência a uma reserva líquida não pode ser presumida.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-MOD018",
+    "revision": "e94990b8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Rebalanceamento. Critério: A deve ter 12.000 × 60% = 7.200; possui 6.000. A transferência de 1.200 reduz B a 4.800, ou 40%.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD019",
+    "revision": "7cf7a26b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Diversificação. Critério: Diversificação depende das exposições e de como os ativos se comportam em conjunto. Dez empresas do mesmo setor podem continuar concentradas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-MOD020",
+    "revision": "e8cda7fb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Correlação. Critério: Comportamentos semelhantes podem reduzir o benefício de diversificação. Correlação não implica retornos idênticos nem estabilidade futura.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD021",
+    "revision": "610103c4",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capacidade e disposição. Critério: Preferência psicológica e capacidade financeira são dimensões distintas. Prazo curto e obrigação essencial podem limitar a capacidade de assumir perdas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-MOD022",
+    "revision": "7aa3bed0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de liquidez. Critério: Risco de liquidez envolve dificuldade de converter o ativo em dinheiro no prazo e nas condições desejadas. Pode ocorrer sem inadimplência.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-MOD023",
+    "revision": "7b07dfa0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de crédito. Critério: O descumprimento da obrigação de pagamento pelo devedor é manifestação do risco de crédito. Renda fixa não significa ausência de inadimplência.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD024",
+    "revision": "08919b26",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Atualização do perfil. Critério: Mudanças relevantes na situação financeira e nos objetivos exigem atenção à adequação. Uma recomendação passada não fica automaticamente adequada para sempre.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-MOD025",
+    "revision": "57f731de",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco físico climático. Critério: Danos físicos e interrupções causados por eventos climáticos podem afetar receitas, despesas e valor dos ativos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-MOD026",
+    "revision": "145a4636",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de transição. Critério: Mudanças em políticas, tecnologia e preferências podem alterar custos e competitividade na transição econômica.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-MOD027",
+    "revision": "5af6822c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Greenwashing. Critério: Alegações vagas sem evidências podem induzir a erro. É necessário examinar critérios, objetivo, indicadores e consistência das informações.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-MOD028",
+    "revision": "36523c0c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Integração ESG. Critério: Integração incorpora fatores à análise. Objetivo sustentável e impacto exigem compromissos e evidências próprios, além do simples uso de critérios ESG.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD029",
+    "revision": "f7aa1f7c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Governança. Critério: Governança trata de estruturas decisórias, controles, transparência e responsabilidades, incluindo gestão de conflitos de interesse.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-MOD030",
+    "revision": "e5c01300",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Stablecoins. Critério: A estabilidade pretendida depende da estrutura e de seu funcionamento. Reservas, liquidez e confiança podem ser insuficientes em situações adversas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD031",
+    "revision": "37647799",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Tokenização. Critério: Tokenizar muda a forma de representação ou registro. Não elimina o risco econômico nem dispensa avaliar direitos, emissor e condições de negociação.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD032",
+    "revision": "01c4a73a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Consentimento. Critério: O compartilhamento deve seguir os fluxos autorizados e as informações de consentimento. Senhas não devem ser entregues a atendentes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-MOD033",
+    "revision": "38d94d7c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Revogação. Critério: O cliente pode gerenciar e revogar consentimentos pelos canais disponibilizados. Isso é diferente de encerrar contas ou extinguir obrigações contratuais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-MOD034",
+    "revision": "1552ed0f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dados e portabilidade. Critério: Dados podem apoiar análise e oferta, mas portabilidade exige processo próprio e condições aplicáveis. Consentir não equivale a contratar ou transferir.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-MOD035",
+    "revision": "bd02e206",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: IA generativa. Critério: Modelos podem produzir informações incorretas com aparência convincente. Validação, fontes e supervisão são necessárias no atendimento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD036",
+    "revision": "0f444547",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Viés em modelos. Critério: Dados históricos podem carregar padrões injustos. A modelagem precisa de avaliação, governança e monitoramento de desempenho e efeitos.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD037",
+    "revision": "7ec1bf5a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Sandbox regulatório. Critério: Sandbox permite experimentação controlada. Escopo, prazo e salvaguardas seguem as condições estabelecidas, sem garantia de sucesso comercial.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-MOD038",
+    "revision": "19748d00",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Fintech e autorização. Critério: Fintech descreve inovação tecnológica, não uma autorização universal. A natureza da atividade determina as exigências e proteções aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-01",
+    "revision": "48d664ac",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Intermediação. Critério: A captação cria uma obrigação do banco com o depositante, distinta do empréstimo ao tomador.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-02",
+    "revision": "09601dfc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Mercado de capitais. Critério: A empresa capta com investidores por instrumento de dívida; o banco pode participar da distribuição sem ser credor final.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-03",
+    "revision": "8378a34c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cooperativa. Critério: Cooperativas de crédito prestam serviços financeiros aos associados em uma estrutura societária específica, sujeita à regulação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-04",
+    "revision": "1a2dea76",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Previdência fechada. Critério: A Previc supervisiona entidades fechadas de previdência complementar; Susep atua na previdência aberta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-05",
+    "revision": "383c5bc1",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Normas de seguros. Critério: O CNSP é a instância normativa do segmento e a Susep exerce supervisão dentro de suas competências.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-06",
+    "revision": "05117ff6",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Autorregulação. Critério: Adesão a códigos não permite descumprir normas de reguladores ou leis aplicáveis à atividade.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-07",
+    "revision": "efff49aa",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Distribuição e emissão. Critério: A obrigação de pagar o CDB é do emissor; o canal distribuidor não se torna devedor por intermediá-lo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-08",
+    "revision": "8b9d0255",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Competências. Critério: Uma mesma instituição pode exercer atividades alcançadas por competências regulatórias diferentes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-01-09",
+    "revision": "e5626fb9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco do negócio. Critério: O acionista participa do capital e assume risco empresarial; não é credor de juros apenas por possuir ações.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-01",
+    "revision": "25889cf2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Deflação. Critério: Variação negativa do índice caracteriza deflação no período observado, sem provar uma tendência duradoura.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-02",
+    "revision": "97732901",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: PIB real. Critério: O aumento nominal decorre dos preços; o volume real não mudou na hipótese.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-03",
+    "revision": "71e6c0a3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Câmbio. Critério: O custo passa de 2.000×5=10.000 para 2.000×5,50=11.000 reais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-04",
+    "revision": "763dc233",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Política fiscal. Critério: Tributos e despesas públicas são instrumentos fiscais; a taxa básica pertence à condução monetária.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-05",
+    "revision": "a22eac60",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Expectativas. Critério: O retorno real esperado divide o fator nominal pelo fator de inflação esperada; maior denominador reduz o resultado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-06",
+    "revision": "911fb0de",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Juro real. Critério: 1,12÷1,08−1≈0,0370. Usar fatores evita tratar subtração como igualdade exata.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-07",
+    "revision": "5ae87326",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Transmissão monetária. Critério: Juros afetam crédito, demanda e expectativas ao longo do tempo; choques específicos também influenciam preços.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-08",
+    "revision": "007aa21e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Resultado fiscal. Critério: O resultado primário exclui juros nominais; o nominal os incorpora, conforme a metodologia do indicador.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-02-09",
+    "revision": "49b9c83e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cesta de inflação. Critério: Um índice usa uma cesta e pesos definidos; cada família pode consumir em proporções distintas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_MONETARY"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-01",
+    "revision": "e2d1aadb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Juros simples. Critério: J=2.000×0,02×3=120; M=2.000+120=2.120.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-02",
+    "revision": "cc54a202",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxa equivalente. Critério: O fator de três meses é 1,02³=1,061208; a taxa é 6,1208%.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-03",
+    "revision": "522ef7af",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Desconto de fluxo. Critério: VP=10.500÷1,05=10.000, porque trazer a valor presente exige dividir pelo fator.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-04",
+    "revision": "d23bdb9c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: VPL. Critério: 1.210÷1,10²−1.000=0. O projeto remunera exatamente a taxa exigida.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-05",
+    "revision": "cac61c53",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Amortização. Critério: Amortização=prestação−juros=800−150=650.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-06",
+    "revision": "e74613dc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Saldo no SAC. Critério: A amortização é 12.000÷12=1.000 por parcela; após duas, o saldo cai para 10.000.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-07",
+    "revision": "6ba9a4b7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: TIR e escala. Critério: É necessário considerar fluxos, escala e custo de capital; o VPL ajuda a comparar valor criado.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-08",
+    "revision": "17bd8ebb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Unidade da taxa. Critério: A taxa está em meses; um ano corresponde a 12 períodos mensais no exercício.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-03-09",
+    "revision": "f39c2daf",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Payback. Critério: O prazo simples de recuperação não substitui VPL ou análise integral dos fluxos.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-01",
+    "revision": "b8661c24",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Liquidação. Critério: Liquidação é o cumprimento das obrigações de entrega e pagamento, distinto da negociação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-02",
+    "revision": "bfab9373",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Compensação. Critério: Compensação calcula e organiza obrigações; liquidação realiza o cumprimento financeiro e de ativos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-03",
+    "revision": "2ce1bbee",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Custódia. Critério: Custódia se relaciona à guarda e ao controle de ativos, segundo as estruturas de registro aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-04",
+    "revision": "dcef1dc3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Margem. Critério: Margens são mecanismos de administração de risco; sua exigência não equivale a uma tarifa nem elimina perdas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-05",
+    "revision": "550f93b7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco operacional. Critério: Falhas de sistemas e processos podem causar execução indevida, perdas e necessidade de correção.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-06",
+    "revision": "e8b787eb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capital prudencial. Critério: Capital adequado ajuda a suportar perdas inesperadas; não é uma promessa de que elas nunca ocorrerão.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-07",
+    "revision": "7c21d5ef",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Contraparte. Critério: A possibilidade de descumprimento pela outra parte é risco de contraparte, administrado por contratos e estruturas de mercado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-08",
+    "revision": "4878e419",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Mercado secundário. Critério: No mercado secundário a negociação transfere o ativo entre investidores; não é nova captação do emissor.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-04-09",
+    "revision": "216c7222",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Garantia e liquidez. Critério: É necessário avaliar prazo de execução e liquidez; valor patrimonial e dinheiro disponível não são equivalentes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SPB"
+    ]
+  },
+  {
+    "id": "CPA-V25-05-01",
+    "revision": "360d814a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Retorno líquido. Critério: O imposto hipotético é 500×20%=100; restam R$ 400 de rendimento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-05-02",
+    "revision": "00da953c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Spread de crédito. Critério: Maior risco de crédito pode exigir prêmio adicional. Com fluxos prometidos iguais, maior desconto reduz o preço.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-05-03",
+    "revision": "7b257b57",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Indexador. Critério: 110% da DI é uma relação com uma taxa de referência, não uma taxa anual absoluta de 110%.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-05-04",
+    "revision": "0bc5cbcc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de reinvestimento. Critério: Cupons antecipam recebimentos que precisam ser reaplicados; a taxa futura de reinvestimento não é garantida pela compra do título.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-05-05",
+    "revision": "91150251",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Carência e vencimento. Critério: Carência limita a possibilidade de resgate por certo período; não se confunde com a data final do título.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-01",
+    "revision": "6e2fbf3d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Retorno acionário. Critério: O ganho é 44−40+2=6; 6÷40=15%.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-02",
+    "revision": "aeb42040",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Desdobramento. Critério: Quantidade triplica e preço unitário se divide por três, preservando o valor teórico total.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-03",
+    "revision": "409921fc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Diluição. Critério: O número de ações do acionista fica igual enquanto o total aumenta; sua fração do capital cai.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-04",
+    "revision": "c4c8c9fd",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Direitos acionários. Critério: Categorias possuem características distintas; estatuto e legislação definem direitos concretos, sem prometer retorno fixo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-05",
+    "revision": "1a365790",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Hedge. Critério: Hedge busca compensar a variação do risco identificado; exige compatibilidade de montante, prazo e instrumento.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-06",
+    "revision": "252570b3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Alavancagem. Critério: Alavancagem permite exposição superior ao desembolso inicial e pode produzir perdas e chamadas adicionais, conforme o contrato.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-07",
+    "revision": "71fc35d3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Opção de compra. Critério: A call confere ao titular o direito de comprar nas condições do contrato, mediante pagamento do prêmio.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-08",
+    "revision": "69d7073f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Limite de retorno do COE. Critério: O teto contratual limita o ganho, ainda que o ativo de referência suba mais.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-06-09",
+    "revision": "94060f5c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Liquidez e preço. Critério: Facilidade de negociar e estabilidade do preço são atributos diferentes de um ativo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "B3"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-01",
+    "revision": "ebd88455",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Valor da cota. Critério: Valor da cota=patrimônio líquido÷quantidade de cotas=2.000.000÷100.000.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-02",
+    "revision": "d98f8799",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cotização e pagamento. Critério: Cotização e liquidação financeira são etapas distintas. A solicitação não assegura caixa imediato.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-03",
+    "revision": "af773689",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Benchmark. Critério: A referência permite avaliar a estratégia e seu resultado; não é garantia de que o fundo acompanhará ou superará o índice.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-04",
+    "revision": "781932bf",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxa de performance. Critério: A taxa de performance depende das regras aplicáveis e da metodologia contratada; não basta olhar sua porcentagem isolada.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-05",
+    "revision": "aa3f3823",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Responsabilidade limitada. Critério: Limitar responsabilidade não equivale a garantir capital, retorno ou liquidez das cotas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-06",
+    "revision": "fbb3d37a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Come-cotas. Critério: O mecanismo usa cotas para recolher IR antecipadamente; incidência e complementação dependem das regras do fundo.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-07",
+    "revision": "3c6a3c18",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Fundo cambial. Critério: Exposição cambial não é ganho garantido. A direção da moeda e a estrutura da carteira influenciam o resultado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-07-08",
+    "revision": "a17ced3b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Subclasses. Critério: A segregação patrimonial ocorre entre classes; subclasses podem diferenciar condições conforme as regras, sem criar automaticamente patrimônio independente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-01",
+    "revision": "a0479834",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Vacância. Critério: Vacância reduz a ocupação e pode diminuir receitas, ainda que os imóveis continuem pertencendo ao fundo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-02",
+    "revision": "ddaa261b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Concentração de locatários. Critério: Diversificação geográfica não elimina a concentração de receita em uma contraparte.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-03",
+    "revision": "9a8c1be0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Preço e patrimônio. Critério: Preço abaixo do patrimônio não garante convergência ou qualidade dos ativos e avaliações.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-04",
+    "revision": "4f2a400b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Distribuição extraordinária. Critério: Ganho de venda não necessariamente se repete; projetar renda exige distinguir suas fontes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-05",
+    "revision": "50814d79",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Inadimplência de recebíveis. Critério: O fluxo dos recebíveis depende de pagamento e da estrutura de crédito, não apenas do indexador prometido.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-06",
+    "revision": "520c92b7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Rendimento e preço. Critério: 98+1−100=−1; o resultado total é −1% sobre os R$ 100 iniciais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-07",
+    "revision": "51a85814",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Taxas de mercado. Critério: Mesmo com imóveis físicos, a taxa de desconto e as alternativas de investimento podem afetar o preço das cotas.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-08",
+    "revision": "b93d612a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Contrato longo. Critério: Prazo contratual não garante adimplemento; a saúde financeira do locatário e as condições da locação importam.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-08-09",
+    "revision": "7786a16d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Objetivo de caixa. Critério: O valor necessário pode não ser obtido no prazo e preço esperados, mesmo que o fundo distribua renda.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_175"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-01",
+    "revision": "12e60d83",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Base do VGBL. Critério: No VGBL, a incidência no resgate alcança a parcela de rendimentos, observadas as regras do regime aplicável.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-02",
+    "revision": "9df2a22d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Base do PGBL. Critério: No PGBL, o resgate considera o montante resgatado, diferentemente da base de rendimentos do VGBL.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-03",
+    "revision": "b5cc0dc9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Benefício tributário. Critério: A dedução reduz a base no momento elegível, mas não elimina o imposto futuro sobre o resgate do PGBL.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-04",
+    "revision": "fd150eea",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Portabilidade versus resgate. Critério: Portabilidade e resgate têm natureza e tratamento próprios; não se deve tratá-los como procedimentos intercambiáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-05",
+    "revision": "4ad84898",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Custos do plano. Critério: Taxas podem afetar acumulação; a comparação exige olhar o conjunto de condições, não só retorno passado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-06",
+    "revision": "9be587aa",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Longevidade. Critério: Risco de longevidade relaciona duração da vida e necessidade de renda, exigindo premissas e modalidade coerentes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-07",
+    "revision": "6349953a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Renda por prazo certo. Critério: Prazo certo limita a duração contratada; vitaliciedade tem lógica distinta e deve ser comparada conforme objetivos e regras.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-08",
+    "revision": "f0920942",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Previdência e reserva. Critério: Um instrumento para aposentadoria não substitui automaticamente a reserva disponível para emergências.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-09-09",
+    "revision": "b73bea8b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Inflação na aposentadoria. Critério: Com inflação, o mesmo valor nominal pode comprar menos. A projeção deve manter consistência entre despesas e retornos reais ou nominais.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_PREVIDENCIA"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-01",
+    "revision": "74cc8e8f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: CET e juros. Critério: CET incorpora componentes além dos juros e permite analisar o custo da operação conforme suas condições.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-02",
+    "revision": "1910902c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Prazo e parcela. Critério: 12×950=11.400; 24×550=13.200. A comparação financeira completa ainda deve considerar datas e CET.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-03",
+    "revision": "93f662c9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capacidade de pagamento. Critério: A folga é 5.000−4.300=700; nova parcela de 900 supera essa folga em 200.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-04",
+    "revision": "8790887c",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Garantia real. Critério: Garantia pode mitigar perda do credor, mas não substitui concessão responsável e análise do fluxo do devedor.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-05",
+    "revision": "04156241",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: SCR. Critério: SCR reúne informações relevantes para acompanhamento e análise de crédito; não deve ser confundido com saldo de investimentos ou aprovação automática.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-06",
+    "revision": "5fa91d0f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Crédito rotativo. Critério: Financiar o saldo pode aliviar caixa no momento e aumentar compromissos futuros; é preciso tratar também o desequilíbrio do orçamento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-07",
+    "revision": "d5e69481",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Portabilidade de crédito. Critério: Avaliar só a prestação pode esconder prazo maior ou custos. A operação deve ser comparada de forma consistente.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-08",
+    "revision": "e56e8d9b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Consignado e orçamento. Critério: Limite regulamentar e capacidade econômica concreta são análises relacionadas, mas diferentes.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-10-09",
+    "revision": "ff8643d3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Informação incompleta. Critério: A decisão exige dados consistentes sobre obrigações; omissão pode levar a um crédito incompatível com o orçamento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-01",
+    "revision": "ee879141",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Destinatário Pix. Critério: Confirmar destinatário evita concluir uma transferência para pessoa errada ou fraudulenta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-02",
+    "revision": "aefd23e3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Agendamento. Critério: É preciso verificar execução, saldo e confirmação na data prevista; agendamento não equivale a pagamento concluído.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-03",
+    "revision": "759cb628",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Débito e crédito. Critério: Débito afeta o saldo disponível conforme a operação; crédito envolve obrigação a pagar nas condições do cartão.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-04",
+    "revision": "4e8a71d5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Pacote de serviços. Critério: Adequação depende da necessidade e do custo, não do número máximo de serviços oferecidos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-05",
+    "revision": "43965257",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Comprovante falso. Critério: Uma imagem pode ser adulterada; a confirmação da movimentação é mais confiável para verificar o recebimento.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-06",
+    "revision": "66c4f617",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Cheque especial. Critério: O limite é crédito da instituição, não dinheiro pertencente ao cliente sem obrigação de devolver.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-07",
+    "revision": "85771d49",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Contestação de cobrança. Critério: A ocorrência deve ser comunicada com segurança para investigação e tratamento segundo as regras aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-08",
+    "revision": "7aecd79a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Consórcio e lance. Critério: É necessário entender critérios, concorrência e condições contratuais; não basta ofertar um valor simbólico.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-11-09",
+    "revision": "8e16c281",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Canal digital. Critério: Acesso remoto e urgência podem integrar engenharia social; a confirmação independente é essencial.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_PIX"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-01",
+    "revision": "567109b5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Limite de cobertura. Critério: A indenização não ultrapassa o limite contratual considerado no exercício.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-02",
+    "revision": "689cb3cb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Beneficiário. Critério: Beneficiário é quem tem direito à prestação do seguro na hipótese coberta, respeitadas as condições e regras aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-03",
+    "revision": "07b096fc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco excluído. Critério: Pagamento do prêmio remunera a cobertura prevista, sem tornar todos os eventos indenizáveis.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-04",
+    "revision": "50845abd",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Carência. Critério: Carência é restrição temporal definida nas condições aplicáveis, distinta de franquia monetária ou limite de indenização.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-05",
+    "revision": "ae12a4a0",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Franquia e prêmio. Critério: Prêmio menor pode vir com franquia maior ou menor cobertura. O custo anunciado não resume a proteção.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-06",
+    "revision": "6546afa5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Seguro prestamista. Critério: Prestamista não representa perdão irrestrito de atrasos. A indenização depende do evento e das condições.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-07",
+    "revision": "3e923e3f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capitalização e sorteio. Critério: Planejamento de obrigação conhecida não pode pressupor premiação incerta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-08",
+    "revision": "aaea9719",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Comunicação do sinistro. Critério: Comunicação e comprovação devem seguir orientações e condições aplicáveis para permitir a análise do sinistro.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-12-09",
+    "revision": "afcbde32",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Proteção patrimonial. Critério: A proteção securitária redistribui consequências financeiras de eventos cobertos; não elimina fisicamente o risco.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP"
+    ]
+  },
+  {
+    "id": "CPA-V25-13-01",
+    "revision": "e12989e8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Fluxo e estoque. Critério: É possível ter patrimônio positivo e déficit de caixa mensal. As duas dimensões precisam ser analisadas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-13-02",
+    "revision": "6b11773f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Meta de poupança. Critério: Dividindo o objetivo de R$ 9.000 pelos nove aportes, obtém-se R$ 1.000 por mês.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-13-03",
+    "revision": "d6bcc3e5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Despesas irregulares. Critério: Diluir despesas previsíveis no planejamento evita tratá-las como imprevistos toda vez que vencem.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-13-04",
+    "revision": "8e1d98a5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Prioridades. Critério: A alocação deve partir das metas e restrições para avaliar compromissos viáveis e ajustes.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-13-05",
+    "revision": "119afc49",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Renda variável. Critério: Renda incerta exige atenção ao caixa em meses fracos e a um colchão de liquidez adequado às necessidades.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-01",
+    "revision": "8f39f5b7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Pesos da carteira. Critério: O total é R$ 20.000; 8.000÷20.000=40%.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-02",
+    "revision": "3a881cbe",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Retorno ponderado. Critério: 0,60×10%+0,40×(−5%)=6%−2%=4%.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-03",
+    "revision": "2b54479a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Correlação negativa. Critério: Correlação negativa pode favorecer diversificação, mas pode mudar e não garante lucro ou risco zero.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-04",
+    "revision": "e73aa4c9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Rebalanceamento por aportes. Critério: Aportes podem aproximar os pesos da meta, reduzindo necessidade de negociar posições existentes.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-05",
+    "revision": "9d290e19",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Custos de giro. Critério: Giro frequente pode gerar fricções; monitorar não significa negociar constantemente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-06",
+    "revision": "2eb67d0e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Diversificação aparente. Critério: Nomes diferentes podem esconder a mesma concentração de ativos e fatores.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-07",
+    "revision": "0b589de8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Liquidez agregada. Critério: Diversificar emissores não resolve necessariamente a indisponibilidade de caixa na mesma janela de tempo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-08",
+    "revision": "73b90f40",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Alocação estratégica. Critério: Uma política reduz improvisação e explicita critérios, sem impedir ajustes fundamentados quando premissas mudam.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-14-09",
+    "revision": "c6b3438b",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco do conjunto. Critério: Decisões devem considerar interação entre posições, não apenas cada produto isolado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-01",
+    "revision": "4b7910e3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Conhecimento e tolerância. Critério: Tolerar perdas não substitui a compreensão do produto nem os demais critérios de adequação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-02",
+    "revision": "36deb27d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Capacidade financeira. Critério: A capacidade depende de obrigações, prazo e patrimônio disponível, não só da estabilidade da renda.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-03",
+    "revision": "89a57e96",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de mercado. Critério: A oscilação de preço por mudança em fatores de mercado pode ocorrer mesmo sem inadimplência do emissor.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-04",
+    "revision": "77c19fad",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Horizontes distintos. Critério: Uma pessoa pode precisar de estratégias distintas por prazo e finalidade, sem ignorar sua situação global.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-05",
+    "revision": "4b308217",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Retorno esperado. Critério: Retorno esperado não é garantia contratual nem certeza do resultado realizado.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-06",
+    "revision": "2f76d734",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Histórico curto. Critério: Um resultado passado isolado não substitui análise de risco, objetivos, prazo e situação do cliente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-07",
+    "revision": "19061f5a",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Diversificação e risco sistêmico. Critério: Diversificação ajuda a reduzir exposições específicas, mas não elimina fatores comuns a muitos ativos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-08",
+    "revision": "eca5b4ad",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Perfil desatualizado. Critério: Mudanças podem afetar capacidade e necessidades; usar dados antigos sem crítica pode gerar recomendação inadequada.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-15-09",
+    "revision": "3be9fec2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Perda e volatilidade. Critério: A oscilação pode provocar decisões e perdas incompatíveis com suas necessidades; adequação considera ambas as dimensões.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_30"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-01",
+    "revision": "6f2faf2d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dimensão social. Critério: Saúde, segurança e condições de trabalho se relacionam à dimensão social, embora possam ter efeitos financeiros e de governança.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-02",
+    "revision": "904a7f9f",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Materialidade. Critério: Materialidade depende do contexto e do objetivo da avaliação; os temas relevantes podem variar entre setores.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-03",
+    "revision": "2759cc10",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Risco de transição. Critério: Mudanças de preferência e tecnologia podem afetar o modelo de negócios durante a transição econômica.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-04",
+    "revision": "858e306d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Indicadores de impacto. Critério: Impacto não se comprova só com intenção ou nome; é necessário acompanhar evidências coerentes com o objetivo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-05",
+    "revision": "70dc8353",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Engajamento. Critério: Engajamento envolve atuação e acompanhamento junto às empresas, diferente de apenas excluir ativos da carteira.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-06",
+    "revision": "8698d1ad",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Filtro negativo. Critério: Filtro negativo restringe o universo de investimento por critérios de exclusão definidos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-07",
+    "revision": "3b8691bb",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Governança e conflitos. Critério: Controles de partes relacionadas ajudam a tratar potenciais conflitos e proteger a integridade das decisões.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-08",
+    "revision": "43638a0e",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dados ESG. Critério: Ratings ESG podem refletir critérios e objetivos diferentes; a divergência pede análise metodológica.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-17-09",
+    "revision": "11d76000",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: ESG e retorno. Critério: ESG pode contribuir para avaliar riscos e oportunidades, sem eliminar os riscos financeiros da carteira.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "CVM_ESG"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-01",
+    "revision": "00b8c705",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Chave privada. Critério: Em autocustódia, controle e recuperação das credenciais são críticos; a rede não conhece necessariamente uma forma de restaurar o acesso.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-02",
+    "revision": "0c65a670",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Oracle. Critério: Oráculos conectam dados externos à execução; informação incorreta pode provocar resultado indesejado mesmo com código executado corretamente.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-03",
+    "revision": "6e5f26d8",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Contrato programável. Critério: Código pode executar uma lógica errada; testes, auditoria e governança continuam importantes.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-04",
+    "revision": "204d18aa",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Token e direito. Critério: Representação digital não basta para comprovar propriedade ou direito econômico exequível.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-05",
+    "revision": "886548f9",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: DeFi e garantias. Critério: Volatilidade do colateral e mecanismos automáticos podem gerar perdas e liquidações em condições adversas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-06",
+    "revision": "f4f4d1f3",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Stablecoin sem paridade. Critério: Objetivo de estabilidade não é certeza; estrutura, reservas, liquidez e resgate precisam ser avaliados.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-07",
+    "revision": "dc7a5683",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Irreversibilidade operacional. Critério: Transferências podem ser difíceis ou impossíveis de reverter; validar os dados antes é essencial.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-08",
+    "revision": "fb1461ab",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Rede permissionada. Critério: Redes podem ter modelos diferentes de acesso, consenso e governança.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-18-09",
+    "revision": "8ee750fd",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Custódia por terceiro. Critério: Delegar a custódia envolve confiança na estrutura e no prestador, além dos riscos do ativo.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-01",
+    "revision": "031b0ca7",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Escopo do consentimento. Critério: Consentimento não é uma autorização irrestrita para usar qualquer dado de qualquer forma.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-02",
+    "revision": "788ff357",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Comparação de ofertas. Critério: Mais informações podem reduzir assimetrias, mas não garantem aprovação ou melhor condição em toda situação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-03",
+    "revision": "b855ef72",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Revogação e contrato. Critério: Gestão de dados e obrigação de pagamento são relações diferentes; cada uma segue suas regras.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-04",
+    "revision": "1625f1a2",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Consolidação financeira. Critério: Consolidar informações ajuda a enxergar sobreposições e distribuição, mas não elimina riscos dos ativos.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-05",
+    "revision": "62320e29",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Iniciação de pagamento. Critério: Interoperabilidade simplifica a jornada, sem dispensar identificação e autorização da transação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-06",
+    "revision": "8f1d43a5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Participantes. Critério: O rótulo não comprova participação legítima; a solicitação de credenciais por mensagem é sinal de alerta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-07",
+    "revision": "e3ee2815",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Portabilidade e oferta. Critério: A oferta não equivale à execução automática da transferência e deve ser avaliada pelo cliente.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-08",
+    "revision": "d104d415",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Open Insurance. Critério: Acesso a dados pode melhorar a jornada, mas não substitui leitura e adequação do produto de seguro.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "SUSEP_OPEN_INSURANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-19-09",
+    "revision": "0abac438",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dados atualizados. Critério: Dados compartilhados apoiam a análise, mas podem exigir validação de atualidade e contexto.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_OPEN_FINANCE"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-01",
+    "revision": "bc34c207",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Dados pessoais em IA. Critério: Eficiência não dispensa segurança e base adequada para tratamento; dados financeiros identificáveis exigem cuidado.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-02",
+    "revision": "01f2b8f5",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Alucinação. Critério: Fluência não assegura veracidade; normas, fatos e cálculos relevantes devem ser conferidos em fontes adequadas.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-03",
+    "revision": "1f8ffcbc",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Modelo preditivo. Critério: O modelo estima um resultado com base em padrões; sua qualidade depende de dados, validação e monitoramento.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-04",
+    "revision": "41d346ea",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Mudança de contexto. Critério: Distribuições e relações podem mudar; validação inicial não garante performance permanente.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-05",
+    "revision": "abff1499",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Explicabilidade. Critério: É necessário controlar e explicar o funcionamento em nível apropriado, observadas regras e responsabilidades aplicáveis.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-06",
+    "revision": "6726c64d",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Supervisão humana. Critério: A supervisão deve ser efetiva; seguir automaticamente uma recomendação conhecida como inadequada não é controle.",
+    "sourceIds": [
+      "ANBIMA_PD"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-07",
+    "revision": "5c4026ff",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Fintech e atividade. Critério: O termo fintech não é licença universal; o enquadramento depende da atividade concreta.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-08",
+    "revision": "c858c1de",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Pagamentos por aproximação. Critério: Facilidade de uso deve coexistir com autenticação e resposta a perda ou comprometimento do dispositivo.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  },
+  {
+    "id": "CPA-V25-20-09",
+    "revision": "75c08d32",
+    "status": "reviewed",
+    "reviewedAt": "2026-09-28",
+    "evidence": "Revisão editorial assistida: coerência do caso, alternativa correta e distratores. Conceito: Sandbox e escala. Critério: Um ambiente de teste tem limites; passar a escala maior pode exigir outra autorização ou adaptação.",
+    "sourceIds": [
+      "ANBIMA_PD",
+      "BCB_SFN"
+    ]
+  }
+]

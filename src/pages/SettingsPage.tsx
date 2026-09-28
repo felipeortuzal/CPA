@@ -1,3 +1,5 @@
+import { VersionStatus } from '../components/VersionStatus'
+import { prepareBackupExport, recordBackupExport } from '../lib/storage/repositories/backupStatusRepository'
 import { useEffect, useRef, useState, type ChangeEvent, type FormEvent } from 'react'
 import { CheckCircle2, DatabaseBackup, Download, Save, Trash2, Upload, UserRound } from 'lucide-react'
 import { Button } from '../components/ui/Button'
@@ -39,7 +41,7 @@ export function SettingsPage() {
 
   async function exportProgress() {
     setBusyAction('export'); setMessage(null); setError(null)
-    try { downloadBackup(await createBackup()); setMessage('Backup exportado com sucesso.') }
+    try { const backup=prepareBackupExport(await createBackup()); downloadBackup(backup); await recordBackupExport(backup); setMessage('Exportação solicitada. Confira o JSON na pasta de downloads.') }
     catch (cause) { setError(cause instanceof Error ? cause.message : 'Não foi possível exportar o backup.') }
     finally { setBusyAction(null) }
   }
@@ -79,11 +81,12 @@ export function SettingsPage() {
 
   return <div className="mx-auto max-w-3xl space-y-6">
     <div><h1 className="text-3xl font-bold tracking-tight">Configurações</h1><p className="mt-2 text-slate-500">Perfil local, rotina de estudos e segurança dos seus dados.</p></div>
+    <VersionStatus/>
     <Card>
       <div className="mb-6 flex items-center gap-3"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-emerald-400/15 text-emerald-700 dark:text-emerald-300"><UserRound className="h-5 w-5"/></div><div><h2 className="font-semibold">Perfil local</h2><p className="text-sm text-slate-500">Sem conta e sem login. Este perfil existe apenas neste navegador.</p></div></div>
       <form onSubmit={submit} className="space-y-5">
         <label className="block"><span className="mb-1.5 block text-sm font-medium">Alterar nome</span><input className={inputClass} required maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)}/></label>
-        <label className="block"><span className="mb-1.5 block text-sm font-medium">Certificação atual</span><select className={inputClass} value={certification} onChange={(e) => setCertification(e.target.value)}>{certifications.map((item) => <option key={item.id} value={item.id} disabled={!item.available}>{item.name}{!item.available ? ' — em breve' : ''}</option>)}</select></label>
+        {certifications.filter(item=>item.available).length>1?<label className="block"><span className="mb-1.5 block text-sm font-medium">Certificação atual</span><select className={inputClass} value={certification} onChange={(e) => setCertification(e.target.value)}>{certifications.map((item) => <option key={item.id} value={item.id} disabled={!item.available}>{item.name}{!item.available ? ' — em breve' : ''}</option>)}</select></label>:<p className="text-sm text-slate-500">Certificação: CPA</p>}
         <label className="block"><span className="mb-1.5 block text-sm font-medium">Meta diária</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={5} max={600} step={5} value={dailyGoal} onChange={(e) => setDailyGoal(Number(e.target.value))}/><span className="shrink-0 text-sm text-slate-500">minutos</span></div></label>
         <Button disabled={saving} type="submit"><Save className="h-4 w-4"/>{saving ? 'Salvando...' : 'Salvar alterações'}</Button>
       </form>

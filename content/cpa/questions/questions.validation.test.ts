@@ -9,9 +9,9 @@ const terminalPdCodes = new Set(cpaLessons.map((lesson) => lesson.pdCode))
 const countBy = <T extends string | number>(values: T[]) => values.reduce<Record<string, number>>((acc, value) => { const key = String(value); acc[key] = (acc[key] ?? 0) + 1; return acc }, {})
 
 describe('banco original de questões CPA', () => {
-  it('possui 583 questões únicas e cobre todos os 445 PDs terminais', () => {
-    expect(cpaQuestions).toHaveLength(583)
-    expect(new Set(cpaQuestions.map((q) => q.id)).size).toBe(583)
+  it('possui 745 questões únicas e cobre todos os 445 PDs terminais', () => {
+    expect(cpaQuestions).toHaveLength(745)
+    expect(new Set(cpaQuestions.map((q) => q.id)).size).toBe(745)
     const covered=new Set(cpaQuestions.map((q)=>q.pdCode))
     for(const pdCode of terminalPdCodes)expect(covered.has(pdCode),`PD terminal sem questão: ${pdCode}`).toBe(true)
   })

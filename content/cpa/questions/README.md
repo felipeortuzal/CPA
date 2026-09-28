@@ -1,32 +1,19 @@
-# Banco original de questões CPA
+# Banco autoral CPA — V25
 
-Versão inicial: 100 questões originais, verificadas em 14/09/2026.
+São 745 questões: 300 autorais revisadas editorialmente (15 por módulo) e 445 exercícios de cobertura automática, identificados como rascunhos. As 100 questões originais e os IDs anteriores foram preservados. As 38 questões da V24 e as 162 desta expansão completam o banco autoral.
 
-## Referências de estilo
+## O que significa revisão
 
-Antes da elaboração foram estudados materiais oficiais da ANBIMA:
+- Rascunho: não elegível para simulados, domínio, assuntos fracos ou estatísticas de desempenho.
+- Revisada: coerência do caso, resposta, explicação e distratores conferida na revisão editorial assistida de 28/09/2026.
+- Verificada: exige conferência específica documentada contra uma fonte. Nenhuma questão recebe esse selo nesta versão.
 
-- Programa Detalhado CPA v1.2 — revisão 04/06/2025, vigência 01/01/2026.
-- Guia de Elaboração de Questões das Certificações ANBIMA.
-- Caderno de Questões CPA publicado pela ANBIMA.
-- Modelos de questões interativas/árvore de diálogo divulgados pela ANBIMA.
+O registro `editorial-review.json` guarda ID, hash da revisão, data, conceito, justificativa e fontes cadastradas. `editorial.ts` invalida a aprovação se o texto, alternativas ou gabarito mudarem. A data legada `verifiedAt` é de cadastro das referências e não comprova conferência do gabarito. A revisão assistida não equivale a revisão humana independente ou homologação pela ANBIMA.
 
-O guia oficial orienta questões contextualizadas em situações profissionais, comando claro, quatro alternativas concisas e distratores plausíveis no mesmo universo semântico da resposta correta. O banco evita absolutos, negativas artificiais, pistas gramaticais, “todas as anteriores” e memorização isolada quando é possível avaliar aplicação.
+Os novos casos são originais. A expansão inclui cenários de atendimento, interpretação de risco, comparação de produtos, contratos e cálculos, sem copiar enunciados de cursos ou bancos externos. Questões privadas e vazadas não são utilizadas.
 
-Materiais públicos de preparação disponíveis na internet foram observados apenas para calibrar extensão e dificuldade. Nenhum enunciado, gabarito ou alternativa de terceiros foi copiado.
+## Fontes e manutenção
 
-## Distribuição v1
+A base curricular é o Programa Detalhado CPA da ANBIMA. Há referências oficiais da CVM, Banco Central, SUSEP e demais instituições em cada questão; a simples presença de um link não confere o selo Verificada. Para atualizar uma questão: confira a regra e seus distratores, registre a revisão exata e rode os testes. Nunca atualize hashes em lote para contornar a revisão.
 
-- Tema 1: 20 questões
-- Tema 2: 40 questões
-- Tema 3: 30 questões
-- Tema 4: 10 questões
-- Fácil / médio / difícil: 30 / 45 / 25
-- Compreensão / aplicação / análise: 30 / 45 / 25
-- Multiple choice / case / dialog tree: 70 / 20 / 10
-
-Cada questão referencia um PD Code existente e pelo menos uma fonte oficial. A validação automatizada bloqueia o CI se a estrutura ou a distribuição divergir.
-
-## Integridade
-
-Não usar questões vazadas, privadas ou obtidas de forma não autorizada. Questões oficiais da ANBIMA servem somente como referência de estilo e desenho cognitivo; este banco contém material autoral.
+Os exercícios automáticos podem ser consultados pelo filtro de rascunhos. Seus históricos permanecem disponíveis, mas não contam como evidência de aprendizagem. Simulados de módulo sorteiam oito questões e usam as ainda não vistas primeiro. O treino completo conserva os pesos de estudo configurados e não é uma simulação homologada da prova oficial; os diálogos ainda são questões objetivas, sem árvore interativa.

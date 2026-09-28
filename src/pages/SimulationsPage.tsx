@@ -1,3 +1,4 @@
+import { reviewedEvidence } from '../lib/qualityEvidence'
 import { reportStorageError } from '../lib/storage/events'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ArrowRight, Clock3, FileText, History, Sparkles, Target, Zap } from 'lucide-react'
@@ -38,11 +39,11 @@ export function SimulationsPage() {
 
   async function load() {
     const [attemptRows, simulationRows, seenIds] = await Promise.all([getQuestionAttempts(), getSimulations(), getSeenQuestionIds()])
-    setAttempts(attemptRows); setSimulations(simulationRows); setSeen(seenIds); setLoaded(true)
+    setAttempts(reviewedEvidence(attemptRows,simulationRows,[]).attempts); setSimulations(simulationRows); setSeen(seenIds); setLoaded(true)
   }
   useEffect(() => { void load().catch(reportStorageError) }, [])
 
-  const performanceSamples = useMemo(() => [...samplesFromAttempts(attempts), ...samplesFromSimulations(simulations)], [attempts, simulations])
+  const performanceSamples = useMemo(() => [...samplesFromAttempts(attempts), ...samplesFromSimulations(reviewedEvidence([],simulations,[]).simulations)], [attempts, simulations])
   const active = simulations.find((item) => !item.completedAt)
   const completed = simulations.filter((item) => item.completedAt)
 
@@ -61,11 +62,11 @@ export function SimulationsPage() {
 
   return <div className="mx-auto max-w-6xl space-y-7">
     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div><div className="mb-2 flex items-center gap-2"><Badge>Treino autoral</Badge><span className="text-sm text-slate-500">Conteúdo com revisão individual pendente</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Simulados CPA</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Treine em uma interface sem dicas nem correção durante a prova. O treino completo tem 50 questões e 2h30. As questões de diálogo atuais são objetivas; ainda não reproduzem as árvores de decisão do exame.</p></div>
+      <div><div className="mb-2 flex items-center gap-2"><Badge>Treino autoral</Badge><span className="text-sm text-slate-500">Questões com revisão editorial</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Simulados CPA</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Treine em uma interface sem dicas nem correção durante a prova. O treino completo tem 50 questões e 2h30. As questões de diálogo atuais são objetivas; ainda não reproduzem as árvores de decisão do exame.</p></div>
       <Link to="/simulados/historico"><Button variant="secondary"><History className="h-4 w-4"/>Histórico ({completed.length})</Button></Link>
     </div>
 
-    <Link to="/conteudos" className="block rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-5"><h2 className="font-bold">Simulados dos 20 módulos</h2><p className="mt-2 text-sm leading-6 text-slate-500">Escolha um assunto, revise a leitura e faça o simulado ao final. Cada módulo tem de 6 a 10 questões autorais comentadas.</p><span className="mt-3 block text-sm font-bold text-emerald-700 dark:text-emerald-300">Escolher módulo →</span></Link>
+    <Link to="/conteudos" className="block rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-5"><h2 className="font-bold">Simulados dos 20 módulos</h2><p className="mt-2 text-sm leading-6 text-slate-500">Escolha um assunto, revise a leitura e faça o simulado ao final. Cada módulo tem 8 questões autorais comentadas.</p><span className="mt-3 block text-sm font-bold text-emerald-700 dark:text-emerald-300">Escolher módulo →</span></Link>
     {active ? <Card className="border-amber-300 bg-amber-50 dark:border-amber-400/20 dark:bg-amber-400/[0.06]"><div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-xs font-bold uppercase tracking-[0.16em] text-amber-700 dark:text-amber-300">Simulado em andamento</p><p className="mt-1 font-semibold">{active.payload.label} · {active.questionCount} questões</p></div><Button onClick={() => navigate(`/prova/${active.id}`)}>Continuar <ArrowRight className="h-4 w-4"/></Button></div></Card> : null}
 
     <Card className="overflow-hidden p-0">
@@ -74,9 +75,9 @@ export function SimulationsPage() {
 
     <div className="grid gap-4 md:grid-cols-2">{modes.map(({mode,title,description,icon:Icon,detail}) => <Card key={mode} className="flex flex-col"><div className="flex items-start gap-3"><div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-400/15 text-emerald-700 dark:text-emerald-300"><Icon className="h-5 w-5"/></div><div><h2 className="font-bold">{title}</h2><p className="mt-1 text-sm leading-6 text-slate-500">{description}</p><p className="mt-2 text-xs font-semibold text-slate-400">{detail}</p></div></div><div className="mt-auto pt-5"><Button variant="secondary" disabled={!loaded || busy !== null || Boolean(active)} onClick={() => void start(mode)}>{busy === mode ? 'Gerando...' : 'Iniciar'} <ArrowRight className="h-4 w-4"/></Button></div></Card>)}</div>
 
-    <Card><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><h2 className="font-bold">Simulado por tema</h2><p className="mt-1 text-sm text-slate-500">Até 20 questões focadas em um único macrotema. Não há corte oficial neste modo.</p></div><div className="flex flex-col gap-2 sm:flex-row"><select value={theme} onChange={(event) => setTheme(event.target.value as '1'|'2'|'3'|'4')} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm dark:border-white/10 dark:bg-white/5">{Object.entries(themeLabels).map(([value,label]) => <option key={value} value={value}>{label}</option>)}</select><Button disabled={!loaded || busy !== null || Boolean(active)} onClick={() => void start('theme')}>{busy === 'theme' ? 'Gerando...' : 'Iniciar por tema'}</Button></div></div></Card>
+    <Card><div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><h2 className="font-bold">Simulado por tema</h2><p className="mt-1 text-sm text-slate-500">Até 20 questões focadas em um único macrotema. Não há corte oficial neste modo.</p></div><div className="flex flex-col gap-2 sm:flex-row"><select aria-label="Tema do simulado" value={theme} onChange={(event) => setTheme(event.target.value as '1'|'2'|'3'|'4')} className="rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm dark:border-white/10 dark:bg-white/5">{Object.entries(themeLabels).map(([value,label]) => <option key={value} value={value}>{label}</option>)}</select><Button disabled={!loaded || busy !== null || Boolean(active)} onClick={() => void start('theme')}>{busy === 'theme' ? 'Gerando...' : 'Iniciar por tema'}</Button></div></div></Card>
 
     {error ? <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-800 dark:border-rose-400/20 dark:bg-rose-400/[0.06] dark:text-rose-200">{error}</div> : null}
-    <p className="text-xs leading-5 text-slate-500">Os modos de treino usam o banco autoral local. O treino completo exclui exercícios gerados automaticamente. Nenhum modo certifica preparo ou aprovação na prova. O histórico é salvo neste navegador.</p>
+    <p className="text-xs leading-5 text-slate-500">Os modos de treino usam o banco autoral local. Todos os novos simulados excluem rascunhos e exercícios gerados automaticamente. Nenhum modo certifica preparo ou aprovação na prova. O histórico é salvo neste navegador.</p>
   </div>
 }

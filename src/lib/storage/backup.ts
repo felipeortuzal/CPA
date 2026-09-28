@@ -1,3 +1,5 @@
+import { validBackupStatus } from './repositories/backupStatusRepository'
+import { validDailySession } from '../daily/repository'
 import { validCourseProgress } from './repositories/courseRepository'
 import { calendarDate, validStudyPlanSettings } from '../study-plan/validation'
 import { validQuestion, validSimulation, finite, natural } from './validation'
@@ -69,7 +71,7 @@ export function validateBackup(value: unknown): value is LocalBackup {
   if (!(value.studySessions as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && ['lesson','quiz','flashcard','questions','simulation','review'].includes(String(row.activityType)) && isNullableString(row.pdCode) && validDate(row.startedAt) && nullableDate(row.endedAt) && finite(row.activeSeconds) && row.activeSeconds >= 0)) return false
   if (!(value.activityDays as unknown[]).every((row) => isRecord(row) && calendarDate(row.date) && natural(row.events) && validDate(row.lastActivityAt))) return false
   if (!(value.preferences as unknown[]).every((row) => isRecord(row) && row.id === 'preferences' && validDate(row.updatedAt) && (row.theme === undefined || ['light','dark'].includes(String(row.theme))) && ['reduceMotion','lessonSidebarOpen'].every(key => row[key] === undefined || typeof row[key] === 'boolean'))) return false
-  if (!(value.studyPlans as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && validDate(row.updatedAt) && 'payload' in row && (!row.id.startsWith('course:') || validCourseProgress(row.payload, row.id)) && (row.id !== 'exam-plan:settings' || validStudyPlanSettings(row.payload)))) return false
+  if (!(value.studyPlans as unknown[]).every((row) => isRecord(row) && typeof row.id === 'string' && validDate(row.updatedAt) && 'payload' in row && (row.id !== 'backup:status' || validBackupStatus(row.payload)) && (!row.id.startsWith('session:') || validDailySession(row.payload,row.id)) && (!row.id.startsWith('course:') || validCourseProgress(row.payload, row.id)) && (row.id !== 'exam-plan:settings' || validStudyPlanSettings(row.payload)))) return false
   for (const key of value.backupVersion === 2 ? v2ArrayKeys : baseArrayKeys) {
     const rows = value[key] as Record<string, unknown>[]
     const ids = rows.map((row) => row[key === 'lessonProgress' ? 'pdCode' : key === 'activityDays' ? 'date' : 'id'])

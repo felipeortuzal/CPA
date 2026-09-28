@@ -31,8 +31,9 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
-      - run: npx playwright install --with-deps chromium --only-shell
+      - run: npx playwright install --with-deps chromium firefox webkit
       - run: npm run test:browser
+      - run: npm run test:cross-browser
       - uses: actions/upload-artifact@v4
         with:
           name: CPA-Study-offline

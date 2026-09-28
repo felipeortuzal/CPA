@@ -1,3 +1,4 @@
+import { isReviewed } from '../../../content/cpa/questions/quality'
 import type { CPAQuestion, QuestionDifficulty } from '../../../content/cpa/questions/types'
 import type { QuestionAttemptRecord, SimulationRecord, SimulationResultSnapshot } from '../storage/types'
 
@@ -94,6 +95,7 @@ export function samplesFromSimulations(simulations: SimulationRecord[]) {
 }
 
 export function generateSimulation(questions: CPAQuestion[], request: SimulationRequest): SimulationDefinition {
+  questions = questions.filter(isReviewed)
   const random = request.random ?? Math.random
   let selected: CPAQuestion[] = []
   let durationSeconds = 60 * 60
@@ -105,7 +107,8 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
     if (!module) throw new Error('Módulo não encontrado.')
     const pool = questions.filter((q) => q.origin === 'authored' && matchesModule(module, q.pdCode))
     if (pool.length < 6) throw new Error('Este módulo ainda não possui questões suficientes.')
-    selected = shuffle(pool, random).slice(0, 10)
+    const seen = request.seenQuestionIds ?? new Set<string>()
+    selected = [...shuffle(pool.filter(q=>!seen.has(q.id)),random), ...shuffle(pool.filter(q=>seen.has(q.id)),random)].slice(0,8)
     durationSeconds = selected.length * 3 * 60
     theme = null
   } else if (request.mode === 'official_exam') {

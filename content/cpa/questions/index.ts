@@ -1,3 +1,5 @@
+import { applyEditorialReview } from './editorial'
+import { expandedQuestions } from './expansion'
 import { moduleAssessmentQuestions } from './module-assessments'
 import { generatedCoverageQuestions } from './generated-coverage'
 import { macro1Questions } from './macro-1'
@@ -15,7 +17,8 @@ export const cpaQuestions: CPAQuestion[] = [
   ...macro4Questions,
   ...generatedCoverageQuestions,
   ...moduleAssessmentQuestions,
-]
+  ...expandedQuestions,
+].map(applyEditorialReview)
 
 export const cpaQuestionMap = new Map(cpaQuestions.map((question) => [question.id, question]))
 
@@ -23,4 +26,4 @@ export function getQuestionsByPdCode(pdCode: string) {
   return cpaQuestions.filter((question) => question.pdCode === pdCode)
 }
 
-if(cpaQuestions.length!==583)throw new Error(`O banco CPA deveria possuir 583 questões; foram carregadas ${cpaQuestions.length}.`)
+if(cpaQuestions.length!==745)throw new Error(`O banco CPA deveria possuir 745 questões; foram carregadas ${cpaQuestions.length}.`)

@@ -1,3 +1,4 @@
+import { nextModule, moduleStateLabels } from '../lib/course/progress'
 import { useState } from 'react'
 import { ArrowRight, BookOpen, CheckCircle2, Search } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -11,10 +12,10 @@ import { useCourseProgress } from '../hooks/useCourseProgress'
 const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
 export function ContentsPage() {
   const [query, setQuery] = useState('')
-  const { progress, simulations, loading } = useCourseProgress()
+  const { progress, simulations, modules, loading } = useCourseProgress()
   const finished = (id: string) => progress[id]?.readSections.length === moduleReadings[id].sections.length && simulations.some(row => row.payload.moduleId === id && row.completedAt)
   const completed = courseModules.filter(module => finished(module.id)).length
-  const next = courseModules.find(module => !finished(module.id)) ?? courseModules[0]
+  const next = nextModule(modules).module
   const filtered = courseModules.filter(module => {
     const terms = [module.title, module.subtitle, ...moduleReadings[module.id].objectives, ...cpaLessons.filter(lesson => matchesModule(module, lesson.pdCode)).flatMap(lesson => [lesson.title, lesson.pdCode, ...lesson.searchTerms])].join(' ')
     return normalize(terms).includes(normalize(query.trim()))
@@ -28,7 +29,7 @@ export function ContentsPage() {
       return items.length ? <section key={stage}><h2 className="mb-4 text-xl font-bold">{stage}</h2><div className="grid gap-4 md:grid-cols-2">{items.map(module => {
         const reading = moduleReadings[module.id]; const count = progress[module.id]?.readSections.length ?? 0
         const exam = simulations.find(row => row.payload.moduleId === module.id && row.completedAt)
-        return <Link key={module.id} to={`/modulos/${module.id}`} className="group"><Card className="h-full transition group-hover:-translate-y-0.5 group-hover:border-emerald-400/50 group-hover:shadow-lg"><div className="flex gap-4"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-400/10 text-lg font-bold text-emerald-700 dark:text-emerald-300">{String(courseModules.indexOf(module)+1).padStart(2,'0')}</span><div className="min-w-0 flex-1"><h3 className="font-bold">{module.title}</h3><p className="mt-2 text-sm leading-6 text-slate-500">{module.subtitle}</p><p className="mt-3 flex items-center gap-2 text-xs text-slate-500"><BookOpen className="h-3.5 w-3.5"/>{readingMinutes(reading)} min de leitura · simulado ao final</p><div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-white/10"><div className="h-full rounded-full bg-emerald-400" style={{width:`${count/reading.sections.length*100}%`}}/></div><p className="mt-2 text-xs text-slate-500">Leitura: {count}/{reading.sections.length} partes · {exam ? `Último simulado: ${exam.score}%` : 'Simulado pendente'}</p></div>{finished(module.id) ? <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500"/> : <ArrowRight className="h-4 w-4 shrink-0 text-slate-400"/>}</div></Card></Link>
+        return <Link key={module.id} to={`/modulos/${module.id}`} className="group"><Card className="h-full transition group-hover:-translate-y-0.5 group-hover:border-emerald-400/50 group-hover:shadow-lg"><div className="flex gap-4"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-emerald-400/10 text-lg font-bold text-emerald-700 dark:text-emerald-300">{String(courseModules.indexOf(module)+1).padStart(2,'0')}</span><div className="min-w-0 flex-1"><h3 className="font-bold">{module.title}</h3><span className="mt-1 inline-block text-xs font-semibold text-emerald-700 dark:text-emerald-300">{moduleStateLabels[modules.find(row=>row.module.id===module.id)!.state]}</span><p className="mt-2 text-sm leading-6 text-slate-500">{module.subtitle}</p><p className="mt-3 flex items-center gap-2 text-xs text-slate-500"><BookOpen className="h-3.5 w-3.5"/>{readingMinutes(reading)} min de leitura · simulado ao final</p><div className="mt-4 h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-white/10"><div className="h-full rounded-full bg-emerald-400" style={{width:`${count/reading.sections.length*100}%`}}/></div><p className="mt-2 text-xs text-slate-500">Leitura: {count}/{reading.sections.length} partes · {exam ? `Último simulado: ${exam.score}%` : 'Simulado pendente'}</p></div>{finished(module.id) ? <CheckCircle2 className="h-5 w-5 shrink-0 text-emerald-500"/> : <ArrowRight className="h-4 w-4 shrink-0 text-slate-400"/>}</div></Card></Link>
       })}</div></section> : null
     })}
     <p className="text-xs leading-6 text-slate-500">As leituras apresentam os conceitos centrais de cada módulo. As 445 aulas de consulta do programa continuam disponíveis dentro dos módulos. Ler o resumo não marca automaticamente essas aulas como estudadas.</p>

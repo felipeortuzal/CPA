@@ -1,3 +1,4 @@
+import { QuestionQuality } from '../components/QuestionQuality'
 import { Activity, BarChart3, BookOpenCheck, Clock3, RefreshCw, Target, TrendingUp, TriangleAlert } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Badge } from '../components/ui/Badge'
@@ -35,7 +36,7 @@ export function AnalyticsPage(){
   const avgMinutesWithPractice=daysWithBoth.length?Math.round(daysWithBoth.reduce((sum,day)=>sum+day.studyMinutes,0)/daysWithBoth.length):null
   const avgAccuracyWithPractice=daysWithBoth.length?Math.round(daysWithBoth.reduce((sum,day)=>sum+(day.accuracy??0),0)/daysWithBoth.length):null
 
-  return <div className="mx-auto max-w-7xl space-y-6">
+  return <div className="mx-auto max-w-7xl space-y-6"><QuestionQuality/><p className="text-sm leading-6 text-slate-500">Desempenho calculado apenas com questões revisadas ou verificadas e simulados integralmente elegíveis. Histórico completo disponível em Questões e Simulados. Aulas e mini quizzes são indicadores separados.</p>
     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><div className="mb-2 flex items-center gap-2"><Badge>Desempenho CPA</Badge><span className="text-sm text-slate-500">100% local</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">Estatísticas</h1><p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">Use seus dados reais para decidir o que estudar. Nenhuma métrica é enviada para servidor e nenhuma porcentagem é inventada quando não há amostra.</p></div><Button variant="secondary" onClick={()=>void refresh()}><RefreshCw className="h-4 w-4"/>Atualizar</Button></div>
 
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

@@ -78,7 +78,7 @@ for(const file of [
 
 requireText(readme,'445 aulas','README')
 requireText(readme,'1.780 flashcards','README')
-requireText(readme,'583 questões','README')
+requireText(readme,'745 questões','README')
 requireText(readme,'50 questões','README')
 requireText(readme,'35 acertos','README')
 requireText(readme,'Para o Thó','README')
