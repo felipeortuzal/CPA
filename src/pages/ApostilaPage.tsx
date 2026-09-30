@@ -30,11 +30,12 @@ export function ApostilaPage() {
       <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">{module.subtitle}</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-4">
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Cobertura</p><p className="mt-1 text-xl font-bold">{lessons.length} PDs</p></div>
-        <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Estudo estimado</p><p className="mt-1 text-xl font-bold">~{stats.minutes} min</p></div>
+        <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Trilha principal</p><p className="mt-1 text-xl font-bold">~{stats.minutes} min</p></div>
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Checkpoints</p><p className="mt-1 text-xl font-bold">{stats.checkpoints}</p></div>
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Fórmulas</p><p className="mt-1 text-xl font-bold">{stats.formulas}</p></div>
       </div>
-      <p className="mt-5 text-xs leading-5 text-slate-500">Revisão editorial da V26: {formatDate(V26_EDITORIAL_REVIEW_DATE)}. Regras normativas mantêm a data de verificação indicada em cada tópico e devem ser conferidas nas fontes oficiais quando houver atualização posterior.</p>
+      <p className="mt-5 text-sm leading-6 text-slate-500">A trilha principal mostra o essencial para avançar. Em cada tópico, <strong>Aprofundamento</strong> abre a teoria integral e o exemplo completo sem retirar nenhum conteúdo do acervo.</p>
+      <p className="mt-2 text-xs leading-5 text-slate-500">Revisão editorial da V26: {formatDate(V26_EDITORIAL_REVIEW_DATE)}. Regras normativas mantêm a data de verificação indicada em cada tópico e devem ser conferidas nas fontes oficiais quando houver atualização posterior.</p>
     </header>
 
     <div className="grid gap-7 lg:grid-cols-[260px_minmax(0,1fr)]">
@@ -56,14 +57,13 @@ export function ApostilaPage() {
 
             <div className="mt-7 space-y-6">
               <div><h3 className="text-lg font-bold">Comece por aqui</h3><p className="mt-2 text-base leading-8 text-slate-700 dark:text-slate-300">{lesson.beginnerExplanation}</p></div>
-              <div><h3 className="text-lg font-bold">Teoria completa</h3><div className="mt-3 space-y-4 text-base leading-8 text-slate-700 dark:text-slate-300">{lesson.completeExplanation.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></div>
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="rounded-2xl border border-slate-200 p-4 dark:border-white/10"><p className="text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-300">Entenda</p><ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">{lesson.essentialConcepts.map((item) => <li key={item}>{item}</li>)}</ul></div>
                 <div className="rounded-2xl border border-slate-200 p-4 dark:border-white/10"><p className="text-xs font-black uppercase tracking-widest text-sky-700 dark:text-sky-300">Como pode ser cobrado</p><ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">{lesson.examFocus.map((item) => <li key={item}>{item}</li>)}</ul></div>
               </div>
 
-              <div className="rounded-2xl bg-slate-50 p-5 dark:bg-white/5"><p className="text-xs font-black uppercase tracking-widest text-slate-500">Exemplo prático</p><p className="mt-3 text-sm leading-7">{lesson.practicalExample}</p></div>
+              <details className="rounded-2xl border border-slate-200 p-5 dark:border-white/10"><summary className="cursor-pointer font-bold">Aprofundamento · teoria completa e exemplo</summary><div className="mt-5 space-y-5"><div><h3 className="text-base font-bold">Teoria completa</h3><div className="mt-3 space-y-4 text-base leading-8 text-slate-700 dark:text-slate-300">{lesson.completeExplanation.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></div><div className="rounded-2xl bg-slate-50 p-5 dark:bg-white/5"><p className="text-xs font-black uppercase tracking-widest text-slate-500">Exemplo prático</p><p className="mt-3 text-sm leading-7">{lesson.practicalExample}</p></div></div></details>
 
               {lesson.comparisons.length > 0 && <div><h3 className="text-lg font-bold">Compare para não confundir</h3><div className="mt-3 overflow-x-auto rounded-2xl border border-slate-200 dark:border-white/10"><table className="w-full min-w-[560px] text-left text-sm"><thead className="bg-slate-100 dark:bg-white/5"><tr><th className="p-3">Conceito A</th><th className="p-3">Conceito B</th><th className="p-3">Diferença essencial</th></tr></thead><tbody>{lesson.comparisons.map((item) => <tr key={`${item.left}-${item.right}`} className="border-t border-slate-200 dark:border-white/10"><th className="p-3 align-top">{item.left}</th><td className="p-3 align-top">{item.right}</td><td className="p-3 align-top leading-6 text-slate-500">{item.explanation}</td></tr>)}</tbody></table></div></div>}
 
