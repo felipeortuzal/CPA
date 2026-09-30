@@ -27,6 +27,20 @@ export function lessonWordCount(lesson: CPALesson) {
   ].join(' '))
 }
 
+export function lessonCoreWordCount(lesson: CPALesson) {
+  return wordCount([
+    lesson.title,
+    lesson.oneSentence,
+    lesson.beginnerExplanation,
+    ...lesson.essentialConcepts,
+    ...lesson.examFocus,
+    ...lesson.comparisons.flatMap((item) => [item.left, item.right, item.explanation]),
+    ...lesson.formulas.flatMap((item) => [item.name, item.expression, item.explanation]),
+    ...lesson.traps,
+    ...lesson.reviewSummary,
+  ].join(' '))
+}
+
 export function getModuleLessons(moduleId: string) {
   const module = courseModuleMap.get(moduleId)
   if (!module) return []
@@ -36,27 +50,29 @@ export function getModuleLessons(moduleId: string) {
 export function moduleApostilaStats(moduleId: string) {
   const reading = moduleReadings[moduleId]
   const lessons = getModuleLessons(moduleId)
-  const lessonWords = lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
   const overviewWords = reading ? wordCount(JSON.stringify(reading)) : 0
-  const words = lessonWords + overviewWords
+  const coreWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonCoreWordCount(lesson), 0)
+  const fullWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
   const formulas = lessons.reduce((sum, lesson) => sum + lesson.formulas.length, 0)
   const comparisons = lessons.reduce((sum, lesson) => sum + lesson.comparisons.length, 0)
   const checkpoints = lessons.reduce((sum, lesson) => sum + lesson.miniQuiz.length, 0)
-  // Leitura ativa é mais lenta que leitura corrida; fórmulas, tabelas e checkpoints recebem overhead.
-  const minutes = Math.max(12, Math.ceil(words / 145 + formulas * 1.1 + comparisons * 0.35 + checkpoints * 0.2))
-  return { lessons, words, minutes, formulas, comparisons, checkpoints }
+  // A estimativa mede a trilha principal, não o aprofundamento opcional. O conteúdo integral permanece disponível.
+  const minutes = Math.max(12, Math.ceil(coreWords / 210 + formulas * 0.55 + comparisons * 0.08 + checkpoints * 0.02))
+  return { lessons, words: coreWords, coreWords, fullWords, minutes, formulas, comparisons, checkpoints }
 }
 
 export function apostilaTotalStats() {
   const moduleIds = [...courseModuleMap.keys()]
   return moduleIds.reduce((acc, moduleId) => {
     const stats = moduleApostilaStats(moduleId)
-    acc.words += stats.words
+    acc.words += stats.coreWords
+    acc.coreWords += stats.coreWords
+    acc.fullWords += stats.fullWords
     acc.minutes += stats.minutes
     acc.formulas += stats.formulas
     acc.comparisons += stats.comparisons
     acc.checkpoints += stats.checkpoints
     acc.lessons += stats.lessons.length
     return acc
-  }, { words: 0, minutes: 0, formulas: 0, comparisons: 0, checkpoints: 0, lessons: 0 })
+  }, { words: 0, coreWords: 0, fullWords: 0, minutes: 0, formulas: 0, comparisons: 0, checkpoints: 0, lessons: 0 })
 }
