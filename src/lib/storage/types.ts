@@ -73,7 +73,7 @@ export interface SimulationPayload {
 }
 export interface SimulationRecord { id: string; certification: string; score: number | null; questionCount: number; completedAt: string | null; payload: SimulationPayload }
 
-export interface StudySessionRecord { id: string; activityType: 'lesson' | 'quiz' | 'flashcard' | 'questions' | 'simulation' | 'review'; pdCode: string | null; startedAt: string; endedAt: string | null; activeSeconds: number }
+export interface StudySessionRecord { id: string; activityType: 'lesson' | 'quiz' | 'flashcard' | 'questions' | 'simulation' | 'review' | 'daily'; pdCode: string | null; startedAt: string; endedAt: string | null; activeSeconds: number }
 export interface ActivityDayRecord { date: string; events: number; lastActivityAt: string }
 export interface PreferencesRecord { id: 'preferences'; theme?: 'light' | 'dark'; reduceMotion?: boolean; lessonSidebarOpen?: boolean; updatedAt: string }
 export interface StudyPlanRecord { id: string; payload: unknown; updatedAt: string }
