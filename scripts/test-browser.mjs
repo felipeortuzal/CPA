@@ -63,7 +63,7 @@ try {
   // In-app navigation must reset quiz state, without relying on a page reload.
   await goto('conteudos')
   await page.locator('a[href^="#/modulos/"]').first().click()
-  await page.getByText(/Aprofunde o módulo/).click()
+  await page.getByText(/Ver índice detalhado/).click()
   await page.locator('a[href^="#/conteudos/"]').first().click()
   await expect(page.getByRole('heading', { name: 'Mini quiz', exact: true })).toBeVisible()
   const lessonUrl = page.url()
@@ -117,7 +117,13 @@ try {
   await page.getByRole('link', {name:'Voltar ao módulo'}).click()
   await expect(page.getByRole('button', {name:'Refazer simulado do módulo',exact:true})).toBeVisible()
 
-  const routes = ['', 'trilha', 'conteudos', 'edital', 'modulos/economia', 'modulos/atendimento-etica', 'modulos/tecnologia', 'plano', 'estudo-ativo', 'revisao', 'flashcards', 'erros', 'estatisticas', 'fontes', 'simulados', 'simulados/historico', 'configuracoes']
+  await goto('apostila/economia')
+  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
+  await expect(page.getByText(/Apostila digital · V26/)).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Imprimir / salvar PDF' })).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+
+  const routes = ['', 'trilha', 'conteudos', 'edital', 'modulos/economia', 'apostila/economia', 'modulos/atendimento-etica', 'modulos/tecnologia', 'plano', 'estudo-ativo', 'revisao', 'flashcards', 'erros', 'estatisticas', 'fontes', 'simulados', 'simulados/historico', 'configuracoes']
   for (const width of [1440, 390]) {
     await page.setViewportSize({ width, height: 900 })
     for (const route of routes) {
@@ -150,6 +156,8 @@ try {
   await other.goto(`${fileUrl}#/modulos/economia`)
   await expect(other.getByRole('checkbox').first()).toBeChecked()
   await expect(other.getByRole('button',{name:'Refazer simulado do módulo',exact:true})).toBeVisible()
+  await other.goto(`${fileUrl}#/apostila/economia`)
+  await expect(other.getByRole('heading', { name:'Economia sem complicação', exact:true })).toBeVisible()
   await otherContext.close()
 
   await goto('conteudos')
@@ -168,5 +176,5 @@ try {
   await blockedContext.close()
   expect(requests).toEqual([])
   expect(errors).toEqual([])
-  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, reading persistence, module exam isolation/resume/correction, 17 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
+  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, handbook route, reading persistence, module exam isolation/resume/correction, 18 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
 } finally { await browser.close() }
