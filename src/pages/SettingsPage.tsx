@@ -25,14 +25,14 @@ export function SettingsPage() {
     if (!profile) return
     setDisplayName(profile.displayName)
     setCertification(profile.currentCertification)
-    setDailyGoal(profile.dailyGoalMinutes)
+    setDailyGoal(Math.max(10, Math.min(120, profile.dailyGoalMinutes)))
   }, [profile])
 
   async function submit(event: FormEvent) {
     event.preventDefault()
     setSaving(true); setMessage(null); setError(null)
     try {
-      await updateStudent({ displayName: displayName.trim(), currentCertification: certification, dailyGoalMinutes: dailyGoal })
+      await updateStudent({ displayName: displayName.trim(), currentCertification: certification, dailyGoalMinutes: Math.max(10, Math.min(120, dailyGoal)) })
       setMessage('Configurações salvas neste navegador.')
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Não foi possível salvar as configurações.')
@@ -87,7 +87,7 @@ export function SettingsPage() {
       <form onSubmit={submit} className="space-y-5">
         <label className="block"><span className="mb-1.5 block text-sm font-medium">Alterar nome</span><input className={inputClass} required maxLength={80} value={displayName} onChange={(e) => setDisplayName(e.target.value)}/></label>
         {certifications.filter(item=>item.available).length>1?<label className="block"><span className="mb-1.5 block text-sm font-medium">Certificação atual</span><select className={inputClass} value={certification} onChange={(e) => setCertification(e.target.value)}>{certifications.map((item) => <option key={item.id} value={item.id} disabled={!item.available}>{item.name}{!item.available ? ' — em breve' : ''}</option>)}</select></label>:<p className="text-sm text-slate-500">Certificação: CPA</p>}
-        <label className="block"><span className="mb-1.5 block text-sm font-medium">Meta diária</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={5} max={600} step={5} value={dailyGoal} onChange={(e) => setDailyGoal(Number(e.target.value))}/><span className="shrink-0 text-sm text-slate-500">minutos</span></div></label>
+        <label className="block"><span className="mb-1.5 block text-sm font-medium">Meta diária</span><div className="flex items-center gap-3"><input className={inputClass} type="number" min={10} max={120} step={5} value={dailyGoal} onChange={(e) => setDailyGoal(Number(e.target.value))}/><span className="shrink-0 text-sm text-slate-500">minutos</span></div><p className="mt-1 text-xs text-slate-500">Faixa suportada: 10 a 120 minutos. A sessão do dia respeita esta meta ou uma escolha rápida temporária.</p></label>
         <Button disabled={saving} type="submit"><Save className="h-4 w-4"/>{saving ? 'Salvando...' : 'Salvar alterações'}</Button>
       </form>
     </Card>
