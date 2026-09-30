@@ -21,18 +21,21 @@ describe('V26 · apostila digital completa', () => {
     expect(new Set(cpaLessons.map(lesson => lesson.pdCode))).toEqual(new Set(terminalCodes))
   })
 
-  it('expõe profundidade substancial e elementos de apostila em todos os módulos', () => {
+  it('separa uma trilha principal substancial do acervo integral', () => {
     const total = apostilaTotalStats()
     expect(total.lessons).toBe(445)
     expect(total.minutes).toBeGreaterThanOrEqual(600)
-    expect(total.words).toBeGreaterThan(70_000)
+    expect(total.coreWords).toBeGreaterThan(70_000)
+    expect(total.fullWords).toBeGreaterThan(300_000)
+    expect(total.fullWords).toBeGreaterThan(total.coreWords)
     expect(total.comparisons).toBeGreaterThanOrEqual(445)
     expect(total.checkpoints).toBeGreaterThanOrEqual(1_335)
     for (const module of courseModules) {
       const stats = moduleApostilaStats(module.id)
       expect(getModuleLessons(module.id).length, module.id).toBeGreaterThan(0)
       expect(stats.minutes, module.id).toBeGreaterThanOrEqual(12)
-      expect(stats.words, module.id).toBeGreaterThan(1_500)
+      expect(stats.coreWords, module.id).toBeGreaterThan(1_500)
+      expect(stats.fullWords, module.id).toBeGreaterThan(stats.coreWords)
       expect(moduleReadings[module.id].example.scenario.length, module.id).toBeGreaterThan(30)
       expect(moduleReadings[module.id].comparison.rows.length, module.id).toBeGreaterThan(0)
       expect(moduleReadings[module.id].recall.length, module.id).toBeGreaterThan(0)
@@ -61,10 +64,11 @@ describe('V26 · banco confiável e simulados', () => {
     expect(reviewed.every(question => question.origin === 'authored')).toBe(true)
   })
 
-  it('recalibra os metadados pedagógicos dos 300 itens revisados', () => {
+  it('recalibra os metadados pedagógicos dos 300 itens revisados sem fingir árvore de decisão', () => {
     expect(new Set(reviewed.map(question => question.difficulty)).size).toBeGreaterThanOrEqual(3)
     expect(new Set(reviewed.map(question => question.cognitiveLevel)).size).toBeGreaterThanOrEqual(3)
     expect(new Set(reviewed.map(question => question.questionType)).size).toBeGreaterThanOrEqual(2)
+    expect(reviewed.filter(question => question.questionType === 'dialog_tree')).toHaveLength(0)
     expect(new Set(reviewed.map(question => question.conceptId)).size).toBeGreaterThan(100)
   })
 
