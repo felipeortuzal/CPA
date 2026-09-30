@@ -10,6 +10,7 @@ import { generateSimulation } from '../../../src/lib/simulations/engine'
 
 const parentCodes = new Set(cpaCurriculum.flatMap(item => item.parentCode ? [item.parentCode] : []))
 const terminalCodes = cpaCurriculum.filter(item => !parentCodes.has(item.pdCode)).map(item => item.pdCode)
+const countBy = (values:string[]) => Object.fromEntries([...new Set(values)].sort().map(value => [value, values.filter(item => item === value).length]))
 
 describe('V26 · apostila digital completa', () => {
   it('mantém 20 módulos e rastreia os 445 PDs terminais para um módulo', () => {
@@ -75,5 +76,19 @@ describe('V26 · banco confiável e simulados', () => {
       const distinctConcepts = new Set(selected.map(question => question.conceptId ?? question.pdCode)).size
       expect(distinctConcepts, module.id).toBeGreaterThanOrEqual(Math.min(6, selected.length))
     }
+  })
+
+  it('emite métricas reprodutíveis para o V26_REPORT', () => {
+    const reviewed = cpaQuestions.filter(isReviewed)
+    const payload = {
+      total: apostilaTotalStats(),
+      modules: courseModules.map(module => ({ id:module.id, title:module.title, ...moduleApostilaStats(module.id), lessons:undefined })),
+      bank: bankQuality(cpaQuestions),
+      difficulty: countBy(reviewed.map(question => question.difficulty)),
+      cognition: countBy(reviewed.map(question => question.cognitiveLevel)),
+      type: countBy(reviewed.map(question => question.questionType)),
+    }
+    console.info(`V26_REPORT_METRICS=${JSON.stringify(payload)}`)
+    expect(payload.modules).toHaveLength(20)
   })
 })
