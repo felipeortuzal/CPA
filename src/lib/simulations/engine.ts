@@ -57,12 +57,48 @@ function shuffle<T>(items: T[], random: () => number) {
 
 function macroOf(question: CPAQuestion) { return question.pdCode.split('.')[0] }
 
+function pickDiverse(questions: CPAQuestion[], count: number, random: () => number, seen = new Set<string>()) {
+  const pool = shuffle(questions, random)
+  const selected: CPAQuestion[] = []
+  const concepts = new Set<string>()
+  const pdCodes = new Set<string>()
+  const cognitive = new Set<string>()
+  const types = new Set<string>()
+  const difficulties = new Set<string>()
+
+  while (pool.length && selected.length < count) {
+    let bestIndex = 0
+    let bestScore = -Infinity
+    for (let index = 0; index < pool.length; index += 1) {
+      const question = pool[index]
+      const concept = question.conceptId ?? question.pdCode
+      const score =
+        (seen.has(question.id) ? 0 : 100) +
+        (concepts.has(concept) ? 0 : 18) +
+        (pdCodes.has(question.pdCode) ? 0 : 8) +
+        (cognitive.has(question.cognitiveLevel) ? 0 : 5) +
+        (types.has(question.questionType) ? 0 : 4) +
+        (difficulties.has(question.difficulty) ? 0 : 3) +
+        random()
+      if (score > bestScore) { bestScore = score; bestIndex = index }
+    }
+    const [picked] = pool.splice(bestIndex, 1)
+    selected.push(picked)
+    concepts.add(picked.conceptId ?? picked.pdCode)
+    pdCodes.add(picked.pdCode)
+    cognitive.add(picked.cognitiveLevel)
+    types.add(picked.questionType)
+    difficulties.add(picked.difficulty)
+  }
+  return selected
+}
+
 function pickWeighted(questions: CPAQuestion[], counts: Record<string, number>, random: () => number) {
   const selected: CPAQuestion[] = []
   for (const [theme, count] of Object.entries(counts)) {
-    const pool = shuffle(questions.filter((question) => macroOf(question) === theme), random)
+    const pool = questions.filter((question) => macroOf(question) === theme)
     if (pool.length < count) throw new Error(`Banco insuficiente para o Tema ${theme}: necessário ${count}, disponível ${pool.length}.`)
-    selected.push(...pool.slice(0, count))
+    selected.push(...pickDiverse(pool, count, random))
   }
   return shuffle(selected, random)
 }
@@ -107,14 +143,13 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
     if (!module) throw new Error('Módulo não encontrado.')
     const pool = questions.filter((q) => q.origin === 'authored' && matchesModule(module, q.pdCode))
     if (pool.length < 6) throw new Error('Este módulo ainda não possui questões suficientes.')
-    const seen = request.seenQuestionIds ?? new Set<string>()
-    selected = [...shuffle(pool.filter(q=>!seen.has(q.id)),random), ...shuffle(pool.filter(q=>seen.has(q.id)),random)].slice(0,8)
+    selected = pickDiverse(pool, Math.min(8, pool.length), random, request.seenQuestionIds ?? new Set<string>())
     durationSeconds = selected.length * 3 * 60
     theme = null
   } else if (request.mode === 'official_exam') {
     selected = pickWeighted(questions.filter((question) => question.origin !== 'generated'), OFFICIAL_EXAM.themeCounts, random)
     durationSeconds = OFFICIAL_EXAM.durationSeconds
-    // The current bank has no validated branching decision trees. Do not claim exam readiness.
+    // O banco não reproduz a prova oficial nem possui árvores decisórias homologadas.
     cutoff = null
   } else if (request.mode === 'quick10') {
     selected = pickWeighted(questions, QUICK10_COUNTS, random)
@@ -124,14 +159,14 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
     durationSeconds = 60 * 60
   } else if (request.mode === 'theme') {
     if (!request.theme) throw new Error('Escolha um tema para gerar o simulado.')
-    const pool = shuffle(questions.filter((question) => macroOf(question) === request.theme), random)
-    selected = pool.slice(0, Math.min(20, pool.length))
+    const pool = questions.filter((question) => macroOf(question) === request.theme)
+    selected = pickDiverse(pool, Math.min(20, pool.length), random, request.seenQuestionIds ?? new Set<string>())
     durationSeconds = selected.length * 3 * 60
   } else if (request.mode === 'unseen') {
     const seen = request.seenQuestionIds ?? new Set<string>()
-    const pool = shuffle(questions.filter((question) => !seen.has(question.id)), random)
+    const pool = questions.filter((question) => !seen.has(question.id))
     if (pool.length === 0) throw new Error('Você já respondeu todas as questões disponíveis no banco atual.')
-    selected = pool.slice(0, Math.min(20, pool.length))
+    selected = pickDiverse(pool, Math.min(20, pool.length), random)
     durationSeconds = selected.length * 3 * 60
     theme = null
   } else {
@@ -141,8 +176,8 @@ export function generateSimulation(questions: CPAQuestion[], request: Simulation
     const weakMacros = [...new Set(weakPdCodes.map((pdCode) => pdCode.split('.')[0]))]
     const pool = questions
       .filter((question) => rank.has(question.pdCode) || weakMacros.includes(macroOf(question)))
-      .sort((a, b) => (rank.get(a.pdCode) ?? 999) - (rank.get(b.pdCode) ?? 999) || random() - 0.5)
-    selected = pool.slice(0, Math.min(20, pool.length))
+      .sort((a, b) => (rank.get(a.pdCode) ?? 999) - (rank.get(b.pdCode) ?? 999))
+    selected = pickDiverse(pool, Math.min(20, pool.length), random, request.seenQuestionIds ?? new Set<string>())
     durationSeconds = selected.length * 3 * 60
     theme = null
   }
