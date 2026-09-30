@@ -10,6 +10,12 @@ Também existe o arquivo único `CPA_Study.html`, que pode ser aberto diretament
 
 > O progresso fica no navegador/IndexedDB. Felipe e Thó têm históricos independentes. Exporte o backup JSON antes de trocar de computador, limpar dados do navegador ou substituir o HTML local.
 
+### Para o Thó
+
+O caminho mais simples é usar o site ou manter `CPA_Study.html` em uma pasta fixa no próprio computador. Antes de trocar o arquivo local por uma versão nova, exporte o backup JSON em **Configurações → Dados e Backup**.
+
+Se estiver usando a pasta clonada do repositório no Windows, `update-cpa.bat` atualiza os arquivos do projeto conforme o fluxo local já existente. Depois da atualização, abra o HTML no mesmo caminho de antes e, se necessário, importe o backup. O progresso do site e o progresso do arquivo local continuam independentes.
+
 ## Estado atual — V26 / 0.26.0
 
 A V26 transforma a trilha de 20 módulos em uma **Apostila Digital Completa**, sem abandonar a rastreabilidade do Programa Detalhado.
