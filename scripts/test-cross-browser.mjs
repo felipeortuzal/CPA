@@ -13,9 +13,9 @@ try {
    const page=await context.newPage();const errors=[]
    page.on('pageerror',e=>errors.push(e.message))
    await page.goto(url)
-   await page.getByPlaceholder('Felipe, Thó...').fill('Teste V25')
+   await page.getByPlaceholder('Felipe, Thó...').fill('Teste V26')
    await page.getByRole('button',{name:'Começar a estudar'}).click()
-   await expect(page.getByRole('heading',{name:'Olá, Teste V25.'})).toBeVisible()
+   await expect(page.getByRole('heading',{name:'Olá, Teste V26.'})).toBeVisible()
    // Mobile keyboard focus stays inside the modal and returns to its trigger.
    await page.getByRole('button',{name:'Abrir menu'}).click()
    const dialog=page.getByRole('dialog',{name:'Menu de navegação'})
@@ -31,7 +31,7 @@ try {
    const other=await context.newPage()
    await other.goto(`${url}#/conteudos`)
    other.on('pageerror',e=>errors.push(e.message))
-   await page.getByRole('button',{name:'Começar sessão de hoje'}).click()
+   await page.getByRole('link',{name:'Minha meta',exact:true}).click()
    await expect(page.getByRole('heading',{name:'Sessão de hoje',exact:true})).toBeVisible()
    await page.getByRole('button',{name:'Li esta parte · continuar'}).click()
    await expect(page.getByText(/Etapa 2 de/)).toBeVisible()
@@ -55,13 +55,13 @@ try {
    await page.reload()
    await expect(page.getByRole('button',{name:'Continuar sessão'})).toBeVisible()
    await page.getByRole('button',{name:'Continuar sessão'}).click()
-   for(const route of ['revisao','modulos/economia','estatisticas','configuracoes']) {
+   for(const route of ['revisao','modulos/economia','apostila/economia','estatisticas','configuracoes']) {
     await page.goto(`${url}#/${route}`)
     await expect(page.getByRole('heading',{level:1}).first()).toBeVisible()
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true)
    }
    expect(errors).toEqual([])
-   console.log(`PASS ${name}: mobile focus trap, Escape, daily reading/answer/reload, cross-tab refresh and main routes.`)
+   console.log(`PASS ${name}: mobile focus trap, Escape, daily reading/answer/reload, cross-tab refresh, handbook and main routes.`)
   } finally {await browser.close()}
  }
 } finally {await new Promise(resolve=>server.close(resolve))}
