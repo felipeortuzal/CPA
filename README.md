@@ -1,440 +1,201 @@
 # CPA Study — Nova CPA ANBIMA 2026
 
-Plataforma local, gratuita e offline-first para estudar a **CPA — Certificado Profissional ANBIMA** do modelo vigente em 2026.
+Plataforma gratuita, local-first e offline-first para Felipe e Thó estudarem a **CPA — Certificado Profissional ANBIMA** no modelo vigente em 2026.
 
-## Comece a estudar — sem instalar programas
+## Começar a estudar
 
-Abra **[CPA Study](https://felipeortuzal.github.io/CPA/)**, informe seu nome e use **Começar sessão de hoje**. Para o Thó e demais alunos, esse é o caminho recomendado. Para estudar sem internet, baixe [CPA_Study.html](CPA_Study.html) e abra em Chrome ou Edge. Instruções de Git e Node são apenas para desenvolvimento, mais abaixo.
+Acesse **https://felipeortuzal.github.io/CPA/**, informe seu nome e siga a **Sessão de hoje**.
 
-A trilha principal tem **20 módulos**, com leitura, exemplos, comparações, revisão e um **simulado de 8 questões ao final de cada módulo**. Os 445 pontos do edital ficam na biblioteca de aprofundamento. Cada módulo tem 15 questões autorais; as inéditas têm prioridade ao refazer o simulado.
+Também existe o arquivo único `CPA_Study.html`, que pode ser aberto diretamente no Chrome ou Edge sem instalar Git, Node ou qualquer servidor. O conteúdo funciona offline; links para fontes oficiais exigem internet.
 
-A sessão diária combina leitura, prática e revisão, salva a etapa atual e pode ser retomada. A revisão de hoje intercala erros pendentes, flashcards previstos, assuntos fracos e questões praticadas há pelo menos 7 dias. Itens pulados ficam registrados; uma nova fila é montada no próximo dia.
+> O progresso fica no navegador/IndexedDB. Felipe e Thó têm históricos independentes. Exporte o backup JSON antes de trocar de computador, limpar dados do navegador ou substituir o HTML local.
 
-**Concluir não é dominar.** Conclusão exige ler as partes e finalizar um simulado, independentemente da nota. Domínio exige 12 questões distintas revisadas, três dias de prática, intervalo mínimo de sete dias, acerto recente de pelo menos 80%, duas práticas recentes consistentes e simulado elegível com pelo menos 70%. Evidência de mais de 30 dias pede revisão. Os módulos permanecem livres para navegar.
+## Estado atual — V26 / 0.26.0
 
-O progresso fica neste navegador. Em **Configurações**, exporte seu backup, veja a versão e a data da revisão editorial e consulte atualizações manualmente. O app mostra um lembrete discreto após prática acumulada. A data de exportação indica a solicitação do download; confira se o JSON foi salvo. Abas do mesmo site se atualizam entre si; isso não sincroniza dispositivos nem combina os dados do site com os do HTML.
+A V26 transforma a trilha de 20 módulos em uma **Apostila Digital Completa**, sem abandonar a rastreabilidade do Programa Detalhado.
 
-## Estado atual — v0.25
-
-A plataforma está focada exclusivamente na CPA e contém:
-
-- Programa Detalhado CPA v1.2 estruturado em **590 nós curriculares**;
-- **445 aulas completas**, uma para cada PD terminal;
+- **20 módulos** temáticos e progressivos;
+- **445 PDs terminais** do Programa Detalhado, cada um pertencendo a um módulo;
+- **445 aulas completas**, uma por PD terminal;
 - **1.780 flashcards** de aula, além de flashcards pessoais;
-- **745 questões** (300 autorais revisadas e 445 exercícios gerados automaticamente, ainda em rascunho);
-- cobertura de questões em todos os 445 PDs terminais;
-- Treino completo com **50 questões autorais** e 2h30, sem estimativa de aprovação;
-- Simulado 10, Simulado 20, por tema, pontos fracos e somente inéditas;
-- Indicadores internos de estudo com domínio, confiança e detecção de baixa evidência;
-- Plano de Estudos adaptativo à data da prova;
-- Central de Revisão, repetição espaçada e Caderno de Erros;
-- Estatísticas avançadas e heatmap por PD;
-- Estudo Ativo com interleaving, recuperação ativa, treino de fraquezas e revisão de véspera;
-- Central de Fontes e Atualizações oficiais;
-- PWA, uso offline e backup JSON.
+- **1.335 checkpoints** dentro da apostila, três por PD;
+- comparações, fórmulas, confusões comuns, exemplos e foco de prova;
+- **Modo Apostila** contínuo por módulo, com índice, fontes oficiais e impressão/PDF;
+- trilha principal separada de **Aprofundamento**, que preserva a teoria integral e exemplos completos sem tornar todo esse volume obrigatório para avançar;
+- simulado ao final de cada módulo;
+- sessão diária, revisão espaçada, Caderno de Erros, plano de estudos e estatísticas;
+- PWA, GitHub Pages, backup JSON e HTML standalone offline.
 
-Nenhuma questão privada ou vazada é usada. O banco é autoral e usa materiais públicos da ANBIMA como referência de estilo.
+O tempo mostrado na Apostila é uma **estimativa da trilha principal**, não do acervo integral. Abrir todos os aprofundamentos aumenta bastante o tempo total de estudo.
+
+## Como estudar na V26
+
+Fluxo recomendado:
+
+1. abra o próximo módulo da trilha;
+2. leia as seções introdutórias;
+3. use **Ler como apostila completa**;
+4. em cada PD, domine `Comece por aqui`, `Entenda`, `Como pode ser cobrado`, comparações, fórmulas, confusões e resumo;
+5. abra **Aprofundamento** quando precisar de mais contexto, teoria completa ou exemplo detalhado;
+6. responda os checkpoints;
+7. faça o simulado do módulo;
+8. use a revisão diária para erros, flashcards e recuperação espaçada.
+
+A página inicial oferece sessões rápidas de **10, 25 ou 45 minutos**, além da sua meta. A meta diária configurável aceita **10–120 minutos**.
+
+## Conclusão e domínio
+
+**Concluir não é dominar.**
+
+Conclusão significa terminar a leitura introdutória do módulo e finalizar um simulado, independentemente da nota.
+
+O status de **Domínio** é uma meta interna de estudo e exige evidências adicionais: leitura e simulado concluídos, pelo menos 12 questões distintas, prática em três dias, intervalo mínimo de sete dias, acerto recente de pelo menos 80%, duas práticas recentes consistentes, simulado elegível de pelo menos 70% e evidência recente.
+
+A própria página do módulo mostra esse checklist. Ele **não é previsão de aprovação na certificação**.
+
+## Banco de questões
+
+O projeto mantém **745 itens**:
+
+- **300 questões autorais revisadas**, usadas como base confiável de treino e simulados;
+- **445 exercícios de cobertura gerados**, um por PD terminal, mantidos fora da base revisada enquanto não passam por revisão individual.
+
+Nenhuma questão privada ou vazada é usada.
+
+Na V26, dificuldade, nível cognitivo e tipo das questões revisadas foram recalibrados a partir da estrutura real do item, sem mudar enunciado, alternativas ou gabarito.
+
+### Status editorial
+
+`reviewed` significa que o texto passou pela revisão editorial registrada no projeto.
+
+`verified` exige confronto específico de gabarito, explicação e regra central com a fonte oficial correspondente. **A V26 não promove questões a `verified` apenas para aumentar um contador.**
+
+Itens de diálogo continuam sendo questões objetivas. O projeto **não afirma implementar árvore de decisão** enquanto não houver nós e ramificações reais.
+
+## Simulados
+
+A plataforma oferece:
+
+- simulado por módulo;
+- Simulado 10;
+- Simulado 20;
+- por tema;
+- assuntos fracos;
+- somente inéditas;
+- treino completo de 50 questões e 2h30.
+
+O motor da V26 prioriza questões ainda não vistas e diversidade de `conceptId`, PD, dificuldade, nível cognitivo e tipo, reduzindo a chance de uma prova curta repetir praticamente o mesmo conceito.
+
+O treino completo e os simulados são **ferramentas pedagógicas locais**. Eles não são provas oficiais, não são homologados pela ANBIMA e não geram previsão de aprovação.
 
 ## Base oficial
 
-Referências cadastradas na V21 (data legada: 20/09/2026; isso não comprova revisão individual de cada questão):
+A estrutura curricular continua baseada no **Programa Detalhado CPA ANBIMA v1.2**, revisado em 04/06/2025 e vigente desde 01/01/2026.
 
-- Programa Detalhado CPA ANBIMA v1.2;
-- revisão 04/06/2025;
-- vigência 01/01/2026;
-- distribuição de estudo atualmente configurada:
-  - Tema 1: 20%;
-  - Tema 2: 40%;
-  - Tema 3: 30%;
-  - Tema 4: 10%;
-- Edital dos Exames de Certificação Profissional ANBIMA v1.4, de 28/05/2026;
-- CPA: 50 questões;
-- duração: 2h30;
-- aprovação: 35 acertos.
+O projeto também acompanha, entre outras fontes oficiais:
 
-O repositório também monitora Guia de Elaboração de Questões, Caderno de Questões CPA e demais fontes regulatórias oficiais usadas nas aulas.
+- Guia de Elaboração de Questões ANBIMA;
+- Caderno de Questões CPA ANBIMA;
+- Edital dos Exames de Certificação Profissional ANBIMA;
+- Banco Central do Brasil;
+- CVM / Portal do Investidor;
+- SUSEP;
+- Receita Federal e demais fontes regulatórias aplicáveis.
 
-## Abrir o arquivo local — sem instalar nada
+O manifesto interno possui fontes oficiais rastreáveis e cada PD da Apostila mostra as referências utilizadas e sua data de verificação editorial.
 
-1. Baixe **[CPA_Study.html](CPA_Study.html)** (no GitHub, use o botão de baixar arquivo bruto).
-2. Guarde em uma pasta fixa e abra com Chrome ou Edge.
-3. Informe um nome local ou clique em **Já tenho um backup** para restaurar seu JSON.
-4. Use **Configurações → Exportar progresso** ao terminar os estudos.
+Materiais públicos de cursos e preparatórios podem ser usados como **benchmark didático**, nunca como licença para copiar apostilas, slides ou questões privadas.
 
-O arquivo contém a mesma aplicação, aulas e questões do site, inclusive as rotas antes carregadas sob demanda. Funciona sem servidor, npm, instalação ou conexão. Links das fontes exigem internet.
+## Offline e arquivo local
 
-**O progresso fica no navegador, não dentro do HTML.** Não há identificação da máquina ou sincronização entre dispositivos. Antes de mover, renomear ou substituir o HTML, exporte o JSON. O site e o HTML podem ter armazenamentos separados; transfira o progresso por backup. Não use uma janela privada para guardar progresso duradouro.
+Para usar sem instalar nada:
 
-Para atualizar: exporte o JSON, baixe o HTML novo, abra e importe o backup se necessário. Uma importação substitui os dados locais; pela interface, uma cópia dos dados anteriores é baixada antes da substituição. Backups legados v1/v2 válidos continuam aceitos; payloads malformados são recusados.
+1. baixe `CPA_Study.html`;
+2. guarde o arquivo em uma pasta fixa;
+3. abra no Chrome ou Edge;
+4. informe seu nome ou importe um backup;
+5. estude normalmente;
+6. em **Configurações → Dados e Backup**, exporte o JSON periodicamente.
 
-### Limites editoriais atuais
+O standalone contém a aplicação e o conteúdo. O progresso não fica “dentro” do HTML; ele permanece no IndexedDB do navegador.
 
-As 445 questões de cobertura são geradas por regras e permanecem identificadas como rascunhos. As 300 autorais passaram por revisão editorial assistida, com registro por ID e revisão exata do texto. Isso não equivale a homologação pela ANBIMA ou verificação regulatória independente. Nenhuma é apresentada como verificada. Os links de referência e datas antigas não constituem validação de gabarito. A aplicação conserva todos os IDs existentes.
+Mover ou renomear o HTML pode mudar a origem de armazenamento usada pelo navegador. Antes de atualizar ou trocar de local, faça backup.
 
-Os diálogos atuais são questões objetivas, **não árvores de decisão com ramificações**. O treino completo exclui a cobertura gerada e não mostra aprovação/reprovação. Não há ainda um simulado fiel homologado ao formato oficial. O indicador de estudo é descritivo do desempenho neste banco.
+## Backup
 
-## Acesso pelo site
+O backup inclui, entre outros dados:
 
-O site está publicado no **GitHub Pages**:
+- perfil local;
+- progresso de aulas e módulos;
+- respostas de questões;
+- quizzes;
+- favoritos;
+- flashcards e revisões;
+- Caderno de Erros;
+- simulados e resultados;
+- sessões e tempo de estudo;
+- preferências e plano de estudos.
 
-```text
-https://felipeortuzal.github.io/CPA/
-```
+A importação pela interface mostra um resumo e cria uma cópia dos dados atuais antes da substituição. Backups legados válidos continuam compatíveis.
 
-Para o Thó, esse é o modo recomendado:
+## Desenvolvimento
 
-1. abrir o link no Chrome/Edge/Safari;
-2. informar o nome na primeira abertura;
-3. estudar normalmente;
-4. voltar sempre pelo mesmo link e pelo mesmo navegador.
+Requisitos para desenvolvimento:
 
-Ele **não precisa instalar Git, Node.js, clonar o repositório ou executar arquivos .bat**.
-
-O aplicativo continua local-first: o site é carregado pelo GitHub Pages, mas **perfil, progresso, respostas, simulados, flashcards, erros e planos ficam no IndexedDB do navegador dele**. O seu progresso e o dele continuam separados.
-
-As rotas usam hash routing, então páginas internas continuam funcionando no GitHub Pages sem servidor próprio. A PWA continua podendo ser instalada pelo navegador se vocês quiserem, mas isso é opcional.
-
-> Importante: limpar os dados do site/navegador pode apagar o progresso local. Para segurança, use Configurações > Dados e Backup periodicamente.
-
-## Desenvolvimento — instalação local opcional
-
-Se o projeto já está instalado:
-
-1. feche qualquer janela antiga do servidor CPA;
-2. dê duplo clique em **`update-cpa.bat`** para trazer a versão mais recente;
-3. quando terminar, dê duplo clique em **`start-cpa.bat`**;
-4. o navegador abrirá automaticamente.
-
-O progresso salvo no navegador não é apagado pelo update.
-
-Também é possível usar o terminal:
-
-```bash
-git pull --ff-only
-npm install --no-package-lock
-npm run dev
-```
-
-## Ambiente de desenvolvimento — primeira instalação
-
-Requisitos:
-
-- Git;
-- Node.js 22 ou superior.
-
-No Prompt de Comando:
+- Node.js 22+;
+- Git.
 
 ```bash
 git clone https://github.com/felipeortuzal/CPA.git
 cd CPA
-npm install --no-package-lock
+npm ci
+npm run dev
 ```
 
-Depois da primeira instalação:
+Validação completa:
 
-- **estudar:** duplo clique em `start-cpa.bat`;
-- **atualizar:** duplo clique em `update-cpa.bat`.
+```bash
+npm run validate
+```
 
-Na primeira abertura, basta informar o nome. Não existe login ou cadastro remoto.
-
-Cada computador/navegador possui seu próprio progresso.
-
-## Como os dados funcionam
-
-Princípio da arquitetura:
-
-- **GitHub = conteúdo da plataforma**;
-- **IndexedDB do navegador = progresso pessoal**.
-
-O IndexedDB salva:
-
-- perfil local;
-- aulas e mini quizzes;
-- respostas de questões;
-- favoritos;
-- flashcards e revisões;
-- Caderno de Erros;
-- simulados;
-- tempo ativo;
-- streak;
-- preferências;
-- planos de estudo.
-
-O schema continua em `DB_VERSION = 2`.
-
-Atualizar o código com Git não apaga o banco do navegador.
-
-## Backup
-
-Em **Configurações > Dados e Backup**:
-
-- exportar `cpa-backup-YYYY-MM-DD.json`;
-- importar um backup validado;
-- conferir resumo antes de substituir os dados atuais;
-- restaurar em outro computador/navegador;
-- apagar progresso somente com confirmação forte.
-
-Backup v2 continua compatível com backups v1.
-
-## Aulas
-
-Todos os **445 PDs terminais** possuem aula.
-
-Cada aula possui:
-
-1. explicação em uma frase;
-2. explicação para iniciante;
-3. explicação completa;
-4. conceitos essenciais;
-5. foco de prova;
-6. exemplo prático;
-7. comparações;
-8. fórmulas quando aplicáveis;
-9. pegadinhas;
-10. resumo para revisão;
-11. 4 flashcards;
-12. mini quiz com 3 perguntas;
-13. fontes oficiais.
-
-Status:
-
-`Não iniciado → Em andamento → Estudado → Dominado`
-
-Dominado exige aula estudada e melhor mini quiz >= 75%.
-
-## Banco de questões — 745 questões
-
-O banco preserva as 100 questões originais, acrescenta 200 casos autorais para os módulos e mantém **445 exercícios gerados automaticamente**, um por PD terminal. Os exercícios gerados continuam com revisão individual pendente e não participam de nenhum simulado nem dos indicadores de desempenho.
-
-Tipos:
-
-- `multiple_choice`;
-- `case`;
-- `dialog_tree`.
-
-As questões possuem:
-
-- PD Code;
-- macrotema;
-- tópico;
-- dificuldade;
-- nível cognitivo;
-- contexto;
-- alternativas;
-- gabarito;
-- explicação;
-- motivo das alternativas incorretas;
-- fontes oficiais;
-- data de verificação.
-
-A página Questões permite filtrar por tema, subtema, dificuldade, tipo, não respondidas, erradas e favoritas.
-
-Resposta errada entra automaticamente no Caderno de Erros.
-
-## Treino completo
-
-Configuração pedagógica local, não uma réplica validada do exame:
-
-- 50 questões;
-- 2h30;
-- sem classificação de aprovação;
-- Tema 1: 10 questões;
-- Tema 2: 20;
-- Tema 3: 15;
-- Tema 4: 5.
-
-Durante a prova não são mostrados gabarito, correção, assunto ou dica.
-
-Ao finalizar:
-
-- resultado;
-- percentual de acertos (sem previsão de aprovação);
-- tempo utilizado;
-- desempenho por tema;
-- dificuldade;
-- PD;
-- erradas;
-- em branco;
-- marcadas para revisão.
-
-## Study Engine e Plano de Estudos
-
-O Study Engine usa apenas evidências reais do IndexedDB:
-
-- aula;
-- mini quiz;
-- questões;
-- simulados;
-- erros;
-- flashcards;
-- recência.
-
-Ele calcula domínio por PD, confiança, amostra, falsa confiança, fraquezas e um indicador interno de **Prontidão CPA**.
-
-> Indicador interno baseado no seu desempenho na plataforma. Não é garantia de aprovação.
-
-O Plano de Estudos usa esses dados, pesos oficiais, disponibilidade semanal e data da prova para distribuir:
-
-1. Fundamentos;
-2. Cobertura;
-3. Prática;
-4. Consolidação;
-5. Simulados;
-6. Revisão final.
-
-## Estatísticas — v0.20
-
-A página Estatísticas mostra, sem servidor externo:
-
-- acurácia acumulada;
-- acurácia recente;
-- tempo ativo;
-- desempenho por tema;
-- desempenho por dificuldade;
-- evolução dos simulados;
-- heatmap dos PDs praticados;
-- erros recorrentes;
-- relação descritiva entre tempo de estudo e prática.
-
-Quando não existe amostra, a interface mostra ausência de dados em vez de inventar uma porcentagem.
-
-## Estudo Ativo — v0.21
-
-A página **Estudo Ativo** reúne:
-
-- treino intercalado entre os quatro temas;
-- treino focado em assuntos fracos;
-- recuperação ativa por flashcards;
-- revisão de véspera sem matéria nova;
-- glossário pesquisável;
-- conceitos essenciais;
-- fórmulas;
-- links diretos para as aulas completas.
-
-A ideia é reduzir releitura passiva e aumentar prática de recuperação e aplicação.
-
-## Fontes e Atualizações
-
-O manifesto em `content/sources.json` registra as fontes oficiais usadas ou monitoradas.
-
-O workflow **Official Source Watch** pode identificar:
-
-- baseline;
-- unchanged;
-- changed;
-- unreachable.
-
-Mudança detectada nunca reescreve aula, questão, gabarito ou regra do exame automaticamente. Ela sinaliza revisão humana.
-
-Falha da internet não bloqueia estudo local.
-
-## PWA e offline
-
-O PWA usa cache versionado e service worker.
-
-Depois que os arquivos da aplicação foram carregados, a maior parte da experiência acadêmica local continua disponível sem internet:
-
-- aulas;
-- questões;
-- simulados;
-- revisão;
-- flashcards;
-- trilha;
-- Dashboard;
-- progresso.
-
-Links para fontes externas naturalmente dependem de conexão.
-
-## Qualidade
-
-Validações:
+Principais gates:
 
 ```bash
 npm run validate:curriculum
 npm run validate:lessons
 npm run validate:questions
 npm run validate:sources
-npm run validate:experience
-npm run audit:v13
-npm run validate:v21
+npm run validate:v26
 npm test
 npm run lint
 npm run typecheck
 npm run build
-```
-
-Ou:
-
-```bash
-npm run validate
-```
-
-As validações impedem, entre outras regressões:
-
-- PD inexistente;
-- aula terminal faltante;
-- questão sem fonte;
-- alternativa duplicada;
-- banco sem cobertura completa;
-- comando destrutivo no atualizador;
-- retorno de dependência remota obrigatória;
-- perda de rotas de Estatísticas ou Estudo Ativo.
-
-## Arquitetura
-
-- React;
-- TypeScript strict;
-- Vite;
-- Tailwind CSS;
-- React Router;
-- IndexedDB via `idb`;
-- Vitest;
-- PWA via Workbox.
-
-Sem login, sem servidor obrigatório, sem API paga e com custo obrigatório de **R$ 0**.
-
-## Desenvolvimento e validação V22
-
-```sh
-npm ci
-npm run validate
-npx playwright install chromium
 npm run test:browser
+npm run test:cross-browser
 ```
 
-`npm run build` gera o site em `dist/` e o arquivo `CPA_Study.html` na raiz e em `dist/`. O empacotamento usa a mesma aplicação e não precisa de plugin externo de HTML único. Execute novamente o build sempre que alterar o código. A CI publica o HTML como artefato para download.
+O `build` também gera o `CPA_Study.html` standalone.
 
-Novas tentativas guardam revisão do conteúdo, IDs das alternativas e uma cópia da questão. Novos simulados guardam as questões completas para preservar gabaritos, explicações e resultados após atualizações. Registros anteriores à V22 não podem recuperar uma cópia histórica que nunca foi salva; para eles, continua existindo a leitura do banco atual.
+## Política editorial da V26
 
-Veja [V22_REPORT.md](V22_REPORT.md) para correções, verificação e limitações.
+A V26 não aumenta números artificialmente. Em particular:
 
+- os 445 exercícios gerados continuam identificados separadamente da base revisada;
+- uma questão só pode ser chamada de verificada quando houver evidência específica;
+- PDs, fontes e datas permanecem rastreáveis;
+- nenhum material externo protegido é reproduzido integralmente;
+- indicadores de desempenho descrevem o histórico dentro da plataforma, não a probabilidade de aprovação.
 
-## Auditoria V23
+## Relatórios e histórico
 
-A V23 corrige perda de progresso em gravações simultâneas, respostas de mini quiz que permaneciam ao mudar de aula, avaliações duplicadas de flashcards e links de revisão dos temas 2–4. Backups agora validam também o agendamento dos cartões e as configurações do plano. Datas do plano respeitam o dia local; agendas distantes usam uma janela de 366 dias, indicada na tela.
+- `V26_REPORT.md` — auditoria da release V26;
+- `CHANGELOG.md` — mudanças por versão;
+- relatórios de versões anteriores permanecem no repositório para rastreabilidade.
 
-A publicação no Pages executa os testes de navegador antes do deploy, inclusive quando o envio é feito diretamente em `main`. Vitest foi atualizado para 4.1.11; a auditoria npm desta revisão não apontou vulnerabilidades conhecidas.
+## Limites conhecidos
 
-Veja [V23_REPORT.md](V23_REPORT.md) para escopo, evidências e limites da varredura.
-
-## V24 — estudo em 20 módulos
-
-A navegação principal apresenta 20 módulos temáticos em vez de uma árvore de códigos. Cada módulo oferece leitura autoral, caso resolvido, comparação, pegadinhas, revisão por perguntas e um simulado de 6–10 questões autorais do próprio assunto. A correção completa inclui acertos, erros e questões em branco.
-
-As 445 aulas completas de consulta continuam acessíveis dentro dos módulos; `/edital` mantém a hierarquia oficial. Marcar uma leitura não conclui automaticamente as aulas correspondentes. Leituras e resultados de módulo são salvos localmente e incluídos no backup, sem alterar os IDs do histórico anterior.
-
-Há links para o caderno oficial da ANBIMA e materiais gratuitos da Elite Bancária e TopInvest. Os sites externos podem exigir cadastro e internet. As leituras e os 38 novos casos são originais, sem reprodução de apostilas de terceiros.
-
-Veja [V24_REPORT.md](V24_REPORT.md) para escopo e validação.
-
-## Consolidação V25
-
-- Início centrado nos módulos, na sessão diária e na revisão de hoje.
-- Menu agrupado em Início, Estudar, Praticar, Revisar e Progresso; fontes e configurações secundárias.
-- 300 questões autorais com revisão editorial vinculada ao conteúdo; 445 exercícios automáticos fora das métricas e dos simulados.
-- Sessões diárias persistidas, com proteção contra cliques duplicados e retomada após recarga.
-- Conclusão e domínio separados, sem impedir a navegação livre.
-- Exportação de backup registrada, lembrete discreto, consulta manual de versão e atualização de dados entre abas do mesmo site.
-- Mantidos CPA apenas, backup v1/v2, banco local versão 2 e monitoramento de fontes sem reescrita automática do conteúdo.
-
-Validação: `npm run validate` cobre currículo, aulas, questões, fontes, integridade, 114 testes, TypeScript e builds web/HTML. `npm run test:browser` testa o HTML offline no Chromium. `npm run test:cross-browser` executa o teste de navegação, teclado, sessão e abas no Chromium, Firefox e WebKit pelo CI. WebKit automatizado não substitui avaliação em aparelhos Safari reais.
+- Não existe sincronização automática entre computadores ou entre o site e o HTML standalone.
+- O projeto ainda não implementa árvore de decisão dinâmica no padrão do formato oficial.
+- As 445 questões de cobertura gerada ainda precisam de revisão editorial individual antes de entrarem na base confiável.
+- Fontes externas podem mudar depois da data registrada; regras vigentes devem ser reconferidas quando houver atualização normativa.
+- A plataforma é independente e não é afiliada, certificada ou homologada pela ANBIMA.
