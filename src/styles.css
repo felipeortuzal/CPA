@@ -42,3 +42,23 @@ button, a, input, select, textarea, summary { -webkit-tap-highlight-color: trans
     scroll-behavior: auto !important;
   }
 }
+
+@media print {
+  :root, :root.dark { color-scheme: light; }
+  html, body { background: white !important; color: #0f172a !important; }
+  body { font-size: 10.5pt; }
+  header, aside, nav, .print\:hidden { display: none !important; }
+  main { padding: 0 !important; }
+  .apostila-print { max-width: none !important; }
+  .apostila-print > header { display: block !important; border: 0 !important; background: white !important; padding: 0 0 18pt !important; }
+  .apostila-section { border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+  .apostila-section h2 { font-size: 18pt !important; margin-top: 18pt !important; }
+  .apostila-section h3 { font-size: 12pt !important; }
+  .apostila-section p, .apostila-section li, .apostila-section td, .apostila-section th { color: #0f172a !important; }
+  .apostila-section details { display: block !important; }
+  .apostila-section details > summary { list-style: none; }
+  .apostila-section a { color: #0f172a !important; text-decoration: none !important; }
+  .break-inside-avoid-page { break-inside: avoid-page; }
+  table { break-inside: avoid; }
+  h2, h3 { break-after: avoid; }
+}
