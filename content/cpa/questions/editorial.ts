@@ -9,7 +9,6 @@ function recalibrate(question: CPAQuestion): CPAQuestion {
   const directDefinition = /o que (é|significa)|qual (conceito|definição|instituição)|quem (define|supervisiona|regula)|como se chama/.test(text)
   const calculation = /r\$|%|calcule|montante|retorno|taxa|parcela|valor presente|valor futuro/.test(text)
   const multiFactor = /mais adequad|considerando|ao mesmo tempo|combina|prioriz|implica|avaliar|qual risco|qual conduta|qual conclusão/.test(text)
-  const dialogue = /atendente|assessor|gerente/.test(text) && /cliente|investidor/.test(text) && /orienta|responde|pergunta|conversa|afirma/.test(text)
 
   let cognitiveLevel: CognitiveLevel = 'application'
   if (directDefinition && question.context.length < 120) cognitiveLevel = 'comprehension'
@@ -19,10 +18,9 @@ function recalibrate(question: CPAQuestion): CPAQuestion {
   if (cognitiveLevel === 'comprehension' || (calculation && question.context.length < 110)) difficulty = 'easy'
   if (cognitiveLevel === 'analysis' && (question.context.length > 150 || multiFactor)) difficulty = 'hard'
 
-  let questionType: QuestionType = question.context.length < 55 && cognitiveLevel === 'comprehension' ? 'multiple_choice' : 'case'
-  // Só classifica como diálogo quando o enunciado efetivamente descreve uma interação de atendimento.
-  if (dialogue && question.context.length > 90) questionType = 'dialog_tree'
-
+  // Os 300 itens V25 são questões objetivas. Mesmo quando há fala de cliente/atendente,
+  // isso não cria ramificações reais; por isso V26 não os rotula artificialmente como dialog_tree.
+  const questionType: QuestionType = question.context.length < 55 && cognitiveLevel === 'comprehension' ? 'multiple_choice' : 'case'
   return {...question, difficulty, cognitiveLevel, questionType}
 }
 
