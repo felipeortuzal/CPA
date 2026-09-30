@@ -61,7 +61,7 @@ A própria página do módulo mostra esse checklist. Ele **não é previsão de 
 
 ## Banco de questões
 
-O projeto mantém **745 itens**:
+O banco bruto possui **745 questões**/itens no total:
 
 - **300 questões autorais revisadas**, usadas como base confiável de treino e simulados;
 - **445 exercícios de cobertura gerados**, um por PD terminal, mantidos fora da base revisada enquanto não passam por revisão individual.
@@ -89,6 +89,8 @@ A plataforma oferece:
 - assuntos fracos;
 - somente inéditas;
 - treino completo de 50 questões e 2h30.
+
+Em um conjunto de 50 itens, **35 acertos** correspondem aritmeticamente a 70%. A V26 não usa esse número, sozinho, como declaração de aprovação oficial: nosso treino não é prova homologada e ainda não reproduz árvores de decisão dinâmicas.
 
 O motor da V26 prioriza questões ainda não vistas e diversidade de `conceptId`, PD, dificuldade, nível cognitivo e tipo, reduzindo a chance de uma prova curta repetir praticamente o mesmo conceito.
 
