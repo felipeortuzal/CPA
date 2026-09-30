@@ -4,24 +4,25 @@ import type { CPAQuestion, CognitiveLevel, QuestionDifficulty, QuestionType } fr
 const byId = new Map(reviews.map(review => [review.id, review]))
 
 function recalibrate(question: CPAQuestion): CPAQuestion {
-  if (!question.id.startsWith('CPA-V25-')) return question
-  const text = `${question.context} ${question.prompt}`.toLocaleLowerCase('pt-BR')
+  // O modelo atual de CPAQuestion é objetivo: ele não armazena nós, escolhas intermediárias ou ramificações.
+  // Itens legados rotulados como dialog_tree são, portanto, normalizados como casos até existir árvore real.
+  const objectiveQuestion: CPAQuestion = question.questionType === 'dialog_tree' ? {...question, questionType:'case'} : question
+  if (!objectiveQuestion.id.startsWith('CPA-V25-')) return objectiveQuestion
+  const text = `${objectiveQuestion.context} ${objectiveQuestion.prompt}`.toLocaleLowerCase('pt-BR')
   const directDefinition = /o que (é|significa)|qual (conceito|definição|instituição)|quem (define|supervisiona|regula)|como se chama/.test(text)
   const calculation = /r\$|%|calcule|montante|retorno|taxa|parcela|valor presente|valor futuro/.test(text)
   const multiFactor = /mais adequad|considerando|ao mesmo tempo|combina|prioriz|implica|avaliar|qual risco|qual conduta|qual conclusão/.test(text)
 
   let cognitiveLevel: CognitiveLevel = 'application'
-  if (directDefinition && question.context.length < 120) cognitiveLevel = 'comprehension'
-  else if (multiFactor || question.context.length > 220) cognitiveLevel = 'analysis'
+  if (directDefinition && objectiveQuestion.context.length < 120) cognitiveLevel = 'comprehension'
+  else if (multiFactor || objectiveQuestion.context.length > 220) cognitiveLevel = 'analysis'
 
   let difficulty: QuestionDifficulty = 'medium'
-  if (cognitiveLevel === 'comprehension' || (calculation && question.context.length < 110)) difficulty = 'easy'
-  if (cognitiveLevel === 'analysis' && (question.context.length > 150 || multiFactor)) difficulty = 'hard'
+  if (cognitiveLevel === 'comprehension' || (calculation && objectiveQuestion.context.length < 110)) difficulty = 'easy'
+  if (cognitiveLevel === 'analysis' && (objectiveQuestion.context.length > 150 || multiFactor)) difficulty = 'hard'
 
-  // Os 300 itens V25 são questões objetivas. Mesmo quando há fala de cliente/atendente,
-  // isso não cria ramificações reais; por isso V26 não os rotula artificialmente como dialog_tree.
-  const questionType: QuestionType = question.context.length < 55 && cognitiveLevel === 'comprehension' ? 'multiple_choice' : 'case'
-  return {...question, difficulty, cognitiveLevel, questionType}
+  const questionType: QuestionType = objectiveQuestion.context.length < 55 && cognitiveLevel === 'comprehension' ? 'multiple_choice' : 'case'
+  return {...objectiveQuestion, difficulty, cognitiveLevel, questionType}
 }
 
 // Approval is tied to the exact reviewed stem/options/explanation, never just to a persistent ID.
