@@ -1,11 +1,12 @@
 import { reportStorageError } from '../lib/storage/events'
 import { useEffect } from 'react'
 import { addActiveStudySeconds, beginStudySession, endStudySession } from '../lib/storage/repositories/activityRepository'
+import type { StudySessionRecord } from '../lib/storage/types'
 
 const ACTIVE_WINDOW_MS = 60_000
 const TICK_SECONDS = 15
 
-export function useStudyTimer(pdCode: string | null, activityType: 'lesson' | 'review' = 'lesson') {
+export function useStudyTimer(pdCode: string | null, activityType: StudySessionRecord['activityType'] = 'lesson') {
   useEffect(() => {
     if (!pdCode) return
     let disposed=false; let sessionId:string|null=null; let lastInteraction=Date.now()

@@ -44,17 +44,17 @@ export function buildDailySteps(input:DailyInput,kind:DailyKind):DailyStep[] {
     const candidates=reliable.filter(q=>matchesModule(row.module,q.pdCode)).sort((a,b)=>Number(last.has(a.id))-Number(last.has(b.id))||(last.get(a.id)?.at??'').localeCompare(last.get(b.id)?.at??'')||a.id.localeCompare(b.id))
     for(const q of candidates)pushQuestion(2,q,`Reforçar ${row.module.title}`)
   }
-  const budget=Math.max(5,Math.min(kind==='review'?20:45,input.budget))
+  const budget=Math.max(10,Math.min(kind==='review'?20:120,input.budget))
   const steps:DailyStep[]=[];let minutes=0
   if(kind==='today') {
     const row=nextModule(input.modules)
     const sections=moduleReadings[row.module.id].sections.filter(s=>!input.progress[row.module.id]?.readSections.includes(s.id))
-    for(const section of sections.slice(0,Math.max(1,Math.min(2,Math.floor(budget/10))))) {
+    for(const section of sections.slice(0,Math.max(1,Math.min(4,Math.floor(budget/10))))) {
       steps.push({id:`reading:${row.module.id}:${section.id}`,type:'reading',moduleId:row.module.id,sectionId:section.id,reason:`Continuar ${row.module.title}`,minutes:4});minutes+=4
     }
     // Unseen practice from the current module joins the mixed session after reading.
     const candidates=reliable.filter(q=>matchesModule(row.module,q.pdCode)).sort((a,b)=>Number(last.has(a.id))-Number(last.has(b.id))||(last.get(a.id)?.at??'').localeCompare(last.get(b.id)?.at??'')||a.id.localeCompare(b.id))
-    for(const q of candidates.slice(0,3))pushQuestion(2,q,`Praticar ${row.module.title}`)
+    for(const q of candidates.slice(0,Math.max(3,Math.min(12,Math.floor(budget/8)))))pushQuestion(2,q,`Praticar ${row.module.title}`)
   }
   // Round-robin prevents a large error backlog from crowding out spaced recall.
   while(buckets.some(bucket=>bucket.length)) {

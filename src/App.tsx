@@ -7,6 +7,7 @@ import { AppLayout } from './layouts/AppLayout'
 const DailySessionPage = lazy(() => import('./pages/DailySessionPage').then(module => ({default:module.DailySessionPage})))
 const DashboardPage = lazy(() => import('./pages/DashboardPage').then((module) => ({ default: module.DashboardPage })))
 const ModulePage = lazy(() => import('./pages/ModulePage').then((module) => ({ default: module.ModulePage })))
+const ApostilaPage = lazy(() => import('./pages/ApostilaPage').then((module) => ({ default: module.ApostilaPage })))
 const ContentsPage = lazy(() => import('./pages/ContentsPage').then((module) => ({ default: module.ContentsPage })))
 const CurriculumPage = lazy(() => import('./pages/CurriculumPage').then((module) => ({ default: module.CurriculumPage })))
 const ErrorNotebookPage = lazy(() => import('./pages/ErrorNotebookPage').then((module) => ({ default: module.ErrorNotebookPage })))
@@ -33,6 +34,7 @@ const router = createHashRouter([
     { path:'trilha', element:<ContentsPage/> },
     { path:'edital', element:<CurriculumPage/> },
     { path:'modulos/:moduleId', element:<ModulePage/> },
+    { path:'apostila/:moduleId', element:<ApostilaPage/> },
     { path:'conteudos', element:<ContentsPage/> },
     { path:'conteudos/:pdCode', element:<LessonPage/> },
     { path:'questoes', element:<QuestionsPage/> },

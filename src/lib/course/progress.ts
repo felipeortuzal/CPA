@@ -19,16 +19,18 @@ export function buildModuleProgress(progress: Record<string,CourseProgress>, sim
     const accuracy = unique.length ? Math.round(unique.filter(row=>row.correct).length/unique.length*100) : null
     const recentDays = [...new Set(recent.map(row=>new Date(row.at).toLocaleDateString('sv-SE')))]
     const daily = recentDays.slice(-2).map(day=>recent.filter(row=>new Date(row.at).toLocaleDateString('sv-SE')===day)).map(rows=>[...new Map(rows.map(row=>[row.questionId,row])).values()])
+    const consistentRecentDays = daily.filter(rows=>rows.length>=3 && rows.filter(row=>row.correct).length/rows.length>=.8).length
     const completed = read === total && exams.length>0
     const lastAt = samples.at(-1)?.at ?? null
-    const span = recentDays.length ? (Date.parse(recentDays.at(-1)!)-Date.parse(recentDays[0]))/86400000 : 0
+    const spanDays = recentDays.length ? Math.floor((Date.parse(recentDays.at(-1)!)-Date.parse(recentDays[0]))/86400000) : 0
     const latestExam = exams.find(reliableSimulation)?.payload.result
+    const eligibleExamScore = latestExam?.scorePercent ?? null
     const poorExam = latestExam && latestExam.scorePercent < 70
     const stale = lastAt !== null && now.getTime()-Date.parse(lastAt)>30*86400000
-    const mastered = completed && Boolean(latestExam && latestExam.scorePercent >= 70) && !poorExam && !stale && unique.length>=12 && recentDays.length>=3 && span>=7 && (accuracy??0)>=80 && daily.length===2 && daily.every(rows=>rows.length>=3 && rows.filter(row=>row.correct).length/rows.length>=.8)
+    const mastered = completed && Boolean(latestExam && latestExam.scorePercent >= 70) && !poorExam && !stale && unique.length>=12 && recentDays.length>=3 && spanDays>=7 && (accuracy??0)>=80 && daily.length===2 && consistentRecentDays===2
     const needsReview = Boolean(poorExam || (unique.length>=3 && (accuracy??100)<70) || (completed && stale))
     const state: ModuleState = mastered?'mastered':needsReview?'review':completed?'completed':read>0||samples.length||exams.length?'in_progress':'not_started'
-    return {module,read,total,completed,state,accuracy,distinct:unique.length,practiceDays:recentDays.length,lastAt,exam:exams[0]??null,needsReview}
+    return {module,read,total,completed,state,accuracy,distinct:unique.length,practiceDays:recentDays.length,spanDays,consistentRecentDays,eligibleExamScore,lastAt,exam:exams[0]??null,needsReview}
   })
 }
 export type ModuleProgress = ReturnType<typeof buildModuleProgress>[number]
