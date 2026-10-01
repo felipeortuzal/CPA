@@ -1,3 +1,12 @@
+## 0.27.3 — 01/10/2026
+
+### Módulos robustos
+- Reestruturada a leitura-base dos 20 módulos para deixar de ser um resumo curto e funcionar como uma apostila direcionada.
+- Acrescentadas camadas específicas de mecanismo, exemplos, comparações e raciocínio de prova para todos os módulos.
+- O SFN recebeu uma explicação completa desde o fluxo de recursos até órgãos normativos, supervisores, operadores, autorregulação, garantias e caso integrado.
+- O conteúdo foi alinhado ao Programa Detalhado CPA 1.2 vigente desde 01/01/2026 e ao estilo situacional indicado pela ANBIMA, sem copiar material protegido de terceiros.
+- Validação passou a exigir profundidade mínima de leitura por módulo e profundidade adicional para o SFN.
+
 ## 0.27.2 — 01/10/2026
 
 ### Aulas completas
