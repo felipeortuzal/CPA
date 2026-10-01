@@ -82,6 +82,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Considere um seguro de automóvel com determinada cobertura e franquia. O veículo sofre um dano, mas o evento precisa ser enquadrado na apólice antes de calcular qualquer indenização. Primeiro verifique vigência, cobertura, exclusões, franquia e limite. Depois determine o prejuízo coberto e o valor efetivamente devido. A existência do seguro reduz determinado risco financeiro, mas não transforma qualquer evento em indenização.",
         "O mesmo raciocínio vale para vida e prestamista. A pergunta não é apenas “há seguro?”. É “qual risco foi transferido, quem é o beneficiário, qual evento está coberto e quais condições precisam ser cumpridas?”. Na CPA, a alternativa correta normalmente respeita o contrato e evita generalizações."
       ]
+    },
+    {
+      "id": "robusto-seguros-contrato",
+      "title": "Apólice, prêmio, sinistro, franquia e exclusões: leia o contrato como um mapa",
+      "paragraphs": [
+        "Uma apólice precisa ser lida como um conjunto de condições. O prêmio é o preço pago pela cobertura; a vigência define o período; as coberturas indicam quais riscos são transferidos; exclusões delimitam situações que não estão cobertas; franquias podem definir a parcela do prejuízo que permanece com o segurado. Limites de indenização definem o máximo pagável para determinada cobertura.",
+        "Quando ocorre um sinistro, a existência do contrato não encerra a análise. É necessário verificar se o evento ocorreu durante a vigência, se está dentro da cobertura, se existe exclusão e qual valor efetivamente está protegido. Na prova, se uma alternativa disser “qualquer dano é indenizado”, ela ignora a estrutura contratual. O raciocínio correto é sempre evento → cobertura → condições → franquia/limite → indenização."
+      ]
     }
   ],
   "planejamento": [
