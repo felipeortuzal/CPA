@@ -196,8 +196,8 @@ export function CPAMentorChat() {
       className="fixed bottom-24 right-4 z-[70] flex h-[min(680px,calc(100vh-7rem))] w-[min(420px,calc(100vw-2rem))] flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-950/20 dark:border-white/10 dark:bg-[#0a1724]"
     >
       <header className="flex shrink-0 items-center gap-3 border-b border-slate-200 bg-white px-4 py-3 dark:border-white/10 dark:bg-[#0a1724]">
-        <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#0b1724] ring-1 ring-emerald-400/30">
-          <img src="/favicon.svg" alt="" className="h-full w-full" />
+        <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#0b1724] ring-1 ring-emerald-400/30" aria-hidden="true">
+          <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden="true"><rect width="64" height="64" rx="18" fill="#0b1724"/><path d="M18 18h28v8H26v12h20v8H18z" fill="#34d399"/></svg>
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
