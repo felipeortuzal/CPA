@@ -130,5 +130,77 @@ export const masteryReadingSections: Record<string, ReadingSection[]> = {
       'Você deve conseguir diferenciar renda de patrimônio, despesa de objetivo, reserva de emergência de investimento de longo prazo e dívida de investimento. Também deve conseguir explicar por que liquidez é uma característica do planejamento.',
       'Se o cliente tem três objetivos, não procure um único produto. Separe os objetivos e monte a lógica de cada um. Esse é o comportamento que a prova contextualizada tende a exigir.'
     ]}
+  ],,
+
+  'carteiras': [
+    {id:'mastery-carteira-decisao',title:'6. Como sair do produto e voltar para a carteira',paragraphs:[
+      'Uma carteira não deve ser construída como uma lista de produtos favoritos. Primeiro se define a política de alocação e as restrições; depois se escolhem instrumentos que implementem essa política. Isso reduz a chance de acumular ativos com o mesmo risco sem perceber.',
+      'Em uma questão, se o cliente muda de objetivo, a carteira pode precisar mudar mesmo que os produtos individualmente continuem bons. A adequação é dinâmica.'
+    ]},
+    {id:'mastery-carteira-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve explicar alocação, diversificação, correlação, risco e retorno esperado e rebalanceamento. Também deve reconhecer que retorno histórico não é garantia e que concentração pode aumentar risco.',
+      'A pergunta-chave é: “o que aconteceria com a carteira se este fator específico mudasse?”. Essa pergunta revela a verdadeira exposição.'
+    ]}
   ],
+  'perfil': [
+    {id:'mastery-perfil-perguntas',title:'6. Perguntas que revelam adequação',paragraphs:[
+      'Quando o cliente diz “quero segurança”, transforme a frase em perguntas objetivas: para quando é o dinheiro? Quanto pode perder? Precisa de liquidez? Possui reserva? Tem experiência? Qual é o objetivo? Essas perguntas convertem preferências vagas em restrições de investimento.',
+      'O profissional não precisa adivinhar o perfil. Ele coleta informações, registra e utiliza as regras da instituição para avaliar adequação.'
+    ]},
+    {id:'mastery-perfil-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve diferenciar capacidade de disposição a assumir risco, reconhecer o papel do horizonte e entender por que o produto também precisa ser analisado. Perfil não é autorização para ignorar liquidez, custo ou complexidade.',
+      'Se uma alternativa recomenda produto apenas porque o cliente se declarou agressivo, procure uma análise incompleta. O perfil é multidimensional.'
+    ]}
+  ],
+  'atendimento-etica': [
+    {id:'mastery-etica-conflitos',title:'6. Como reconhecer conflito de interesse em uma questão',paragraphs:[
+      'Procure incentivos. Quem ganha se o cliente escolher o produto? Existe remuneração diferenciada? O profissional omitiu uma característica importante? A instituição possui procedimento de tratamento do conflito? Essas perguntas ajudam a identificar o ponto ético do caso.',
+      'Nem toda remuneração é ilícita. O problema é a falta de transparência, a inadequação ou a priorização indevida do interesse do distribuidor. A análise precisa seguir as regras aplicáveis.'
+    ]},
+    {id:'mastery-etica-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve reconhecer KYC, PLD/FT, sigilo, proteção de dados, conflitos de interesse, boa-fé, transparência e diligência. Também deve saber que suspeita não é prova de crime e que procedimentos internos precisam ser respeitados.',
+      'Em caso de dúvida, escolha a alternativa que preserva informação correta, segurança, adequação e encaminhamento formal. Evite improvisos.'
+    ]}
+  ],
+  'sustentabilidade': [
+    {id:'mastery-esg-materialidade',title:'6. Materialidade: o elo entre ESG e valor econômico',paragraphs:[
+      'Um fator ESG é material quando pode influenciar de forma relevante os resultados, riscos ou oportunidades de uma empresa ou investimento, conforme a abordagem utilizada. Materialidade evita que o profissional trate qualquer indicador como igualmente importante.',
+      'Uma seca prolongada pode ser material para uma empresa agrícola e menos relevante para outra atividade. Uma falha de governança pode afetar qualquer setor. A análise deve considerar o modelo de negócio e a exposição específica.'
+    ]},
+    {id:'mastery-esg-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve diferenciar ESG de sustentabilidade como slogan, integração de exclusão, investimento temático de impacto e risco físico de transição. Também deve reconhecer greenwashing como problema de coerência entre alegação e evidência.',
+      'A pergunta-chave é: “qual evidência sustenta a característica sustentável alegada?”. Se não houver método, objetivo ou transparência, a conclusão precisa ser cautelosa.'
+    ]}
+  ],
+  'ativos-digitais': [
+    {id:'mastery-digital-risco',title:'6. O risco migra; não desaparece',paragraphs:[
+      'A tecnologia pode remover um intermediário e criar dependência de código, protocolo ou governança. Pode facilitar transferência e aumentar exposição operacional. Pode ampliar acesso e aumentar risco de fraude. Esse princípio — risco migra — é uma das melhores chaves para questões de inovação.',
+      'Quando uma alternativa afirma que blockchain elimina risco de fraude ou que smart contract garante execução sem falhas, procure a generalização. Código e infraestrutura também precisam de controles.'
+    ]},
+    {id:'mastery-digital-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve explicar blockchain, tokenização, smart contracts, oráculos, DeFi, custódia e stablecoins. Também deve separar tecnologia de direito econômico e risco financeiro.',
+      'Se você consegue responder “o que é?”, “para que serve?”, “qual risco novo aparece?” e “quem controla ou responde?”, está pronto para as questões contextualizadas.'
+    ]}
+  ],
+  'open-finance': [
+    {id:'mastery-open-journey',title:'6. A jornada do consentimento',paragraphs:[
+      'Pense na jornada como autorização → autenticação → compartilhamento → uso para a finalidade autorizada → possibilidade de controle/revogação conforme as regras. Cada etapa existe para proteger o cliente e permitir rastreabilidade.',
+      'Isso ajuda a identificar golpes. Se alguém pede senha ou código fora do fluxo oficial para “ativar Open Finance”, o comportamento é incompatível com uma jornada segura. A conveniência não justifica ignorar autenticação.'
+    ]},
+    {id:'mastery-open-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve diferenciar Open Finance de compartilhamento público, consentimento de entrega de senha, dados de transferência de recursos e compartilhamento de portabilidade. Também deve entender que benefício comercial não é garantido.',
+      'Na prova, procure o verbo do caso: compartilhar, revogar, portar, iniciar ou pagar. Cada verbo indica uma operação diferente.'
+    ]}
+  ],
+  'tecnologia': [
+    {id:'mastery-ia-governanca',title:'6. Governança antes de automação',paragraphs:[
+      'Quanto maior o impacto de uma decisão, maior a necessidade de controles. Uma IA que sugere respostas simples pode ter risco diferente de um modelo que influencia concessão de crédito ou classificação de clientes. A governança deve acompanhar o impacto.',
+      'Controles podem incluir validação, revisão humana, monitoramento, trilhas de auditoria, segurança de dados e critérios para interromper o modelo. “Automatizar” não é sinônimo de “deixar sem supervisão”.'
+    ]},
+    {id:'mastery-tecnologia-check',title:'7. Checklist de domínio',paragraphs:[
+      'Você deve diferenciar IA de machine learning, entender riscos de dados e viés, saber que fintech não é licença e explicar o propósito de um sandbox regulatório. Também deve reconhecer funções distintas em pagamentos.',
+      'Quando uma questão disser que uma solução é “100% segura porque usa IA”, blockchain ou automação, procure o risco que continua existindo. A tecnologia não substitui governança.'
+    ]}
+  ],
+
 };
