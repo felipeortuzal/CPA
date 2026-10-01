@@ -8,3 +8,5 @@ dist
 .source-monitor/
 test-results/
 playwright-report/
+
+.dev.vars*
