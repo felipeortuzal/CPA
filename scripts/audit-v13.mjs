@@ -32,7 +32,7 @@ const pkg=JSON.parse(pkgRaw)
 const metadata=JSON.parse(metadataRaw)
 const sources=JSON.parse(sourcesRaw)
 
-expect(/^0\.(?:1[3-9]|2[0-9])\.0$/.test(pkg.version),`package version must be >=0.13.0 in the CPA-only roadmap, received ${pkg.version}`)
+expect(/^0\.(?:1[3-9]|2[0-9])\.\d+$/.test(pkg.version),`package version must be >=0.13.0 in the CPA-only roadmap, received ${pkg.version}`)
 expect(!Object.keys({...pkg.dependencies,...pkg.devDependencies}).some((name)=>/supabase|firebase/i.test(name)),'remote backend dependency found')
 expect(metadata.programVersion==='1.2','Programa Detalhado version drifted from 1.2')
 expect(metadata.revisionDate==='2025-06-04','Programa Detalhado revision date drifted')
