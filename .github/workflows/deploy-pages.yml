@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -38,6 +38,19 @@ jobs:
 
       - name: Verify offline application
         run: npm run test:browser
+
+      - name: Persist standalone HTML
+        run: |
+          cp dist/CPA_Study.html CPA_Study.html
+          if git diff --quiet -- CPA_Study.html; then
+            echo "CPA_Study.html already up to date."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add CPA_Study.html
+            git commit -m "V26: refresh standalone study HTML"
+            git push
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
