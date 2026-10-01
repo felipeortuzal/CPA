@@ -1,6 +1,8 @@
 import type { LessonSourceId } from '../lessons/sources'
 import { deepReadingSections } from './deep-readings'
 import { masteryReadingSections } from './master-readings'
+import { moduleExpansionSections } from './module-expansions-1'
+import { moduleExpansionSections2 } from './module-expansions-2'
 export interface ReadingSection { id: string; title: string; paragraphs: string[] }
 export interface ModuleReading {
   objectives: string[]
@@ -229,6 +231,17 @@ for (const [moduleId, sections] of Object.entries(deepReadingSections)) {
 }
 
 for (const [moduleId, sections] of Object.entries(masteryReadingSections)) {
+  const reading = moduleReadings[moduleId]
+  if (reading) reading.sections.push(...sections)
+}
+
+// V27.3: camada editorial robusta por módulo. A leitura-base agora explica os mecanismos antes de encaminhar para os PDs terminais.
+for (const [moduleId, sections] of Object.entries(moduleExpansionSections)) {
+  const reading = moduleReadings[moduleId]
+  if (reading) reading.sections.push(...sections)
+}
+
+for (const [moduleId, sections] of Object.entries(moduleExpansionSections2)) {
   const reading = moduleReadings[moduleId]
   if (reading) reading.sections.push(...sections)
 }
