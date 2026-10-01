@@ -1,4 +1,5 @@
 import type { LessonSourceId } from '../lessons/sources'
+import { deepReadingSections } from './deep-readings'
 export interface ReadingSection { id: string; title: string; paragraphs: string[] }
 export interface ModuleReading {
   objectives: string[]
@@ -9,7 +10,7 @@ export interface ModuleReading {
   recall: { question: string; answer: string }[]
   sources: LessonSourceId[]
 }
-// Textos e exemplos originais. As fontes sustentam os conceitos; não há reprodução de apostilas.
+// Textos e exemplos originais. As fontes sustentam os conceitos; não há reprodução de apostilas.\n// V27.2 acrescenta uma camada de aprofundamento autoral inspirada na estrutura didática observada em cursos públicos, sem reproduzir suas apostilas, slides ou roteiros.
 export const moduleReadings: Record<string,ModuleReading> = {
 'sistema-financeiro': {
  objectives:['Distinguir quem cria regras, quem supervisiona e quem presta serviços.','Reconhecer a função da intermediação e os limites das garantias.'],
@@ -218,4 +219,10 @@ export const moduleReadings: Record<string,ModuleReading> = {
 export function readingMinutes(reading: ModuleReading) {
   const text = JSON.stringify(reading)
   return Math.max(4, Math.ceil(text.split(/\s+/).length / 150))
+}
+
+
+for (const [moduleId, sections] of Object.entries(deepReadingSections)) {
+  const reading = moduleReadings[moduleId]
+  if (reading) reading.sections.push(...sections)
 }
