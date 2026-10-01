@@ -39,7 +39,7 @@ O tempo mostrado na Apostila é uma **estimativa da trilha principal**, não do 
 
 A V27 adiciona uma camada dedicada a entender como transformar o edital em raciocínio de prova:
 
-- página Inteligência da prova em /inteligencia;
+- Radar CPA integrado à central Fontes e Atualizações;
 - benchmark do curso público Retorno Interno / Renan Duarte;
 - 12 clusters pedagógicos cobrindo os 20 módulos;
 - 23 atalhos mentais;
