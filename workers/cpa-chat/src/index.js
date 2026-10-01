@@ -36,13 +36,6 @@ BASE DA CPA STUDY
 - Quando útil, mencione códigos PD e indique em qual bloco do curso o assunto costuma aparecer.
 `.trim()
 
-function allowedOrigin(request) {
-  const origin = request.headers.get('Origin')
-  const configured = (request.env?.CHAT_ALLOWED_ORIGINS || '').split(',').map(item => item.trim()).filter(Boolean)
-  const allowed = configured.length ? configured : DEFAULT_ALLOWED_ORIGINS
-  return origin && allowed.includes(origin) ? origin : null
-}
-
 function corsHeaders(origin) {
   return {
     'Access-Control-Allow-Origin': origin || 'null',
