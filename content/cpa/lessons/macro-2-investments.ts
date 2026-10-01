@@ -2,6 +2,7 @@ import { module2 } from '../module-2'
 import { macro2InvestmentDefinitions } from './macro-2-investments-definitions'
 import { lessonSources, type LessonSourceId } from './sources'
 import type { CPALesson, LessonComparison, LessonFormula, LessonQuizQuestion } from './types'
+import { enrichCompleteExplanation } from './enrichment'
 
 const verifiedAt='2026-09-20'
 
@@ -208,7 +209,7 @@ export const macro2InvestmentLessons:CPALesson[]=units.map((unit)=>{
     title,
     oneSentence:definition,
     beginnerExplanation:beginner(unit.pdCode,title,definition),
-    completeExplanation:[
+    completeExplanation:enrichCompleteExplanation(unit.pdCode,title,definition,[
       `${definition} Este item pertence ao bloco de ${area(unit.pdCode)} do Programa Detalhado CPA 1.2.`,
       unit.pdCode.startsWith('2.1.1.1')?'A análise correta de renda fixa passa por emissor, indexador, prazo, fluxo, liquidez, marcação a mercado, garantias e tributação. A taxa isolada não resume o risco.':
         unit.pdCode.startsWith('2.1.1.2')?'Em renda variável, conecte direitos societários, forma de captação, eventos corporativos e negociação. Mudança de quantidade de ações não significa, sozinha, criação de valor.':
@@ -217,7 +218,7 @@ export const macro2InvestmentLessons:CPALesson[]=units.map((unit)=>{
         unit.pdCode.startsWith('2.1.4')?'Em FIIs, o tipo de ativo muda o risco dominante. Imóvel físico traz vacância e gestão; recebíveis trazem crédito e indexadores; a cota acrescenta risco de mercado e liquidez.':
         'Tributação deve ser aplicada ao produto e ao evento corretos. Regras de alíquota, isenção e compensação podem mudar com a legislação e são verificadas pelas fontes oficiais da aula.',
       `Na decisão de um cliente, ${title} deve ser conectado a objetivo, horizonte, liquidez, capacidade de perda e tributação líquida — exatamente o tipo de aplicação contextual que a nova CPA privilegia.`,
-    ],
+    ],focus,trap,practical(unit.pdCode,title)),
     essentialConcepts:essentials,
     examFocus:focus,
     practicalExample:practical(unit.pdCode,title),
