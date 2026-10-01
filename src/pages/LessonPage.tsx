@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { AlertCircle, BookOpen, CheckCircle2, CircleHelp, Heart, Search, Star } from 'lucide-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { cpaLessonMap, cpaLessons } from '../../content/cpa/lessons'
+import { lessonWordCount } from '../../content/cpa/course/apostila'
 import type { CPALesson } from '../../content/cpa/lessons/types'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
@@ -118,7 +119,7 @@ function LessonContent({ pdCode }: { pdCode: string | undefined }) {
     <LessonSidebar lesson={lesson} />
     <div className="min-w-0 space-y-6">
       {error ? <p role="alert" className="text-sm text-rose-600">{error}</p> : null}
-      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>{moduleForPd(lesson.pdCode)?.title ?? 'Aula de consulta'}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">PD {lesson.pdCode} · Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><div className="mt-4"><Progress value={progressValue} /></div></div>
+      <div><div className="mb-3 flex flex-wrap items-center gap-2"><Badge>{moduleForPd(lesson.pdCode)?.title ?? 'Aula de consulta'}</Badge><span className="text-xs text-slate-500">Aula {position}</span><span className="text-xs font-semibold text-slate-500">{statusLabel(progress)}</span></div><h1 className="text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h1><p className="mt-3 text-sm text-slate-500">PD {lesson.pdCode} · Referência cadastrada em: {new Intl.DateTimeFormat('pt-BR').format(new Date(`${lesson.lastVerified}T12:00:00`))} · Programa Detalhado CPA {lesson.programVersion}</p><p className="mt-2 text-xs font-semibold text-slate-500">Leitura completa · ~{Math.max(8, Math.ceil(lessonWordCount(lesson) / 180))} min · {lessonWordCount(lesson).toLocaleString('pt-BR')} palavras</p><div className="mt-4"><Progress value={progressValue} /></div></div>
 
       <Card className="border-emerald-400/25 bg-emerald-400/[0.06]"><p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-700 dark:text-emerald-300">Em uma frase</p><p className="mt-3 text-lg font-semibold leading-7">{lesson.oneSentence}</p></Card>
 
