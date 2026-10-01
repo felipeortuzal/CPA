@@ -1,3 +1,18 @@
+## 0.27.0 — 30/09/2026
+
+### Inteligência da prova
+- Central V27 de engenharia de prova.
+- Benchmark estruturado do curso público do Retorno Interno / Renan Duarte sem copiar conteúdo protegido.
+- 13 aulas com título e URL verificados publicamente.
+- Mapa dos 20 módulos em 12 clusters de raciocínio.
+- Radar de evidências, atalhos mentais, padrões de questão e 100 pegadinhas autorais.
+- Benchmark externo de materiais gratuitos e simulados.
+- Programa Detalhado e fontes oficiais permanecem como fonte de verdade.
+
+### Confiabilidade
+- Validação V27 para cobertura, benchmark, pegadinhas e métricas.
+- Versão do pacote: 0.27.0.
+
 # Changelog
 
 ## 0.26.0 — 30/09/2026
