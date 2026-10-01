@@ -446,5 +446,3 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
     ]}
   ],
 };
-
-};
