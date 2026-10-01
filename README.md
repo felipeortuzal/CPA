@@ -50,6 +50,21 @@ A V27 adiciona uma camada dedicada a entender como transformar o edital em racio
 
 A regra editorial da V27 é: ANBIMA é fonte de verdade; terceiros são benchmark. O projeto não copia transcrições, slides ou questões proprietárias.
 
+
+### V27.1 — Mestre CPA
+
+Antes da V28, a plataforma ganhou um tutor de IA flutuante: o **Mestre CPA**.
+
+- abre sobre a página atual, sem navegação;
+- histórico local da conversa;
+- explica conceitos do zero e treina raciocínio de prova;
+- analisa alternativas e pegadinhas;
+- recebe o contexto da página atual;
+- pode consultar fontes institucionais atuais por busca web;
+- usa GPT-5.6 Luna por padrão;
+- a chave da OpenAI fica somente no backend Cloudflare Worker.
+
+O frontend já está instalado. Para ativar a IA em um deploy, publique `workers/cpa-chat` e defina `VITE_CPA_CHAT_ENDPOINT`. Consulte `workers/cpa-chat/README.md`.
 ## Como estudar na V27
 
 1. Use a trilha principal e a Apostila V26 como base.
