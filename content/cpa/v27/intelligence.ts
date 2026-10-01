@@ -225,7 +225,44 @@ const trapSeeds: Array<[string,string,string,string]> = [
   ['Questão contextualizada','Escolher alternativa tecnicamente verdadeira, mas inadequada ao caso.','A prova pode avaliar aplicação, não só definição.','Responda ao caso antes de escolher a definição.'],
 ]
 
-export const v27Traps: V27Trap[] = trapSeeds.map(([concept,trap,why,avoid],index)=>({id:'T'+String(index+1).padStart(3,'0'),concept,trap,why,avoid}))
+const trapSupplement: Array<[string,string,string,string]> = [
+  ['Renda fixa e garantia','Assumir que todo título privado possui a mesma proteção.','Instrumentos e emissores possuem estruturas diferentes.','Identifique produto, emissor e garantia específica.'],
+  ['LCI/LCA','Tratar isenção tributária como sinônimo de menor risco.','Tributação e risco de crédito são dimensões diferentes.','Compare retorno líquido e risco separadamente.'],
+  ['Debênture','Assumir que debênture tem FGC por ser título de dívida.','A natureza do instrumento não cria automaticamente cobertura.','Verifique a proteção específica.'],
+  ['Tesouro Direto','Confundir risco de crédito soberano com ausência de risco de preço.','Títulos podem oscilar no mercado antes do vencimento.','Separe risco do emissor de marcação a mercado.'],
+  ['Cupom','Tratar cupom como taxa de retorno total.','Cupom é fluxo periódico; retorno depende também do preço e dos demais fluxos.','Olhe o fluxo completo.'],
+  ['Indexador','Assumir que indexador maior sempre significa retorno maior.','O resultado depende da taxa contratada, spread, prazo e inflação/câmbio quando aplicável.','Leia a fórmula do produto.'],
+  ['Spread de crédito','Tratar spread como taxa Selic.','Spread é prêmio adicional relacionado às condições do emissor/mercado.','Separe taxa-base de prêmio.'],
+  ['Rating','Tratar rating como garantia.','É uma opinião/avaliação de risco, não promessa de pagamento.','Use rating como informação adicional.'],
+  ['Risco operacional','Tratar risco operacional como risco de mercado.','Falhas de processos, sistemas ou pessoas têm natureza diferente.','Identifique a origem do evento.'],
+  ['Risco sistêmico','Confundir com risco específico de uma empresa.','Pode afetar grande parte do sistema ou mercado.','Observe a abrangência do choque.'],
+  ['Mercado de capitais','Atribuir toda atividade ao Banco Central.','A CVM possui papel específico no mercado de valores mobiliários.','Mapeie o segmento.'],
+  ['B3','Tratar B3 como regulador estatal.','B3 fornece infraestrutura e exerce funções de autorregulação em determinados contextos.','Separe infraestrutura, autorregulação e supervisão estatal.'],
+  ['Registradora','Confundir registro com custódia em qualquer situação.','As funções podem ser distintas conforme o ativo e infraestrutura.','Leia a função descrita.'],
+  ['SPB','Tratar todo pagamento instantâneo como liquidação de investimento.','Meios de pagamento e mercado de capitais têm fluxos diferentes.','Identifique a operação.'],
+  ['Pix segurança','Assumir que Pix elimina fraude.','O sistema é infraestrutura de pagamento e exige controles de segurança.','Não transforme tecnologia em garantia absoluta.'],
+  ['Política monetária','Achar que política monetária é definida pelo mercado.','Há autoridade monetária e instrumentos institucionais específicos.','Identifique órgão e instrumento.'],
+  ['Copom','Confundir meta Selic com taxa de qualquer investimento.','Selic é referência monetária; produtos podem ter outros indexadores e spreads.','Pergunte qual taxa o produto usa.'],
+  ['Câmbio comercial','Tratar qualquer cotação de dólar como preço universal.','Cotações dependem de mercado, operação e condições.','Leia o contexto da transação.'],
+  ['Inflação acumulada','Somar percentuais mensais automaticamente.','Inflação acumulada é composta pelas variações do período.','Use a composição correta.'],
+  ['Poder de compra','Confundir aumento nominal de renda com aumento real.','Preços podem subir mais que a renda nominal.','Compare renda e inflação.'],
+  ['Valor presente','Descontar fluxo futuro com taxa de período incompatível.','A taxa e o período precisam estar na mesma base.','Converta taxas antes do cálculo.'],
+  ['SAC x Price','Confundir amortização constante com parcela constante.','SAC mantém amortização; Price mantém prestação, dentro das premissas do modelo.','Pergunte o que permanece constante.'],
+  ['Taxa equivalente','Tratar taxa proporcional como equivalente.','Bases de capitalização diferentes produzem relações diferentes.','Observe o regime de capitalização.'],
+  ['Valor futuro','Ignorar o número de períodos.','Capitalização depende do prazo.','Escreva n antes de calcular.'],
+  ['Mercado secundário','Achar que emissor recebe todo recurso de uma negociação secundária.','A contraparte é outro investidor.','Siga o fluxo financeiro.'],
+  ['Derivativo','Assumir que derivativo sempre serve para especular.','Também pode ser usado para hedge e outras estratégias.','Identifique a finalidade.'],
+  ['Opção','Tratar comprador e vendedor como tendo o mesmo direito.','As posições têm direitos e obrigações diferentes.','Identifique quem compra e quem lança.'],
+  ['Futuro','Achar que contrato futuro é apenas uma compra parcelada.','Há padronização, ajustes e dinâmica própria do mercado.','Leia a estrutura do contrato.'],
+  ['COE liquidez','Assumir que pode sair a qualquer momento pelo valor investido.','A liquidez e o preço de saída dependem da estrutura e do mercado.','Verifique condições de saída.'],
+  ['Fundo e patrimônio','Achar que patrimônio do fundo é patrimônio do administrador.','São patrimônios juridicamente distintos conforme a estrutura aplicável.','Separe prestador e veículo.'],
+  ['Taxa de performance','Assumir que toda taxa é cobrada independentemente do resultado.','Taxas possuem regras e condições específicas.','Leia a política do fundo.'],
+  ['Comef x Copom','Confundir estabilidade financeira com condução da política monetária.','Os objetivos institucionais são diferentes.','Identifique o problema descrito.'],
+  ['Classificação do investidor','Confundir classificação regulatória com perfil de risco.','São conceitos que podem coexistir, mas não são sinônimos.','Leia exatamente o termo usado.'],
+  ['Liberdade econômica','Tratar uma lei geral como autorização para ignorar regulação financeira específica.','Regras setoriais continuam relevantes.','Procure a norma específica do mercado.'],
+  ['Fonte atualizada','Usar um PDF antigo porque ele explica melhor.','Uma explicação clara pode estar desatualizada normativamente.','Use material antigo só como benchmark e confirme a regra atual.'],
+];
+export const v27Traps: V27Trap[] = [...trapSeeds, ...trapSupplement].map(([concept,trap,why,avoid],index)=>({id:'T'+String(index+1).padStart(3,'0'),concept,trap,why,avoid}))
 
 export const v27Radar: V27Evidence[] = [
   {kind:'OFICIAL',title:'Peso não é frequência',detail:'Os pesos 20/40/30/10 são estrutura oficial. A V27 não transforma frequência de um banco externo em peso da prova.',source:'ANBIMA'},
