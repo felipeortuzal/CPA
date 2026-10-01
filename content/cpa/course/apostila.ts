@@ -51,7 +51,7 @@ export function moduleApostilaStats(moduleId: string) {
   const reading = moduleReadings[moduleId]
   const lessons = getModuleLessons(moduleId)
   const overviewWords = reading ? wordCount(JSON.stringify(reading)) : 0
-  const readingMinutes = Math.max(8, Math.ceil(overviewWords / 180))
+  const readingMinutes = Math.max(8, Math.ceil(overviewWords / 130))
   const coreWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonCoreWordCount(lesson), 0)
   const fullWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
   const formulas = lessons.reduce((sum, lesson) => sum + lesson.formulas.length, 0)
