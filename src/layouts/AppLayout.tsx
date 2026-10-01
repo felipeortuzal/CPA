@@ -8,7 +8,7 @@ import { useTheme } from '../hooks/useTheme'
 type NavItem=readonly [string,string,LucideIcon]
 const groups: {title:string;items:NavItem[]}[]=[
   {title:'Início',items:[['Hoje','/',LayoutDashboard]]},
-  {title:'Estudar',items:[['Módulos','/conteudos',GraduationCap],['Mapa do edital','/edital',BookOpen]]},
+  {title:'Estudar',items:[['Módulos','/conteudos',GraduationCap],['Mapa do edital','/edital',BookOpen],['Inteligência da prova','/inteligencia',Brain]]},
   {title:'Praticar',items:[['Questões','/questoes',ClipboardCheck],['Simulados','/simulados',FileText]]},
   {title:'Revisar',items:[['Revisão de hoje','/revisao',RotateCcw],['Erros','/erros',Target],['Flashcards','/flashcards',Brain]]},
   {title:'Progresso',items:[['Plano','/plano',CalendarDays],['Estatísticas','/estatisticas',BarChart3]]},
