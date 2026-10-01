@@ -119,7 +119,7 @@ try {
 
   await goto('apostila/economia')
   await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
-  await expect(page.getByText(/Apostila digital · V26/)).toBeVisible()
+  await expect(page.getByText(/Apostila digital · V27\.2/)).toBeVisible()
   await expect(page.getByRole('button', { name: 'Imprimir / salvar PDF' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 
