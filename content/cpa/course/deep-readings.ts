@@ -110,5 +110,94 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'Imagine um cliente dizendo: “Quero o investimento mais seguro e que pague a maior taxa”. A resposta profissional começa desmontando a frase. Segurança depende de qual risco está sendo considerado; taxa maior pode vir acompanhada de maior risco de crédito, prazo ou liquidez. O objetivo do cliente também importa. Um dinheiro que será usado em três meses não deve ser analisado da mesma forma que uma reserva para aposentadoria.',
       'Na prova, procure as palavras que revelam o risco relevante: “vender antes do vencimento” aponta para risco de mercado e liquidez; “emissor com dificuldade financeira” aponta para crédito; “taxa subiu depois da compra” aponta para marcação a mercado; “garantia” exige identificar o mecanismo específico. Essa leitura por gatilhos torna as questões de renda fixa muito mais rápidas.'
     ]}
+  ],,
+'renda-variavel': [
+    { id:'deep-acoes', title:'1. Ação é participação, não promessa de rendimento', paragraphs:[
+      'Uma ação representa uma participação no capital de uma companhia. O retorno do acionista pode vir da valorização do preço e de proventos distribuídos, mas nenhum desses componentes é garantido. O preço de mercado incorpora expectativas sobre lucros, crescimento, juros, risco e condições do setor. Por isso, uma ação não deve ser tratada como um título de dívida com juros contratados.',
+      'Em uma questão, identifique primeiro a posição do investidor. Acionista participa economicamente do negócio e está exposto ao desempenho da companhia. Credor tem direito contratual de receber fluxos conforme o instrumento de dívida. Essa diferença ajuda a responder perguntas sobre risco, prioridade de recebimento, governança e retorno.'
+    ]},
+    { id:'deep-oferta', title:'2. Mercado primário, secundário e liquidez', paragraphs:[
+      'No mercado primário, os recursos de uma emissão chegam ao emissor conforme a estrutura da oferta. No secundário, investidores negociam ativos que já foram emitidos. A existência de mercado secundário favorece liquidez e formação de preços, mas não significa que todo ativo será vendido imediatamente pelo preço desejado.',
+      'Quando a questão apresenta IPO, emissão ou distribuição, pense em captação. Quando apresenta compra e venda entre investidores depois da emissão, pense em mercado secundário. O distribuidor pode participar da oferta sem ser o emissor. Essa separação é especialmente útil em situações de atendimento.'
+    ]},
+    { id:'deep-derivativos', title:'3. Derivativos: para que servem e por que existem', paragraphs:[
+      'Derivativos são contratos cujo valor depende de outro ativo, taxa, índice ou variável de referência. Eles podem ser usados para proteção, transferência de risco, exposição direcional e estratégias de arbitragem, dependendo do contrato. O ponto central é que derivativo não é sinônimo de aposta; seu uso econômico pode reduzir riscos reais de uma empresa ou investidor.',
+      'Em uma proteção cambial, por exemplo, uma empresa que receberá dólares no futuro pode usar um contrato para reduzir a incerteza do valor em reais. A proteção tem custo e pode limitar ganhos caso o mercado caminhe na direção oposta. Na prova, pergunte qual risco o agente possui antes de identificar o instrumento de hedge.'
+    ]},
+    { id:'deep-coe', title:'4. COE e estruturas de retorno', paragraphs:[
+      'O COE combina características de diferentes exposições dentro de uma estrutura única, com regras de remuneração e cenários previamente definidos. O investidor não deve olhar apenas para a promessa de retorno: precisa entender o ativo de referência, cenários de ganho e perda, prazo, liquidez, custos e riscos da estrutura.',
+      'Uma questão pode apresentar uma estrutura que paga determinado retorno se um índice atingir um nível, mas limita a participação em uma alta adicional. A leitura correta é montar os cenários. Pergunte o que acontece se o ativo subir muito, subir pouco, ficar estável e cair. Esse método é mais seguro do que tentar memorizar nomes de estruturas.'
+    ]},
+    { id:'deep-caso-rv', title:'5. Como pensar uma questão de renda variável', paragraphs:[
+      'Se um cliente deseja proteger uma receita futura em moeda estrangeira, uma ação não resolve o problema apenas porque é negociada em bolsa. O instrumento precisa ter relação com o risco. Se outro cliente quer participar do crescimento de uma empresa e aceita oscilações de mercado, a lógica é diferente. A adequação depende do objetivo e do risco que está sendo assumido.',
+      'O padrão de prova é contextual: a questão fornece uma situação, apresenta características de um instrumento e pergunta qual alternativa descreve melhor a solução. Identifique objetivo, horizonte, risco e fluxo antes de olhar as opções. Depois, elimine alternativas que tratam retorno potencial como garantia ou confundem emissão com negociação.'
+    ]}
   ],
+  'fundos': [
+    { id:'deep-estrutura-fundos', title:'1. O que realmente acontece quando você compra uma cota', paragraphs:[
+      'Um fundo reúne recursos de vários investidores e os administra segundo uma política definida em seus documentos. O cotista não escolhe individualmente cada ativo da carteira; ele compra uma participação econômica no patrimônio do fundo. A estrutura separa funções de administração, gestão, custódia, distribuição e outras atividades previstas nas regras aplicáveis.',
+      'Essa separação é importante para entender riscos. O banco que distribuiu a cota não é automaticamente o gestor. O gestor toma decisões de investimento dentro da política. O administrador responde por funções administrativas e de funcionamento do fundo. A custódia envolve guarda e controle dos ativos. Em questões, procure a função descrita antes de escolher a instituição.'
+    ]},
+    { id:'deep-cotas', title:'2. Cota, patrimônio e rentabilidade', paragraphs:[
+      'A cota representa uma fração do patrimônio do fundo. Quando os ativos da carteira variam de preço, o patrimônio e, consequentemente, o valor da cota podem mudar. Entradas e saídas de recursos também precisam ser processadas segundo as regras do fundo. A rentabilidade observada pelo cotista depende da evolução da carteira, das despesas e das condições de mercado.',
+      'Não confunda rendimento da carteira com retorno líquido do cotista. Taxas e despesas reduzem o resultado disponível. Também não confunda rentabilidade passada com promessa futura. Um fundo que teve desempenho elevado em determinado período pode estar exposto a fatores que não se repetirão.'
+    ]},
+    { id:'deep-taxas', title:'3. Taxas e custos: quem paga o quê', paragraphs:[
+      'Taxa de administração remunera a estrutura de administração e gestão conforme as regras do fundo. Taxa de performance, quando existente, depende do desempenho segundo critérios definidos. Outras despesas podem existir. O investidor deve olhar o regulamento, a lâmina e os documentos oficiais para entender como os custos impactam o patrimônio.',
+      'A prova pode usar uma taxa como distração. Não basta reconhecer o nome; é preciso saber a finalidade. Taxa de administração não é uma multa por resgate. Taxa de performance não significa que o gestor receberá sempre um percentual do patrimônio. A incidência depende da estrutura e das regras aplicáveis.'
+    ]},
+    { id:'deep-classes', title:'4. Classes, políticas e riscos', paragraphs:[
+      'A classificação de um fundo deve ser analisada junto à política de investimento, composição da carteira, prazo, liquidez e riscos. Duas classes com nomes parecidos podem ter exposições diferentes. O investidor precisa saber em quais ativos o fundo pode investir, quais limites existem e como funciona o resgate.',
+      'Quando uma questão apresenta um objetivo de curto prazo e um fundo com ativos de baixa liquidez, a discussão deixa de ser apenas rentabilidade. Liquidez, volatilidade e compatibilidade com o horizonte tornam-se centrais. O mesmo vale para concentração de crédito: uma carteira com poucos emissores pode ter risco diferente de uma carteira mais diversificada.'
+    ]},
+    { id:'deep-caso-fundos', title:'5. Como estudar fundos para a prova', paragraphs:[
+      'Leia cada questão em quatro camadas: estrutura do fundo, política de investimento, risco e custo. Se o enunciado falar de gestor, procure a função de decisão de investimento. Se falar de cotista, pense na cota e no patrimônio. Se falar de resgate, procure regras de liquidez e prazo de cotização/pagamento. Se falar de rentabilidade, verifique se é bruta ou líquida e qual período foi analisado.',
+      'O objetivo não é decorar dezenas de nomes. É conseguir reconstruir a lógica do produto a partir dos documentos e do caso. Esse método também ajuda no atendimento: em vez de dizer que “fundo é seguro” ou “fundo rende X”, explique como a carteira, a estrutura e os riscos determinam o resultado.'
+    ]}
+  ],
+  'fundos-imobiliarios': [
+    { id:'deep-fii-estrutura', title:'1. O que é um FII e de onde vem seu resultado', paragraphs:[
+      'Fundos imobiliários permitem exposição coletiva a ativos e estratégias ligadas ao setor imobiliário. A carteira pode conter imóveis físicos, recebíveis imobiliários ou estruturas relacionadas, conforme a política do fundo. O cotista participa do resultado econômico da carteira, mas não deve interpretar a cota como propriedade direta de cada imóvel.',
+      'A origem da receita é importante. Um fundo de tijolo pode ter receitas de aluguel e valorização dos imóveis. Um fundo de recebíveis pode receber juros e amortizações de créditos imobiliários. A fonte do fluxo determina parte importante do risco. Uma carteira concentrada em poucos imóveis ou devedores possui perfil diferente de uma carteira diversificada.'
+    ]},
+    { id:'deep-fii-riscos', title:'2. Vacância, crédito, juros e liquidez', paragraphs:[
+      'FIIs podem sofrer com vacância, inadimplência, mudanças nos preços dos imóveis, alterações nas taxas de juros, concentração e liquidez das cotas. Um imóvel vazio pode reduzir a receita de aluguel; um devedor com problemas pode afetar recebíveis; juros maiores podem alterar a atratividade relativa e o preço de mercado das cotas.',
+      'Esses riscos não devem ser tratados isoladamente. Um FII pode ter boa qualidade física dos imóveis e, ainda assim, sofrer volatilidade de mercado. Pode ter distribuição recorrente e enfrentar queda de preço. A questão geralmente testa se o candidato distingue fluxo distribuído de retorno total.'
+    ]},
+    { id:'deep-fii-rendimento', title:'3. Rendimento não é o mesmo que retorno total', paragraphs:[
+      'O cotista pode receber distribuições periódicas, mas o retorno total também depende da variação do preço da cota. Uma cota que distribui renda e perde valor no mercado pode apresentar resultado total diferente daquele sugerido apenas pelo rendimento recebido. Para comparar investimentos, é necessário considerar todos os componentes do retorno e os custos.',
+      'Também é importante verificar as condições tributárias vigentes. A tributação pode depender do tipo de rendimento, da situação do investidor e das regras aplicáveis. A prova pode apresentar uma afirmação genérica sobre “FII é isento” para testar se o candidato percebe que benefícios fiscais possuem condições e não devem ser tratados como universais.'
+    ]},
+    { id:'deep-fii-leitura', title:'4. Como analisar um FII sem cair no yield isolado', paragraphs:[
+      'Uma leitura mínima deve observar tipo de fundo, qualidade e localização dos ativos, concentração, vacância quando aplicável, perfil dos contratos, qualidade dos devedores em recebíveis, prazo dos ativos, liquidez e estrutura de custos. O preço da cota também deve ser analisado em relação ao patrimônio e às características da carteira, sem transformar um único múltiplo em resposta automática.',
+      'Yield alto pode refletir risco alto, queda recente de preço, distribuição extraordinária ou características específicas da carteira. Portanto, não é correto concluir que “maior yield é melhor”. Em uma questão de adequação, volte ao objetivo e ao perfil do cliente antes de olhar apenas para a renda mensal.'
+    ]},
+    { id:'deep-caso-fii', title:'5. Caso de prova: renda mensal x segurança', paragraphs:[
+      'Imagine um cliente que quer renda mensal, não aceita oscilações e precisa do dinheiro em seis meses. Um FII pode até distribuir rendimentos, mas a cotação pode variar e a liquidez pode não ser suficiente para garantir saída no preço desejado. O problema não é afirmar que FII é bom ou ruim; é verificar se suas características combinam com o objetivo apresentado.',
+      'Essa forma de pensar é mais importante do que decorar uma lista de vantagens. A prova pode trocar o nome do produto e manter a mesma lógica: renda variável, liquidez, risco de mercado e horizonte precisam ser avaliados conjuntamente.'
+    ]}
+  ],
+  'previdencia': [
+    { id:'deep-previdencia', title:'1. Previdência como produto de acumulação de longo prazo', paragraphs:[
+      'Previdência complementar é uma ferramenta de acumulação voltada a objetivos de longo prazo. O investidor realiza contribuições e, segundo o plano escolhido, acumula recursos que poderão ser utilizados conforme regras de resgate, benefício, portabilidade e tributação. O produto deve ser analisado como uma estrutura de planejamento, e não apenas como um investimento isolado.',
+      'A principal diferença para um investimento comum está na combinação entre estrutura do plano, regime tributário, horizonte e possibilidade de sucessão ou beneficiários. Por isso, duas pessoas com a mesma renda podem ter decisões diferentes. O que importa é o objetivo, a forma de contribuição, o prazo e as características do plano.'
+    ]},
+    { id:'deep-pgbl-vgbl', title:'2. PGBL x VGBL: entenda a lógica antes da regra tributária', paragraphs:[
+      'PGBL e VGBL são planos com estruturas distintas de tratamento tributário. A diferença mais importante para o estudo é entender sobre qual base o imposto incide no momento do recebimento/resgate segundo o regime escolhido. Não memorize apenas uma frase; associe o produto ao objetivo tributário e à forma como o cliente realiza suas contribuições.',
+      'Na prática de atendimento, o profissional deve analisar a situação fiscal e o horizonte do cliente antes de apresentar a alternativa. A indicação não deve ser baseada em “PGBL sempre é melhor” ou “VGBL sempre é melhor”. A adequação depende da situação do investidor e das regras vigentes.'
+    ]},
+    { id:'deep-regimes', title:'3. Regimes de tributação e horizonte', paragraphs:[
+      'Os regimes tributários devem ser estudados em conjunto com o horizonte de permanência. Em um regime em que a alíquota pode diminuir conforme o prazo, o tempo de acumulação torna-se relevante. Em outro, a tributação segue uma lógica diferente e pode fazer mais sentido para determinadas situações. A prova costuma apresentar um perfil de cliente e pedir a interpretação da regra.',
+      'Evite decorar somente tabelas. Primeiro pergunte: o cliente pretende resgatar em curto ou longo prazo? Precisa de previsibilidade? Como serão as contribuições? Há intenção de benefício ou resgate? Depois aplique a regra. Quando houver alteração normativa, consulte a fonte oficial, pois tabelas tributárias são sensíveis a mudanças.'
+    ]},
+    { id:'deep-portabilidade', title:'4. Portabilidade, resgate e benefícios', paragraphs:[
+      'Portabilidade não é simplesmente sacar um plano e aplicar o dinheiro novamente. É uma transferência entre planos conforme regras próprias, com efeitos diferentes de um resgate. O cliente precisa entender carência, custos, regime tributário, plano de destino e condições do contrato. Uma decisão aparentemente simples pode alterar o tratamento tributário ou a estrutura de benefícios.',
+      'Também é importante distinguir fase de acumulação e fase de recebimento. Na acumulação, o foco está em contribuições, rentabilidade e custos. Na concessão do benefício, entram modalidade de renda, expectativa de duração, beneficiários e regras contratuais. Uma questão pode explorar exatamente essa mudança de perspectiva.'
+    ]},
+    { id:'deep-caso-prev', title:'5. Como resolver um caso de previdência', paragraphs:[
+      'Imagine uma cliente com renda tributável, horizonte de quinze anos e objetivo de formar patrimônio para aposentadoria. Antes de falar em produto, você precisa conhecer a forma de declaração, contribuições, horizonte e necessidade de liquidez. Depois, compare PGBL e VGBL dentro das regras vigentes e avalie o regime tributário adequado ao horizonte.',
+      'O ponto central para a prova é que previdência é um problema de planejamento. Se a cliente precisa do dinheiro em poucos meses, a análise muda. Se pretende formar renda para aposentadoria, o horizonte longo ganha importância. Se quer apenas uma aplicação de curto prazo, o produto pode não cumprir o objetivo. A resposta nasce do contexto, não do nome do plano.'
+    ]}
+  ],
+
 };
