@@ -1,3 +1,13 @@
+## 0.27.2 — 01/10/2026
+
+### Conteúdo de leitura ampliado
+- Reescritos os 20 módulos de leitura com uma camada completa de aprofundamento.
+- Adicionados blocos de raciocínio, mecanismos, exemplos e casos no estilo de curso preparatório.
+- Adicionados blocos finais de domínio e checklists de revisão para cada módulo.
+- A leitura agora funciona como uma apostila complementar: conceito → aprofundamento → caso → comparação → pegadinhas → revisão → simulado.
+- Tempo de leitura passou a ser calculado pelo volume real do texto, sem o piso artificial de 4 minutos.
+- Conteúdo autoral inspirado em padrões didáticos observados no curso público CPA 2026 do Retorno Interno/Renan Duarte; não reproduz slides, apostilas ou roteiros proprietários.
+- Revisão editorial atualizada para 01/10/2026.
 ## 0.27.1 — 01/10/2026
 
 ### Mestre CPA
