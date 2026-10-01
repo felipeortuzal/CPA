@@ -185,13 +185,7 @@ export default {
       `Versão da plataforma: ${String(context.appVersion || 'desconhecida').slice(0, 30)}`,
     ].join(' | ')
 
-    const input = [
-      {
-        role: 'developer',
-        content: `${SYSTEM_PROMPT}\n\nCONTEXTO DO APP\n${contextLine}`,
-      },
-      ...messages,
-    ]
+    const input = messages
 
     const openaiResponse = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
