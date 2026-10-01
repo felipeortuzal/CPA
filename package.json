@@ -1,7 +1,7 @@
 {
   "name": "cpa-study-platform",
   "private": true,
-  "version": "0.26.0",
+  "version": "0.27.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -13,7 +13,7 @@
     "test:watch": "vitest",
     "validate:curriculum": "node scripts/validate-curriculum.mjs",
     "validate:questions": "vitest run content/cpa/questions/questions.validation.test.ts",
-    "validate": "npm run validate:curriculum && npm run validate:lessons && npm run validate:questions && npm run validate:sources && npm run validate:experience && npm run audit:v13 && npm run validate:v21 && npm run validate:v26 && npm test && npm run lint && npm run typecheck && npm run build",
+    "validate": "npm run validate:curriculum && npm run validate:lessons && npm run validate:questions && npm run validate:sources && npm run validate:experience && npm run audit:v13 && npm run validate:v21 && npm run validate:v26 && npm run validate:v27 && npm test && npm run lint && npm run typecheck && npm run build",
     "validate:sources": "node scripts/validate-official-sources.mjs",
     "check:sources": "node scripts/check-official-sources.mjs",
     "validate:experience": "node scripts/validate-v12-experience.mjs",
@@ -21,6 +21,7 @@
     "validate:lessons": "vitest run content/cpa/lessons/lessons.validation.test.ts",
     "validate:v21": "node scripts/validate-v21.mjs",
     "validate:v26": "vitest run content/cpa/course/v26.validation.test.ts",
+    "validate:v27": "vitest run content/cpa/v27/v27.validation.test.ts",
     "build:standalone": "node scripts/build-standalone.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "test:cross-browser": "node scripts/test-cross-browser.mjs"
