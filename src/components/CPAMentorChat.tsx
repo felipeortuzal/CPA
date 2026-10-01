@@ -23,7 +23,7 @@ const MAX_HISTORY = 12
 const initialMessage: ChatMessage = {
   id: 'mestre-welcome',
   role: 'assistant',
-  content: 'Oi! Eu sou o **Mestre CPA**, o tutor de IA da CPA Study.\n\nPode me perguntar qualquer coisa sobre a CPA: conceitos, produtos, matemática financeira, pegadinhas, cases, alternativas de uma questão ou simplesmente “não entendi nada disso”. Eu vou explicar do zero e conectar com o jeito que o assunto é cobrado.',
+  content: 'Oi! Eu sou o Mestre CPA, o tutor de IA da CPA Study.\n\nPode me perguntar qualquer coisa sobre a CPA: conceitos, produtos, matemática financeira, pegadinhas, cases, alternativas de uma questão ou simplesmente “não entendi nada disso”. Eu vou explicar do zero e conectar com o jeito que o assunto é cobrado.',
 }
 
 const quickPrompts = [
