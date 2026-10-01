@@ -202,6 +202,7 @@ export default {
       body: JSON.stringify({
         model: env.OPENAI_MODEL || 'gpt-5.6-luna',
         reasoning: { effort: 'low' },
+        instructions: \`\${SYSTEM_PROMPT}\\n\\nCONTEXTO DO APP\\n\${contextLine}\`,
         input,
         tools: [{
           type: 'web_search',
