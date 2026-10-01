@@ -130,7 +130,7 @@ export const masteryReadingSections: Record<string, ReadingSection[]> = {
       'Você deve conseguir diferenciar renda de patrimônio, despesa de objetivo, reserva de emergência de investimento de longo prazo e dívida de investimento. Também deve conseguir explicar por que liquidez é uma característica do planejamento.',
       'Se o cliente tem três objetivos, não procure um único produto. Separe os objetivos e monte a lógica de cada um. Esse é o comportamento que a prova contextualizada tende a exigir.'
     ]}
-  ],,
+  ],
 
   'carteiras': [
     {id:'mastery-carteira-decisao',title:'6. Como sair do produto e voltar para a carteira',paragraphs:[
