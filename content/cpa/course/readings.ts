@@ -219,7 +219,7 @@ export const moduleReadings: Record<string,ModuleReading> = {
 }
 export function readingMinutes(reading: ModuleReading) {
   const text = JSON.stringify(reading)
-  return Math.max(8, Math.ceil(text.split(/\s+/).length / 180))
+  return Math.max(8, Math.ceil(text.split(/\s+/).length / 130))
 }
 
 
