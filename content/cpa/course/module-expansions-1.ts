@@ -286,6 +286,8 @@ export const moduleExpansionSections: Record<string, ReadingSection[]> = {
     }
   ],
   "fundos-imobiliarios": [
+    {id:"robusto-fii-analise",title:"Como analisar um FII como uma carteira de fluxo de caixa",paragraphs:["Uma análise de FII pode começar como uma análise de empresa: de onde vem a receita, quais são os custos, qual é a qualidade dos contratos, quais riscos podem interromper o fluxo e qual preço o mercado está pagando por essa exposição? Em um FII de tijolo, olhe ocupação, concentração de locatários, localização, contratos, reajustes e despesas. Em um FII de papel, olhe devedores, garantias, indexadores, spreads, concentração e qualidade do crédito. Em um híbrido, identifique qual parcela do resultado vem de cada fonte.","Depois, conecte o fluxo ao preço da cota. Um rendimento mensal alto pode refletir uma distribuição extraordinária, uma carteira mais arriscada ou uma oportunidade de preço; não existe interpretação correta sem contexto. Também compare o valor patrimonial com o preço de mercado sem tratar essa diferença como prova automática de desconto ou sobrepreço. A liquidez da cota, os custos e o horizonte do investidor completam a análise. Na CPA, a resposta mais forte é a que identifica o mecanismo econômico por trás do rendimento, e não a que escolhe o maior dividend yield."]},
+
     {
       "id": "robusto-fii-estrutura",
       "title": "FII do zero: o patrimônio, a cota e o ambiente de negociação",
