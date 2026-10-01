@@ -1,7 +1,7 @@
 {
   "name": "cpa-study-platform",
   "private": true,
-  "version": "0.26.0",
+  "version": "0.27.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -21,6 +21,7 @@
     "validate:lessons": "vitest run content/cpa/lessons/lessons.validation.test.ts",
     "validate:v21": "node scripts/validate-v21.mjs",
     "validate:v26": "vitest run content/cpa/course/v26.validation.test.ts",
+    "validate:v27": "vitest run content/cpa/v27/v27.validation.test.ts",
     "build:standalone": "node scripts/build-standalone.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "test:cross-browser": "node scripts/test-cross-browser.mjs"
