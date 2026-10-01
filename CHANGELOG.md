@@ -1,3 +1,17 @@
+## 0.27.1 — 01/10/2026
+
+### Mestre CPA
+- Adiciona chatbot flutuante persistente em todas as páginas.
+- Interface em formato de chat/WhatsApp, sem troca de página.
+- Usa a logo oficial da CPA Study no avatar e na navegação.
+- Histórico local da conversa, limpar conversa, copiar resposta, atalhos de dúvidas e suporte mobile.
+- Contexto da página atual enviado ao tutor.
+- Backend preparado com Cloudflare Worker + OpenAI Responses API.
+- GPT-5.6 Luna como modelo padrão, com busca web opcional e restrita a fontes institucionais prioritárias.
+- Fontes retornadas pela busca são exibidas como links clicáveis.
+- OPENAI_API_KEY permanece somente no backend.
+- store: false para não persistir as respostas na API.
+- Documentação de deploy e .env.example adicionados.
 ## 0.27.0 — 30/09/2026
 
 ### Inteligência da prova
