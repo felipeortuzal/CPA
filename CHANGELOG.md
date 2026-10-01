@@ -1,5 +1,13 @@
 ## 0.27.2 — 01/10/2026
 
+### Aulas completas
+- Expande a leitura de todas as 445 aulas terminais do Programa Detalhado.
+- Cada aula passa a seguir uma sequência pedagógica mais completa: conceito, mecanismo, exemplo guiado, confusões, aplicação em prova, checklist, pegadinhas e fechamento.
+- A estrutura foi inspirada na organização didática observável em cursos públicos do Retorno Interno/Renan Duarte, sem copiar roteiros, slides, apostilas ou questões protegidas.
+- A página da aula agora informa quantidade aproximada de palavras e tempo de leitura completa.
+- A validação exige pelo menos 8 blocos de explicação e 1.200 caracteres por aula.
+## 0.27.2 — 01/10/2026
+
 ### Conteúdo de leitura ampliado
 - Reescritos os 20 módulos de leitura com uma camada completa de aprofundamento.
 - Adicionados blocos de raciocínio, mecanismos, exemplos e casos no estilo de curso preparatório.
