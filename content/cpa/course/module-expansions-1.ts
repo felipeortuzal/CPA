@@ -392,5 +392,14 @@ export const moduleExpansionSections: Record<string, ReadingSection[]> = {
         "O raciocínio final é: finalidade → valor → prazo → capacidade → garantia → CET → risco. Se um desses elementos estiver incompatível, a taxa isolada não resolve o problema."
       ]
     }
+,
+    {
+      "id": "robusto-credito-caso",
+      "title": "Caso de crédito: escolher a dívida pelo fluxo completo",
+      "paragraphs": [
+        "Considere uma pessoa que precisa de R$ 20 mil para uma reforma. Uma proposta tem parcela menor porque o prazo é longo; outra tem parcela maior, mas custo total menor; uma terceira exige garantia e oferece taxa inferior. A resposta não pode ser dada olhando somente para a parcela. Compare finalidade, CET, prazo, garantia, risco de inadimplência e capacidade de pagamento. A melhor estrutura depende da situação financeira e do objetivo.",
+        "Se o cliente já possui outras dívidas, o novo crédito precisa ser analisado dentro do orçamento consolidado. Uma parcela aparentemente pequena pode empurrar o comprometimento de renda para um nível inadequado. O profissional deve explicar o custo e as consequências, não apenas calcular a prestação. Na CPA, casos de crédito são uma oportunidade para combinar matemática financeira, adequação e gestão de risco."
+      ]
+    },
   ]
 }
