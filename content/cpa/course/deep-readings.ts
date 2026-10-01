@@ -199,7 +199,7 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'O ponto central para a prova é que previdência é um problema de planejamento. Se a cliente precisa do dinheiro em poucos meses, a análise muda. Se pretende formar renda para aposentadoria, o horizonte longo ganha importância. Se quer apenas uma aplicação de curto prazo, o produto pode não cumprir o objetivo. A resposta nasce do contexto, não do nome do plano.'
     ]}
   ],
-,
+
 
   'credito': [
     { id:'deep-credito-estrutura', title:'1. Crédito é uma decisão sobre capacidade de pagamento', paragraphs:[
@@ -289,7 +289,7 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'O método é separar objetivos, estimar necessidade de recursos, avaliar capacidade de poupança e escolher soluções compatíveis. A prova pode mudar os produtos, mas a lógica permanece: primeiro objetivo e restrições; depois alocação e produto.'
     ]}
   ],
-,
+
 
   'carteiras': [
     { id:'deep-alocacao', title:'1. Alocação nasce do objetivo', paragraphs:[
