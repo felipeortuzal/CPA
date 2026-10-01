@@ -1,5 +1,6 @@
 import type { LessonSourceId } from '../lessons/sources'
 import { deepReadingSections } from './deep-readings'
+import { masteryReadingSections } from './master-readings'
 export interface ReadingSection { id: string; title: string; paragraphs: string[] }
 export interface ModuleReading {
   objectives: string[]
@@ -223,6 +224,11 @@ export function readingMinutes(reading: ModuleReading) {
 
 
 for (const [moduleId, sections] of Object.entries(deepReadingSections)) {
+  const reading = moduleReadings[moduleId]
+  if (reading) reading.sections.push(...sections)
+}
+
+for (const [moduleId, sections] of Object.entries(masteryReadingSections)) {
   const reading = moduleReadings[moduleId]
   if (reading) reading.sections.push(...sections)
 }
