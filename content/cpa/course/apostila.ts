@@ -3,7 +3,7 @@ import type { CPALesson } from '../lessons/types'
 import { courseModuleMap, matchesModule } from './modules'
 import { moduleReadings } from './readings'
 
-export const V26_EDITORIAL_REVIEW_DATE = '2026-09-30'
+export const V27_EDITORIAL_REVIEW_DATE = '2026-10-01'
 
 function wordCount(text: string) {
   return text.trim() ? text.trim().split(/\s+/).length : 0
@@ -51,6 +51,7 @@ export function moduleApostilaStats(moduleId: string) {
   const reading = moduleReadings[moduleId]
   const lessons = getModuleLessons(moduleId)
   const overviewWords = reading ? wordCount(JSON.stringify(reading)) : 0
+  const readingMinutes = Math.max(8, Math.ceil(overviewWords / 180))
   const coreWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonCoreWordCount(lesson), 0)
   const fullWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
   const formulas = lessons.reduce((sum, lesson) => sum + lesson.formulas.length, 0)
@@ -58,7 +59,7 @@ export function moduleApostilaStats(moduleId: string) {
   const checkpoints = lessons.reduce((sum, lesson) => sum + lesson.miniQuiz.length, 0)
   // A estimativa mede a trilha principal, não o aprofundamento opcional. O conteúdo integral permanece disponível.
   const minutes = Math.max(12, Math.ceil(coreWords / 210 + formulas * 0.55 + comparisons * 0.08 + checkpoints * 0.02))
-  return { lessons, words: coreWords, coreWords, fullWords, minutes, formulas, comparisons, checkpoints }
+  return { lessons, words: coreWords, coreWords, fullWords, readingMinutes, minutes, formulas, comparisons, checkpoints }
 }
 
 export function apostilaTotalStats() {
