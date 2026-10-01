@@ -16,7 +16,7 @@ O caminho mais simples é usar o site ou manter `CPA_Study.html` em uma pasta fi
 
 Se estiver usando a pasta clonada do repositório no Windows, `update-cpa.bat` atualiza os arquivos do projeto conforme o fluxo local já existente. Depois da atualização, abra o HTML no mesmo caminho de antes e, se necessário, importe o backup. O progresso do site e o progresso do arquivo local continuam independentes.
 
-## Estado atual — V26 / 0.26.0
+## Estado atual — V27 / 0.27.0
 
 A V26 transforma a trilha de 20 módulos em uma **Apostila Digital Completa**, sem abandonar a rastreabilidade do Programa Detalhado.
 
@@ -33,6 +33,30 @@ A V26 transforma a trilha de 20 módulos em uma **Apostila Digital Completa**, s
 - PWA, GitHub Pages, backup JSON e HTML standalone offline.
 
 O tempo mostrado na Apostila é uma **estimativa da trilha principal**, não do acervo integral. Abrir todos os aprofundamentos aumenta bastante o tempo total de estudo.
+
+
+### V27 — Inteligência da prova
+
+A V27 adiciona uma camada dedicada a entender como transformar o edital em raciocínio de prova:
+
+- página Inteligência da prova em /inteligencia;
+- benchmark do curso público Retorno Interno / Renan Duarte;
+- 12 clusters pedagógicos cobrindo os 20 módulos;
+- 23 atalhos mentais;
+- 16 padrões de reconhecimento de questões;
+- 100 pegadinhas conceituais autorais;
+- Radar CPA com separação entre evidência oficial, observada, especialistas e relatos;
+- benchmark de materiais externos gratuitos.
+
+A regra editorial da V27 é: ANBIMA é fonte de verdade; terceiros são benchmark. O projeto não copia transcrições, slides ou questões proprietárias.
+
+## Como estudar na V27
+
+1. Use a trilha principal e a Apostila V26 como base.
+2. Abra Inteligência da prova para revisar os clusters e o 80/20 interno.
+3. Antes de fazer um simulado, revise os padrões de questão e os atalhos mentais.
+4. Depois do simulado, use as pegadinhas para transformar erros conceituais em recuperação ativa.
+5. Consulte os materiais externos apenas como benchmark e confirme regras atuais nas fontes oficiais.
 
 ## Como estudar na V26
 
