@@ -289,5 +289,162 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'O método é separar objetivos, estimar necessidade de recursos, avaliar capacidade de poupança e escolher soluções compatíveis. A prova pode mudar os produtos, mas a lógica permanece: primeiro objetivo e restrições; depois alocação e produto.'
     ]}
   ],
+,
+
+  'carteiras': [
+    { id:'deep-alocacao', title:'1. Alocação nasce do objetivo', paragraphs:[
+      'Construir uma carteira começa pelo objetivo, horizonte, necessidade de liquidez e capacidade de suportar perdas. Só depois entram produtos. Um investidor que precisa do dinheiro em seis meses possui restrições diferentes de alguém que investe para aposentadoria em vinte anos. O mesmo produto pode ser adequado em um contexto e inadequado em outro.',
+      'A alocação de ativos organiza a exposição entre classes com comportamentos diferentes. A intenção não é eliminar risco, mas distribuir fontes de risco de maneira coerente com o objetivo. Uma carteira pode ter renda fixa, ações, fundos e outros ativos, mas a combinação precisa fazer sentido para o investidor.'
+    ]},
+    { id:'deep-diversificacao', title:'2. Diversificação não é comprar muitos ativos', paragraphs:[
+      'Diversificação reduz a dependência de um único emissor, setor, classe ou fator de risco. Comprar dez ativos altamente correlacionados não produz a mesma diversificação que combinar exposições com comportamentos diferentes. Por isso, quantidade de ativos não é suficiente para avaliar uma carteira.',
+      'A correlação ajuda a entender como os retornos de ativos se movimentam em conjunto. Quando ativos possuem correlação menor, perdas em uma parte da carteira podem ser parcialmente compensadas por outras exposições, embora isso nunca garanta proteção em todos os cenários.'
+    ]},
+    { id:'deep-risco-retorno', title:'3. Retorno esperado e risco', paragraphs:[
+      'Retorno esperado é uma estimativa baseada em cenários ou probabilidades; não é uma promessa. Risco pode ser analisado por diferentes medidas e perspectivas, como volatilidade, risco de crédito, liquidez ou perda permanente de capital. Na prova, a definição depende do contexto apresentado.',
+      'Uma carteira pode buscar maior retorno esperado assumindo maior risco, mas isso não significa que maior risco sempre produz maior retorno realizado. A relação é probabilística. O profissional deve comunicar incerteza e evitar transformar uma expectativa em garantia.'
+    ]},
+    { id:'deep-rebalanceamento', title:'4. Rebalanceamento e disciplina', paragraphs:[
+      'Com o tempo, os preços dos ativos mudam e a carteira se afasta dos pesos originalmente definidos. Rebalancear significa ajustar a composição para voltar a uma política ou faixa-alvo. O processo pode ser periódico ou acionado por desvios relevantes, conforme a estratégia.',
+      'Rebalanceamento também exige considerar custos, impostos, liquidez e condições do cliente. Não existe uma regra universal de “vender o que subiu” sem contexto. O objetivo é preservar a política de risco, não prever o próximo movimento do mercado.'
+    ]},
+    { id:'deep-caso-carteira', title:'5. Caso de prova: carteira desalinhada', paragraphs:[
+      'Um cliente começou com uma carteira equilibrada, mas uma forte alta das ações fez essa classe passar a representar parcela muito maior do patrimônio. Ao mesmo tempo, ele agora precisa de parte do dinheiro para um objetivo de curto prazo. O profissional precisa considerar tanto o desvio de alocação quanto a nova necessidade de liquidez.',
+      'A solução não nasce de uma previsão sobre o mercado. Primeiro se revisam objetivo e restrições; depois se compara a carteira atual com a política; por fim, são avaliados os ajustes possíveis e seus custos.'
+    ]}
+  ],
+  'perfil': [
+    { id:'deep-suitability', title:'1. Perfil não é apenas “conservador ou agressivo”', paragraphs:[
+      'A adequação de um investimento depende de características do cliente e do produto. Entre os elementos relevantes estão objetivos, horizonte, situação financeira, conhecimento, experiência, capacidade de suportar perdas e disposição a assumir riscos. Um rótulo simples pode esconder diferenças importantes.',
+      'Capacidade e disposição também não são a mesma coisa. Uma pessoa pode estar disposta a correr risco, mas não ter capacidade financeira para suportar uma perda relevante. Outra pode ter patrimônio suficiente, mas preferir estabilidade. A recomendação precisa respeitar as informações disponíveis.'
+    ]},
+    { id:'deep-risco', title:'2. Capacidade de risco x tolerância a risco', paragraphs:[
+      'Tolerância ou disposição para assumir risco é uma característica comportamental. Capacidade de risco está ligada às condições financeiras objetivas do cliente. O horizonte também importa: uma perda temporária pode ser administrável em um investimento de longo prazo, mas problemática quando o dinheiro será usado em poucos meses.',
+      'Na prova, procure evidências concretas. Se o cliente precisa do recurso para uma obrigação próxima, liquidez e preservação ganham peso. Se possui horizonte longo e reserva suficiente, pode haver maior espaço para volatilidade. O perfil é contextual.'
+    ]},
+    { id:'deep-adequacao', title:'3. Adequação do produto exige olhar o produto', paragraphs:[
+      'Não existe perfil adequado sem conhecer o investimento. Para avaliar adequação, analise risco, liquidez, prazo, complexidade, custos e características de retorno do produto. Um produto de baixa liquidez pode ser incompatível com um objetivo de curto prazo mesmo para um cliente com alta tolerância a risco.',
+      'A prova pode apresentar um cliente aparentemente sofisticado e um produto complexo. Conhecimento e experiência são relevantes, mas não substituem as demais dimensões. Também é necessário explicar riscos de forma compreensível.'
+    ]},
+    { id:'deep-comunicacao', title:'4. Explicar risco faz parte da adequação', paragraphs:[
+      'Adequação não termina quando o produto é escolhido. O cliente precisa compreender como pode ganhar e perder dinheiro, quais são os custos, quando pode resgatar e quais eventos podem afetar o resultado. Comunicação clara reduz decisões baseadas em expectativas irreais.',
+      'Evite frases como “esse produto é seguro” sem especificar qual risco está sendo considerado. Um investimento pode ter baixo risco de crédito e alta volatilidade de mercado, ou alta liquidez e risco elevado de perda. A linguagem deve acompanhar a natureza do risco.'
+    ]},
+    { id:'deep-caso-perfil', title:'5. Caso de prova: cliente agressivo com objetivo curto', paragraphs:[
+      'Um cliente afirma ter perfil agressivo, mas informa que precisará de todo o dinheiro para comprar um imóvel em quatro meses. A disposição ao risco não elimina a restrição de prazo. O profissional deve considerar o objetivo e a necessidade de liquidez antes de avaliar qualquer produto de alta volatilidade.',
+      'Esse tipo de caso testa a capacidade de conciliar informações. O perfil não é uma autorização automática para qualquer risco; é uma peça de um conjunto de dados usado para adequação.'
+    ]}
+  ],
+  'atendimento-etica': [
+    { id:'deep-kyc', title:'1. Conheça o cliente antes de oferecer', paragraphs:[
+      'Um bom atendimento financeiro começa com informações suficientes para entender quem é o cliente, sua situação e o propósito do relacionamento. KYC não é apenas preencher cadastro; envolve compreender a identidade, características e contexto do relacionamento dentro das regras aplicáveis.',
+      'A qualidade das informações influencia prevenção a ilícitos, adequação e experiência do cliente. Dados incompletos podem gerar risco operacional e regulatório. O profissional deve seguir procedimentos da instituição e jamais improvisar uma exceção porque a operação parece conveniente.'
+    ]},
+    { id:'deep-aml', title:'2. PLD/FT: o foco é o comportamento e a origem dos recursos', paragraphs:[
+      'Prevenção à lavagem de dinheiro e ao financiamento do terrorismo busca reduzir o uso do sistema financeiro para ocultar origem, movimentar ou disponibilizar recursos ligados a atividades ilícitas. O profissional não precisa “investigar sozinho” além de sua função, mas deve reconhecer sinais e seguir os canais internos de comunicação.',
+      'Operações atípicas não significam automaticamente crime. Elas podem justificar análise e procedimentos adicionais. A prova pode apresentar um comportamento incompatível com o perfil do cliente e perguntar qual conduta é adequada. O caminho correto é seguir as regras e não alertar indevidamente o cliente sobre procedimentos internos de comunicação.'
+    ]},
+    { id:'deep-etica', title:'3. Ética: informação correta antes de venda', paragraphs:[
+      'Ética profissional envolve boa-fé, transparência, diligência, lealdade e respeito às regras. O objetivo não é apenas evitar fraude explícita. Omissões, exageros e comunicação que induza o cliente a uma interpretação equivocada também podem comprometer a qualidade do atendimento.',
+      'Uma questão pode apresentar uma oportunidade comercial real, mas com um risco relevante escondido. A conduta adequada é explicar o risco e as condições, mesmo que isso reduza a chance de venda. O profissional não deve inventar rentabilidade, esconder custos ou usar informação privilegiada.'
+    ]},
+    { id:'deep-dados', title:'4. Sigilo, dados e conflitos de interesse', paragraphs:[
+      'Informações financeiras e pessoais devem ser tratadas com segurança e finalidade adequada. O profissional não deve compartilhar dados com terceiros sem base legítima ou autorização quando exigida. O cliente também precisa saber com quem seus dados serão compartilhados em fluxos de consentimento.',
+      'Conflito de interesse aparece quando um incentivo do profissional ou da instituição pode afetar a recomendação. O conflito não deve ser escondido. A análise deve considerar o interesse do cliente, a transparência sobre remuneração e as regras internas e regulatórias aplicáveis.'
+    ]},
+    { id:'deep-caso-etica', title:'5. Caso de prova: produto com maior comissão', paragraphs:[
+      'Imagine dois produtos adequados ao cliente, mas um gera remuneração maior ao distribuidor. O fato de existir remuneração não determina automaticamente uma irregularidade; o problema surge quando o incentivo influencia a recomendação de forma incompatível com o interesse do cliente ou quando a remuneração relevante não é tratada conforme as regras.',
+      'Na prova, procure alternativas que preservam transparência, adequação, diligência e lealdade. Uma resposta que justifica a recomendação apenas pela comissão é um sinal de conflito. Uma resposta que esconde custos ou riscos também deve ser vista com cautela.'
+    ]}
+  ],
+  'sustentabilidade': [
+    { id:'deep-esg-conceito', title:'1. ESG é uma lente de análise, não um selo mágico', paragraphs:[
+      'ESG reúne fatores ambientais, sociais e de governança que podem afetar riscos, oportunidades e a sustentabilidade econômica de organizações. O fator ambiental pode envolver emissões, uso de recursos e exposição climática; o social pode envolver trabalhadores, clientes e comunidades; governança trata de controles, incentivos, direitos e prestação de contas.',
+      'A integração de fatores ESG não significa que um investimento seja automaticamente “verde”. Um gestor pode considerar riscos climáticos porque eles afetam o valor econômico de uma empresa sem ter como objetivo principal produzir impacto ambiental positivo. A estratégia precisa ser identificada pelo processo e pelos documentos.'
+    ]},
+    { id:'deep-esg-risco', title:'2. Risco físico, transição e governança', paragraphs:[
+      'Risco climático pode aparecer de forma física, como eventos extremos que danificam ativos, ou como risco de transição, decorrente de mudanças tecnológicas, regulatórias e de preferência dos consumidores. Esses riscos podem afetar receita, custo, ativos e acesso a financiamento.',
+      'Governança conecta muitos desses temas. Falhas de controles podem permitir problemas ambientais e sociais persistentes. Por isso, analisar apenas uma métrica ambiental não é suficiente. A questão pode pedir que o candidato identifique a dimensão ESG mais diretamente relacionada ao caso.'
+    ]},
+    { id:'deep-estrategias-esg', title:'3. Integração, exclusão, temático e impacto', paragraphs:[
+      'Estratégias ESG possuem objetivos diferentes. Integração incorpora fatores materiais na análise. Exclusão remove setores ou emissores segundo critérios. Seleção positiva privilegia características desejadas. Estratégia temática concentra-se em determinado tema. Investimento de impacto adiciona intenção de gerar resultado socioambiental mensurável, conforme a metodologia adotada.',
+      'Engajamento ou stewardship procura influenciar práticas das empresas investidas. Essas abordagens podem coexistir. O ponto importante para a prova é não tratar todas como sinônimos. Quando uma alternativa descreve uma estratégia, identifique o mecanismo utilizado para alterar a carteira ou o comportamento das investidas.'
+    ]},
+    { id:'deep-greenwashing', title:'4. Como reconhecer greenwashing', paragraphs:[
+      'Greenwashing ocorre quando uma comunicação transmite uma impressão ambiental ou sustentável que não é sustentada de forma adequada por metodologia, evidências ou características reais do produto. O risco aumenta quando o nome do produto promete mais do que os documentos conseguem demonstrar.',
+      'Para analisar uma alegação, procure objetivo, política, critérios de seleção, indicadores, acompanhamento e transparência. Um rótulo não substitui documentos. Também não se deve concluir que um produto sustentável tem menor risco financeiro: sustentabilidade e risco financeiro são dimensões que precisam ser avaliadas conjuntamente.'
+    ]},
+    { id:'deep-caso-esg', title:'5. Caso de prova: dois fundos “verdes”', paragraphs:[
+      'Dois fundos usam linguagem sustentável. O primeiro apenas incorpora fatores ESG na análise de risco; o segundo possui objetivo sustentável e metodologia específica para acompanhar resultados. Não é correto afirmar que são equivalentes apenas porque ambos usam a palavra ESG.',
+      'A resposta deve olhar para estratégia, objetivo e evidências. Esse raciocínio também evita outra armadilha: presumir que uma estratégia ESG garante desempenho superior. O papel do profissional é explicar a característica do produto, não prometer resultado.'
+    ]}
+  ],
+  'ativos-digitais': [
+    { id:'deep-blockchain', title:'1. Blockchain é infraestrutura, não sinônimo de ativo', paragraphs:[
+      'Blockchain é uma forma de registrar e validar informações de maneira distribuída segundo regras de uma rede. Ela pode suportar diferentes aplicações. O fato de um ativo usar blockchain não determina sozinho sua natureza econômica, jurídica ou seu valor.',
+      'Essa separação é fundamental. Bitcoin, um token que representa um direito sobre determinado ativo e um registro de uma transação podem utilizar tecnologias semelhantes, mas possuem funções e riscos diferentes. Na prova, primeiro identifique o que está sendo representado e só depois analise a tecnologia.'
+    ]},
+    { id:'deep-tokens', title:'2. Tokenização e direitos econômicos', paragraphs:[
+      'Tokenização representa digitalmente um ativo ou direito dentro de uma estrutura tecnológica. O token pode representar participação, crédito, acesso, utilidade ou outros direitos. O que importa é o direito efetivamente conferido e o regime jurídico aplicável.',
+      'Um token não cria liquidez automaticamente. Se o mercado para aquele token for pequeno, o investidor pode ter dificuldade para vender. Também é preciso analisar emissor, custódia, governança, tecnologia e vínculo entre o token e o ativo subjacente.'
+    ]},
+    { id:'deep-smart', title:'3. Smart contracts, oráculos e DeFi', paragraphs:[
+      'Smart contracts são programas executados em uma blockchain conforme regras programadas. Eles podem automatizar transferências, garantias, liquidações e outras funções. Entretanto, código pode conter falhas e depender de dados externos. Oráculos fornecem informações de fora da rede para que um contrato tome decisões, criando uma nova superfície de risco.',
+      'DeFi utiliza protocolos e contratos para oferecer funções financeiras. A redução de intermediários tradicionais pode ser acompanhada por riscos de código, governança, liquidez, concentração de poder, dependência de oráculos e mudanças de protocolo. “Descentralizado” não significa “sem risco”.'
+    ]},
+    { id:'deep-custodia', title:'4. Custódia e segurança das chaves', paragraphs:[
+      'Na autocustódia, o usuário controla as chaves necessárias para movimentar seus ativos. Perder a chave ou expô-la pode comprometer o acesso. Em custódia terceirizada, o usuário depende do prestador e de seus controles. A escolha entre modelos envolve conveniência, segurança, responsabilidade e risco de contraparte.',
+      'Stablecoins também exigem análise. O objetivo de manter estabilidade em relação a uma referência depende do mecanismo utilizado, das reservas, da capacidade de resgate e da governança. O nome “stable” não elimina risco de mercado, liquidez, emissor ou estrutura.'
+    ]},
+    { id:'deep-caso-digital', title:'5. Caso de prova: “token seguro porque está na blockchain”', paragraphs:[
+      'A frase parece tecnológica, mas não responde às perguntas financeiras. Quem emitiu o token? Qual direito ele representa? Como é feita a custódia? Existe mercado secundário? Qual o risco de crédito? Quem controla o protocolo? Quais regras jurídicas se aplicam?',
+      'Na prova, a alternativa mais adequada tende a separar tecnologia de risco econômico. Blockchain pode melhorar rastreabilidade ou automação, mas não garante solvência, liquidez ou adequação do investimento.'
+    ]}
+  ],
+  'open-finance': [
+    { id:'deep-open-conceito', title:'1. Open Finance é compartilhamento consentido, não exposição pública', paragraphs:[
+      'Open Finance cria padrões para que informações e serviços financeiros possam circular entre participantes autorizados com consentimento do cliente. A lógica é permitir que o cliente use seus próprios dados para obter serviços, comparar propostas e construir experiências integradas.',
+      'O consentimento precisa ter contexto. O cliente deve compreender o que será compartilhado, para qual finalidade e com qual participante. O processo não significa entregar senha de internet banking a outra instituição. A autenticação ocorre pelos fluxos oficiais previstos.'
+    ]},
+    { id:'deep-open-beneficios', title:'2. Dados melhores podem melhorar decisões, mas não garantem vantagem', paragraphs:[
+      'Com dados autorizados, uma instituição pode compreender melhor renda, movimentação e relacionamento e, em determinados contextos, oferecer uma proposta mais personalizada. Isso não garante aprovação de crédito, taxa menor ou retorno superior. A decisão depende das políticas e condições da instituição.',
+      'O profissional deve explicar benefícios e limites. Uma proposta baseada em Open Finance continua sujeita a custo, prazo, garantias, risco e adequação. O compartilhamento de dados é um meio para melhorar a informação, não uma promessa de resultado.'
+    ]},
+    { id:'deep-portabilidade', title:'3. Compartilhar dados é diferente de portar produtos', paragraphs:[
+      'Uma das confusões mais importantes é tratar Open Finance como se fosse uma transferência automática de dinheiro ou investimento. Compartilhar informações permite que outra instituição acesse dados autorizados; portabilidade é um processo próprio para determinados produtos e relações.',
+      'A mesma lógica vale para investimentos, crédito, seguros e outros serviços. Antes de afirmar que algo “vai junto” para outra instituição, identifique qual operação está sendo realizada e quais procedimentos, prazos e requisitos existem.'
+    ]},
+    { id:'deep-open-seguranca', title:'4. Consentimento, segurança e revogação', paragraphs:[
+      'O ecossistema depende de autenticação, padrões técnicos, segurança e rastreabilidade. O cliente precisa conseguir compreender e controlar as autorizações segundo as regras do sistema. Uma autorização não deve ser tratada como permanente e irrestrita.',
+      'Em atendimento, nunca simplifique a ponto de apagar a escolha do cliente. Explique o objetivo do compartilhamento e encaminhe para o fluxo oficial. Se houver suspeita de fraude, a prioridade passa a ser segurança, não conveniência.'
+    ]},
+    { id:'deep-caso-open', title:'5. Caso de prova: proposta de crédito com Open Finance', paragraphs:[
+      'Uma cliente autoriza uma instituição a acessar seus dados para analisar uma proposta. Depois, pergunta se isso significa que seu empréstimo atual será automaticamente transferido. A resposta é não: o compartilhamento de dados e a portabilidade são processos diferentes.',
+      'A prova pode trocar crédito por investimento ou seguro, mas o raciocínio permanece. Primeiro identifique o que o consentimento permite; depois identifique o serviço que o cliente pretende realizar. Não confunda acesso a informação com transferência de posição.'
+    ]}
+  ],
+  'tecnologia': [
+    { id:'deep-ia', title:'1. IA no mercado financeiro: ferramenta, não autoridade', paragraphs:[
+      'Inteligência artificial pode apoiar atendimento, classificação, detecção de fraude, análise de dados, automação e outras tarefas. Machine learning identifica padrões a partir de dados; modelos generativos produzem texto, código ou outras saídas a partir de padrões aprendidos. O uso financeiro exige governança porque erros podem gerar perdas, discriminação ou informação incorreta.',
+      'Uma resposta produzida por IA pode parecer convincente e ainda assim estar errada ou desatualizada. Por isso, tarefas relevantes precisam de validação proporcional ao risco. O profissional deve saber quando confiar em automação, quando revisar e quando encaminhar para análise humana.'
+    ]},
+    { id:'deep-dados-ia', title:'2. Dados, viés e qualidade do modelo', paragraphs:[
+      'Modelos dependem da qualidade dos dados. Bases incompletas, enviesadas ou desatualizadas podem produzir resultados ruins. Um modelo que funcionou bem no passado pode perder desempenho quando o comportamento dos clientes ou as condições de mercado mudam.',
+      'Por isso, governança envolve validação, monitoramento, controle de acesso, qualidade dos dados e documentação. A prova pode apresentar uma ferramenta com alta acurácia histórica e perguntar qual cuidado continua necessário. A resposta é que desempenho passado não elimina risco futuro.'
+    ]},
+    { id:'deep-fintechs', title:'3. Fintech não é uma licença', paragraphs:[
+      'Fintech descreve empresas que usam tecnologia para oferecer ou reorganizar serviços financeiros. A palavra não identifica uma autorização regulatória única. Uma fintech de pagamentos, uma empresa de crédito e uma plataforma ligada a investimentos podem estar sujeitas a regras e supervisores diferentes.',
+      'O profissional deve perguntar qual atividade efetivamente está sendo exercida. Essa atividade define o enquadramento. O uso de aplicativo ou API não altera sozinho a natureza do serviço. A tecnologia muda a experiência e os processos, mas não apaga obrigações financeiras.'
+    ]},
+    { id:'deep-sandbox', title:'4. Sandbox e inovação regulada', paragraphs:[
+      'Sandbox regulatório permite testar soluções inovadoras dentro de condições e limites definidos pelo regulador. O objetivo é criar ambiente controlado para experimentação, sem transformar o teste em autorização irrestrita ou garantia de sucesso.',
+      'Na prova, cuidado com alternativas que dizem que empresas em sandbox estão livres das normas ou que o selo do sandbox significa produto seguro. O ponto é justamente testar inovação sob supervisão e condições específicas.'
+    ]},
+    { id:'deep-pagamentos-futuro', title:'5. Pagamentos, APIs e novos modelos', paragraphs:[
+      'Novos meios de pagamento combinam infraestrutura, APIs, autenticação, prevenção a fraude e experiência digital. O aumento de velocidade pode reduzir fricção, mas também aumenta a necessidade de controles. Arranjos de pagamento definem regras e participantes; instituições desempenham funções específicas dentro desses arranjos.',
+      'Para a prova, identifique o papel do participante e o fluxo da operação. Adquirente, emissor, subadquirente, instituição de pagamento e infraestrutura não são sinônimos. A pergunta normalmente fica mais fácil quando você desenha quem inicia, quem aceita, quem autoriza e quem liquida.'
+    ]}
+  ],
+};
 
 };
