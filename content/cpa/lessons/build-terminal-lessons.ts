@@ -1,6 +1,7 @@
 import type { CurriculumUnit } from '../schema'
 import { lessonSources, type LessonSourceId } from './sources'
 import type { CPALesson, LessonComparison, LessonFormula, LessonQuizQuestion } from './types'
+import { enrichCompleteExplanation } from './enrichment'
 
 export interface LessonBlueprint {
   area:(code:string,title:string)=>string
@@ -84,7 +85,7 @@ export function buildTerminalLessons(
       title,
       oneSentence:definition,
       beginnerExplanation:blueprint.beginner(unit.pdCode,title,definition),
-      completeExplanation:blueprint.complete(unit.pdCode,title,definition),
+      completeExplanation:enrichCompleteExplanation(unit.pdCode,title,definition,blueprint.complete(unit.pdCode,title,definition),focus,traps,blueprint.practical(unit.pdCode,title)),
       essentialConcepts:essentials,
       examFocus:focus,
       practicalExample:blueprint.practical(unit.pdCode,title),
