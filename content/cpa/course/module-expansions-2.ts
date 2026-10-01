@@ -90,6 +90,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Uma apólice precisa ser lida como um conjunto de condições. O prêmio é o preço pago pela cobertura; a vigência define o período; as coberturas indicam quais riscos são transferidos; exclusões delimitam situações que não estão cobertas; franquias podem definir a parcela do prejuízo que permanece com o segurado. Limites de indenização definem o máximo pagável para determinada cobertura.",
         "Quando ocorre um sinistro, a existência do contrato não encerra a análise. É necessário verificar se o evento ocorreu durante a vigência, se está dentro da cobertura, se existe exclusão e qual valor efetivamente está protegido. Na prova, se uma alternativa disser “qualquer dano é indenizado”, ela ignora a estrutura contratual. O raciocínio correto é sempre evento → cobertura → condições → franquia/limite → indenização."
       ]
+    },
+    {
+      "id": "robusto-seguros-necessidade",
+      "title": "Seguro como planejamento de risco: proteger patrimônio, renda e dívida",
+      "paragraphs": [
+        "A utilidade de um seguro aparece quando um evento de baixa frequência pode causar uma perda financeira grande. Uma família pode precisar proteger a renda de uma pessoa-chave; um proprietário pode precisar proteger um imóvel; um tomador pode precisar proteger uma dívida em situações previstas. O tamanho da cobertura deve ser coerente com a exposição econômica, e o prêmio precisa caber no orçamento.",
+        "Na análise de adequação, compare risco transferido, capital segurado, duração, exclusões, franquia e custo. Cobrir um risco pequeno com prêmio muito alto pode não ser eficiente; deixar um risco catastrófico sem proteção pode comprometer todo o planejamento. Na prova, pense em seguro como uma ferramenta de gestão de risco, não como investimento de retorno garantido."
+      ]
     }
   ],
   "planejamento": [
