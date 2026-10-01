@@ -110,7 +110,7 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'Imagine um cliente dizendo: “Quero o investimento mais seguro e que pague a maior taxa”. A resposta profissional começa desmontando a frase. Segurança depende de qual risco está sendo considerado; taxa maior pode vir acompanhada de maior risco de crédito, prazo ou liquidez. O objetivo do cliente também importa. Um dinheiro que será usado em três meses não deve ser analisado da mesma forma que uma reserva para aposentadoria.',
       'Na prova, procure as palavras que revelam o risco relevante: “vender antes do vencimento” aponta para risco de mercado e liquidez; “emissor com dificuldade financeira” aponta para crédito; “taxa subiu depois da compra” aponta para marcação a mercado; “garantia” exige identificar o mecanismo específico. Essa leitura por gatilhos torna as questões de renda fixa muito mais rápidas.'
     ]}
-  ],,
+  ],
 'renda-variavel': [
     { id:'deep-acoes', title:'1. Ação é participação, não promessa de rendimento', paragraphs:[
       'Uma ação representa uma participação no capital de uma companhia. O retorno do acionista pode vir da valorização do preço e de proventos distribuídos, mas nenhum desses componentes é garantido. O preço de mercado incorpora expectativas sobre lucros, crescimento, juros, risco e condições do setor. Por isso, uma ação não deve ser tratada como um título de dívida com juros contratados.',
