@@ -262,7 +262,11 @@ const trapSupplement: Array<[string,string,string,string]> = [
   ['Liberdade econômica','Tratar uma lei geral como autorização para ignorar regulação financeira específica.','Regras setoriais continuam relevantes.','Procure a norma específica do mercado.'],
   ['Fonte atualizada','Usar um PDF antigo porque ele explica melhor.','Uma explicação clara pode estar desatualizada normativamente.','Use material antigo só como benchmark e confirme a regra atual.'],
 ];
-export const v27Traps: V27Trap[] = [...trapSeeds, ...trapSupplement].map(([concept,trap,why,avoid],index)=>({id:'T'+String(index+1).padStart(3,'0'),concept,trap,why,avoid}))
+const trapFinal: Array<[string,string,string,string]> = [
+  ['Questão de definição','Escolher uma definição sem responder ao contexto.','O formato contextualizado pode exigir aplicação.','Resolva o caso antes das alternativas.'],
+  ['Alternativa absoluta','Aceitar uma alternativa absoluta sem testar condições.','Generalizações podem ignorar exceções.','Teste a frase contra as condições do conceito.'],
+]
+export const v27Traps: V27Trap[] = [...trapSeeds, ...trapSupplement, ...trapFinal].map(([concept,trap,why,avoid],index)=>({id:'T'+String(index+1).padStart(3,'0'),concept,trap,why,avoid}))
 
 export const v27Radar: V27Evidence[] = [
   {kind:'OFICIAL',title:'Peso não é frequência',detail:'Os pesos 20/40/30/10 são estrutura oficial. A V27 não transforma frequência de um banco externo em peso da prova.',source:'ANBIMA'},
