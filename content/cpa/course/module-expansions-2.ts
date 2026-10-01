@@ -37,6 +37,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "A cotação usada pelo cliente pode incorporar spread e custos. Câmbio comercial e turismo correspondem a contextos diferentes de formação de preço. Recompra de moeda estrangeira também possui regras. Para investimentos internacionais, a pessoa residente no Brasil precisa observar as obrigações tributárias e declarativas vigentes.",
         "Na prova, procure o objeto: estamos pagando uma compra, comprando moeda, mantendo saldo ou investindo? O mesmo dólar pode aparecer em quatro situações economicamente diferentes."
       ]
+    },
+    {
+      "id": "robusto-serv-caso",
+      "title": "Caso bancário: escolha o serviço pelo uso real do cliente",
+      "paragraphs": [
+        "Imagine uma pessoa que recebe salário, paga contas, usa Pix diariamente e viaja ao exterior duas vezes por ano. Um pacote bancário só faz sentido se os serviços incluídos forem compatíveis com esse padrão de uso. Compare tarifas, gratuidade, canais, necessidade de moeda estrangeira e segurança. O objetivo não é contratar o maior pacote, mas encontrar uma estrutura eficiente para a necessidade real.",
+        "Em outro caso, uma empresa recebe muitos Pix e precisa conciliar pagamentos. A análise muda: entram volume, integração, recebimento, segurança, tarifas e necessidade de serviços para pessoa jurídica. A mesma ferramenta pode ser adequada para uma empresa e desnecessária para uma pessoa física. Na prova, use o comportamento do cliente como evidência e não o nome comercial do pacote."
+      ]
     }
   ],
   "seguros": [
@@ -65,6 +73,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Seguro de automóvel protege contra riscos previstos no contrato relacionados ao veículo, podendo incluir coberturas como colisão, roubo, furto ou danos a terceiros, conforme a apólice. Seguro residencial protege patrimônio e responsabilidades associadas ao imóvel dentro das coberturas contratadas. Seguro prestamista está ligado à quitação ou redução de uma obrigação financeira diante de determinados eventos cobertos.",
         "Franquia e limite máximo de indenização são conceitos diferentes. Franquia é a parcela de um prejuízo que pode permanecer com o segurado; limite é o máximo de cobertura contratada para determinada garantia. Exclusão é uma situação não coberta. Um seguro barato pode ter coberturas menores, franquia maior ou exclusões mais amplas.",
         "Na prova, compare o evento, o objeto protegido, quem recebe a indenização e qual obrigação existe. Isso diferencia produtos com nomes parecidos."
+      ]
+    },
+    {
+      "id": "robusto-seguros-caso",
+      "title": "Caso de seguro: cobertura não é sinônimo de pagamento automático",
+      "paragraphs": [
+        "Considere um seguro de automóvel com determinada cobertura e franquia. O veículo sofre um dano, mas o evento precisa ser enquadrado na apólice antes de calcular qualquer indenização. Primeiro verifique vigência, cobertura, exclusões, franquia e limite. Depois determine o prejuízo coberto e o valor efetivamente devido. A existência do seguro reduz determinado risco financeiro, mas não transforma qualquer evento em indenização.",
+        "O mesmo raciocínio vale para vida e prestamista. A pergunta não é apenas “há seguro?”. É “qual risco foi transferido, quem é o beneficiário, qual evento está coberto e quais condições precisam ser cumpridas?”. Na CPA, a alternativa correta normalmente respeita o contrato e evita generalizações."
       ]
     }
   ],
@@ -133,6 +149,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Rebalanceamento não deve ser uma tentativa de prever o mercado. É uma disciplina de gestão de risco. A frequência pode ser definida por calendário ou por bandas de desvio, dependendo da metodologia. Também é possível usar novos aportes para corrigir pesos sem vender ativos.",
         "Na prova, procure a causa da mudança de peso. Se um ativo valorizou, o percentual dele pode subir. Se houve resgate, todos os pesos podem mudar. A carteira é dinâmica."
       ]
+    },
+    {
+      "id": "robusto-cart-caso",
+      "title": "Caso de carteira: objetivo, horizonte e risco mudam a composição",
+      "paragraphs": [
+        "Imagine dois clientes com R$ 100 mil. Um usará o dinheiro para uma entrada de imóvel em dezoito meses; o outro investirá para aposentadoria em vinte anos. Mesmo patrimônio e mesmo investidor não significam mesma carteira. O primeiro precisa priorizar preservação e liquidez compatíveis com o prazo. O segundo pode aceitar maior volatilidade em parte da carteira se sua capacidade, tolerância e objetivo permitirem.",
+        "Depois de montar a carteira, o trabalho não termina. A renda, o patrimônio, o horizonte e os pesos dos ativos mudam. Acompanhamento e rebalanceamento verificam se a estratégia continua adequada. Na prova, a palavra “carteira” deve fazer você pensar em conjunto de riscos e objetivos, não em uma lista aleatória de produtos."
+      ]
     }
   ],
   "perfil": [
@@ -161,6 +185,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Em finanças, retorno esperado e risco precisam ser analisados juntos. Dois investimentos podem ter o mesmo retorno histórico e riscos completamente diferentes. Um investimento com retorno potencial maior pode envolver maior volatilidade, crédito mais frágil, menor liquidez ou estrutura mais complexa.",
         "Diversificação permite combinar ativos e reduzir a dependência de uma única fonte de risco. O perfil não é uma etiqueta permanente: mudanças de renda, patrimônio, objetivos ou horizonte podem alterar a adequação. O acompanhamento deve refletir a situação atual.",
         "Na prova, desconfie de frases como “quanto maior o retorno, melhor” ou “cliente conservador deve sempre comprar X”. A adequação depende do conjunto de características."
+      ]
+    },
+    {
+      "id": "robusto-perfil-caso",
+      "title": "Caso de perfil: quando o cliente pede exatamente o produto errado",
+      "paragraphs": [
+        "Um cliente conservador pede um produto de alta volatilidade porque viu uma rentabilidade passada excepcional. O profissional precisa investigar objetivo, horizonte, capacidade de perda e conhecimento antes de simplesmente executar o pedido. Explicar a diferença entre retorno histórico e risco atual é parte do atendimento. Se o produto for incompatível, devem ser observadas as regras e os procedimentos de adequação.",
+        "Outro cliente pode ter grande patrimônio, alta renda e longo horizonte, mas não compreender derivativos. Capacidade financeira não substitui conhecimento. O perfil resulta de várias dimensões. Na CPA, procure a alternativa que combina situação financeira, tolerância, conhecimento, objetivo e horizonte."
       ]
     }
   ],
@@ -305,6 +337,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Quando uma pessoa quer “levar tudo para outra instituição”, pergunte o que exatamente ela quer levar: histórico de dados, uma dívida, uma posição de investimento, um plano de previdência ou uma apólice. A operação correspondente pode ser compartilhamento, portabilidade ou contratação nova. Misturar os conceitos é uma pegadinha comum.",
         "A prova pode usar linguagem comercial como “leve seus investimentos com um clique”. O profissional precisa separar experiência digital de processo jurídico e operacional."
       ]
+    },
+    {
+      "id": "robusto-open-caso",
+      "title": "Caso de Open Finance: compartilhar dados, comparar e depois decidir",
+      "paragraphs": [
+        "Uma cliente autoriza uma instituição a acessar seu histórico financeiro para receber uma proposta de crédito. O primeiro passo é confirmar que o compartilhamento ocorreu no fluxo oficial e com a finalidade compreendida. Depois ela deve comparar a proposta pelo CET, prazo, garantias e condições. Se decidir transferir uma operação ou investimento, precisará seguir o processo de portabilidade correspondente.",
+        "O ganho do Open Finance está na redução de assimetria de informação e na possibilidade de criar serviços mais personalizados. O risco está em compartilhar dados sem compreender a finalidade, usar canais inseguros ou confundir autorização de dados com transferência patrimonial. Na prova, separe sempre informação, produto e dinheiro."
+      ]
     }
   ],
   "tecnologia": [
@@ -333,6 +373,14 @@ export const moduleExpansionSections2: Record<string, ReadingSection[]> = {
         "Fintech é uma empresa que utiliza tecnologia para oferecer ou apoiar serviços financeiros. O termo não representa uma licença única. A atividade efetivamente exercida determina o enquadramento regulatório: pagamentos, crédito, investimento, seguros e infraestrutura possuem regras diferentes.",
         "Sandbox regulatório permite testar modelos inovadores sob condições e supervisão específicas. Não é uma autorização permanente nem um selo de investimento seguro. A lógica é criar um ambiente controlado para aprender sobre uma inovação sem abandonar controles relevantes.",
         "Nos meios de pagamento, entenda os papéis de arranjo, instituição participante, adquirente e subadquirente. O objetivo é acompanhar o fluxo: quem cria as regras do arranjo, quem aceita o pagamento, quem processa e quem liquida."
+      ]
+    },
+    {
+      "id": "robusto-tech-caso",
+      "title": "Caso de IA: rapidez sem validação pode ampliar o erro",
+      "paragraphs": [
+        "Um atendente usa uma IA generativa para responder a uma pergunta sobre tributação e recebe uma resposta fluente, mas baseada em uma regra antiga. O problema não é a existência da IA; é a ausência de validação. O profissional deve conferir a fonte oficial, a data, o produto e a regra aplicável antes de enviar a resposta. Se houver dado pessoal, também precisa confirmar se o ambiente utilizado é autorizado.",
+        "Em outro cenário, um modelo preditivo identifica clientes com maior probabilidade de inadimplência. O resultado precisa ser monitorado para detectar mudanças de desempenho, erros e possíveis vieses. Modelos devem ser tratados como ferramentas dentro de um processo de governança. Na CPA, eficiência tecnológica nunca elimina responsabilidade, segurança ou conformidade."
       ]
     }
   ]
