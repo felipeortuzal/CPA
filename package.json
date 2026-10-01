@@ -13,7 +13,7 @@
     "test:watch": "vitest",
     "validate:curriculum": "node scripts/validate-curriculum.mjs",
     "validate:questions": "vitest run content/cpa/questions/questions.validation.test.ts",
-    "validate": "npm run validate:curriculum && npm run validate:lessons && npm run validate:questions && npm run validate:sources && npm run validate:experience && npm run audit:v13 && npm run validate:v21 && npm run validate:v26 && npm test && npm run lint && npm run typecheck && npm run build",
+    "validate": "npm run validate:curriculum && npm run validate:lessons && npm run validate:questions && npm run validate:sources && npm run validate:experience && npm run audit:v13 && npm run validate:v21 && npm run validate:v26 && npm run validate:v27 && npm test && npm run lint && npm run typecheck && npm run build",
     "validate:sources": "node scripts/validate-official-sources.mjs",
     "check:sources": "node scripts/check-official-sources.mjs",
     "validate:experience": "node scripts/validate-v12-experience.mjs",
