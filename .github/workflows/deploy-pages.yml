@@ -31,6 +31,9 @@ jobs:
         run: npm ci --no-audit --no-fund
 
       - name: Validate platform
+        env:
+          VITE_CPA_CHAT_ENDPOINT: ${{ secrets.CPA_CHAT_ENDPOINT }}
+          VITE_CPA_CHAT_TOKEN: ${{ secrets.CPA_CHAT_TOKEN }}
         run: npm run validate
 
       - name: Install test browser
