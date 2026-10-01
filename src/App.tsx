@@ -25,7 +25,6 @@ const SourcesPage = lazy(() => import('./pages/SourcesPage').then((module) => ({
 const StudyPlanPage = lazy(() => import('./pages/StudyPlanPage').then((module) => ({ default: module.StudyPlanPage })))
 const AnalyticsPage = lazy(() => import('./pages/AnalyticsPage').then((module) => ({ default: module.AnalyticsPage })))
 const ActiveStudyPage = lazy(() => import('./pages/ActiveStudyPage').then((module) => ({ default: module.ActiveStudyPage })))
-const ExamIntelligencePage = lazy(() => import('./pages/ExamIntelligencePage').then((module) => ({ default: module.ExamIntelligencePage })))
 const WelcomePage = lazy(() => import('./pages/WelcomePage').then((module) => ({ default: module.WelcomePage })))
 
 const router = createHashRouter([
@@ -43,7 +42,7 @@ const router = createHashRouter([
     { path:'simulados/historico', element:<SimulationHistoryPage/> },
     { path:'plano', element:<StudyPlanPage/> },
     { path:'estudo-ativo', element:<ActiveStudyPage/> },
-    { path:'inteligencia', element:<ExamIntelligencePage/> },
+    
     { path:'revisao', element:<ReviewPage/> },
     { path:'flashcards', element:<FlashcardsPage/> },
     { path:'erros', element:<ErrorNotebookPage/> },
