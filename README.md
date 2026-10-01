@@ -65,6 +65,14 @@ Antes da V28, a plataforma ganhou um tutor de IA flutuante: o **Mestre CPA**.
 - a chave da OpenAI fica somente no backend Cloudflare Worker.
 
 O frontend já está instalado. Para ativar a IA em um deploy, publique `workers/cpa-chat` e defina `VITE_CPA_CHAT_ENDPOINT`. Consulte `workers/cpa-chat/README.md`.
+
+### V27.2 — Leitura completa
+
+Os 20 módulos agora têm leitura aprofundada autoral, com mais de 1.000 palavras por módulo em média, além da base anterior. A estrutura foi aproximada da lógica de cursos preparatórios em vídeo:
+
+**conceito → explicação → mecanismo → exemplo → aplicação em prova → confusão comum → checklist → simulado.**
+
+O conteúdo foi elaborado a partir do Programa Detalhado vigente e usado o curso público CPA 2026 do Retorno Interno/Renan Duarte como referência de cobertura e didática. Não são reproduzidos slides, apostilas ou roteiros.
 ## Como estudar na V27
 
 1. Use a trilha principal e a Apostila V26 como base.
