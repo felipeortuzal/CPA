@@ -199,5 +199,95 @@ export const deepReadingSections: Record<string, ReadingSection[]> = {
       'O ponto central para a prova é que previdência é um problema de planejamento. Se a cliente precisa do dinheiro em poucos meses, a análise muda. Se pretende formar renda para aposentadoria, o horizonte longo ganha importância. Se quer apenas uma aplicação de curto prazo, o produto pode não cumprir o objetivo. A resposta nasce do contexto, não do nome do plano.'
     ]}
   ],
+,
+
+  'credito': [
+    { id:'deep-credito-estrutura', title:'1. Crédito é uma decisão sobre capacidade de pagamento', paragraphs:[
+      'Uma operação de crédito começa com uma pergunta simples: o tomador terá capacidade de cumprir o fluxo de pagamentos nas condições contratadas? A instituição analisa renda, patrimônio, histórico, relacionamento, finalidade, garantias e outras informações. O risco de crédito não desaparece porque existe uma garantia; a garantia é um mecanismo adicional de mitigação caso ocorra inadimplência.',
+      'Para o cliente, o custo do crédito deve ser analisado além da taxa nominal. Prazo, tarifas, seguros vinculados, impostos e demais encargos podem alterar o custo total. É por isso que o CET é tão importante: ele ajuda a comparar propostas considerando os componentes relevantes da operação.'
+    ]},
+    { id:'deep-cet', title:'2. CET, juros e custo efetivo', paragraphs:[
+      'A taxa anunciada em uma propaganda pode não representar todo o custo da operação. O CET busca consolidar os custos relevantes de uma operação de crédito em uma medida que permita comparação. Em uma questão, se o enunciado fornece taxa, tarifas e outros encargos, não assuma que a menor taxa nominal corresponde automaticamente ao menor custo.',
+      'Também observe o prazo. Uma taxa mensal aparentemente pequena pode produzir custo elevado quando a operação é longa. O raciocínio correto é comparar fluxos e custos na mesma base. Quando houver alternativas de crédito, considere valor recebido, valor pago, prazo, frequência das parcelas e encargos.'
+    ]},
+    { id:'deep-garantias', title:'3. Garantias e recuperação do crédito', paragraphs:[
+      'Garantias reduzem a exposição potencial do credor, mas não transformam um empréstimo em operação sem risco. Uma garantia real vincula determinado bem à operação conforme as regras aplicáveis; garantias pessoais dependem da obrigação de terceiros. A qualidade da garantia depende de valor, liquidez, documentação, prioridade e possibilidade efetiva de execução.',
+      'Em uma situação de inadimplência, o valor econômico recuperável pode ser diferente do valor originalmente estimado. O bem pode perder valor, a execução pode demorar e os custos de recuperação podem ser relevantes. A prova pode explorar justamente essa diferença entre “existe garantia” e “risco de crédito foi eliminado”.'
+    ]},
+    { id:'deep-capacidade', title:'4. Capacidade de pagamento e endividamento', paragraphs:[
+      'Uma análise responsável considera o comprometimento da renda e o conjunto das obrigações do cliente. Aprovar crédito olhando apenas para uma parcela isolada pode esconder um nível de endividamento elevado. O profissional deve considerar a situação financeira global e a finalidade do crédito.',
+      'Questões contextualizadas podem apresentar renda, despesas, outras dívidas e uma nova prestação. O candidato precisa interpretar se a operação é compatível com a capacidade de pagamento. Não basta dizer que “o cliente tem renda”; o ponto é verificar quanto dessa renda já está comprometido e quais riscos podem surgir.'
+    ]},
+    { id:'deep-caso-credito', title:'5. Caso de prova: duas propostas diferentes', paragraphs:[
+      'Imagine duas propostas para o mesmo cliente. A primeira tem taxa nominal menor, mas cobra tarifas e seguro; a segunda tem taxa nominal maior, porém menos encargos. A resposta não pode ser dada apenas pela taxa anunciada. Compare o custo efetivo e as condições completas da operação.',
+      'Esse exemplo resume o método para a prova: identificar finalidade, capacidade, prazo, custo total, garantias e risco. A melhor resposta em uma questão de atendimento é a que respeita as informações disponíveis e evita prometer aprovação, economia ou segurança sem base suficiente.'
+    ]}
+  ],
+  'servicos-bancarios': [
+    { id:'deep-contas', title:'1. Conta é infraestrutura de relacionamento', paragraphs:[
+      'Serviços bancários permitem movimentar recursos, realizar pagamentos, receber valores e acessar produtos financeiros. A conta utilizada pelo cliente é uma porta de entrada para diferentes serviços, mas cada serviço possui regras próprias. O profissional deve saber diferenciar conta, instrumento de pagamento, crédito, investimento e serviço de cobrança.',
+      'Na prova, a instituição pode apresentar um cliente usando cartão, Pix, débito automático e crédito. O fato de todos aparecerem no mesmo aplicativo não significa que tenham o mesmo funcionamento ou risco. Classifique a operação antes de responder.'
+    ]},
+    { id:'deep-pagamentos', title:'2. Pix, cartões e meios de pagamento', paragraphs:[
+      'Pix é um sistema de pagamentos instantâneos com funcionamento próprio dentro da infraestrutura do Banco Central. Cartões envolvem participantes diferentes, como emissor, credenciador e, conforme o arranjo, outros participantes. A pergunta “quem faz o quê?” volta a ser útil: quem emite o instrumento, quem aceita o pagamento e quem participa da liquidação?',
+      'Segurança também faz parte do produto. Golpes, engenharia social, roubo de credenciais e transações não autorizadas exigem prevenção e procedimentos adequados. Uma questão pode apresentar um cliente que compartilhou uma senha e perguntar sobre conduta. A resposta deve considerar segurança e os procedimentos oficiais, sem inventar garantias.'
+    ]},
+    { id:'deep-cartoes', title:'3. Crédito rotativo, parcelamento e custo', paragraphs:[
+      'No cartão de crédito, o cliente pode realizar compras à vista ou parceladas e, dependendo do pagamento da fatura, entrar em modalidades de financiamento. O custo do crédito deve ser analisado nas condições vigentes. O profissional não deve confundir limite disponível com renda disponível nem tratar o cartão como extensão gratuita da capacidade financeira.',
+      'Para estudar, pense no fluxo: compra → fatura → pagamento integral ou financiamento → juros/encargos. Uma questão pode apresentar um cliente que paga apenas parte da fatura e perguntar qual é a consequência. O ponto é reconhecer que o saldo financiado gera custo e pode aumentar rapidamente o endividamento.'
+    ]},
+    { id:'deep-seguranca-bancaria', title:'4. Fraude, autenticação e proteção de dados', paragraphs:[
+      'A segurança bancária combina autenticação, monitoramento de transações, limites, confirmação de operações e educação do cliente. Nenhuma camada é suficiente sozinha. O cliente deve evitar compartilhar senhas, códigos e dados de autenticação e deve utilizar os canais oficiais da instituição.',
+      'Proteção de dados também importa. Informações financeiras são sensíveis para o relacionamento e devem ser tratadas conforme as regras aplicáveis. O profissional precisa distinguir compartilhamento autorizado, uso interno e divulgação indevida. A conveniência digital não elimina deveres de segurança e privacidade.'
+    ]},
+    { id:'deep-caso-banco', title:'5. Como responder a um cliente no balcão digital', paragraphs:[
+      'Imagine que um cliente recebeu uma mensagem pedindo código de autenticação para “cancelar uma transferência”. A primeira reação profissional é interromper o fluxo suspeito e orientar o uso dos canais oficiais. Não se deve pedir ou fornecer credenciais por canais inseguros.',
+      'Para a prova, identifique o risco antes de buscar a solução comercial. Se o problema for fraude, a prioridade é segurança. Se for custo de crédito, a prioridade é explicar CET e condições. Se for pagamento, a prioridade é entender o arranjo e o fluxo. A competência é adaptar o atendimento ao problema real.'
+    ]}
+  ],
+  'seguros': [
+    { id:'deep-seguro-risco', title:'1. Seguro é transferência e mutualização de risco', paragraphs:[
+      'Seguro organiza a transferência de determinados riscos mediante contrato. Muitos segurados contribuem para uma estrutura que permite pagar indenizações aos participantes que sofrem eventos cobertos. O prêmio é o valor pago pelo segurado e a indenização é o pagamento devido quando ocorre evento coberto segundo as condições contratuais.',
+      'O seguro não é uma promessa de pagar qualquer prejuízo. A cobertura depende da apólice, das condições gerais, especiais e particulares, das exclusões e dos procedimentos de regulação do sinistro. Para o profissional, explicar “o que está coberto” é mais importante do que dizer apenas “tem seguro”.'
+    ]},
+    { id:'deep-apolice', title:'2. Apólice, cobertura, exclusão e franquia', paragraphs:[
+      'A apólice formaliza as condições do contrato. Cobertura define os eventos protegidos; exclusão delimita situações que não geram indenização; franquia representa a parcela de prejuízo que permanece sob responsabilidade do segurado em determinadas coberturas. Esses termos aparecem frequentemente juntos em questões.',
+      'Uma alternativa pode dizer que franquia é o valor pago pela seguradora antes de qualquer análise ou que toda ocorrência está coberta porque existe uma apólice. Ambas as frases podem estar erradas. O candidato deve voltar às condições contratuais e identificar exatamente o evento e a regra aplicável.'
+    ]},
+    { id:'deep-sinistro', title:'3. Sinistro e regulação', paragraphs:[
+      'Sinistro é a ocorrência de um evento que pode gerar direito à cobertura contratada. Após o aviso, a seguradora realiza procedimentos de regulação para verificar circunstâncias, documentação, cobertura e valor eventualmente devido. A existência de um evento não significa automaticamente que a indenização será integral.',
+      'O atendimento deve ser claro sobre documentos, prazos e canais. Não é adequado prometer pagamento antes da análise. A prova pode colocar o profissional diante de um cliente ansioso e testar se ele explica o processo sem antecipar uma decisão que depende da regulação.'
+    ]},
+    { id:'deep-seguro-x-cap', title:'4. Seguro não é capitalização', paragraphs:[
+      'Seguro tem como foco proteção contra riscos cobertos. Capitalização é uma estrutura de acumulação com regras próprias, podendo incluir sorteios e resgate conforme condições do título. Misturar os dois conceitos é um erro clássico. O fato de ambos poderem ser vendidos por instituições financeiras não torna seus objetivos equivalentes.',
+      'Em uma questão, identifique o problema econômico. Se o cliente quer proteger a família contra um evento de morte ou incapacidade, a análise é de seguro. Se quer participar de uma estrutura de capitalização com condições específicas, a análise é outra. O produto deve ser explicado pelo objetivo e pelo contrato.'
+    ]},
+    { id:'deep-caso-seguro', title:'5. Caso de prova: promessa de cobertura', paragraphs:[
+      'Um cliente contrata seguro residencial e pergunta se qualquer dano causado por água será pago. A resposta profissional não é “sim” nem “não” sem consultar a cobertura. É necessário identificar a origem do dano, a cobertura contratada, as exclusões, franquias e demais condições.',
+      'Esse caso mostra a regra de ouro para a prova: seguro é contratual. A alternativa correta tende a ser a que respeita as condições da apólice e não transforma a existência do seguro em cobertura universal.'
+    ]}
+  ],
+  'planejamento': [
+    { id:'deep-orcamento', title:'1. Planejamento começa pelo fluxo de caixa', paragraphs:[
+      'Planejamento financeiro pessoal começa com uma visão realista de receitas, despesas e compromissos. O objetivo não é controlar cada gasto de forma obsessiva, mas entender o fluxo e criar espaço para decisões. Separar despesas essenciais, discricionárias, dívidas e investimentos ajuda a enxergar prioridades.',
+      'Uma pessoa pode ter renda elevada e ainda assim possuir baixa capacidade de poupança se seus compromissos forem elevados. Por isso, patrimônio e renda não são sinônimos. O profissional deve olhar para fluxo de caixa, patrimônio líquido, dívidas, objetivos e horizonte.'
+    ]},
+    { id:'deep-reserva', title:'2. Reserva de emergência e liquidez', paragraphs:[
+      'A reserva de emergência existe para cobrir eventos inesperados, como perda de renda, despesas médicas ou manutenção relevante. Sua principal característica é a disponibilidade e a preservação do capital dentro de uma estratégia coerente, não a busca pelo maior retorno possível.',
+      'Uma questão pode apresentar um cliente com alta tolerância a risco e dinheiro que será usado em dois meses. A tolerância isolada não transforma esse recurso em capital de longo prazo. Objetivo e horizonte também determinam a adequação. Liquidez é parte da solução.'
+    ]},
+    { id:'deep-dividas', title:'3. Dívida, juros e ordem de prioridades', paragraphs:[
+      'Dívidas com custo elevado podem comprometer a capacidade de investir. Antes de montar uma carteira sofisticada, o planejamento deve considerar o custo da dívida, possibilidade de renegociação e formação de reserva. Não existe uma regra única para todas as pessoas, mas o custo efetivo da dívida é uma variável que precisa entrar na conta.',
+      'Para a prova, compare retorno esperado e custo de oportunidade com cuidado. Se uma dívida custa muito e o investimento possui retorno incerto, a decisão não pode ser feita apenas olhando a rentabilidade histórica do investimento. O cliente precisa entender risco, liquidez e custo financeiro.'
+    ]},
+    { id:'deep-objetivos', title:'4. Metas transformam planejamento em números', paragraphs:[
+      'Uma meta financeira precisa de valor, prazo e finalidade. “Quero me aposentar bem” é uma intenção; “quero formar determinado patrimônio em quinze anos” permite calcular uma necessidade de poupança e avaliar cenários. Quanto maior o prazo, maior a importância da capitalização e da consistência das contribuições.',
+      'O planejamento deve ser revisado quando renda, despesas, patrimônio ou objetivos mudarem. Um plano não é uma promessa fixa. O profissional pode ajudar o cliente a entender as consequências de alterar prazo ou contribuição, sem garantir retornos futuros.'
+    ]},
+    { id:'deep-caso-planejamento', title:'5. Caso de prova: cliente com três objetivos', paragraphs:[
+      'Imagine uma pessoa que possui três objetivos: reserva para emergências, compra de um imóvel em quatro anos e aposentadoria em vinte anos. Não faz sentido colocar todos os recursos em uma única estratégia. Cada objetivo possui horizonte, liquidez e tolerância a risco diferentes.',
+      'O método é separar objetivos, estimar necessidade de recursos, avaliar capacidade de poupança e escolher soluções compatíveis. A prova pode mudar os produtos, mas a lógica permanece: primeiro objetivo e restrições; depois alocação e produto.'
+    ]}
+  ],
 
 };
