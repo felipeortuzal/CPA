@@ -16,7 +16,10 @@ describe('Trilha de módulos CPA', () => {
     expect(Object.keys(moduleReadings).sort()).toEqual(courseModules.map(m => m.id).sort())
     for (const module of courseModules) {
       const r = moduleReadings[module.id]
-      expect(r.sections.length).toBeGreaterThanOrEqual(3)
+      const moduleWords = r.sections.flatMap(s => s.paragraphs).join(' ').trim().split(/\s+/).length
+      expect(r.sections.length).toBeGreaterThanOrEqual(6)
+      expect(moduleWords, module.id).toBeGreaterThan(1500)
+      if (module.id === 'sistema-financeiro') expect(moduleWords, module.id).toBeGreaterThan(2500)
       expect(new Set(r.sections.map(s => s.id)).size).toBe(r.sections.length)
       expect(r.sections.every(s => s.paragraphs.length >= 2 && s.paragraphs.every(p => p.length > 100))).toBe(true)
       expect(r.example.steps.length).toBeGreaterThanOrEqual(3)
