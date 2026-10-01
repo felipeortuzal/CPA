@@ -1,7 +1,7 @@
 import { ExternalLink, Lightbulb, Radar, ShieldCheck, Target, TriangleAlert } from 'lucide-react'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { v27Benchmark, v27Clusters, v27Evidence, v27Metrics, v27QuestionPatterns, v27Radar, v27Resources, v27Shortcuts, v27Traps, v27VerifiedVideos, V27_REVIEW_DATE } from '../../content/cpa/v27/intelligence'
+import { v27Benchmark, v27Clusters, v27Evidence, v27Metrics, v27QuestionPatterns, v27Radar, v27Resources, v27Shortcuts, v27Traps, v27VerifiedVideos, V27_REVIEW_DATE, type V27Evidence } from '../../content/cpa/v27/intelligence'
 import { courseModules } from '../../content/cpa/course/modules'
 
 const kindLabel = {
