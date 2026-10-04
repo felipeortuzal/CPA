@@ -2,9 +2,9 @@ import { v28ReadingSectionsA } from './v28-readings-a'
 import { v28ReadingSectionsB } from './v28-readings-b'
 
 export interface V28ReadingSection {
-  id: string
-  title: string
-  paragraphs: string[]
+  readonly id: string
+  readonly title: string
+  readonly paragraphs: readonly string[]
 }
 
 export interface StudyVideo {
@@ -65,12 +65,12 @@ export const renanVideosByModule: Record<string, StudyVideo[]> = {
   ],
 }
 
-export const v28ReadingSections: Record<string, V28ReadingSection[]> = {
+export const v28ReadingSections: Record<string, readonly V28ReadingSection[]> = {
   ...v28ReadingSectionsA,
   ...v28ReadingSectionsB,
 }
 
-export function v28SectionsFor(moduleId: string) {
+export function v28SectionsFor(moduleId: string): readonly V28ReadingSection[] {
   return v28ReadingSections[moduleId] ?? []
 }
 
