@@ -48,7 +48,7 @@ export function V28CourseLayer({ moduleId, printFriendly = false }: V28CourseLay
 
     <section>
       <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
-        <div><div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300"><BookOpen className="h-4 w-4"/><span className="text-xs font-black uppercase tracking-[0.18em]">Apostila de prova · V29</span></div><h2 className="mt-2 text-2xl font-black tracking-tight">Explicação completa do capítulo</h2><p className="mt-2 max-w-3xl text-sm leading-7 text-slate-500">Leia esta parte como uma aula escrita: conceito, mecanismo e conexão entre os assuntos. Depois, desça para os pontos do Programa Detalhado, onde entram definições, exemplos, como pode cair, comparações, fórmulas e pegadinhas. Não é mais um resumo de quatro minutos.</p></div>
+        <div><div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300"><BookOpen className="h-4 w-4"/><span className="text-xs font-black uppercase tracking-[0.18em]">Apostila de prova · V29</span></div><h2 className="mt-2 text-2xl font-black tracking-tight">Leitura robusta e direcionada</h2><p className="mt-2 max-w-3xl text-sm leading-7 text-slate-500">Leia esta parte como uma aula escrita: conceito, mecanismo e conexão entre os assuntos. Depois, desça para os pontos do Programa Detalhado, onde entram definições, exemplos, como pode cair, comparações, fórmulas e pegadinhas. Não é mais um resumo de quatro minutos.</p></div>
         <Badge>{sections.length} blocos de explicação</Badge>
       </div>
       <div className="space-y-5">
