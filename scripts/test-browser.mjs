@@ -61,8 +61,7 @@ try {
   await expect(page.locator('a[href^="#/conteudos/2."]').first()).toBeVisible()
 
   // In-app navigation must reset quiz state, without relying on a page reload.
-  await goto('conteudos')
-  await page.locator('a[href^="#/modulos/"]').first().click()
+  await goto('modulos/sistema-financeiro')
   await page.getByText(/Ver índice detalhado/).click()
   await page.locator('a[href^="#/conteudos/"]').first().click()
   await expect(page.getByRole('heading', { name: 'Mini quiz', exact: true })).toBeVisible()
@@ -97,7 +96,7 @@ try {
 
   await page.setViewportSize({width:390,height:844})
   await goto('modulos/economia')
-  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Política econômica e indicadores', exact: true })).toBeVisible()
   await page.getByRole('checkbox').first().click()
   await expect.poll(async () => (await getData('studyPlans')).find(row => row.id === 'course:economia')?.payload.readSections.length).toBe(1)
   await page.reload()
@@ -118,10 +117,11 @@ try {
   await expect(page.getByRole('button', {name:'Refazer simulado do módulo',exact:true})).toBeVisible()
 
   await goto('apostila/economia')
-  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
-  await expect(page.getByText(/Apostila digital · V28/)).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Política econômica e indicadores', exact: true })).toBeVisible()
+  await expect(page.getByText(/Apostila de prova/)).toBeVisible()
   await expect(page.getByRole('heading', { name: 'Leitura robusta e direcionada', exact: true })).toBeVisible()
   await expect(page.getByText(/Prof. Renan Duarte · Retorno Interno/)).toBeVisible()
+  await expect(page.getByText('O que você precisa dominar', { exact: true })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Imprimir / salvar PDF' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 
@@ -159,15 +159,16 @@ try {
   await expect(other.getByRole('checkbox').first()).toBeChecked()
   await expect(other.getByRole('button',{name:'Refazer simulado do módulo',exact:true})).toBeVisible()
   await other.goto(`${fileUrl}#/apostila/economia`)
-  await expect(other.getByRole('heading', { name:'Economia sem complicação', exact:true })).toBeVisible()
+  await expect(other.getByRole('heading', { name:'Política econômica e indicadores', exact:true })).toBeVisible()
   await otherContext.close()
 
   await goto('conteudos')
+  await expect(page.getByRole('heading', { name: 'Apostila organizada como a prova.', exact: true })).toBeVisible()
   await mkdir('test-results', { recursive: true })
   await page.screenshot({ path: 'test-results/offline-desktop.png', fullPage: true })
   await page.setViewportSize({ width: 390, height: 844 })
   await goto('modulos/economia')
-  await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Política econômica e indicadores', exact: true })).toBeVisible()
   await page.screenshot({ path: 'test-results/offline-mobile.png', fullPage: true })
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   const blockedContext = await browser.newContext({ offline: true })
@@ -178,5 +179,5 @@ try {
   await blockedContext.close()
   expect(requests).toEqual([])
   expect(errors).toEqual([])
-  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, handbook route, V28 robust reading/video trail, reading persistence, module exam isolation/resume/correction, 18 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
+  console.log('PASS: exam-first V29 course, file:// offline, answer feedback, reload, exam resume/notes/result, backup export/import, quiz reset, failed-write retry, full apostila route, exam blueprint, 20 chapters grouped into 4 official blocks, desktop/mobile routes, blocked-storage recovery, zero network requests and zero page errors.')
 } finally { await browser.close() }
