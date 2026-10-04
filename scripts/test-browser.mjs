@@ -119,7 +119,9 @@ try {
 
   await goto('apostila/economia')
   await expect(page.getByRole('heading', { name: 'Economia sem complicação', exact: true })).toBeVisible()
-  await expect(page.getByText(/Apostila digital · V27\.2/)).toBeVisible()
+  await expect(page.getByText(/Apostila digital · V28/)).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Leitura robusta e direcionada', exact: true })).toBeVisible()
+  await expect(page.getByText(/Prof. Renan Duarte · Retorno Interno/)).toBeVisible()
   await expect(page.getByRole('button', { name: 'Imprimir / salvar PDF' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
 
@@ -176,5 +178,5 @@ try {
   await blockedContext.close()
   expect(requests).toEqual([])
   expect(errors).toEqual([])
-  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, handbook route, reading persistence, module exam isolation/resume/correction, 18 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
+  console.log('PASS: file:// offline, first launch, answer feedback, reload, exam resume/notes/result, backup export/import in a fresh browser context, quiz reset between lessons, duplicate clicks, failed-write retry, 20-module catalog, handbook route, V28 robust reading/video trail, reading persistence, module exam isolation/resume/correction, 18 routes at desktop/mobile widths, blocked-storage recovery screen, zero network requests and zero page errors.')
 } finally { await browser.close() }
