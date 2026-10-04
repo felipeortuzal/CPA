@@ -1,7 +1,8 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, BookOpen, ExternalLink, Printer } from 'lucide-react'
 import { courseModuleMap } from '../../content/cpa/course/modules'
-import { getModuleLessons, moduleApostilaStats, V27_EDITORIAL_REVIEW_DATE } from '../../content/cpa/course/apostila'
+import { getModuleLessons, moduleApostilaStats, V28_EDITORIAL_REVIEW_DATE } from '../../content/cpa/course/apostila'
+import { V28CourseLayer } from '../components/course/V28CourseLayer'
 import { Badge } from '../components/ui/Badge'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
@@ -25,23 +26,26 @@ export function ApostilaPage() {
     </div>
 
     <header className="rounded-3xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/10 to-sky-400/5 p-6 sm:p-9">
-      <Badge>Apostila digital · V27.2</Badge>
+      <Badge>Apostila digital · V28</Badge>
       <h1 className="mt-4 text-3xl font-black tracking-tight sm:text-5xl">{module.title}</h1>
       <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600 dark:text-slate-300">{module.subtitle}</p>
       <div className="mt-6 grid gap-3 sm:grid-cols-4">
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Cobertura</p><p className="mt-1 text-xl font-bold">{lessons.length} PDs</p></div>
-        <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Leitura completa</p><p className="mt-1 text-xl font-bold">~{stats.readingMinutes} min</p></div>
+        <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Leitura robusta</p><p className="mt-1 text-xl font-bold">~{stats.readingMinutes} min</p></div>
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Checkpoints</p><p className="mt-1 text-xl font-bold">{stats.checkpoints}</p></div>
         <div className="rounded-2xl bg-white/70 p-4 dark:bg-white/5"><p className="text-xs font-bold uppercase tracking-wide text-slate-500">Fórmulas</p><p className="mt-1 text-xl font-bold">{stats.formulas}</p></div>
       </div>
-      <p className="mt-5 text-sm leading-6 text-slate-500">A leitura completa foi ampliada para funcionar como uma apostila de curso: começa pelo conceito, aprofunda o mecanismo, conecta com situações de prova e fecha com revisão. Se você preferir estudar por vídeo ou questões, pode pular partes e voltar quando necessário.</p>
-      <p className="mt-2 text-xs leading-5 text-slate-500">Revisão editorial da V27.2: {formatDate(V27_EDITORIAL_REVIEW_DATE)}. Regras normativas mantêm a data de verificação indicada em cada tópico e devem ser conferidas nas fontes oficiais quando houver atualização posterior.</p>
+      <p className="mt-5 text-sm leading-6 text-slate-500">A V28 foi organizada para funcionar de duas formas: uma leitura de curso, que explica os mecanismos em sequência, e o detalhamento integral do Programa Detalhado. Se você preferir vídeo ou questões, pode pular a leitura longa e voltar quando necessário.</p>
+      <p className="mt-2 text-xs leading-5 text-slate-500">Revisão editorial da V28: {formatDate(V28_EDITORIAL_REVIEW_DATE)}. Regras normativas mantêm a data de verificação indicada em cada tópico e devem ser conferidas nas fontes oficiais quando houver atualização posterior.</p>
     </header>
+
+    <V28CourseLayer moduleId={moduleId} printFriendly/>
 
     <div className="grid gap-7 lg:grid-cols-[260px_minmax(0,1fr)]">
       <aside className="print:hidden lg:sticky lg:top-24 lg:self-start">
         <Card>
-          <div className="flex items-center gap-2"><BookOpen className="h-4 w-4 text-emerald-500"/><h2 className="font-bold">Neste módulo</h2></div>
+          <div className="flex items-center gap-2"><BookOpen className="h-4 w-4 text-emerald-500"/><h2 className="font-bold">Programa Detalhado</h2></div>
+          <p className="mt-2 text-xs leading-5 text-slate-500">Depois da leitura V28, use este índice para aprofundar cada ponto oficial.</p>
           <nav aria-label="Índice da apostila" className="mt-4 max-h-[70vh] space-y-1 overflow-y-auto pr-1">
             {lessons.map((lesson, index) => <a key={lesson.pdCode} href={`#pd-${lesson.pdCode.replaceAll('.', '-')}`} className="block rounded-lg px-2 py-2 text-xs leading-5 text-slate-600 hover:bg-emerald-400/10 hover:text-emerald-700 dark:text-slate-300">{index + 1}. {lesson.title}</a>)}
           </nav>
