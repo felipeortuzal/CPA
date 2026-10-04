@@ -1,6 +1,6 @@
 import pkg from '../../package.json'
 export const APP_VERSION=pkg.version
-export const CONTENT_REVIEW_DATE='2026-10-01'
+export const CONTENT_REVIEW_DATE='2026-10-04'
 export function newerVersion(candidate:string,current=APP_VERSION) {
   if(!/^\d+\.\d+\.\d+$/.test(candidate))throw new Error('A resposta de versão não é válida.')
   const a=candidate.split('.').map(Number),b=current.split('.').map(Number)
