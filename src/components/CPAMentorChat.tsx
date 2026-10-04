@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { Copy, ExternalLink, GraduationCap, Loader2, MessageCircle, Send, Sparkles, Trash2, X } from 'lucide-react'
+import { Copy, ExternalLink, Loader2, MessageCircle, Send, Sparkles, Trash2, X } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { useStudent } from '../features/profile/StudentProvider'
+import { answerLocally } from '../lib/cpaMentorLocal'
+import { APP_VERSION } from '../lib/version'
 
 type Role = 'user' | 'assistant'
 
@@ -23,7 +25,7 @@ const MAX_HISTORY = 12
 const initialMessage: ChatMessage = {
   id: 'mestre-welcome',
   role: 'assistant',
-  content: 'Oi! Eu sou o Mestre CPA, o tutor de IA da CPA Study.\n\nPode me perguntar qualquer coisa sobre a CPA: conceitos, produtos, matemática financeira, pegadinhas, cases, alternativas de uma questão ou simplesmente “não entendi nada disso”. Eu vou explicar do zero e conectar com o jeito que o assunto é cobrado.',
+  content: 'Oi! Eu sou o Mestre CPA, o tutor da CPA Study.\n\nPode me perguntar sobre conceitos, produtos, matemática financeira, pegadinhas, cases, alternativas de uma questão ou simplesmente “não entendi nada disso”. Sem backend de IA eu continuo funcionando em modo local, buscando a resposta no próprio material V28. Quando a IA online estiver conectada, eu também consigo interpretar perguntas mais abertas.',
 }
 
 const quickPrompts = [
@@ -113,21 +115,23 @@ export function CPAMentorChat() {
     const content = (prefilled ?? draft).trim()
     if (!content || loading) return
 
+    const userMessage: ChatMessage = { id: makeId(), role: 'user', content }
+    const nextMessages = [...messages, userMessage]
+    setDraft('')
+
     if (!connected) {
-      const errorMessage: ChatMessage = {
+      const local = answerLocally(content)
+      const assistantMessage: ChatMessage = {
         id: makeId(),
         role: 'assistant',
-        content: 'O visual do Mestre CPA já está instalado, mas a conexão com a IA ainda não foi configurada.\n\nPara manter a chave da OpenAI segura, a CPA Study precisa de um pequeno endpoint de backend. A V27 já deixou o Worker preparado; basta configurar o endpoint nas variáveis de ambiente do deploy.',
+        content: local.content,
+        sources: local.sources,
       }
-      setMessages(prev => [...prev, { id: makeId(), role: 'user', content }, errorMessage])
-      setDraft('')
+      setMessages([...nextMessages, assistantMessage])
       return
     }
 
-    const userMessage: ChatMessage = { id: makeId(), role: 'user', content }
-    const nextMessages = [...messages, userMessage]
     setMessages(nextMessages)
-    setDraft('')
     setLoading(true)
 
     try {
@@ -146,7 +150,7 @@ export function CPAMentorChat() {
             page: location.pathname,
             studentName: profile?.displayName || 'Aluno',
             certification: 'CPA',
-            appVersion: '0.27.0',
+            appVersion: APP_VERSION,
           },
         }),
       })
@@ -171,10 +175,12 @@ export function CPAMentorChat() {
       setMessages(prev => [...prev, assistantMessage])
     } catch (error) {
       const detail = error instanceof Error ? error.message : 'Erro desconhecido'
+      const local = answerLocally(content)
       setMessages(prev => [...prev, {
         id: makeId(),
         role: 'assistant',
-        content: `Não consegui falar com o Mestre CPA agora.\n\nDetalhe técnico: ${detail}\n\nSe você acabou de configurar o endpoint, confira se o Worker está publicado e se OPENAI_API_KEY está configurada nele.`,
+        content: `A IA online não respondeu (${detail}). Usei automaticamente o material local da V28:\n\n${local.content}`,
+        sources: local.sources,
       }])
     } finally {
       setLoading(false)
@@ -202,9 +208,9 @@ export function CPAMentorChat() {
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
             <p className="truncate text-sm font-black">Mestre CPA</p>
-            <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[9px] font-bold text-emerald-700 dark:text-emerald-300">IA</span>
+            <span className="rounded-full bg-emerald-400/10 px-2 py-0.5 text-[9px] font-bold text-emerald-700 dark:text-emerald-300">{connected ? 'IA' : 'LOCAL'}</span>
           </div>
-          <p className="truncate text-[11px] text-slate-500">{connected ? 'Tutor especializado em CPA · online' : 'Interface pronta · conexão pendente'}</p>
+          <p className="truncate text-[11px] text-slate-500">{connected ? 'Tutor especializado em CPA · IA online' : 'Tutor V28 · funciona offline'}</p>
         </div>
         <button aria-label="Limpar conversa" title="Limpar conversa" onClick={resetChat} className="grid h-9 w-9 place-items-center rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5">
           <Trash2 className="h-4 w-4" />
@@ -239,7 +245,7 @@ export function CPAMentorChat() {
       </div>
 
       <footer className="shrink-0 border-t border-slate-200 bg-white p-3 dark:border-white/10 dark:bg-[#0a1724]">
-        {!connected && <p className="mb-2 rounded-xl bg-amber-50 px-3 py-2 text-[10px] leading-4 text-amber-900 dark:bg-amber-400/10 dark:text-amber-200">O botão e a conversa já estão instalados. Falta somente conectar o backend seguro da OpenAI.</p>}
+        {!connected && <p className="mb-2 rounded-xl bg-emerald-50 px-3 py-2 text-[10px] leading-4 text-emerald-900 dark:bg-emerald-400/10 dark:text-emerald-200">Modo local ativo: o Mestre consulta o próprio material V28 sem internet. Se o backend seguro estiver configurado, a IA online assume automaticamente.</p>}
         <div className="flex items-end gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 focus-within:border-emerald-400 dark:border-white/10 dark:bg-white/5">
           <textarea
             ref={inputRef}
@@ -249,7 +255,7 @@ export function CPAMentorChat() {
             rows={1}
             maxLength={4000}
             disabled={loading}
-            placeholder={connected ? 'Tire sua dúvida sobre a CPA...' : 'Backend ainda não conectado'}
+            placeholder="Tire sua dúvida sobre a CPA..."
             className="max-h-32 min-h-10 flex-1 resize-none bg-transparent px-2 py-2 text-sm outline-none placeholder:text-slate-400 disabled:cursor-not-allowed"
           />
           <button aria-label="Enviar pergunta" onClick={() => void sendMessage()} disabled={!draft.trim() || loading} className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-500 text-white transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-40">
