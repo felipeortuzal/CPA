@@ -22,12 +22,20 @@ export function V28CourseLayer({ moduleId, printFriendly = false }: V28CourseLay
             <div className="flex flex-wrap items-center gap-2"><Badge>Trilha em vídeo · complementar</Badge><span className="text-xs font-semibold text-slate-500">Prof. Renan Duarte · Retorno Interno</span></div>
             <h2 className="mt-3 text-2xl font-black tracking-tight">Assista quando quiser trocar leitura por aula</h2>
             <p className="mt-2 text-sm leading-7 text-slate-600 dark:text-slate-300">A V28 usa o curso público CPA 2026 do Renan como referência didática complementar. O conteúdo escrito desta plataforma é autoral e continua sendo a trilha principal; em qualquer divergência normativa, prevalecem o Programa Detalhado e as fontes oficiais indicadas no material.</p>
+            <p className="mt-2 text-xs leading-5 text-slate-500">Para preservar o modo offline, o YouTube só é aberto quando você clicar em uma aula. A plataforma não carrega vídeo nem faz conexão externa automaticamente.</p>
           </div>
           <a href={RENAN_CPA_SEARCH_URL} target="_blank" rel="noreferrer"><Button variant="secondary"><PlayCircle className="h-4 w-4"/>Abrir curso no YouTube</Button></a>
         </div>
 
-        {featured?.videoId && <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-black dark:border-white/10">
-          <div className="aspect-video"><iframe className="h-full w-full" src={`https://www.youtube-nocookie.com/embed/${featured.videoId}`} title={featured.title} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>
+        {featured && <div className="mt-6 rounded-2xl border border-red-300/30 bg-white/75 p-5 dark:bg-white/5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2"><PlayCircle className="h-5 w-5 text-red-600 dark:text-red-300"/><span className="text-xs font-black uppercase tracking-widest text-red-700 dark:text-red-300">Aula sugerida</span></div>
+              <h3 className="mt-2 text-lg font-black">{featured.title}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-500">{featured.note}</p>
+            </div>
+            <a href={featured.url} target="_blank" rel="noreferrer"><Button>Assistir no YouTube<ExternalLink className="h-4 w-4"/></Button></a>
+          </div>
         </div>}
 
         <div className="mt-5 grid gap-3 md:grid-cols-2">
