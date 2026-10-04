@@ -2,8 +2,11 @@ import { cpaLessons } from '../lessons'
 import type { CPALesson } from '../lessons/types'
 import { courseModuleMap, matchesModule } from './modules'
 import { moduleReadings } from './readings'
+import { V28_EDITORIAL_REVIEW_DATE, v28SectionsFor } from './v28-course'
 
-export const V27_EDITORIAL_REVIEW_DATE = '2026-10-01'
+export { V28_EDITORIAL_REVIEW_DATE }
+// Alias mantido para componentes antigos; a revisão editorial vigente é a V28.
+export const V27_EDITORIAL_REVIEW_DATE = V28_EDITORIAL_REVIEW_DATE
 
 function wordCount(text: string) {
   return text.trim() ? text.trim().split(/\s+/).length : 0
@@ -51,15 +54,17 @@ export function moduleApostilaStats(moduleId: string) {
   const reading = moduleReadings[moduleId]
   const lessons = getModuleLessons(moduleId)
   const overviewWords = reading ? wordCount(JSON.stringify(reading)) : 0
-  const readingMinutes = Math.max(8, Math.ceil(overviewWords / 130))
-  const coreWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonCoreWordCount(lesson), 0)
-  const fullWords = overviewWords + lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
+  const v28Words = wordCount(JSON.stringify(v28SectionsFor(moduleId)))
+  const readingWords = overviewWords + v28Words
+  const readingMinutes = Math.max(12, Math.ceil(readingWords / 130))
+  const coreWords = readingWords + lessons.reduce((sum, lesson) => sum + lessonCoreWordCount(lesson), 0)
+  const fullWords = readingWords + lessons.reduce((sum, lesson) => sum + lessonWordCount(lesson), 0)
   const formulas = lessons.reduce((sum, lesson) => sum + lesson.formulas.length, 0)
   const comparisons = lessons.reduce((sum, lesson) => sum + lesson.comparisons.length, 0)
   const checkpoints = lessons.reduce((sum, lesson) => sum + lesson.miniQuiz.length, 0)
   // A estimativa mede a trilha principal, não o aprofundamento opcional. O conteúdo integral permanece disponível.
-  const minutes = Math.max(12, Math.ceil(coreWords / 210 + formulas * 0.55 + comparisons * 0.08 + checkpoints * 0.02))
-  return { lessons, words: coreWords, coreWords, fullWords, readingMinutes, minutes, formulas, comparisons, checkpoints }
+  const minutes = Math.max(15, Math.ceil(coreWords / 210 + formulas * 0.55 + comparisons * 0.08 + checkpoints * 0.02))
+  return { lessons, words: coreWords, coreWords, fullWords, readingWords, readingMinutes, minutes, formulas, comparisons, checkpoints }
 }
 
 export function apostilaTotalStats() {
